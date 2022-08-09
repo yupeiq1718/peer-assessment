@@ -24,24 +24,24 @@ module.exports = {
         light: '#F4ECEB'
       },
       success: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+        DEFAULT: '#66B4AF',
+        light: '#D9ECEB'
       },
       alert: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+        DEFAULT: '#F2A63B',
+        light: '#FCE9CE'
       },
       error: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+        DEFAULT: '#ED7470',
+        light: '#FADCDB'
       },
       info: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+        DEFAULT: '#7DC1DC',
+        light: '#DEEFF6'
       },
       muted: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+        DEFAULT: '#888888',
+        light: '#E1E1E1'
       },
       white: '#FFF',
       light: '#BBB',
