@@ -15,33 +15,39 @@ module.exports = {
       '2xl': '1536px'
     },
     colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      black: colors.black,
-      white: colors.white,
-      slate: colors.slate,
-      gray: colors.gray,
-      zinc: colors.zinc,
-      neutral: colors.neutral,
-      stone: colors.stone,
-      red: colors.red,
-      orange: colors.orange,
-      amber: colors.amber,
-      yellow: colors.yellow,
-      lime: colors.lime,
-      green: colors.green,
-      emerald: colors.emerald,
-      teal: colors.teal,
-      cyan: colors.cyan,
-      sky: colors.sky,
-      blue: colors.blue,
-      indigo: colors.indigo,
-      violet: colors.violet,
-      purple: colors.purple,
-      fuchsia: colors.fuchsia,
-      pink: colors.pink,
-      rose: colors.rose
+      primary: {
+        DEFAULT: '#A2CED3',
+        light: '#E8F3F4'
+      },
+      secondary: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      success: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      alert: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      error: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      info: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      muted: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      white: '#FFF',
+      light: '#BBB',
+      gray: '#888',
+      dark: '#444',
+      black: '#000'
     }),
     columns: {
       auto: 'auto',
