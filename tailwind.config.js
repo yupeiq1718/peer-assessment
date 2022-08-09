@@ -14,7 +14,7 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px'
     },
-    colors: ({ colors }) => ({
+    colors: () => ({
       primary: {
         DEFAULT: '#A2CED3',
         light: '#E8F3F4'
