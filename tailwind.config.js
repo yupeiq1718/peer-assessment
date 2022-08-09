@@ -14,34 +14,40 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px'
     },
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      black: colors.black,
-      white: colors.white,
-      slate: colors.slate,
-      gray: colors.gray,
-      zinc: colors.zinc,
-      neutral: colors.neutral,
-      stone: colors.stone,
-      red: colors.red,
-      orange: colors.orange,
-      amber: colors.amber,
-      yellow: colors.yellow,
-      lime: colors.lime,
-      green: colors.green,
-      emerald: colors.emerald,
-      teal: colors.teal,
-      cyan: colors.cyan,
-      sky: colors.sky,
-      blue: colors.blue,
-      indigo: colors.indigo,
-      violet: colors.violet,
-      purple: colors.purple,
-      fuchsia: colors.fuchsia,
-      pink: colors.pink,
-      rose: colors.rose
+    colors: () => ({
+      primary: {
+        DEFAULT: '#A2CED3',
+        light: '#E8F3F4'
+      },
+      secondary: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      success: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      alert: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      error: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      info: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      muted: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
+      white: '#FFF',
+      light: '#BBB',
+      gray: '#888',
+      dark: '#444',
+      black: '#000'
     }),
     columns: {
       auto: 'auto',
@@ -382,16 +388,9 @@ module.exports = {
       xs: ['0.75rem', { lineHeight: '1rem' }],
       sm: ['0.875rem', { lineHeight: '1.25rem' }],
       base: ['1rem', { lineHeight: '1.5rem' }],
-      lg: ['1.125rem', { lineHeight: '1.75rem' }],
-      xl: ['1.25rem', { lineHeight: '1.75rem' }],
-      '2xl': ['1.5rem', { lineHeight: '2rem' }],
-      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-      '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-      '5xl': ['3rem', { lineHeight: '1' }],
-      '6xl': ['3.75rem', { lineHeight: '1' }],
-      '7xl': ['4.5rem', { lineHeight: '1' }],
-      '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }]
+      lg: ['1.25rem', { lineHeight: '1.75rem' }],
+      xl: ['1.5rem', { lineHeight: '2rem' }],
+      '2xl': ['2rem', { lineHeight: '2.5rem' }]
     },
     fontWeight: {
       thin: '100',
