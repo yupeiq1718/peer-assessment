@@ -7,7 +7,7 @@ interface Props {
 const props = defineProps<Props>()
 
 type VariantMap= {
-  [key in Variant]: string
+  [key in Variant]?: string
 }
 
 const buttonStyleMap:VariantMap = {
@@ -21,8 +21,6 @@ const buttonStyleMap:VariantMap = {
 }
 
 const iconNameMap:VariantMap = {
-  primary: '',
-  secondary: '',
   success: 'icon_success',
   alert: 'icon_alert',
   error: 'icon_error',
