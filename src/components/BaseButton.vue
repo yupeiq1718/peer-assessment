@@ -35,9 +35,9 @@ const iconNameMap:VariantMap = {
     :class="buttonStyleMap[props.variant]"
   >
     <BaseSvgIcon
-      v-if="iconNameMap[variant]"
+      v-if="iconNameMap[props.variant]"
       class="m-0 mr-1 w-[24px] h-[24px]"
-      :name="iconNameMap[variant]"
+      :name="iconNameMap[props.variant]"
     />
     <slot />
   </button>
