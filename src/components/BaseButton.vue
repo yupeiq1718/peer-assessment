@@ -27,8 +27,6 @@ const iconNameMap:VariantMap = {
   info: 'icon_info',
   muted: 'icon_muted'
 }
-
-// const iconName = computed(() => `icon_${props.variant}`)
 </script>
 <template>
   <button
