@@ -21,11 +21,11 @@ const buttonStyleMap:VariantMap = {
 }
 
 const iconNameMap:VariantMap = {
-  success: 'icon_success',
-  alert: 'icon_alert',
-  error: 'icon_error',
-  info: 'icon_info',
-  muted: 'icon_muted'
+  success: 'success',
+  alert: 'alert',
+  error: 'error',
+  info: 'info',
+  muted: 'muted'
 }
 </script>
 <template>
