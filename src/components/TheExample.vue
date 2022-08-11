@@ -3,7 +3,19 @@
 </script>
 
 <template>
-  <BaseButton variant="alert">
-    primary
-  </BaseButton>
+  <section>
+    <h2>Button</h2>
+    <br>
+    <BaseButton variant="alert">
+      Button
+    </BaseButton>
+  </section>
+  <br>
+  <section>
+    <h2>Tag</h2>
+    <br>
+    <BaseTag variant="error">
+      Tag
+    </BaseTag>
+  </section>
 </template>
