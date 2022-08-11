@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const isToastActive = ref(true)
 </script>
 
 <template>
@@ -14,8 +14,19 @@
   <section>
     <h2>Tag</h2>
     <br>
-    <BaseTag variant="error">
+    <BaseTag variant="primary">
       Tag
     </BaseTag>
+  </section>
+  <section>
+    <h2>Toast</h2>
+    <br>
+    <BaseToast
+      v-if="isToastActive"
+      v-model:is-active="isToastActive"
+      variant="error"
+    >
+      Toast
+    </BaseToast>
   </section>
 </template>
