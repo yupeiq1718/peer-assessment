@@ -33,13 +33,13 @@ const iconNameMap:VariantMap = {
 <template>
   <button
     type="button"
-    class="button px-3 py-1 rounded-lg border-2 bg-white duration-300 hover:text-white hover:fill-white"
+    class="px-3 py-1 rounded-lg border-2 bg-white duration-300 hover:text-white hover:fill-white"
     :class="buttonStyleMap[props.variant]"
   >
     <span>
       <BaseSvgIcon
         v-if="iconNameMap[variant]"
-        class="icon m-0 mr-1 w-[24px] h-[24px]"
+        class="m-0 mr-1 w-[24px] h-[24px]"
         :name="iconNameMap[variant]"
       />
       <slot />
