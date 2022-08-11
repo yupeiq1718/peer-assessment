@@ -10,7 +10,7 @@ type VariantMap= {
   [key in Variant]?: string
 }
 
-const TagStyleMap:VariantMap = {
+const tagStyleMap:VariantMap = {
   primary: 'bg-primary',
   secondary: 'bg-secondary',
   success: 'bg-success',
@@ -23,7 +23,7 @@ const TagStyleMap:VariantMap = {
 <template>
   <span
     class="px-3 py-1 text-white"
-    :class="TagStyleMap[props.variant]"
+    :class="tagStyleMap[props.variant]"
   >
     <slot />
   </span>
