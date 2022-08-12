@@ -65,7 +65,7 @@ const value = ref()
     >
   </section>
   <section>
-    <h2>Form</h2>
+    <h2>Input</h2>
     <br>
     <template
       v-for="status of statues"
@@ -73,6 +73,34 @@ const value = ref()
     >
       <div class="inline-block">
         <BaseFormInput
+          v-model:value="value"
+          :status="status"
+          type="text"
+        />
+        <br>
+        <BaseFormMessage
+          :status="status"
+          message="message"
+        />
+      </div>
+    </template>
+    <div class="inline-block">
+      <input
+        v-model="value"
+        type="text"
+      >
+      <p>{{ value }}</p>
+    </div>
+  </section>
+  <section>
+    <h2>Textarea</h2>
+    <br>
+    <template
+      v-for="status of statues"
+      :key="status"
+    >
+      <div class="inline-block">
+        <BaseFormTextarea
           v-model:value="value"
           :status="status"
           type="text"
