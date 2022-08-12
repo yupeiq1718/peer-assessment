@@ -89,6 +89,7 @@ onMounted(() => {
 <template>
   <canvas
     ref="rate"
+    class="inline-block"
     width="68"
     height="68"
   />
