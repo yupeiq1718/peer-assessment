@@ -29,8 +29,7 @@ const iconNameMap:VariantMap = {
   success: 'success',
   alert: 'alert',
   error: 'error',
-  info: 'info',
-  muted: 'muted'
+  info: 'info'
 }
 
 const closeToast = () => emits('update:isActive', false)

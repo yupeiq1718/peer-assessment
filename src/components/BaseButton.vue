@@ -24,8 +24,7 @@ const iconNameMap:VariantMap = {
   success: 'success',
   alert: 'alert',
   error: 'error',
-  info: 'info',
-  muted: 'muted'
+  info: 'info'
 }
 </script>
 <template>
