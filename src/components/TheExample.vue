@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const isToastActive = ref(true)
+const score = ref()
 </script>
 
 <template>
@@ -18,6 +19,7 @@ const isToastActive = ref(true)
       Tag
     </BaseTag>
   </section>
+  <br>
   <section>
     <h2>Toast</h2>
     <br>
@@ -28,5 +30,20 @@ const isToastActive = ref(true)
     >
       Toast
     </BaseToast>
+  </section>
+  <br>
+  <section>
+    <h2>Rate</h2>
+    <br>
+    <BaseRate
+      :score="score"
+      variant="secondary"
+    >
+      Toast
+    </BaseRate>
+    <input
+      v-model="score"
+      type="number"
+    >
   </section>
 </template>
