@@ -4,6 +4,17 @@ const statues = ['success', 'alert', 'error', 'info', 'muted']
 const isToastActive = ref(true)
 const score = ref()
 const value = ref()
+const selected = ref()
+const options = [
+  {
+    value: 'one',
+    text: 'one'
+  },
+  {
+    value: 'two',
+    text: 'two'
+  }
+]
 </script>
 
 <template>
@@ -117,6 +128,30 @@ const value = ref()
         v-model="value"
         type="text"
       >
+      <p>{{ value }}</p>
+    </div>
+  </section>
+  <section>
+    <h2>Select</h2>
+    <br>
+    <template
+      v-for="status of statues"
+      :key="status"
+    >
+      <div class="inline-block">
+        <BaseFormSelect
+          v-model:selected="selected"
+          :status="status"
+          :options="options"
+        />
+        <br>
+        <BaseFormMessage
+          :status="status"
+          message="message"
+        />
+      </div>
+    </template>
+    <div class="inline-block">
       <p>{{ value }}</p>
     </div>
   </section>
