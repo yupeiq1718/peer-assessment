@@ -1,1 +1,0 @@
-import{_ as s,r as o,o as r,c as n}from"./index.55be43ff.js";const c={};function a(t,_){const e=o("TheExample");return r(),n(e)}const p=s(c,[["render",a],["__file","/home/runner/work/peer-assessment/peer-assessment/src/views/HomePage.vue"]]);export{p as default};
