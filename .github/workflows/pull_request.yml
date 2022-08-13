@@ -1,4 +1,4 @@
-name: Pull Request CI
+name: Pull Request CI/CD
 
 on:
   pull_request:
@@ -38,3 +38,9 @@ jobs:
       run: |
         yarn eslint
         yarn stylelint
+    
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v4
+      with:
+        BRANCH: gh-pages
+        FOLDER: dist
