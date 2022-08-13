@@ -9,7 +9,7 @@ import removeConsole from 'vite-plugin-remove-console'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: process.env.VITE_APP_BASE_URL,
   plugins: [
     vue(),
     removeConsole(),
