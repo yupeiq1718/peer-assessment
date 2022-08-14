@@ -8,8 +8,8 @@ type TypeMap = {
 }
 
 const positionMap:TypeMap = {
-  staff: 'col-start-2',
-  admin: 'col-start-8'
+  staff: 'left-[8.33%] ',
+  admin: 'left-[8.33%] md:left-[41.67%] xl:left-[58.33%]'
 }
 
 const backgroundMap:TypeMap = {
@@ -32,34 +32,27 @@ const setType = (value:Type) => {
     class="fixed w-full h-screen duration-1000"
     :class="backgroundMap[type]"
   >
-    <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[480px] container rounded-2xl drop-shadow-md ease-linear"
-      :class="wrapperMap[type]"
-    />
     <div class="absolute left-1/2 transform -translate-x-1/2 container h-full grid grid-cols-12 items-center">
+      <div
+        class="absolute w-full h-[480px] rounded-2xl drop-shadow-md ease-linear"
+        :class="wrapperMap[type]"
+      />
       <section
-        v-show="type==='admin'"
-        class="col-start-2 col-span-3 text-center"
+        class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
       >
         <p class="text-muted mb-4 text-lg">
-          {{ '我想要設定互評問卷' }}
+          {{ '我想要填寫互評問卷' }}
         </p>
         <BaseButton
           variant="muted"
           class="bg-transparent text-lg"
           @click="setType('staff')"
         >
-          {{ '切換管理員登入' }}
+          {{ '切換員工登入' }}
         </BaseButton>
       </section>
       <section
-        class="bg-white h-[720px] col-span-4 rounded-2xl drop-shadow-md"
-        :class="positionMap[type]"
-      />
-
-      <section
-        v-show="type==='staff'"
-        class="col-start-9 col-span-3 text-center"
+        class="absolute right-[8.33%] hidden md:block w-1/3 text-center"
       >
         <p class="text-muted mb-4 text-lg">
           {{ '我想要設定互評問卷' }}
@@ -72,6 +65,10 @@ const setType = (value:Type) => {
           {{ '切換管理員登入' }}
         </BaseButton>
       </section>
+      <section
+        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-[720px] rounded-2xl drop-shadow-md duration-1000 ease-in-out"
+        :class="positionMap[type]"
+      />
     </div>
   </div>
 </template>
