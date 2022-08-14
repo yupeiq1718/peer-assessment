@@ -34,12 +34,12 @@ const styleMap:StyleMap = {
 
 <template>
   <div
-    class="fixed w-full h-screen duration-1000"
+    class="fixed w-full h-screen duration-1000 py-[30px] px-[30px] flex justify-center items-center"
     :class="styleMap.background[type]"
   >
-    <div class="absolute left-1/2 transform -translate-x-1/2 container h-full grid grid-cols-12 items-center">
+    <div class="relative container max-h-full h-[720px] grid grid-cols-12 items-center">
       <div
-        class="absolute w-full h-[480px]  hidden md:block rounded-2xl drop-shadow-md ease-linear duration-1000"
+        class="absolute w-full h-3/4 hidden md:block rounded-2xl drop-shadow-md ease-linear duration-1000"
         :class="styleMap.wrapper[type]"
       />
       <section
@@ -71,7 +71,7 @@ const styleMap:StyleMap = {
         </BaseButton>
       </section>
       <section
-        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-[720px] rounded-2xl drop-shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl drop-shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="styleMap.position[type]"
       >
         <header>
