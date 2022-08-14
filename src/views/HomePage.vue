@@ -12,12 +12,12 @@ const positionMap:TypeMap = {
   admin: 'left-[8.33%] md:left-[41.67%] xl:left-[58.33%]'
 }
 
-const backgroundMap:TypeMap = {
+const colorMap:TypeMap = {
   staff: 'bg-primary',
   admin: 'bg-secondary'
 }
 
-const wrapperMap:TypeMap = {
+const backgroundMap:TypeMap = {
   staff: 'bg-primary-light',
   admin: 'bg-secondary-light'
 }
@@ -30,12 +30,12 @@ const setType = (value:Type) => {
 <template>
   <div
     class="fixed w-full h-screen duration-1000"
-    :class="backgroundMap[type]"
+    :class="colorMap[type]"
   >
     <div class="absolute left-1/2 transform -translate-x-1/2 container h-full grid grid-cols-12 items-center">
       <div
-        class="absolute w-full h-[480px] rounded-2xl drop-shadow-md ease-linear"
-        :class="wrapperMap[type]"
+        class="absolute w-full h-[480px] rounded-2xl drop-shadow-md ease-linear duration-1000"
+        :class="backgroundMap[type]"
       />
       <section
         class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
@@ -66,9 +66,29 @@ const setType = (value:Type) => {
         </BaseButton>
       </section>
       <section
-        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-[720px] rounded-2xl drop-shadow-md duration-1000 ease-in-out"
+        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-[720px] rounded-2xl drop-shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
-      />
+      >
+        <header>
+          <BaseSvgIcon
+            name="logo"
+            class="w-full fill-primary"
+          />
+        </header>
+
+        <article class="text-center text-dark">
+          <h1 class="text-2xl font-bold mb-4">
+            光禾感知互評系統
+          </h1>
+          <p>員工登入</p>
+        </article>
+        <footer>
+          <img
+            src="@/assets/images/google.png"
+            alt="google"
+          >
+        </footer>
+      </section>
     </div>
   </div>
 </template>
