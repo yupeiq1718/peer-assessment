@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import router from '@/router'
+
 type Type = 'staff'|'admin'
 const type = ref<Type>('staff')
 const setType = (value:Type) => {
@@ -30,6 +32,8 @@ const styleMap:StyleMap = {
     admin: 'fill-secondary'
   }
 }
+
+const login = () => router.push(`/${type.value}`)
 </script>
 
 <template>
@@ -97,6 +101,7 @@ const styleMap:StyleMap = {
             src="@/assets/images/google.png"
             alt="google"
             class="mb-4"
+            @click="login"
           >
           <BaseButton
             v-if="type==='admin'"
