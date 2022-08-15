@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'primary'|'secondary'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
 
 interface Props {
   variant: Variant,
@@ -25,8 +25,8 @@ type VariantMap= {
 }
 
 const fillStyleMap:VariantMap = {
-  primary: '#E8F3F4',
-  secondary: '#F4ECEB',
+  theme: getComputedStyle(document.documentElement)
+    .getPropertyValue('--color-theme-light'),
   success: '#D9ECEB',
   alert: '#FCE9CE',
   error: '#FADCDB',
@@ -34,8 +34,8 @@ const fillStyleMap:VariantMap = {
   muted: '#E1E1E1'
 }
 const strokeStyleMap:VariantMap = {
-  primary: '#A2CED3',
-  secondary: '#D4B3AE',
+  theme: getComputedStyle(document.documentElement)
+    .getPropertyValue('--color-theme'),
   success: '#66B4AF',
   alert: '#F2A63B',
   error: '#ED7470',
