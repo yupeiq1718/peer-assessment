@@ -8,17 +8,17 @@ const props = withDefaults(defineProps<Props>(), {
 })
 const items = ['staff', 'leader', 'result', 'calendar']
 
-const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 'bg-primary fill-white' : 'bg-primary-light fill-primary')
+const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
 </script>
 
 <template>
-  <navbar class="w-[6rem] bg-primary-light rounded-2xl flex flex-col justify-start items-center">
+  <navbar class="w-[6rem] bg-theme-light rounded-2xl flex flex-col justify-start items-center">
     <img
       class="absolute top-4 rounded-full w-16 h-16"
       src="@/assets/images/user.png"
       alt="user"
     >
-    <ul class="absolute top-24 bottom-24 border-y-2 border-primary py-8">
+    <ul class="absolute top-24 bottom-24 border-y-2 border-theme py-8">
       <li
         v-for="item of items"
         :key="item"
@@ -33,7 +33,7 @@ const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 
         />
       </li>
     </ul>
-    <button class="absolute bottom-4 p-4 rounded-2xl w-[4.25rem] h-[4.25rem] flex flex-col justify-start items-center bg-white fill-primary">
+    <button class="absolute bottom-4 p-4 rounded-2xl w-[4.25rem] h-[4.25rem] flex flex-col justify-start items-center bg-white fill-theme">
       <BaseSvgIcon
         class="w-8 h-8"
         name="logout"
