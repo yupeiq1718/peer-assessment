@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'primary'|'secondary'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
 
 interface Props {
   variant: Variant
@@ -11,8 +11,7 @@ type VariantMap= {
 }
 
 const tagStyleMap:VariantMap = {
-  primary: 'bg-primary',
-  secondary: 'bg-secondary',
+  theme: 'bg-theme',
   success: 'bg-success',
   alert: 'bg-alert',
   error: 'bg-error',

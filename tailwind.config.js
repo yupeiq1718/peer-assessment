@@ -15,13 +15,9 @@ module.exports = {
       '2xl': '1536px'
     },
     colors: () => ({
-      primary: {
-        DEFAULT: '#A2CED3',
-        light: '#E8F3F4'
-      },
-      secondary: {
-        DEFAULT: '#D4B3AE',
-        light: '#F4ECEB'
+      theme: {
+        DEFAULT: 'var(--color-theme)',
+        light: 'var(--color-theme-light)'
       },
       success: {
         DEFAULT: '#66B4AF',

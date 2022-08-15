@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'primary'|'secondary'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
 
 interface Props {
   variant: Variant
@@ -11,8 +11,7 @@ type VariantMap= {
 }
 
 const buttonStyleMap:VariantMap = {
-  primary: 'border-primary text-primary fill-primary hover:bg-primary',
-  secondary: 'border-secondary text-secondary fill-secondary  hover:bg-secondary',
+  theme: 'border-theme text-theme fill-theme hover:bg-theme',
   success: 'border-success text-success fill-success  hover:bg-success',
   alert: 'border-alert text-alert fill-alert hover:bg-alert',
   error: 'border-error text-error fill-error hover:bg-error',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'primary'|'secondary'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
 
 interface Props {
   variant: Variant
@@ -16,8 +16,7 @@ type VariantMap= {
 }
 
 const toastStyleMap:VariantMap = {
-  primary: 'bg-primary-light text-primary fill-primary',
-  secondary: 'bg-secondary-light text-secondary fill-secondary',
+  theme: 'bg-theme-light text-theme fill-theme',
   success: 'bg-success-light text-success fill-success',
   alert: 'bg-alert-light text-alert fill-alert',
   error: 'bg-error-light text-error fill-error',
