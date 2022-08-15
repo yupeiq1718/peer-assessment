@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import router from '@/router'
+
 type Type = 'employee'|'admin'
 const type = ref<Type>('employee')
 const setType = (value:Type) => {
@@ -24,6 +26,8 @@ const switchPosition = (value:Type) => {
   setThemeColor(value)
   setType(value)
 }
+
+const login = () => router.push(`/${type.value}`)
 
 type TypeMap = {
   [key in Type]?: string
@@ -98,6 +102,7 @@ const positionMap:TypeMap = {
             src="@/assets/images/google.png"
             alt="google"
             class="mb-4"
+            @click="login"
           >
           <BaseButton
             v-if="type==='admin'"
