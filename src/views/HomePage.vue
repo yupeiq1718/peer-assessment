@@ -1,33 +1,15 @@
 <script setup lang="ts">
 import router from '@/router'
+import { Ref } from 'vue'
 
 type Type = 'employee'|'admin'
-const type = ref<Type>('employee')
-const setType = (value:Type) => {
-  type.value = value
-}
+const type:Ref<Type> = inject('type', ref('employee'))
 
-type ThemeColorMap = {
-  employee:string[],
-  admin:string[],
-}
-const themeColorMap:ThemeColorMap = {
-  employee: ['#A2CED3', '#E8F3F4'],
-  admin: ['#D4B3AE', '#F4ECEB']
-}
-const setThemeColor = (type:Type) => {
-  document.documentElement.style.setProperty('--color-theme', themeColorMap[type][0])
-  document.documentElement.style.setProperty('--color-theme-light', themeColorMap[type][1])
-}
+const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 
-setThemeColor(type.value)
-
-const switchPosition = (value:Type) => {
-  setThemeColor(value)
-  setType(value)
+const login = () => {
+  router.push(`/${type.value}`)
 }
-
-const login = () => router.push(`/${type.value}`)
 
 type TypeMap = {
   [key in Type]?: string
