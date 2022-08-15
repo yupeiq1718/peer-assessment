@@ -1,18 +1,24 @@
 <script setup lang="ts">
+import router from '@/router'
+import { Ref } from 'vue'
+
 type Props = {
-  activeItem: string
+  items: string[]
 }
+const props = defineProps<Props>()
 
-const props = withDefaults(defineProps<Props>(), {
-  activeItem: 'staff'
-})
-const items = ['staff', 'leader', 'result', 'calendar']
+type Type = 'employee'|'admin'
+const type:Ref<Type> = inject('type', ref('employee'))
 
-const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
+const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
+
+const buttonStyle = computed(() => (item:string) => item === activeItem.value ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
+
+const pushRouter = (item:string) => router.push(`/${type.value}/${item}`)
 </script>
 
 <template>
-  <navbar class="w-[6rem] bg-theme-light rounded-2xl flex flex-col justify-start items-center">
+  <nav class="w-[6rem] bg-theme-light rounded-2xl flex flex-col justify-start items-center">
     <img
       class="absolute top-4 rounded-full w-16 h-16"
       src="@/assets/images/user.png"
@@ -20,12 +26,13 @@ const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 
     >
     <ul class="absolute top-24 bottom-24 border-y-2 border-theme py-8">
       <li
-        v-for="item of items"
+        v-for="item of props.items"
         :key="item"
         role="button"
-        :active="props.activeItem"
+        :active="activeItem"
         class="p-4 rounded-2xl w-16 h-16 flex flex-col justify-start items-center"
         :class="buttonStyle(item)"
+        @click="pushRouter(item)"
       >
         <BaseSvgIcon
           class="w-8 h-8"
@@ -39,5 +46,5 @@ const buttonStyle = computed(() => (item:string) => item === props.activeItem ? 
         name="logout"
       />
     </button>
-  </navbar>
+  </nav>
 </template>
