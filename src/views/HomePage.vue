@@ -1,16 +1,16 @@
 <script setup lang="ts">
-type Type = 'staff'|'admin'
-const type = ref<Type>('staff')
+type Type = 'employee'|'admin'
+const type = ref<Type>('employee')
 const setType = (value:Type) => {
   type.value = value
 }
 
 type ThemeColorMap = {
-  staff:string[],
+  employee:string[],
   admin:string[],
 }
 const themeColorMap:ThemeColorMap = {
-  staff: ['#A2CED3', '#E8F3F4'],
+  employee: ['#A2CED3', '#E8F3F4'],
   admin: ['#D4B3AE', '#F4ECEB']
 }
 const setThemeColor = (type:Type) => {
@@ -30,7 +30,7 @@ type TypeMap = {
 }
 
 const positionMap:TypeMap = {
-  staff: 'left-[8.33%] ',
+  employee: 'left-[8.33%] ',
   admin: 'left-[8.33%] md:left-[41.67%] xl:left-[58.33%]'
 }
 
@@ -53,7 +53,7 @@ const positionMap:TypeMap = {
         <BaseButton
           variant="muted"
           class="bg-transparent text-md"
-          @click="switchPosition('staff')"
+          @click="switchPosition('employee')"
         >
           {{ '切換員工登入' }}
         </BaseButton>
@@ -86,7 +86,7 @@ const positionMap:TypeMap = {
           <h1 class="text-2xl font-bold mb-4">
             {{ '光禾感知互評系統' }}
           </h1>
-          <p v-if="type==='staff'">
+          <p v-if="type==='employee'">
             {{ '員工登入' }}
           </p>
           <p v-if="type==='admin'">
@@ -103,12 +103,12 @@ const positionMap:TypeMap = {
             v-if="type==='admin'"
             variant="theme"
             class="bg-transparent text-md md:hidden"
-            @click="switchPosition('staff')"
+            @click="switchPosition('employee')"
           >
             {{ '切換員工登入' }}
           </BaseButton>
           <BaseButton
-            v-if="type==='staff'"
+            v-if="type==='employee'"
             variant="theme"
             class="bg-transparent text-md md:hidden"
             @click="switchPosition('admin')"
