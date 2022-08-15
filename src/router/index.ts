@@ -9,7 +9,14 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/employee',
     name: 'Employee',
-    component: () => import('@/views/EmployeePage.vue')
+    component: () => import('@/views/EmployeePage.vue'),
+    children: [
+      {
+        path: 'staff',
+        name: 'Staff',
+        component: () => import('@/views/EmployeeStaff.vue')
+      }
+    ]
   },
   {
     path: '/admin',
