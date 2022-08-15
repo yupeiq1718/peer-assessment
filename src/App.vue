@@ -1,9 +1,3 @@
-
-<script setup lang="ts">
-document.documentElement.style.setProperty('--color-theme', '#D4B3AE')
-document.documentElement.style.setProperty('--color-theme-light', '#F4ECEB')
-</script>
-
 <template>
   <router-view />
 </template>
