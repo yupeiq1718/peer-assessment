@@ -20,6 +20,7 @@ const positionMap:TypeMap = {
   admin: 'left-[8.33%] md:left-[41.67%] xl:left-[58.33%]'
 }
 
+switchPosition('employee')
 </script>
 
 <template>

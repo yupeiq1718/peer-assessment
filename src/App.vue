@@ -20,14 +20,12 @@ const setThemeColor = (type:Type) => {
   document.documentElement.style.setProperty('--color-theme', themeColorMap[type][0])
   document.documentElement.style.setProperty('--color-theme-light', themeColorMap[type][1])
 }
-
-setThemeColor(type.value)
+provide('setThemeColor', setThemeColor)
 
 const switchPosition = (value:Type) => {
   setThemeColor(value)
   setType(value)
 }
-
 provide('switchPosition', switchPosition)
 </script>
 

@@ -36,6 +36,9 @@ const navbarItems = computed(() => pages.value.map(page => ({
   ...pageMap[page]
 })))
 
+type Type = 'employee'|'admin'
+const setThemeColor:(value:Type)=>void = inject('setThemeColor', () => null)
+setThemeColor('employee')
 </script>
 
 <template>
