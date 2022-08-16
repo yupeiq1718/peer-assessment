@@ -26,7 +26,7 @@ const toggleIsFolded = () => {
   isFolded.value = !isFolded.value
 }
 
-const navBarStyle = computed(() => isFolded.value ? 'w-24' : 'w-[18rem]')
+const navBarStyle = computed(() => isFolded.value ? 'hidden md:block w-24' : 'w-[18rem]')
 const iconStyle = computed(() => isFolded.value ? 'w-8 h-8' : 'w-6 h-6')
 const titleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-48')
 
@@ -39,10 +39,10 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
 
 <template>
   <nav
-    class="bg-theme-light rounded-2xl flex flex-col items-start px-4 duration-300"
+    class="absolute left-0 md:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-2xl flex flex-col items-start px-4 duration-300"
     :class="navBarStyle"
   >
-    <header class="absolute top-4 flex justify-start items-center">
+    <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4">
       <img
         class="rounded-full w-16 h-16"
         src="@/assets/images/user.png"
@@ -64,8 +64,8 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
         </p>
       </div>
     </header>
-    <article>
-      <ul class="absolute top-24 bottom-24 border-y-2 border-theme py-8">
+    <article class="absolute top-28 bottom-28 overflow-hidden">
+      <ul>
         <li
           v-for="item of props.items"
           :key="item.name"
@@ -88,9 +88,9 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
         </li>
       </ul>
     </article>
-    <footer>
+    <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
       <button
-        class="absolute bottom-4 rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
+        class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
         :class="logoutButtonStyle"
       >
         <BaseSvgIcon

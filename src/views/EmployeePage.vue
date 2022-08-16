@@ -34,12 +34,9 @@ const navbarItems = computed(() => pages.value.map(page => ({
 </script>
 
 <template>
-  <div class="bg-theme w-full h-screen">
-    <TheNavbar
-      :items="navbarItems"
-      class="absolute left-8 top-16 bottom-16 z-10"
-    />
-    <TheMain class="absolute left-40 right-0 top-8 bottom-8" />
+  <div class="fixed top-0 bottom-0 bg-theme w-full">
+    <TheNavbar :items="navbarItems" />
+    <TheMain />
     <router-view />
   </div>
 </template>
