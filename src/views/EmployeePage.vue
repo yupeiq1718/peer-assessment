@@ -26,7 +26,7 @@ const pageMap:PageMap = {
     url: '/employee/calendar'
   }
 }
-const getNavbarItems = computed(() => pages.value.map(page => ({
+const navbarItems = computed(() => pages.value.map(page => ({
   name: page,
   url: pageMap[page].url
 })))
@@ -36,7 +36,7 @@ const getNavbarItems = computed(() => pages.value.map(page => ({
 <template>
   <div class="bg-theme w-full h-screen">
     <TheNavbar
-      :items="getNavbarItems"
+      :items="navbarItems"
       class="absolute left-8 top-16 bottom-16"
     />
     <TheMain class="absolute left-40 right-0 top-8 bottom-8" />
