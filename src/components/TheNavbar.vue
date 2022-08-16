@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import router from '@/router'
-import { Ref } from 'vue'
 
-type Props = {
-  items: string[]
+interface Props {
+  items: {
+    name:string,
+    url: string
+  }[]
 }
-const props = defineProps<Props>()
 
-type Type = 'employee'|'admin'
-const type:Ref<Type> = inject('type', ref('employee'))
+const props = defineProps<Props>()
 
 const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
-const buttonStyle = computed(() => (item:string) => item === activeItem.value ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
+const buttonStyle = computed(() => (name:string) => name === activeItem.value ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
 
-const pushRouter = (item:string) => router.push(`/${type.value}/${item}`)
+const pushRouter = (url:string) => router.push(url)
 </script>
 
 <template>
@@ -27,16 +27,16 @@ const pushRouter = (item:string) => router.push(`/${type.value}/${item}`)
     <ul class="absolute top-24 bottom-24 border-y-2 border-theme py-8">
       <li
         v-for="item of props.items"
-        :key="item"
+        :key="item.name"
         role="button"
         :active="activeItem"
         class="p-4 rounded-2xl w-16 h-16 flex flex-col justify-start items-center"
-        :class="buttonStyle(item)"
-        @click="pushRouter(item)"
+        :class="buttonStyle(item.name)"
+        @click="pushRouter(item.url)"
       >
         <BaseSvgIcon
           class="w-8 h-8"
-          :name="item"
+          :name="item.name"
         />
       </li>
     </ul>

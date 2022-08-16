@@ -1,12 +1,55 @@
 <script setup lang="ts">
-const navbarItems = ['staff', 'leader', 'result', 'calendar']
+type Pages = 'staff'|'leader'|'result'|'calendar'
+type PageMap = {
+  [Page in Pages]: {
+    title: string,
+    url: string
+  }
+}
+const pages = ref<Pages[]>(['staff', 'leader', 'result', 'calendar'])
+
+const pageMap:PageMap = {
+  staff: {
+    title: '員工互評填寫',
+    url: '/employee/staff'
+  },
+  leader: {
+    title: '主管互評填寫',
+    url: '/employee/leader'
+  },
+  result: {
+    title: '互評結果',
+    url: '/employee/result'
+  },
+  calendar: {
+    title: '時間軸',
+    url: '/employee/calendar'
+  }
+}
+const getNavbarItems = computed(() => {
+  type NavbarItem = {
+    name: string,
+    url: string
+  }
+  let navbarItems:NavbarItem[] = []
+
+  pages.value.forEach(page => {
+    const name = page
+    const { url } = pageMap[page]
+    navbarItems = [...navbarItems, {
+      name, url
+    }]
+  })
+
+  return navbarItems
+})
 
 </script>
 
 <template>
   <div class="bg-theme w-full h-screen">
     <TheNavbar
-      :items="navbarItems"
+      :items="getNavbarItems"
       class="absolute left-8 top-16 bottom-16"
     />
     <TheMain class="absolute left-40 right-0 top-8 bottom-8" />
