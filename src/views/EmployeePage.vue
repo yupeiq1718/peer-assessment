@@ -26,23 +26,10 @@ const pageMap:PageMap = {
     url: '/employee/calendar'
   }
 }
-const getNavbarItems = computed(() => {
-  type NavbarItem = {
-    name: string,
-    url: string
-  }
-  let navbarItems:NavbarItem[] = []
-
-  pages.value.forEach(page => {
-    const name = page
-    const { url } = pageMap[page]
-    navbarItems = [...navbarItems, {
-      name, url
-    }]
-  })
-
-  return navbarItems
-})
+const getNavbarItems = computed(() => pages.value.map(page => ({
+  name: page,
+  url: pageMap[page].url
+})))
 
 </script>
 
