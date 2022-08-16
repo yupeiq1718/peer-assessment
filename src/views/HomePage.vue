@@ -23,13 +23,9 @@ const positionMap:TypeMap = {
 </script>
 
 <template>
-  <div
-    class="fixed w-full h-screen bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center"
-  >
+  <div class="fixed w-full h-screen bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
     <div class="relative container max-h-full h-[40rem] md:h-[45rem] grid grid-cols-12 items-center">
-      <div
-        class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-md ease-linear duration-1000"
-      />
+      <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-md ease-linear duration-1000" />
       <section
         class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
       >
