@@ -28,7 +28,7 @@ const pageMap:PageMap = {
 }
 const navbarItems = computed(() => pages.value.map(page => ({
   name: page,
-  url: pageMap[page].url
+  ...pageMap[page]
 })))
 
 </script>
@@ -37,7 +37,7 @@ const navbarItems = computed(() => pages.value.map(page => ({
   <div class="bg-theme w-full h-screen">
     <TheNavbar
       :items="navbarItems"
-      class="absolute left-8 top-16 bottom-16"
+      class="absolute left-8 top-16 bottom-16 z-10"
     />
     <TheMain class="absolute left-40 right-0 top-8 bottom-8" />
     <router-view />
