@@ -12,7 +12,7 @@ const props = defineProps<Props>()
 
 const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
-const buttonStyle = computed(() => (name:string) => name === activeItem.value ? 'bg-theme fill-white' : 'bg-theme-light fill-theme')
+const listStyle = computed(() => (name:string) => isFolded.value ? (name === activeItem.value ? 'py-4 bg-theme fill-white text-white' : 'py-4 bg-theme-light fill-theme text-theme') : (name === activeItem.value ? 'py-2 bg-theme fill-white text-white' : 'py-2 bg-theme-light fill-theme text-theme'))
 
 const pushRouter = (url:string) => router.push(url)
 
@@ -21,32 +21,20 @@ const toggleIsFolded = () => {
   isFolded.value = !isFolded.value
 }
 
-const navBarStyle = computed(() => {
-  switch (isFolded.value) {
-    case true:
-      return 'w-24'
-    case false:
-      return 'w-[18rem]'
-    default:
-      return 'w-24'
-  }
-})
+const navBarStyle = computed(() => isFolded.value ? 'w-24' : 'w-[18rem]')
 
-const iconStyle = computed(() => {
-  switch (isFolded.value) {
-    case true:
-      return 'w-8 h-8'
-    case false:
-      return 'w-4 h-4'
-    default:
-      return 'w-8 h-8'
-  }
-})
+const iconStyle = computed(() => isFolded.value ? 'w-8 h-8' : 'w-6 h-6')
+
+const titleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-48')
+
+const logoutButtonStyle = computed(() => isFolded.value ? 'py-4 w-16' : 'py-2 w-64')
+const logoutTitleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-24')
+
 </script>
 
 <template>
   <nav
-    class="bg-theme-light rounded-2xl flex flex-col justify-start items-center"
+    class="bg-theme-light rounded-2xl flex flex-col items-start px-4 duration-300"
     :class="navBarStyle"
   >
     <img
@@ -60,23 +48,37 @@ const iconStyle = computed(() => {
         v-for="item of props.items"
         :key="item.name"
         role="button"
-        :active="activeItem"
-        class="p-4 rounded-2xl flex flex-col justify-start items-center"
-        :class="buttonStyle(item.name)"
+        class="p-4 rounded-2xl flex justify-start items-start duration-300"
+        :class="listStyle(item.name)"
         @click="pushRouter(item.url)"
       >
         <BaseSvgIcon
           :name="item.name"
           :class="iconStyle"
+          class="duration-300"
         />
-        <span>{{ item.title }}</span>
+        <span
+          class="text-lg h-7 font-bold overflow-hidden duration-300"
+          :class="titleStyle"
+        >
+          <h2>{{ item.title }}</h2>
+        </span>
       </li>
     </ul>
-    <button class="absolute bottom-4 p-4 rounded-2xl w-[4.25rem] h-[4.25rem] flex flex-col justify-start items-center bg-white fill-theme">
+    <button
+      class="absolute bottom-4 rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
+      :class="logoutButtonStyle"
+    >
       <BaseSvgIcon
         name="logout"
         :class="iconStyle"
       />
+      <span
+        class="text-lg h-7 font-bold overflow-hidden duration-300"
+        :class="logoutTitleStyle"
+      >
+        <h2>{{ '登出' }}</h2>
+      </span>
     </button>
   </nav>
 </template>
