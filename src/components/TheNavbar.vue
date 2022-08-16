@@ -5,7 +5,8 @@ interface Props {
   items: {
     name:string,
     url: string,
-    title: string
+    title: string,
+    icon: string
   }[]
 }
 const props = defineProps<Props>()
@@ -75,7 +76,7 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
           @click="pushRouter(item.url)"
         >
           <BaseSvgIcon
-            :name="item.name"
+            :name="item.icon"
             :class="iconStyle"
             class="duration-300"
           />
