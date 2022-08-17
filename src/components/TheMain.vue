@@ -1,5 +1,5 @@
 <template>
-  <main class="absolute left-0 md:left-40 right-0 top-0 md:top-8 bottom-0 md:bottom-8 bg-white rounded-xl drop-shadow-md">
+  <main class="absolute left-0 md:left-40 right-0 top-12 md:top-8 bottom-0 md:bottom-8 bg-white md:rounded-l-xl drop-shadow-md">
     <div class="absolute left-8 right-8 xl:right-40 top-12 bottom-8 bg-muted-light border-4 border-muted rounded-xl drop-shadow-md">
       <img
         class="hidden md:block absolute top-4 left-4 w-6 h-6"

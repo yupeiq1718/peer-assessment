@@ -23,11 +23,11 @@ const profile = {
   email: 'yupeiq1718@osensetech.com'
 }
 const isFolded = ref(true)
-const toggleIsFolded = () => {
-  isFolded.value = !isFolded.value
+const toggleIsFolded = (value:boolean) => {
+  isFolded.value = value
 }
 
-const navBarStyle = computed(() => isFolded.value ? 'hidden md:block w-24' : 'w-[18rem]')
+const navBarStyle = computed(() => isFolded.value ? '-left-[18rem] w-24' : 'left-0 w-[18rem]')
 const iconStyle = computed(() => isFolded.value ? 'w-8 h-8' : 'w-6 h-6')
 const titleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-48')
 
@@ -40,72 +40,81 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
 
 <template>
   <nav
-    class="absolute left-0 md:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
-    :class="navBarStyle"
-    @mouseenter="toggleIsFolded"
-    @mouseleave="toggleIsFolded"
+    @mouseenter="toggleIsFolded(false)"
+    @mouseleave="toggleIsFolded(true)"
   >
-    <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
-      <img
-        class="rounded-full w-16 h-16"
-        src="@/assets/images/user.png"
-        alt="user"
-      >
-      <div
-        :class="profileStyle"
-        class="h-16 overflow-hidden duration-300 whitespace-nowrap"
-      >
-        <h2 class="text-lg font-bold text-dark">
-          {{ profile.name }}
-        </h2>
-        <h3 class="text-sm text-dark">
-          {{ profile.position }}
-        </h3>
-        <p class="text-xs text-muted">
-          {{ profile.email }}
-        </p>
-      </div>
-    </header>
-    <article class="absolute top-28 bottom-28 overflow-hidden">
-      <ul>
-        <li
-          v-for="item of props.items"
-          :key="item.name"
-          role="button"
-          class="p-4 rounded-2xl flex justify-start items-start duration-300"
-          :class="listStyle(item.name)"
-          @click="pushRouter(item.url)"
+    <section class="absolute md:hidden left-0 top-0 flex items-center justify-center w-12 h-12 z-10">
+      <BaseSvgIcon
+        name="menu"
+        class="w-8 h-8 fill-white"
+      />
+    </section>
+    <section
+      class="absolute md:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-r-2xl md:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
+      :class="navBarStyle"
+    >
+      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
+        <img
+          class="rounded-full w-16 h-16"
+          src="@/assets/images/user.png"
+          alt="user"
+        >
+        <div
+          :class="profileStyle"
+          class="h-16 overflow-hidden duration-300 whitespace-nowrap"
+        >
+          <h2 class="text-lg font-bold text-dark">
+            {{ profile.name }}
+          </h2>
+          <h3 class="text-sm text-dark">
+            {{ profile.position }}
+          </h3>
+          <p class="text-xs text-muted">
+            {{ profile.email }}
+          </p>
+        </div>
+      </header>
+      <article class="absolute top-28 bottom-28 overflow-hidden">
+        <ul>
+          <li
+            v-for="item of props.items"
+            :key="item.name"
+            role="button"
+            class="p-4 rounded-2xl flex justify-start items-start duration-300"
+            :class="listStyle(item.name)"
+            @click="pushRouter(item.url)"
+          >
+            <BaseSvgIcon
+              :name="item.icon"
+              :class="iconStyle"
+              class="duration-300"
+            />
+            <span
+              class="text-lg h-7 font-bold overflow-hidden duration-300"
+              :class="titleStyle"
+            >
+              <h2>{{ item.title }}</h2>
+            </span>
+          </li>
+        </ul>
+      </article>
+      <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
+        <button
+          class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
+          :class="logoutButtonStyle"
         >
           <BaseSvgIcon
-            :name="item.icon"
+            name="logout"
             :class="iconStyle"
-            class="duration-300"
           />
           <span
             class="text-lg h-7 font-bold overflow-hidden duration-300"
-            :class="titleStyle"
+            :class="logoutTitleStyle"
           >
-            <h2>{{ item.title }}</h2>
+            <h2>{{ '登出' }}</h2>
           </span>
-        </li>
-      </ul>
-    </article>
-    <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
-      <button
-        class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
-        :class="logoutButtonStyle"
-      >
-        <BaseSvgIcon
-          name="logout"
-          :class="iconStyle"
-        />
-        <span
-          class="text-lg h-7 font-bold overflow-hidden duration-300"
-          :class="logoutTitleStyle"
-        >
-          <h2>{{ '登出' }}</h2>
-        </span>
-      </button>
-    </footer>
+        </button>
+      </footer>
+    </section>
   </nav>
 </template>
