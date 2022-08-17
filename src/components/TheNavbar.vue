@@ -83,10 +83,10 @@ const styleMap:StyleMap = {
       />
     </section>
     <section
-      class="fixed md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-lg"
+      class="fixed md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-500 drop-shadow-lg"
       :class="styleMap.navBar[status]"
     >
-      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
+      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
           class="rounded-full w-16 h-16"
           src="@/assets/images/user.png"
@@ -94,7 +94,7 @@ const styleMap:StyleMap = {
         >
         <div
           :class="styleMap.profile[status]"
-          class="h-16 overflow-hidden duration-300 whitespace-nowrap"
+          class="h-16 overflow-hidden duration-500 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
             {{ profile.name }}
@@ -113,17 +113,17 @@ const styleMap:StyleMap = {
             v-for="item of props.items"
             :key="item.name"
             role="button"
-            class="p-4 rounded-2xl flex justify-start items-start duration-300"
+            class="p-4 rounded-2xl flex justify-start items-start duration-500"
             :class="[listStyle(item.name), styleMap.list[status]]"
             @click="pushRouter(item.url)"
           >
             <BaseSvgIcon
               :name="item.icon"
               :class="styleMap.icon[status]"
-              class="duration-300"
+              class="duration-500"
             />
             <span
-              class="text-lg h-7 font-bold overflow-hidden duration-300"
+              class="text-lg h-7 font-bold overflow-hidden duration-500"
               :class="styleMap.title[status]"
             >
               <h2>{{ item.title }}</h2>
@@ -131,14 +131,14 @@ const styleMap:StyleMap = {
           </li>
         </ul>
         <BaseSvgIcon
-          class="fill-theme h-12 duration-300"
+          class="fill-theme h-12 duration-500"
           :class="styleMap.logo[status]"
           name="logo"
         />
       </article>
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
         <button
-          class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
+          class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
           :class="styleMap.logoutButton[status]"
         >
           <BaseSvgIcon
@@ -146,7 +146,7 @@ const styleMap:StyleMap = {
             :class="styleMap.icon[status]"
           />
           <span
-            class="text-lg h-7 font-bold overflow-hidden duration-300"
+            class="text-lg h-7 font-bold overflow-hidden duration-500"
             :class="styleMap.logoutTitle[status]"
           >
             <h2>{{ '登出' }}</h2>

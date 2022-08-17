@@ -47,7 +47,7 @@ const closeToast = () => emits('update:isActive', false)
     <slot />
     <BaseSvgIcon
       role="button"
-      class="ml-4 w-[24px] h-[24px] duration-300 hover:fill-white"
+      class="ml-4 w-[24px] h-[24px] duration-500 hover:fill-white"
       name="close"
       @click="closeToast"
     />
