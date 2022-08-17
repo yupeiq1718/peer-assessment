@@ -50,7 +50,7 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
       />
     </section>
     <section
-      class="absolute md:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-r-2xl md:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
+      class="absolute md:left-0 xl:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
       :class="navBarStyle"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
