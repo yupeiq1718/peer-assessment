@@ -72,14 +72,14 @@ const styleMap:StyleMap = {
     @mouseenter="toggleStatus('expanded')"
     @mouseleave="toggleStatus('folded')"
   >
-    <section class="absolute md:hidden left-0 top-0 flex items-center justify-center w-12 h-12 z-10">
+    <section class="fixed md:hidden left-0 top-0 flex items-center justify-center w-12 h-12 z-10">
       <BaseSvgIcon
         name="menu"
         class="w-8 h-8 fill-white"
       />
     </section>
     <section
-      class="absolute md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-lg"
+      class="fixed md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-lg"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
