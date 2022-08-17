@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 
 const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
-const listStyle = computed(() => (name:string) => isFolded.value ? (name === activeItem.value ? 'py-4 bg-theme fill-white text-white' : 'py-4 bg-theme-light fill-theme text-theme') : (name === activeItem.value ? 'py-2 bg-theme fill-white text-white' : 'py-2 bg-theme-light fill-theme text-theme'))
+const listStyle = computed(() => (name:string) => name === activeItem.value ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
 
 const pushRouter = (url:string) => router.push(url)
 
@@ -22,26 +22,55 @@ const profile = {
   position: '一般員工',
   email: 'yupeiq1718@osensetech.com'
 }
-const isFolded = ref(true)
-const toggleIsFolded = (value:boolean) => {
-  isFolded.value = value
+
+type Status = 'folded'|'expanded'
+const status = ref<Status>('folded')
+const toggleStatus = (value:Status) => {
+  status.value = value
 }
 
-const navBarStyle = computed(() => isFolded.value ? '-left-[18rem] w-24' : 'left-0 w-[18rem]')
-const iconStyle = computed(() => isFolded.value ? 'w-8 h-8' : 'w-6 h-6')
-const titleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-48')
-
-const logoutButtonStyle = computed(() => isFolded.value ? 'py-4 w-16' : 'py-2 w-64')
-const logoutTitleStyle = computed(() => isFolded.value ? 'w-0' : 'px-4 w-24')
-
-const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
+type StyleMap = {
+  [key: string]: {
+    [status in Status]: string
+  }
+}
+const styleMap:StyleMap = {
+  navBar: {
+    folded: '-left-[18rem] w-24',
+    expanded: 'left-0 w-[18rem]'
+  },
+  list: {
+    folded: 'py-4',
+    expanded: 'py-2'
+  },
+  icon: {
+    folded: 'w-8 h-8',
+    expanded: 'w-6 h-6'
+  },
+  title: {
+    folded: 'w-0',
+    expanded: 'px-4 w-48'
+  },
+  logoutButton: {
+    folded: 'py-4 w-16',
+    expanded: 'py-2 w-64'
+  },
+  logoutTitle: {
+    folded: 'w-0',
+    expanded: 'px-4 w-24'
+  },
+  profile: {
+    folded: 'w-0',
+    expanded: 'px-2 w-48'
+  }
+}
 
 </script>
 
 <template>
   <nav
-    @mouseenter="toggleIsFolded(false)"
-    @mouseleave="toggleIsFolded(true)"
+    @mouseenter="toggleStatus('expanded')"
+    @mouseleave="toggleStatus('folded')"
   >
     <section class="absolute md:hidden left-0 top-0 flex items-center justify-center w-12 h-12 z-10">
       <BaseSvgIcon
@@ -51,7 +80,7 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
     </section>
     <section
       class="absolute md:left-0 xl:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
-      :class="navBarStyle"
+      :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
         <img
@@ -60,7 +89,7 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
           alt="user"
         >
         <div
-          :class="profileStyle"
+          :class="styleMap.profile[status]"
           class="h-16 overflow-hidden duration-300 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
@@ -81,17 +110,17 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
             :key="item.name"
             role="button"
             class="p-4 rounded-2xl flex justify-start items-start duration-300"
-            :class="listStyle(item.name)"
+            :class="[listStyle(item.name), styleMap.list[status]]"
             @click="pushRouter(item.url)"
           >
             <BaseSvgIcon
               :name="item.icon"
-              :class="iconStyle"
+              :class="styleMap.icon[status]"
               class="duration-300"
             />
             <span
               class="text-lg h-7 font-bold overflow-hidden duration-300"
-              :class="titleStyle"
+              :class="styleMap.title[status]"
             >
               <h2>{{ item.title }}</h2>
             </span>
@@ -101,15 +130,15 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
         <button
           class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-300"
-          :class="logoutButtonStyle"
+          :class="styleMap.logoutButton[status]"
         >
           <BaseSvgIcon
             name="logout"
-            :class="iconStyle"
+            :class="styleMap.icon[status]"
           />
           <span
             class="text-lg h-7 font-bold overflow-hidden duration-300"
-            :class="logoutTitleStyle"
+            :class="styleMap.logoutTitle[status]"
           >
             <h2>{{ '登出' }}</h2>
           </span>
