@@ -43,6 +43,10 @@ const styleMap:StyleMap = {
     folded: 'py-4',
     expanded: 'py-2'
   },
+  logo: {
+    folded: 'w-0',
+    expanded: 'w-48'
+  },
   icon: {
     folded: 'w-8 h-8',
     expanded: 'w-6 h-6'
@@ -103,7 +107,7 @@ const styleMap:StyleMap = {
           </p>
         </div>
       </header>
-      <article class="absolute inset-y-28 overflow-hidden">
+      <article class="absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
         <ul>
           <li
             v-for="item of props.items"
@@ -126,6 +130,11 @@ const styleMap:StyleMap = {
             </span>
           </li>
         </ul>
+        <BaseSvgIcon
+          class="fill-theme h-12 duration-300"
+          :class="styleMap.logo[status]"
+          name="logo"
+        />
       </article>
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
         <button
