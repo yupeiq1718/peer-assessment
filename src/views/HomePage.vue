@@ -26,7 +26,7 @@ switchPosition('employee')
 <template>
   <div class="fixed w-full top-0 bottom-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
     <div class="relative container max-h-full h-[40rem] md:h-[45rem] grid grid-cols-12 items-center">
-      <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-md ease-linear duration-1000" />
+      <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-lg ease-linear duration-1000" />
       <section
         class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
       >
@@ -56,7 +56,7 @@ switchPosition('employee')
         </BaseButton>
       </section>
       <section
-        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl drop-shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl drop-shadow-lg duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
       >
         <header>
