@@ -1,3 +1,5 @@
 <template>
-  <div />
+  <div>
+    <TheModal />
+  </div>
 </template>

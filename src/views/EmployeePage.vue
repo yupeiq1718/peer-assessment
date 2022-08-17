@@ -45,6 +45,5 @@ setThemeColor('employee')
   <div class="fixed top-0 bottom-0 bg-theme w-full">
     <TheNavbar :items="navbarItems" />
     <TheMain />
-    <router-view />
   </div>
 </template>
