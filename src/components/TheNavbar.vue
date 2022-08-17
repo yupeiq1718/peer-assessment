@@ -42,17 +42,18 @@ const profileStyle = computed(() => isFolded.value ? 'w-0' : 'px-2 w-48')
   <nav
     class="absolute left-0 md:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-md"
     :class="navBarStyle"
+    @mouseenter="toggleIsFolded"
+    @mouseleave="toggleIsFolded"
   >
     <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
       <img
         class="rounded-full w-16 h-16"
         src="@/assets/images/user.png"
         alt="user"
-        @click="toggleIsFolded"
       >
       <div
         :class="profileStyle"
-        class="h-16 overflow-hidden duration-300"
+        class="h-16 overflow-hidden duration-300 whitespace-nowrap"
       >
         <h2 class="text-lg font-bold text-dark">
           {{ profile.name }}
