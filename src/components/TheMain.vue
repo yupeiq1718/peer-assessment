@@ -21,10 +21,10 @@
         src="@/assets/images/nail.png"
         alt="nail"
       >
-      <h1 class="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 px-8 py-4 bg-muted text-white rounded-xl text-xl md:text-2xl font-bold whitespace-nowrap drop-shadow-lg">
+      <h1 class="absolute left-1/2 -top-8 transform -translate-x-1/2 px-8 py-4 bg-muted text-white rounded-xl text-xl md:text-2xl font-bold whitespace-nowrap drop-shadow-lg">
         {{ '員工互評填寫' }}
       </h1>
-      <router-view />
+      <router-view class="absolute inset-8" />
     </div>
   </main>
 </template>
