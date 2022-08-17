@@ -79,7 +79,7 @@ const styleMap:StyleMap = {
       />
     </section>
     <section
-      class="absolute md:left-0 xl:left-8 top-0 md:top-12 bottom-0 md:bottom-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-lg"
+      class="absolute md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-300 drop-shadow-lg"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-300">
@@ -103,7 +103,7 @@ const styleMap:StyleMap = {
           </p>
         </div>
       </header>
-      <article class="absolute top-28 bottom-28 overflow-hidden">
+      <article class="absolute inset-y-28 overflow-hidden">
         <ul>
           <li
             v-for="item of props.items"

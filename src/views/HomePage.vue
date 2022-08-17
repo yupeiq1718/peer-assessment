@@ -24,7 +24,7 @@ switchPosition('employee')
 </script>
 
 <template>
-  <div class="fixed w-full top-0 bottom-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
+  <div class="fixed w-full inset-y-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
     <div class="relative container max-h-full h-[40rem] md:h-[45rem] grid grid-cols-12 items-center">
       <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-lg ease-linear duration-1000" />
       <section
