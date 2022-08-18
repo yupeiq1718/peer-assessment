@@ -15,14 +15,14 @@ interface Emits {
 const emits = defineEmits<Emits>()
 
 const sizeMap = {
-  full: 'w-full md:w-full',
+  full: 'w-full md:w-[36rem] lg:w-[48rem] xl:w-[60rem] 2xl:w-[72rem]',
   side: 'max-w-full w-[24rem]'
 }
 </script>
 
 <template>
   <div
-    class="fixed -top-8 -bottom-4 md:-bottom-4 -right-4 md:-right-28 xl:-right-44 bg-theme-light border-2 border-theme rounded-l-xl drop-shadow-lg overflow-hidden"
+    class="fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden"
     :class="sizeMap[props.size]"
   >
     <article class="absolute top-4 bottom-16 inset-x-4 bg-theme">

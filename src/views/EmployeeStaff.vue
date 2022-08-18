@@ -20,7 +20,7 @@ const items = [
       <TheModal
         v-if="isActive"
         v-model:is-active="isActive"
-        size="side"
+        size="full"
       >
         <div class="w-full h-full bg-white" />
       </TheModal>
