@@ -1,28 +1,14 @@
 <script setup lang="ts">
+import router from '@/router'
+import { Ref } from 'vue'
+
 type Type = 'employee'|'admin'
-const type = ref<Type>('employee')
-const setType = (value:Type) => {
-  type.value = value
-}
+const type:Ref<Type> = inject('type', ref('employee'))
 
-type ThemeColorMap = {
-  employee:string[],
-  admin:string[],
-}
-const themeColorMap:ThemeColorMap = {
-  employee: ['#A2CED3', '#E8F3F4'],
-  admin: ['#D4B3AE', '#F4ECEB']
-}
-const setThemeColor = (type:Type) => {
-  document.documentElement.style.setProperty('--color-theme', themeColorMap[type][0])
-  document.documentElement.style.setProperty('--color-theme-light', themeColorMap[type][1])
-}
+const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 
-setThemeColor(type.value)
-
-const switchPosition = (value:Type) => {
-  setThemeColor(value)
-  setType(value)
+const login = () => {
+  router.push(`/${type.value}`)
 }
 
 type TypeMap = {
@@ -34,16 +20,13 @@ const positionMap:TypeMap = {
   admin: 'left-[8.33%] md:left-[41.67%] xl:left-[58.33%]'
 }
 
+switchPosition('employee')
 </script>
 
 <template>
-  <div
-    class="fixed w-full h-screen bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center"
-  >
+  <div class="fixed w-full inset-y-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
     <div class="relative container max-h-full h-[40rem] md:h-[45rem] grid grid-cols-12 items-center">
-      <div
-        class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light drop-shadow-md ease-linear duration-1000"
-      />
+      <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md ease-linear duration-1000" />
       <section
         class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
       >
@@ -73,7 +56,7 @@ const positionMap:TypeMap = {
         </BaseButton>
       </section>
       <section
-        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl drop-shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
       >
         <header>
@@ -98,6 +81,7 @@ const positionMap:TypeMap = {
             src="@/assets/images/google.png"
             alt="google"
             class="mb-4"
+            @click="login"
           >
           <BaseButton
             v-if="type==='admin'"
