@@ -15,8 +15,8 @@ interface Emits {
 const emits = defineEmits<Emits>()
 
 const sizeMap = {
-  full: 'w-full md:w-[36rem] lg:w-[48rem] xl:w-[60rem] 2xl:w-[72rem]',
-  side: 'max-w-full w-[24rem]'
+  full: 'w-full sm:w-[34rem] lg:w-[50rem] xl:w-[62rem] 2xl:w-[78rem]',
+  side: 'max-w-full w-[26rem]'
 }
 </script>
 
