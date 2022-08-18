@@ -36,8 +36,8 @@ type StyleMap = {
 }
 const styleMap:StyleMap = {
   navBar: {
-    folded: '-left-[18rem] w-24',
-    expanded: 'left-0 w-[18rem]'
+    folded: 'transform -translate-x-full md:translate-x-0 w-24',
+    expanded: 'w-[18rem]'
   },
   list: {
     folded: 'py-4',
@@ -83,7 +83,7 @@ const styleMap:StyleMap = {
       />
     </section>
     <section
-      class="fixed md:left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-500 drop-shadow-lg"
+      class="fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-500 drop-shadow-lg"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
