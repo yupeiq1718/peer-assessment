@@ -25,10 +25,10 @@ switchPosition('employee')
 
 <template>
   <div class="fixed w-full inset-y-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
-    <div class="relative container max-h-full h-[40rem] md:h-[45rem] grid grid-cols-12 items-center">
-      <div class="absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md ease-linear duration-1000" />
+    <div class="absolute container max-h-full h-[40rem] md:h-[45rem] flex items-center">
+      <div class="wrapper absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000" />
       <section
-        class="absolute left-[8.33%] hidden md:block w-1/3 text-center"
+        class="aside absolute left-[8.33%] hidden md:block w-1/3 text-center"
       >
         <p class="text-muted mb-4 text-lg">
           {{ '我想要填寫互評問卷' }}
@@ -42,7 +42,7 @@ switchPosition('employee')
         </BaseButton>
       </section>
       <section
-        class="absolute right-[8.33%] hidden md:block w-1/3 text-center"
+        class="aside absolute right-[8.33%] hidden md:block w-1/3 text-center"
       >
         <p class="text-muted mb-4 text-lg">
           {{ '我想要設定互評系統' }}
@@ -56,7 +56,7 @@ switchPosition('employee')
         </BaseButton>
       </section>
       <section
-        class="absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+        class="main absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
       >
         <header>
@@ -104,3 +104,52 @@ switchPosition('employee')
     </div>
   </div>
 </template>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  @apply duration-1000;
+
+  .wrapper {
+    @apply duration-500;
+  }
+
+  .main {
+    @apply delay-500 duration-500;
+  }
+
+  .aside {
+    @apply delay-1000 duration-500;
+  }
+}
+
+.page-enter-from {
+  .wrapper {
+    @apply transform -translate-x-full;
+  }
+
+  .main {
+    @apply left-full;
+  }
+
+  .aside {
+    @apply opacity-0;
+  }
+}
+
+.page-leave-to {
+  @apply duration-1000 bg-error;
+
+  .wrapper {
+    @apply transform -translate-x-full;
+  }
+
+  .main {
+    @apply left-full;
+  }
+
+  .aside {
+    @apply opacity-0;
+  }
+}
+</style>

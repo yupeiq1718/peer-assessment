@@ -30,16 +30,14 @@ provide('switchPosition', switchPosition)
 </script>
 
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <!-- <keep-alive include="Home"> -->
+    <transition
+      name="page"
+      appear
+    >
+      <component :is="Component" />
+    </transition>
+    <!-- </keep-alive> -->
+  </router-view>
 </template>
-
-<style>
-/* #app {
-  margin-top: 60px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
-</style>
