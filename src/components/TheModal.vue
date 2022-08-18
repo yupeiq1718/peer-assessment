@@ -25,7 +25,9 @@ const sizeMap = {
     class="fixed -top-8 -bottom-4 md:-bottom-4 -right-4 md:-right-28 xl:-right-44 bg-theme-light border-2 border-theme rounded-l-xl drop-shadow-lg overflow-hidden"
     :class="sizeMap[props.size]"
   >
-    <slot />
+    <article class="absolute top-4 bottom-16 inset-x-4 bg-theme">
+      <slot />
+    </article>
     <button class="absolute right-4 bottom-2 rounded-2xl flex justify-center items-center bg-theme fill-white duration-500">
       <BaseSvgIcon
         name="close"
