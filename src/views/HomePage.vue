@@ -25,47 +25,49 @@ switchPosition('employee')
 
 <template>
   <div class="fixed w-full inset-y-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
-    <div class="absolute container max-h-full h-[40rem] md:h-[45rem] flex items-center">
-      <div class="wrapper absolute w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000" />
-      <section
-        class="aside absolute left-[8.33%] hidden md:block w-1/3 text-center"
-      >
-        <p class="text-muted mb-4 text-lg">
-          {{ '我想要填寫互評問卷' }}
-        </p>
-        <BaseButton
-          variant="muted"
-          class="bg-transparent text-md"
-          @click="switchPosition('employee')"
+    <div class="wrapper absolute container max-h-full h-[40rem] md:h-[45rem]">
+      <header class="header absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000">
+        <section
+          class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center"
         >
-          {{ '切換員工登入' }}
-        </BaseButton>
-      </section>
-      <section
-        class="aside absolute right-[8.33%] hidden md:block w-1/3 text-center"
-      >
-        <p class="text-muted mb-4 text-lg">
-          {{ '我想要設定互評系統' }}
-        </p>
-        <BaseButton
-          variant="muted"
-          class="bg-transparent text-md"
-          @click="switchPosition('admin')"
+          <p class="text-muted mb-4 text-lg">
+            {{ '我想要填寫互評問卷' }}
+          </p>
+          <BaseButton
+            variant="muted"
+            class="bg-transparent text-md"
+            @click="switchPosition('employee')"
+          >
+            {{ '切換員工登入' }}
+          </BaseButton>
+        </section>
+        <section
+          class="header-content absolute top-1/2 right-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center"
         >
-          {{ '切換管理員登入' }}
-        </BaseButton>
-      </section>
-      <section
-        class="main absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+          <p class="text-muted mb-4 text-lg">
+            {{ '我想要設定互評系統' }}
+          </p>
+          <BaseButton
+            variant="muted"
+            class="bg-transparent text-md"
+            @click="switchPosition('admin')"
+          >
+            {{ '切換管理員登入' }}
+          </BaseButton>
+        </section>
+      </header>
+
+      <article
+        class="article absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
       >
-        <header>
+        <header class="article-content">
           <BaseSvgIcon
             name="logo"
             class="w-full fill-theme duration-1000"
           />
         </header>
-        <article class="text-center text-dark">
+        <article class="article-content text-center text-dark">
           <h1 class="text-2xl font-bold mb-4">
             {{ '光禾感知互評系統' }}
           </h1>
@@ -76,7 +78,7 @@ switchPosition('employee')
             {{ '管理員登入' }}
           </p>
         </article>
-        <footer class="text-center">
+        <footer class="article-content text-center">
           <img
             src="@/assets/images/google.png"
             alt="google"
@@ -100,55 +102,80 @@ switchPosition('employee')
             {{ '切換管理員登入' }}
           </BaseButton>
         </footer>
-      </section>
+      </article>
     </div>
   </div>
 </template>
 
 <style>
-.page-enter-active,
-.page-leave-active {
-  @apply duration-1000;
-
-  .wrapper {
-    @apply duration-500;
+.page-enter-active {
+  .header {
+    @apply duration-1000;
   }
 
-  .main {
-    @apply delay-500 duration-500;
+  .article {
+    @apply duration-1000;
   }
 
-  .aside {
-    @apply delay-1000 duration-500;
+  .header-content {
+    @apply delay-1000 duration-1000;
   }
 }
 
 .page-enter-from {
-  .wrapper {
+  .header {
     @apply transform -translate-x-full;
   }
 
-  .main {
+  .article {
     @apply left-full;
   }
 
-  .aside {
+  .header-content {
     @apply opacity-0;
   }
 }
 
-.page-leave-to {
-  @apply duration-1000 bg-error;
-
+.page-leave-active {
   .wrapper {
-    @apply transform -translate-x-full;
+    @apply duration-1000;
   }
 
-  .main {
-    @apply left-full;
+  .header {
+    @apply duration-1000;
   }
 
-  .aside {
+  .article {
+    @apply duration-1000;
+  }
+
+  .header-content {
+    @apply duration-1000;
+  }
+
+  .article-content {
+    @apply duration-1000;
+  }
+}
+
+.page-leave-to {
+  .wrapper {
+    @apply max-w-full w-full h-full items-start;
+  }
+
+  .header {
+    @apply left-0 xl:left-8 inset-y-0 md:inset-y-12 translate-x-0 translate-y-0 w-24 h-auto z-10;
+  }
+
+  .article {
+    @apply left-0 md:left-12 xl:left-40 right-0 xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 w-auto h-auto;
+  }
+
+  .header-content {
+    @apply opacity-0;
+  }
+
+  .article-content {
     @apply opacity-0;
   }
 }

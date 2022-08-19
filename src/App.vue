@@ -31,13 +31,12 @@ provide('switchPosition', switchPosition)
 
 <template>
   <router-view v-slot="{ Component }">
-    <!-- <keep-alive include="Home"> -->
     <transition
       name="page"
       appear
+      mode="out-in"
     >
       <component :is="Component" />
     </transition>
-    <!-- </keep-alive> -->
   </router-view>
 </template>
