@@ -68,7 +68,6 @@ const styleMap:StyleMap = {
     expanded: 'px-2 w-48'
   }
 }
-
 </script>
 
 <template>
@@ -83,7 +82,7 @@ const styleMap:StyleMap = {
       />
     </section>
     <section
-      class="fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-500 shadow-md"
+      class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
@@ -156,3 +155,16 @@ const styleMap:StyleMap = {
     </section>
   </nav>
 </template>
+<style>
+.navbar-enter-active {
+  .navbar {
+    @apply duration-1000;
+  }
+}
+
+.navbar-enter-from {
+  .navbar {
+    @apply animate-pulse;
+  }
+}
+</style>

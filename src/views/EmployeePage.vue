@@ -43,7 +43,13 @@ setThemeColor('employee')
 
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
-    <TheNavbar :items="navbarItems" />
+    <transition
+      name="navbar"
+      appear
+      mode="out-in"
+    >
+      <TheNavbar :items="navbarItems" />
+    </transition>
     <TheMain />
   </div>
 </template>
