@@ -58,7 +58,7 @@ switchPosition('employee')
       </header>
 
       <article
-        class="article absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 ease-in-out px-8 flex justify-evenly items-center flex-col"
+        class="article absolute bg-white w-5/6 md:w-1/2 xl:w-1/3 h-full rounded-2xl shadow-md duration-1000 px-8 flex justify-evenly items-center flex-col"
         :class="positionMap[type]"
       >
         <header class="article-content">
