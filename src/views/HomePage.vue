@@ -27,9 +27,7 @@ switchPosition('employee')
   <div class="fixed w-full inset-y-0 bg-theme duration-1000 px-0 md:px-8 py-8 flex justify-center items-center">
     <div class="wrapper absolute container max-h-full h-[40rem] md:h-[45rem]">
       <header class="header absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000">
-        <section
-          class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center"
-        >
+        <section class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center">
           <p class="text-muted mb-4 text-lg">
             {{ '我想要填寫互評問卷' }}
           </p>
@@ -41,9 +39,7 @@ switchPosition('employee')
             {{ '切換員工登入' }}
           </BaseButton>
         </section>
-        <section
-          class="header-content absolute top-1/2 right-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center"
-        >
+        <section class="header-content absolute top-1/2 right-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center">
           <p class="text-muted mb-4 text-lg">
             {{ '我想要設定互評系統' }}
           </p>
@@ -118,7 +114,7 @@ switchPosition('employee')
   }
 
   .header-content {
-    @apply delay-1000 duration-1000;
+    @apply duration-1000 delay-1000;
   }
 }
 
@@ -148,13 +144,19 @@ switchPosition('employee')
   .article {
     @apply duration-1000;
   }
+}
+
+.page-leave-from {
+  .wrapper {
+    @apply max-w-full w-full items-start;
+  }
 
   .header-content {
-    @apply duration-1000;
+    @apply opacity-0;
   }
 
   .article-content {
-    @apply duration-1000;
+    @apply opacity-0;
   }
 }
 
