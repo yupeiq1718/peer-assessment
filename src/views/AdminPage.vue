@@ -48,7 +48,7 @@ setThemeColor('admin')
 </script>
 
 <template>
-  <div class="fixed top-0 bottom-0 bg-theme w-full">
+  <div class="fixed inset-0 bg-theme">
     <TheNavbar :items="navbarItems" />
     <TheMain />
     <router-view />
