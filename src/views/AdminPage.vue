@@ -40,7 +40,7 @@ const pageMap:PageMap = {
     icon: 'question'
   }
 }
-const navbarItems = computed(() => pages.value.map(page => ({
+const pageList = computed(() => pages.value.map(page => ({
   name: page,
   ...pageMap[page]
 })))
@@ -53,7 +53,10 @@ setThemeColor('admin')
 
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
-    <TheNavbar :items="navbarItems" />
+    <TheNavbar
+      :active-page="activePage"
+      :page-list="pageList"
+    />
     <TheMain :title="pageMap[activePage].title" />
   </div>
 </template>

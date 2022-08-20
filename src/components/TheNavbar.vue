@@ -2,7 +2,8 @@
 import router from '@/router'
 
 interface Props {
-  items: {
+  activePage: string,
+  pageList: {
     name:string,
     url: string,
     title: string,
@@ -11,9 +12,7 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
-
-const listStyle = computed(() => (name:string) => name === activeItem.value ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
+const listStyle = computed(() => (name:string) => name === props.activePage ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
 
 const pushRouter = (url:string) => router.push(url)
 
@@ -109,15 +108,15 @@ const styleMap:StyleMap = {
       <article class="absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
         <ul>
           <li
-            v-for="item of props.items"
-            :key="item.name"
+            v-for="page of props.pageList"
+            :key="page.name"
             role="button"
             class="p-4 rounded-2xl flex justify-start items-start duration-500"
-            :class="[listStyle(item.name), styleMap.list[status]]"
-            @click="pushRouter(item.url)"
+            :class="[listStyle(page.name), styleMap.list[status]]"
+            @click="pushRouter(page.url)"
           >
             <BaseSvgIcon
-              :name="item.icon"
+              :name="page.icon"
               :class="styleMap.icon[status]"
               class="duration-500"
             />
@@ -125,7 +124,7 @@ const styleMap:StyleMap = {
               class="text-lg h-7 font-bold overflow-hidden duration-500"
               :class="styleMap.title[status]"
             >
-              <h2>{{ item.title }}</h2>
+              <h2>{{ page.title }}</h2>
             </span>
           </li>
         </ul>
