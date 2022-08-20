@@ -12,6 +12,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/EmployeePage.vue'),
     children: [
       {
+        path: '',
+        redirect: '/employee/staff'
+      },
+      {
         path: 'staff',
         name: 'Staff',
         component: () => import('@/views/EmployeeStaff.vue')
@@ -24,8 +28,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/AdminPage.vue'),
     children: [
       {
+        path: '',
+        redirect: '/admin/list'
+      },
+      {
         path: 'list',
-        name: 'list',
+        name: 'List',
         component: () => import('@/views/AdminList.vue')
       }
     ]
