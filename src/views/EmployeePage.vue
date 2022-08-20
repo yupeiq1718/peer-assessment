@@ -1,13 +1,17 @@
 <script setup lang="ts">
-type Pages = 'staff'|'leader'|'result'|'calendar'
+import router from '@/router'
+
+type Page = 'staff'|'leader'|'result'|'calendar'
 type PageMap = {
-  [Page in Pages]: {
+  [key: string]: {
     title: string,
     url: string,
     icon: string
   }
 }
-const pages = ref<Pages[]>(['staff', 'leader', 'result', 'calendar'])
+const pages = ref<Page[]>(['staff', 'leader', 'result', 'calendar'])
+
+const activePage = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
 const pageMap:PageMap = {
   staff: {
@@ -44,6 +48,6 @@ setThemeColor('employee')
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
     <TheNavbar :items="navbarItems" />
-    <TheMain />
+    <TheMain :title="pageMap[activePage].title" />
   </div>
 </template>
