@@ -170,4 +170,17 @@ const logout = () => router.push('/')
     @apply animate-pulse;
   }
 }
+
+/* .page-enter-active,
+.page-leave-active {
+  .navbar {
+    @apply duration-500;
+  }
+} */
+
+.page-leave-to {
+  .navbar {
+    @apply -left-72 duration-500;
+  }
+}
 </style>

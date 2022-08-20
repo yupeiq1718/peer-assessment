@@ -51,6 +51,25 @@ setThemeColor('employee')
       :active-page="activePage"
       :page-list="pageList"
     />
-    <TheMain :title="pageMap[activePage].title" />
+    <router-view v-slot="{ component, route }">
+      <transition
+        name="main"
+        mode="out-in"
+        appear
+      >
+        <TheMain
+          :key="route.path"
+          :title="pageMap[activePage].title"
+        >
+          <component :is="component" />
+        </TheMain>
+      </transition>
+    </router-view>
   </div>
 </template>
+<style scoped>
+.page-enter-active,
+.page-leave-active {
+  @apply duration-1000;
+}
+</style>
