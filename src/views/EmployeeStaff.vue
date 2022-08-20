@@ -18,9 +18,12 @@ const string = `寬度:${window.innerWidth}px\n高度:${window.innerHeight}px\n�
 <template>
   <div class="w-full h-full bg-white">
     <TheSideBar :items="items" />
-    <transition name="modal">
+    <transition
+      name="modal"
+      mode="out-in"
+    >
       <TheModal
-        v-if="isActive"
+        v-show="isActive"
         v-model:is-active="isActive"
         size="full"
       >

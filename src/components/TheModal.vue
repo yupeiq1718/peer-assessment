@@ -25,7 +25,7 @@ const sizeMap = {
     class="fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden"
     :class="sizeMap[props.size]"
   >
-    <article class="absolute top-4 bottom-16 inset-x-4 bg-theme">
+    <article class="absolute top-4 bottom-16 inset-x-4">
       <slot />
     </article>
     <button class="absolute right-4 bottom-2 rounded-2xl flex justify-center items-center bg-theme fill-white duration-500">
@@ -37,16 +37,13 @@ const sizeMap = {
     </button>
   </div>
 </template>
-<style>
+<style scoped>
 .modal-enter-active,
 .modal-leave-active {
   @apply duration-1000;
 }
 
-.modal-enter-from {
-  @apply transform translate-x-full;
-}
-
+.modal-enter-from,
 .modal-leave-to {
   @apply transform translate-x-full;
 }
