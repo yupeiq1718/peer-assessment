@@ -142,6 +142,7 @@ const styleMap:StyleMap = {
           <BaseSvgIcon
             name="logout"
             :class="styleMap.icon[status]"
+            class="duration-500"
           />
           <span
             class="text-lg h-7 font-bold overflow-hidden duration-500"
