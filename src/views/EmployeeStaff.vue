@@ -23,7 +23,7 @@ const string = `寬度:${window.innerWidth}px\n高度:${window.innerHeight}px\n�
       mode="out-in"
     >
       <TheModal
-        v-show="isActive"
+        v-if="isActive"
         v-model:is-active="isActive"
         size="full"
       >
