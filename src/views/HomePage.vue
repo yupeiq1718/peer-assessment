@@ -105,7 +105,7 @@ switchPosition('employee')
   </div>
 </template>
 
-<style>
+<style scoped>
 .page-enter-active {
   .header {
     @apply duration-1000;
