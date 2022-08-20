@@ -67,6 +67,8 @@ const styleMap:StyleMap = {
     expanded: 'px-2 w-48'
   }
 }
+
+const logout = () => router.push('/')
 </script>
 
 <template>
@@ -138,6 +140,7 @@ const styleMap:StyleMap = {
         <button
           class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
           :class="styleMap.logoutButton[status]"
+          @click="logout"
         >
           <BaseSvgIcon
             name="logout"
