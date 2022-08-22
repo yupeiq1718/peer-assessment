@@ -180,7 +180,7 @@ const logout = () => router.push('/')
 
 .page-leave-to {
   .navbar {
-    @apply -left-72 duration-500;
+    @apply -left-72 duration-1000;
   }
 }
 </style>

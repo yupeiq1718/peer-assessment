@@ -59,7 +59,7 @@ const props = defineProps<Props>()
 
 .page-leave-to {
   .main {
-    @apply left-full -right-full duration-500 delay-500;
+    @apply left-full -right-full duration-1000;
   }
 }
 </style>

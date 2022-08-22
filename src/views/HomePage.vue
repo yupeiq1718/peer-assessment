@@ -116,7 +116,7 @@ switchPosition('employee')
   }
 
   .header-content {
-    @apply duration-1000 delay-1000;
+    @apply duration-500 delay-1000;
   }
 }
 
