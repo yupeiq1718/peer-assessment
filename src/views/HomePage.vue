@@ -107,10 +107,7 @@ switchPosition('employee')
 
 <style scoped>
 .page-enter-active {
-  .header {
-    @apply duration-1000;
-  }
-
+  .header,
   .article {
     @apply duration-1000;
   }
@@ -135,28 +132,16 @@ switchPosition('employee')
 }
 
 .page-leave-active {
-  .outer {
-    @apply duration-1000;
-  }
-
-  .inner {
-    @apply duration-1000;
-  }
-
-  .header {
-    @apply duration-1000;
-  }
-
+  .outer,
+  .inner,
+  .header,
   .article {
     @apply duration-1000;
   }
 }
 
 .page-leave-from {
-  .header-content {
-    @apply opacity-0;
-  }
-
+  .header-content,
   .article-content {
     @apply opacity-0;
   }
@@ -180,10 +165,7 @@ switchPosition('employee')
       md:rounded-l-xl xl:rounded-xl;
   }
 
-  .header-content {
-    @apply opacity-0;
-  }
-
+  .header-content,
   .article-content {
     @apply opacity-0;
   }

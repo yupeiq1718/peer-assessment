@@ -42,12 +42,9 @@ const props = defineProps<Props>()
 </template>
 <style scoped>
 .main-enter-active,
-.main-leave-active {
+.main-leave-active,
+.main-content {
   @apply duration-1000;
-
-  .main-content {
-    @apply duration-1000;
-  }
 }
 
 .main-enter-from,
