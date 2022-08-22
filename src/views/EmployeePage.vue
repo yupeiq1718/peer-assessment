@@ -51,7 +51,7 @@ setThemeColor('employee')
       :active-page="activePage"
       :page-list="pageList"
     />
-    <router-view v-slot="{ component, route }">
+    <router-view v-slot="{ Component, route }">
       <transition
         name="main"
         mode="out-in"
@@ -61,7 +61,7 @@ setThemeColor('employee')
           :key="route.path"
           :title="pageMap[activePage].title"
         >
-          <component :is="component" />
+          <component :is="Component" />
         </TheMain>
       </transition>
     </router-view>
