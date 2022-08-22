@@ -34,7 +34,7 @@ const props = defineProps<Props>()
       <h1 class="absolute left-1/2 -top-8 transform -translate-x-1/2 px-8 py-2 bg-muted text-white rounded-xl text-xl md:text-2xl font-bold whitespace-nowrap shadow-md">
         {{ props.title }}
       </h1>
-      <article class="absolute inset-8">
+      <article class="absolute inset-8 overflow-auto">
         <slot />
       </article>
     </div>
