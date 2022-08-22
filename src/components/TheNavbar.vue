@@ -107,7 +107,7 @@ const logout = () => router.push('/')
           </p>
         </div>
       </header>
-      <article class="absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
+      <article class="navbar-content absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
         <ul>
           <li
             v-for="page of props.pageList"
@@ -159,17 +159,19 @@ const logout = () => router.push('/')
   </nav>
 </template>
 <style scoped>
-/* .navbar-enter-active {
-  .navbar {
+.navbar-enter-active {
+  @apply duration-1000;
+
+  .navbar-content {
     @apply duration-1000;
   }
 }
 
 .navbar-enter-from {
-  .navbar {
-    @apply animate-pulse;
+  .navbar-content, {
+    @apply top-full;
   }
-} */
+}
 
 .page-leave-to {
   .navbar {

@@ -47,10 +47,16 @@ setThemeColor('employee')
 
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
-    <TheNavbar
-      :active-page="activePage"
-      :page-list="pageList"
-    />
+    <transition
+      name="navbar"
+      mode="out-in"
+      appear
+    >
+      <TheNavbar
+        :active-page="activePage"
+        :page-list="pageList"
+      />
+    </transition>
     <router-view v-slot="{ Component, route }">
       <transition
         name="main"
