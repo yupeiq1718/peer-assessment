@@ -11,15 +11,6 @@ const login = () => {
   router.push(`/${type.value}`)
 }
 
-type TypeMap = {
-  [key in Type]?: string
-}
-
-const positionMap:TypeMap = {
-  employee: 'left-1/12 right-1/12 md:right-5/12 xl:right-7/12',
-  admin: 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
-}
-
 switchPosition('employee')
 </script>
 
@@ -56,7 +47,10 @@ switchPosition('employee')
 
         <article
           class="article absolute bg-white inset-y-0 rounded-2xl shadow-md duration-1000 px-8 flex justify-evenly items-center flex-col"
-          :class="positionMap[type]"
+          :class="[
+            type==='employee' && 'left-1/12 right-1/12 md:right-5/12 xl:right-7/12',
+            type==='admin' && 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
+          ]"
         >
           <header class="article-content">
             <BaseSvgIcon
