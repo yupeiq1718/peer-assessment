@@ -26,7 +26,7 @@ const props = defineProps<Props>()
 
 <style scope>
 .sidebar-enter-active {
-  @apply duration-1000;
+  @apply duration-500 delay-500;
 }
 
 .sidebar-enter-from {
@@ -35,13 +35,13 @@ const props = defineProps<Props>()
 
 .main-leave-to {
   .sidebar {
-    @apply opacity-0 duration-1000;
+    @apply opacity-0 duration-500;
   }
 }
 
 .page-leave-to {
   .sidebar {
-    @apply opacity-0 duration-1000;
+    @apply opacity-0 duration-500;
   }
 }
 </style>
