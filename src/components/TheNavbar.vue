@@ -158,8 +158,8 @@ const logout = () => router.push('/')
     </section>
   </nav>
 </template>
-<style>
-.navbar-enter-active {
+<style scoped>
+/* .navbar-enter-active {
   .navbar {
     @apply duration-1000;
   }
@@ -168,13 +168,6 @@ const logout = () => router.push('/')
 .navbar-enter-from {
   .navbar {
     @apply animate-pulse;
-  }
-}
-
-/* .page-enter-active,
-.page-leave-active {
-  .navbar {
-    @apply duration-500;
   }
 } */
 

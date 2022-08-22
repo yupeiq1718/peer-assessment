@@ -17,7 +17,13 @@ const string = `寬度:${window.innerWidth}px\n高度:${window.innerHeight}px\n�
 </script>
 <template>
   <div class="w-full h-full bg-white">
-    <TheSideBar :items="items" />
+    <transition
+      name="sidebar"
+      mode="out-in"
+      appear
+    >
+      <TheSideBar :items="items" />
+    </transition>
     <transition
       name="modal"
       mode="out-in"
