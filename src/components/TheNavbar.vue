@@ -12,8 +12,6 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const listStyle = computed(() => (name:string) => name === props.activePage ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
-
 const pushRouter = (url:string) => router.push(url)
 
 const profile = {
@@ -26,46 +24,6 @@ type Status = 'folded'|'expanded'
 const status = ref<Status>('folded')
 const toggleStatus = (value:Status) => {
   status.value = value
-}
-
-type StyleMap = {
-  [key: string]: {
-    [status in Status]: string
-  }
-}
-const styleMap:StyleMap = {
-  navBar: {
-    folded: 'transform -translate-x-full md:translate-x-0 w-24',
-    expanded: 'w-[18rem]'
-  },
-  list: {
-    folded: 'py-4',
-    expanded: 'py-2'
-  },
-  logo: {
-    folded: 'w-0',
-    expanded: 'w-48'
-  },
-  icon: {
-    folded: 'w-8 h-8',
-    expanded: 'w-6 h-6'
-  },
-  title: {
-    folded: 'w-0',
-    expanded: 'px-4 w-48'
-  },
-  logoutButton: {
-    folded: 'py-4 w-16',
-    expanded: 'py-2 w-64'
-  },
-  logoutTitle: {
-    folded: 'w-0',
-    expanded: 'px-4 w-24'
-  },
-  profile: {
-    folded: 'w-0',
-    expanded: 'px-2 w-48'
-  }
 }
 
 const logout = () => router.push('/')
@@ -84,7 +42,10 @@ const logout = () => router.push('/')
     </section>
     <section
       class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
-      :class="styleMap.navBar[status]"
+      :class="[
+        status==='folded' && 'transform -translate-x-full md:translate-x-0 w-24',
+        status==='expanded' && 'w-[18rem]'
+      ]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
@@ -93,7 +54,10 @@ const logout = () => router.push('/')
           alt="user"
         >
         <div
-          :class="styleMap.profile[status]"
+          :class="[
+            status==='folded' && 'w-0',
+            status==='expanded' && 'px-2 w-48'
+          ]"
           class="h-16 overflow-hidden duration-500 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
@@ -114,17 +78,27 @@ const logout = () => router.push('/')
             :key="page.name"
             role="button"
             class="p-4 rounded-2xl flex justify-start items-start duration-500"
-            :class="[listStyle(page.name), styleMap.list[status]]"
+            :class="[
+              status==='folded' && 'py-4',
+              status==='expanded' && 'py-2',
+              page.name === props.activePage ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme'
+            ]"
             @click="pushRouter(page.url)"
           >
             <BaseSvgIcon
               :name="page.icon"
-              :class="styleMap.icon[status]"
+              :class="[
+                status==='folded' && 'w-8 h-8',
+                status==='expanded' && 'w-6 h-6'
+              ]"
               class="duration-500"
             />
             <span
               class="text-lg h-7 font-bold overflow-hidden duration-500"
-              :class="styleMap.title[status]"
+              :class="[
+                status==='folded' && 'w-0',
+                status==='expanded' && 'px-4 w-48'
+              ]"
             >
               <h2>{{ page.title }}</h2>
             </span>
@@ -132,24 +106,36 @@ const logout = () => router.push('/')
         </ul>
         <BaseSvgIcon
           class="fill-theme h-12 duration-500"
-          :class="styleMap.logo[status]"
+          :class="[
+            status==='folded' && 'w-0',
+            status==='expanded' && 'w-48'
+          ]"
           name="logo"
         />
       </article>
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
         <button
           class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
-          :class="styleMap.logoutButton[status]"
+          :class="[
+            status==='folded' && 'py-4 w-16',
+            status==='expanded' && 'py-2 w-64'
+          ]"
           @click="logout"
         >
           <BaseSvgIcon
             name="logout"
-            :class="styleMap.icon[status]"
+            :class="[
+              status==='folded' && 'w-8 h-8',
+              status==='expanded' && 'w-6 h-6'
+            ]"
             class="duration-500"
           />
           <span
             class="text-lg h-7 font-bold overflow-hidden duration-500"
-            :class="styleMap.logoutTitle[status]"
+            :class="[
+              status==='folded' && 'w-0',
+              status==='expanded' && 'px-4 w-24'
+            ]"
           >
             <h2>{{ '登出' }}</h2>
           </span>
