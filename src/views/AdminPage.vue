@@ -1,13 +1,17 @@
 <script setup lang="ts">
-type Pages = 'list'|'users'|'result'|'timeline'|'question'
+import router from '@/router'
+
+type Page = 'list'|'users'|'result'|'timeline'|'question'
 type PageMap = {
-  [Page in Pages]: {
+  [key: string]: {
     title: string,
     url: string,
     icon: string
   }
 }
-const pages = ref<Pages[]>(['list', 'users', 'result', 'timeline', 'question'])
+const pages = ref<Page[]>(['list', 'users', 'result', 'timeline', 'question'])
+
+const activePage = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
 const pageMap:PageMap = {
   list: {
@@ -36,7 +40,7 @@ const pageMap:PageMap = {
     icon: 'question'
   }
 }
-const navbarItems = computed(() => pages.value.map(page => ({
+const pageList = computed(() => pages.value.map(page => ({
   name: page,
   ...pageMap[page]
 })))
@@ -49,8 +53,29 @@ setThemeColor('admin')
 
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
-    <TheNavbar :items="navbarItems" />
-    <TheMain />
-    <router-view />
+    <TheNavbar
+      :active-page="activePage"
+      :page-list="pageList"
+    />
+    <router-view v-slot="{ component, route }">
+      <transition
+        name="main"
+        mode="out-in"
+        appear
+      >
+        <TheMain
+          :key="route.path"
+          :title="pageMap[activePage].title"
+        >
+          <component :is="component" />
+        </TheMain>
+      </transition>
+    </router-view>
   </div>
 </template>
+<style scoped>
+.page-enter-active,
+.page-leave-active {
+  @apply duration-1000;
+}
+</style>

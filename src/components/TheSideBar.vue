@@ -9,7 +9,7 @@ interface Props {
 const props = defineProps<Props>()
 </script>
 <template>
-  <div class="fixed -top-2 md:top-auto md:bottom-10 right-0 md:right-4 xl:right-20 flex flex-row md:flex-col">
+  <div class="sidebar fixed -top-2 md:top-auto md:bottom-10 right-0 md:right-4 xl:right-20 flex flex-row md:flex-col">
     <button
       v-for="item of props.items"
       :key="item.name"
@@ -23,3 +23,25 @@ const props = defineProps<Props>()
     </button>
   </div>
 </template>
+
+<style scope>
+.sidebar-enter-active {
+  @apply duration-500 delay-500;
+}
+
+.sidebar-enter-from {
+  @apply opacity-0;
+}
+
+.main-leave-to {
+  .sidebar {
+    @apply opacity-0 duration-500;
+  }
+}
+
+.page-leave-to {
+  .sidebar {
+    @apply opacity-0 duration-500;
+  }
+}
+</style>

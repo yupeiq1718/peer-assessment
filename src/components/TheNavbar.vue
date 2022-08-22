@@ -2,7 +2,8 @@
 import router from '@/router'
 
 interface Props {
-  items: {
+  activePage: string,
+  pageList: {
     name:string,
     url: string,
     title: string,
@@ -11,9 +12,7 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const activeItem = computed(() => String(router.currentRoute.value.name).toLowerCase())
-
-const listStyle = computed(() => (name:string) => name === activeItem.value ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
+const listStyle = computed(() => (name:string) => name === props.activePage ? 'bg-theme fill-white text-white' : 'bg-theme-light fill-theme text-theme')
 
 const pushRouter = (url:string) => router.push(url)
 
@@ -69,6 +68,7 @@ const styleMap:StyleMap = {
   }
 }
 
+const logout = () => router.push('/')
 </script>
 
 <template>
@@ -83,7 +83,7 @@ const styleMap:StyleMap = {
       />
     </section>
     <section
-      class="fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl flex flex-col items-start px-4 duration-500 shadow-md"
+      class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
@@ -107,18 +107,18 @@ const styleMap:StyleMap = {
           </p>
         </div>
       </header>
-      <article class="absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
+      <article class="navbar-content absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
         <ul>
           <li
-            v-for="item of props.items"
-            :key="item.name"
+            v-for="page of props.pageList"
+            :key="page.name"
             role="button"
             class="p-4 rounded-2xl flex justify-start items-start duration-500"
-            :class="[listStyle(item.name), styleMap.list[status]]"
-            @click="pushRouter(item.url)"
+            :class="[listStyle(page.name), styleMap.list[status]]"
+            @click="pushRouter(page.url)"
           >
             <BaseSvgIcon
-              :name="item.icon"
+              :name="page.icon"
               :class="styleMap.icon[status]"
               class="duration-500"
             />
@@ -126,7 +126,7 @@ const styleMap:StyleMap = {
               class="text-lg h-7 font-bold overflow-hidden duration-500"
               :class="styleMap.title[status]"
             >
-              <h2>{{ item.title }}</h2>
+              <h2>{{ page.title }}</h2>
             </span>
           </li>
         </ul>
@@ -140,10 +140,12 @@ const styleMap:StyleMap = {
         <button
           class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
           :class="styleMap.logoutButton[status]"
+          @click="logout"
         >
           <BaseSvgIcon
             name="logout"
             :class="styleMap.icon[status]"
+            class="duration-500"
           />
           <span
             class="text-lg h-7 font-bold overflow-hidden duration-500"
@@ -156,3 +158,24 @@ const styleMap:StyleMap = {
     </section>
   </nav>
 </template>
+<style scoped>
+.navbar-enter-active {
+  @apply duration-1000;
+
+  .navbar-content {
+    @apply duration-1000;
+  }
+}
+
+.navbar-enter-from {
+  .navbar-content, {
+    @apply top-full;
+  }
+}
+
+.page-leave-to {
+  .navbar {
+    @apply -left-72 duration-1000;
+  }
+}
+</style>

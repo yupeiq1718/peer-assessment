@@ -12,9 +12,18 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/EmployeePage.vue'),
     children: [
       {
+        path: '',
+        redirect: '/employee/staff'
+      },
+      {
         path: 'staff',
         name: 'Staff',
         component: () => import('@/views/EmployeeStaff.vue')
+      },
+      {
+        path: 'leader',
+        name: 'Leader',
+        component: () => import('@/views/EmployeeLeader.vue')
       }
     ]
   },
@@ -24,8 +33,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/AdminPage.vue'),
     children: [
       {
+        path: '',
+        redirect: '/admin/list'
+      },
+      {
         path: 'list',
-        name: 'list',
+        name: 'List',
         component: () => import('@/views/AdminList.vue')
       }
     ]
