@@ -56,7 +56,7 @@ const dataList = ref<Data[]>([{
             {{ data.department }}
           </BaseTag>
         </td>
-        <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white">
+        <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white w-2/3">
           <BaseRate
             v-for="(score, key) of data.scores"
             :key="key"
