@@ -3,7 +3,7 @@ interface Props {
   fields: {
     key:string,
     name:string,
-    width: string
+    width?: string
   }[],
   items: {
     key:string,
