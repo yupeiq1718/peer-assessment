@@ -1,84 +1,98 @@
 <script setup lang="ts">
-type Title = string[]
-
-type Data = {
-  name: string,
-  department: string,
-  scores: number[]
+type Field= {
+  key:string,
+  name:string,
+  width?: string
 }
 
-const titleList:Title = ['姓名', '部門', '評分', '功能']
+type Item = {
+  key:string,
+  [key:string]:unknown
+}
 
-const dataList = ref<Data[]>([{
-  name: '許斾旟',
-  department: 'O2 meta 組',
-  scores: [1, 4, 3, 3, 5]
-},
-{
-  name: '劉于瑄',
-  department: '專案組',
-  scores: [3, 2, 5, 4, 2]
-}])
+const fields:Field[] = [
+  {
+    name: '姓名',
+    key: 'name'
+  },
+  {
+    name: '部門',
+    key: 'department',
+    width: '20%'
+  },
+  {
+    name: '評分',
+    key: 'scores',
+    width: '60%'
+  },
+  {
+    name: '功能',
+    key: 'function'
+  }
+]
+
+const items = ref<Item[]>([
+  {
+    key: '1',
+    name: '許斾旟',
+    department: 'O2 meta 組',
+    scores: [1, 4, 3, 3, 5]
+  },
+  {
+    key: '2',
+    name: '劉于瑄',
+    department: '專案組',
+    scores: [3, 2, 5, 4, 2]
+  }
+])
 
 </script>
 
 <template>
   <div class="mx-4">
-    <table class="relative border-separate border-spacing-x-0 border-spacing-y-2 text-dark text-center min-w-full">
-      <thead>
-        <tr>
-          <th
-            v-for="title of titleList"
-            :key="title"
-            class="px-4 py-2 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white font-bold"
+    <BaseTable
+      :fields="fields"
+      :items="items"
+    >
+      <template #name="data">
+        <div>
+          <img
+            class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
+            src="@/assets/images/user.jpg"
+            alt="user"
           >
-            {{ title }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="data of dataList"
-          :key="data.name"
-          class="whitespace-nowrap"
-        >
-          <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap">
-            <img
-              class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-              src="@/assets/images/user.jpg"
-              alt="user"
-            >
-            <span>
-              {{ data.name }}
-            </span>
-          </td>
-          <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white w-1/5">
-            <BaseTag variant="theme">
-              {{ data.department }}
-            </BaseTag>
-          </td>
-          <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white w-3/5">
-            <BaseRate
-              v-for="(score, key) of data.scores"
-              :key="key"
-              variant="theme"
-              :score="score"
-            />
-          </td>
-          <td class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white">
-            <BaseSvgIcon
-              role="button"
-              class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-              name="edit"
-            />
-            <BaseSvgIcon
-              role="button"
-              class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-              name="delete"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <span>
+            {{ data.data }}
+          </span>
+        </div>
+      </template>
+      <template #department="data">
+        <BaseTag variant="theme">
+          {{ data.data }}
+        </BaseTag>
+      </template>
+      <template #scores="data">
+        <BaseRate
+          v-for="(score, key) of data.data"
+          :key="key"
+          variant="theme"
+          :score="score"
+        />
+      </template>
+      <template #function>
+        <div>
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+            name="edit"
+          />
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+            name="delete"
+          />
+        </div>
+      </template>
+    </BaseTable>
   </div>
 </template>
