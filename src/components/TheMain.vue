@@ -15,22 +15,22 @@ const props = defineProps<Props>()
         <slot />
       </article>
       <img
-        class="absolute top-2 left-2 w-6 h-6"
+        class="absolute top-2 left-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute top-2 right-2 w-6 h-6"
+        class="absolute top-2 right-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 left-2 w-6 h-6"
+        class="absolute bottom-2 left-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 right-2 w-6 h-6"
+        class="absolute bottom-2 right-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
