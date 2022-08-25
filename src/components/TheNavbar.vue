@@ -89,7 +89,7 @@ const logout = () => router.push('/')
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
           class="rounded-full w-16 h-16"
-          src="@/assets/images/user.png"
+          src="@/assets/images/user.jpg"
           alt="user"
         >
         <div

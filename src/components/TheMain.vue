@@ -11,32 +11,32 @@ const props = defineProps<Props>()
     <div
       class="main-content absolute left-4 right-4 md:left-20 xl:left-12 md:right-24 xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-xl shadow-md"
     >
+      <article class="absolute inset-x-3 top-7 bottom-3 overflow-auto">
+        <slot />
+      </article>
       <img
-        class="absolute top-2 left-2 w-6 h-6"
+        class="absolute top-2 left-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute top-2 right-2 w-6 h-6"
+        class="absolute top-2 right-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 left-2 w-6 h-6"
+        class="absolute bottom-2 left-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 right-2 w-6 h-6"
+        class="absolute bottom-2 right-2 w-6 h-6 bg-muted-light"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <h1 class="absolute left-1/2 -top-8 transform -translate-x-1/2 px-8 py-2 bg-muted text-white rounded-xl text-xl md:text-2xl font-bold whitespace-nowrap shadow-md">
         {{ props.title }}
       </h1>
-      <article class="absolute inset-8">
-        <slot />
-      </article>
     </div>
   </main>
 </template>

@@ -37,6 +37,8 @@ const iconNameMap:VariantMap = {
       class="m-0 mr-1 w-[24px] h-[24px]"
       :name="iconNameMap[props.variant]"
     />
-    <slot />
+    <span class="align-middle">
+      <slot />
+    </span>
   </button>
 </template>
