@@ -1,10 +1,14 @@
 <script setup lang="ts">
 const isActive = ref(false)
+const modalType = ref('')
 const items = [
   {
     name: 'plus',
     icon: 'plus',
-    function: () => { isActive.value = true }
+    function: () => {
+      isActive.value = true
+      modalType.value = 'update'
+    }
   }
 ]
 
@@ -28,7 +32,8 @@ const items = [
         v-model:is-active="isActive"
         size="full"
       >
-        <EmployeeStaffEdit />
+        <EmployeeStaffUpdate v-if="modalType==='update'" />
+        <EmployeeStaffCreate v-if="modalType==='create'" />
       </TheModal>
     </transition>
   </div>
