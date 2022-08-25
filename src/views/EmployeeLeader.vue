@@ -1,22 +1,21 @@
 <script setup lang="ts">
 const isActive = ref(false)
+const modalType = ref('')
 const items = [
   {
-    name: 'close',
-    icon: 'close',
-    function: () => { isActive.value = true }
-  },
-  {
-    name: 'alert',
-    icon: 'alert',
-    function: () => { isActive.value = true }
+    name: 'plus',
+    icon: 'plus',
+    function: () => {
+      isActive.value = true
+      modalType.value = 'update'
+    }
   }
 ]
-console.log(window.navigator)
-const string = `寬度:${window.innerWidth}px\n高度:${window.innerHeight}px\n裝置:${window.navigator.appVersion}\n瑄瑄好笨`
+
 </script>
 <template>
-  <div class="w-full h-full bg-white">
+  <div class="absolute w-full h-full">
+    <EmployeeLeaderMain />
     <transition
       name="sidebar"
       mode="out-in"
@@ -33,9 +32,8 @@ const string = `寬度:${window.innerWidth}px\n高度:${window.innerHeight}px\n�
         v-model:is-active="isActive"
         size="full"
       >
-        <div class="w-full h-full bg-white text-black whitespace-pre-wrap">
-          {{ string }}
-        </div>
+        <EmployeeLeaderUpdate v-if="modalType==='update'" />
+        <EmployeeLeaderCreate v-if="modalType==='create'" />
       </TheModal>
     </transition>
   </div>
