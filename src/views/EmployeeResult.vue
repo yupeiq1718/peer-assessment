@@ -3,11 +3,19 @@ const isActive = ref(false)
 const modalType = ref('')
 const items = [
   {
-    name: 'plus',
-    icon: 'plus',
+    name: 'download',
+    icon: 'download',
+    function: () => {
+      // isActive.value = true
+      // modalType.value = 'download'
+    }
+  },
+  {
+    name: 'filter',
+    icon: 'filter',
     function: () => {
       isActive.value = true
-      modalType.value = 'update'
+      modalType.value = 'filter'
     }
   }
 ]
@@ -15,7 +23,7 @@ const items = [
 </script>
 <template>
   <div class="absolute w-full h-full">
-    <EmployeeStaffMain />
+    <EmployeeResultMain />
     <transition
       name="sidebar"
       mode="out-in"
@@ -32,8 +40,7 @@ const items = [
         v-model:is-active="isActive"
         size="full"
       >
-        <EmployeeStaffUpdate v-if="modalType==='update'" />
-        <EmployeeStaffCreate v-if="modalType==='create'" />
+        <EmployeeResultFilter v-if="modalType==='create'" />
       </TheModal>
     </transition>
   </div>
