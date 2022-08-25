@@ -38,9 +38,9 @@ const items = [
       <TheModal
         v-if="isActive"
         v-model:is-active="isActive"
-        size="full"
+        size="side"
       >
-        <EmployeeResultFilter v-if="modalType==='create'" />
+        <EmployeeResultFilter v-if="modalType==='filter'" />
       </TheModal>
     </transition>
   </div>
