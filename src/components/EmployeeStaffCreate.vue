@@ -1,5 +1,7 @@
 <template>
-  <article />
+  <article>
+    <BaseFormOne title="合作部門" />
+  </article>
   <footer class="w-full flex justify-center">
     <BaseButton
       class="mx-2"

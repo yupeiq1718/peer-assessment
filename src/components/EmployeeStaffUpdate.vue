@@ -1,9 +1,8 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <article />
+  <article class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+    <BaseFormOne title="合作部門" />
+    <BaseFormOne title="合作部門" />
+  </article>
   <footer class="w-full flex justify-center">
     <BaseButton
       class="mx-2"
