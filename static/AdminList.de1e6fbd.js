@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as r}from"./index.3acd79c5.js";const n={};function t(c,o){return s(),r("div")}const a=e(n,[["render",t],["__file","/home/runner/work/peer-assessment/peer-assessment/src/views/AdminList.vue"]]);export{a as default};
