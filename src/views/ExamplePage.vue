@@ -60,16 +60,16 @@ const options = [
   </section>
   <br>
   <section>
-    <h2>Rate</h2>
+    <h2>Score</h2>
     <br>
-    <BaseRate
+    <BaseScore
       v-for="variant of variants"
       :key="variant"
       :score="score"
       :variant="variant"
     >
       Toast
-    </BaseRate>
+    </BaseScore>
     <input
       v-model="score"
       type="number"
