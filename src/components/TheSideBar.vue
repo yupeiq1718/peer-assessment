@@ -13,11 +13,11 @@ const props = defineProps<Props>()
     <button
       v-for="item of props.items"
       :key="item.name"
-      class="my-2 p-2 rounded-2xl flex justify-center items-center md:bg-light md:hover:bg-theme fill-white md:shadow-md duration-500"
+      class="my-2 p-3 rounded-2xl flex justify-center items-center md:bg-light md:hover:bg-theme fill-white md:shadow-md duration-500"
     >
       <BaseSvgIcon
         :name="item.icon"
-        class="w-8 h-8 md:w-10 md:h-10"
+        class="w-6 h-6 md:w-8 md:h-8"
         @click="item.function"
       />
     </button>
