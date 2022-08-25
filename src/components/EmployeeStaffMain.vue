@@ -72,7 +72,7 @@ const items = ref<Item[]>([
         </BaseTag>
       </template>
       <template #scores="data">
-        <BaseRate
+        <BaseScore
           v-for="(score, key) of data.data"
           :key="key"
           variant="theme"
