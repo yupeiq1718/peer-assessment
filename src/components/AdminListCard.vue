@@ -5,7 +5,7 @@
       src="@/assets/images/user.jpg"
       alt="user"
     >
-    <h2 class="text-lg">
+    <h2>
       {{ '許斾旟' }}
     </h2>
   </div>
