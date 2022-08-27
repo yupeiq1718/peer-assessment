@@ -22,5 +22,6 @@ dist-ssr
 *.sw?
 
 # auto-import
-auto-imports.d.ts
+.eslintrc-auto-import.json
+components.d.ts
 
