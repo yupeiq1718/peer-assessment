@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AdminListItem: typeof import('./src/components/AdminListItem.vue')['default']
     BaseButton: typeof import('./src/components/BaseButton.vue')['default']
     BaseFormOne: typeof import('./src/components/BaseFormOne.vue')['default']
     BaseFormThree: typeof import('./src/components/BaseFormThree.vue')['default']
