@@ -47,8 +47,6 @@
     "useAttrs": true,
     "useCssModule": true,
     "useCssVars": true,
-    "useMouse": true,
-    "useMyFetch": true,
     "useRoute": true,
     "useRouter": true,
     "useSlots": true,
