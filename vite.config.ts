@@ -30,10 +30,6 @@ export default ({ mode }) => {
           'vue',
           'vue-router',
           {
-            '@vueuse/core': [
-              'useMouse',
-              ['useFetch', 'useMyFetch']
-            ],
             axios: [
               ['default', 'axios']
             ]
