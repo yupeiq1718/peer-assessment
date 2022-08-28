@@ -9,7 +9,7 @@
       title="電子郵件"
     />
     <BaseFormOne
-      class="col-span-1"
+      class="col-start-1 col-span-1"
       title="部門"
     />
     <BaseFormOne
