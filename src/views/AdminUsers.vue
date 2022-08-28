@@ -42,7 +42,7 @@ const items = [
       >
         <AdminUsersUpdate v-if="modalType==='update'" />
         <AdminUsersCreate v-if="modalType==='create'" />
-        <AdminUsersCreate v-if="modalType==='filter'" />
+        <AdminUsersFilter v-if="modalType==='filter'" />
       </TheModal>
     </transition>
   </div>
