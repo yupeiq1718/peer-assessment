@@ -53,11 +53,17 @@ setThemeColor('admin')
 
 <template>
   <div class="fixed top-0 bottom-0 bg-theme w-full">
-    <TheNavbar
-      :active-page="activePage"
-      :page-list="pageList"
-    />
-    <router-view v-slot="{ component, route }">
+    <transition
+      name="navbar"
+      mode="out-in"
+      appear
+    >
+      <TheNavbar
+        :active-page="activePage"
+        :page-list="pageList"
+      />
+    </transition>
+    <router-view v-slot="{ Component, route }">
       <transition
         name="main"
         mode="out-in"
@@ -67,7 +73,7 @@ setThemeColor('admin')
           :key="route.path"
           :title="pageMap[activePage].title"
         >
-          <component :is="component" />
+          <component :is="Component" />
         </TheMain>
       </transition>
     </router-view>
