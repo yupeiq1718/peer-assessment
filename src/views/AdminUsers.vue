@@ -7,7 +7,7 @@ const items = [
     icon: 'plus',
     function: () => {
       isActive.value = true
-      modalType.value = 'update'
+      modalType.value = 'create'
     }
   },
   {
