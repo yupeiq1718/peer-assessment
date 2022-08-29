@@ -18,16 +18,12 @@ const fields:Field[] = [
   {
     name: '部門',
     key: 'department',
-    width: '20%'
+    width: '28%'
   },
   {
     name: '評分',
     key: 'scores',
-    width: '60%'
-  },
-  {
-    name: '功能',
-    key: 'function'
+    width: '56%'
   }
 ]
 
@@ -78,15 +74,6 @@ const items = ref<Item[]>([
           variant="theme"
           :score="score"
         />
-      </template>
-      <template #function>
-        <div>
-          <BaseSvgIcon
-            role="button"
-            class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-            name="eye"
-          />
-        </div>
       </template>
     </BaseTable>
   </div>
