@@ -1,5 +1,5 @@
 <template>
-  <article class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+  <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
     <BaseFormOne
       class="col-span-1"
       title="合作部門"
@@ -20,18 +20,4 @@
       tag="綜合"
     />
   </article>
-  <footer class="w-full flex justify-center">
-    <BaseButton
-      class="mx-2"
-      variant="success"
-    >
-      確定
-    </BaseButton>
-    <BaseButton
-      class="mx-2"
-      variant="error"
-    >
-      取消
-    </BaseButton>
-  </footer>
 </template>

@@ -33,7 +33,7 @@ const selectedMap:SelectedMap = {
 </script>
 
 <template>
-  <article class="p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">
+  <article class="m-2 p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">
     <section class="col-span-1 flex flex-col">
       <label class="mb-4">{{ '請選擇問答類型' }}</label>
       <BaseSelect
