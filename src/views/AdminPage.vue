@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import router from '@/router'
 
-type Page = 'list'|'users'|'result'|'timeline'|'question'
+type Page = 'list'|'users'|'results'|'timeline'|'question'
 type PageMap = {
   [key: string]: {
     title: string,
@@ -9,7 +9,7 @@ type PageMap = {
     icon: string
   }
 }
-const pages = ref<Page[]>(['list', 'users', 'result', 'timeline', 'question'])
+const pages = ref<Page[]>(['list', 'users', 'results', 'timeline', 'question'])
 
 const activePage = computed(() => String(router.currentRoute.value.name).toLowerCase())
 
@@ -24,9 +24,9 @@ const pageMap:PageMap = {
     url: '/admin/users',
     icon: 'users'
   },
-  result: {
+  results: {
     title: '互評結果',
-    url: '/admin/result',
+    url: '/admin/results',
     icon: 'result'
   },
   timeline: {
