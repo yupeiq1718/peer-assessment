@@ -6,7 +6,7 @@
     />
     <BaseFormOne
       class="col-span-1"
-      title="合作部門"
+      title="合作對象"
     />
     <BaseFormTwo
       class="col-span-1 lg:col-span-2 2xl:col-span-3"
@@ -20,18 +20,4 @@
       tag="綜合"
     />
   </article>
-  <footer class="w-full flex justify-center">
-    <BaseButton
-      class="mx-2"
-      variant="success"
-    >
-      確定
-    </BaseButton>
-    <BaseButton
-      class="mx-2"
-      variant="error"
-    >
-      取消
-    </BaseButton>
-  </footer>
 </template>
