@@ -22,18 +22,4 @@
       :tags="['一般員工', '一般主管', '高級主管', '管理員']"
     />
   </article>
-  <footer class="w-full flex justify-center">
-    <BaseButton
-      class="mx-2"
-      variant="success"
-    >
-      確定
-    </BaseButton>
-    <BaseButton
-      class="mx-2"
-      variant="error"
-    >
-      取消
-    </BaseButton>
-  </footer>
 </template>
