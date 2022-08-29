@@ -1,5 +1,5 @@
 <template>
-  <article class="p-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+  <article class="mx-5 my-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
     <BaseFormSelect
       class="col-span-1"
       title="合作部門"
