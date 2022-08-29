@@ -11,26 +11,26 @@ const props = defineProps<Props>()
     <div
       class="main-content absolute left-4 right-4 md:left-20 xl:left-12 md:right-24 xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-xl shadow-md"
     >
-      <article class="absolute inset-x-3 top-7 bottom-3 overflow-auto">
+      <article class="absolute inset-x-7 inset-y-7 overflow-auto">
         <slot />
       </article>
       <img
-        class="absolute top-2 left-2 w-6 h-6 bg-muted-light"
+        class="absolute top-2 left-2 w-6 h-6 bg-muted-light rounded-full"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute top-2 right-2 w-6 h-6 bg-muted-light"
+        class="absolute top-2 right-2 w-6 h-6 bg-muted-light rounded-full"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 left-2 w-6 h-6 bg-muted-light"
+        class="absolute bottom-2 left-2 w-6 h-6 bg-muted-light rounded-full"
         src="@/assets/images/nail.png"
         alt="nail"
       >
       <img
-        class="absolute bottom-2 right-2 w-6 h-6 bg-muted-light"
+        class="absolute bottom-2 right-2 w-6 h-6 bg-muted-light rounded-full"
         src="@/assets/images/nail.png"
         alt="nail"
       >

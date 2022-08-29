@@ -52,9 +52,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/AdminUsers.vue')
       },
       {
-        path: 'result',
-        name: 'Result',
-        component: () => import('@/views/AdminResult.vue')
+        path: 'results',
+        name: 'Results',
+        component: () => import('@/views/AdminResults.vue')
+      },
+      {
+        path: 'question',
+        name: 'Question',
+        component: () => import('@/views/AdminQuestion.vue')
       }
     ]
   },

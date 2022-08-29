@@ -23,7 +23,7 @@ const items = [
 </script>
 <template>
   <div class="absolute w-full h-full">
-    <AdminResultMain />
+    <AdminResultsMain />
     <transition
       name="sidebar"
       mode="out-in"
@@ -40,7 +40,7 @@ const items = [
         v-model:is-active="isActive"
         size="side"
       >
-        <AdminResultFilter v-if="modalType==='filter'" />
+        <AdminResultsFilter v-if="modalType==='filter'" />
       </TheModal>
     </transition>
   </div>

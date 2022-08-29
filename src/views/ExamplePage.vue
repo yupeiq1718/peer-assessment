@@ -83,13 +83,13 @@ const options = [
       :key="status"
     >
       <div class="inline-block">
-        <BaseFormInput
+        <BaseInput
           v-model:value="value"
           :status="status"
           type="text"
         />
         <br>
-        <BaseFormMessage
+        <BaseMessage
           :status="status"
           message="message"
         />
@@ -111,13 +111,13 @@ const options = [
       :key="status"
     >
       <div class="inline-block">
-        <BaseFormTextarea
+        <BaseTextarea
           v-model:value="value"
           :status="status"
           type="text"
         />
         <br>
-        <BaseFormMessage
+        <BaseMessage
           :status="status"
           message="message"
         />
@@ -139,13 +139,13 @@ const options = [
       :key="status"
     >
       <div class="inline-block">
-        <BaseFormSelect
+        <BaseSelect
           v-model:selected="selected"
           :status="status"
           :options="options"
         />
         <br>
-        <BaseFormMessage
+        <BaseMessage
           :status="status"
           message="message"
         />
