@@ -17,12 +17,14 @@ const form = reactive<Form>({
     <BaseTextarea
       v-model:value="form.scoreDescription"
       status="info"
+      placeholder="請輸入評分問題敘述"
     />
   </section>
   <section class="col-span-1 flex flex-col">
     <label class="mb-4">{{ '請輸入評分標籤' }}</label>
     <BaseInput
-      v-model:value="form.scoreDescription"
+      v-model:value="form.scoreTag"
+      placeholder="請輸入評分標籤"
       type="text"
       status="info"
     />

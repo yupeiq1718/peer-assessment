@@ -16,6 +16,7 @@ const form = reactive<Form>({
     <label class="mb-4">{{ '請輸入文字問題敘述' }}</label>
     <BaseTextarea
       v-model:value="form.textareaDescription"
+      placeholder="請輸入文字問題敘述"
       status="info"
     />
   </section>
@@ -23,6 +24,7 @@ const form = reactive<Form>({
     <label class="mb-4">{{ '請輸入文字答案提醒' }}</label>
     <BaseInput
       v-model:value="form.textareaPlaceholder"
+      placeholder="請輸入文字答案提醒"
       type="text"
       status="info"
     />
