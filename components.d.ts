@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AdminListCard: typeof import('./src/components/AdminListCard.vue')['default']
     AdminListItem: typeof import('./src/components/AdminListItem.vue')['default']
     AdminListMain: typeof import('./src/components/AdminListMain.vue')['default']
+    AdminQuestionFilter: typeof import('./src/components/AdminQuestionFilter.vue')['default']
     AdminResultFilter: typeof import('./src/components/AdminResultFilter.vue')['default']
     AdminResultMain: typeof import('./src/components/AdminResultMain.vue')['default']
     AdminUsersCreate: typeof import('./src/components/AdminUsersCreate.vue')['default']
