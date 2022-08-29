@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     BaseFormFive: typeof import('./src/components/BaseFormFive.vue')['default']
     BaseFormFour: typeof import('./src/components/BaseFormFour.vue')['default']
     BaseFormOne: typeof import('./src/components/BaseFormOne.vue')['default']
+    BaseFormSelect: typeof import('./src/components/BaseFormSelect.vue')['default']
     BaseFormThree: typeof import('./src/components/BaseFormThree.vue')['default']
     BaseFormTwo: typeof import('./src/components/BaseFormTwo.vue')['default']
     BaseInput: typeof import('./src/components/BaseInput.vue')['default']
