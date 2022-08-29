@@ -8,9 +8,10 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AdminListCard: typeof import('./src/components/AdminListCard.vue')['default']
-    AdminListItem: typeof import('./src/components/AdminListItem.vue')['default']
     AdminListMain: typeof import('./src/components/AdminListMain.vue')['default']
+    AdminQuestionCreate: typeof import('./src/components/AdminQuestionCreate.vue')['default']
     AdminQuestionFilter: typeof import('./src/components/AdminQuestionFilter.vue')['default']
+    AdminQuestionMain: typeof import('./src/components/AdminQuestionMain.vue')['default']
     AdminResultFilter: typeof import('./src/components/AdminResultFilter.vue')['default']
     AdminResultMain: typeof import('./src/components/AdminResultMain.vue')['default']
     AdminUsersCreate: typeof import('./src/components/AdminUsersCreate.vue')['default']
@@ -32,7 +33,6 @@ declare module '@vue/runtime-core' {
     BaseTag: typeof import('./src/components/BaseTag.vue')['default']
     BaseTextarea: typeof import('./src/components/BaseTextarea.vue')['default']
     BaseToast: typeof import('./src/components/BaseToast.vue')['default']
-    copy: typeof import('./src/components/EmployeeResultFilter copy.vue')['default']
     EmployeeLeaderCreate: typeof import('./src/components/EmployeeLeaderCreate.vue')['default']
     EmployeeLeaderMain: typeof import('./src/components/EmployeeLeaderMain.vue')['default']
     EmployeeLeaderUpdate: typeof import('./src/components/EmployeeLeaderUpdate.vue')['default']
