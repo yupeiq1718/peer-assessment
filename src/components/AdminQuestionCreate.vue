@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
-import AdminQuestionFormScore from '@/components/AdminQuestionFormScore.vue'
-import AdminQuestionFormText from '@/components/AdminQuestionFormText.vue'
-import AdminQuestionFormAll from '@/components/AdminQuestionFormAll.vue'
+import BaseQuestionScore from '@/components/BaseQuestionScore.vue'
+import BaseQuestionText from '@/components/BaseQuestionText.vue'
+import BaseQuestionAll from '@/components/BaseQuestionAll.vue'
 
 const selected = ref('')
 const options = [
@@ -25,9 +25,9 @@ type SelectedMap = {
 }
 
 const selectedMap:SelectedMap = {
-  score: AdminQuestionFormScore,
-  text: AdminQuestionFormText,
-  all: AdminQuestionFormAll
+  score: BaseQuestionScore,
+  text: BaseQuestionText,
+  all: BaseQuestionAll
 }
 
 </script>
