@@ -25,10 +25,10 @@ const sizeMap = {
     class="fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden z-30"
     :class="sizeMap[props.size]"
   >
-    <article class="absolute top-4 bottom-17 sm:bottom-4 inset-x-4 sm:right-17 overflow-auto">
+    <article class="absolute top-4 bottom-17 md:bottom-4 inset-x-4 md:right-17 overflow-auto">
       <slot />
     </article>
-    <aside class="absolute right-2 bottom-2 w-full sm:w-12 flex flex-row sm:flex-col items-center justify-center">
+    <aside class="absolute right-2 bottom-2 w-full md:w-12 flex flex-row md:flex-col items-center justify-center">
       <button class="rounded-2xl bg-theme fill-white duration-500 m-1">
         <BaseSvgIcon
           name="check"
