@@ -18,23 +18,32 @@ const sizeMap = {
   full: 'w-full sm:w-[34rem] lg:w-[50rem] xl:w-[62rem] 2xl:w-[78rem]',
   side: 'max-w-full w-[26rem]'
 }
+
 </script>
 
 <template>
   <div
-    class="fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden z-30"
+    class="modal fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden z-30"
     :class="sizeMap[props.size]"
   >
-    <article class="absolute top-4 bottom-16 inset-x-4 xl:right-16 overflow-auto">
+    <article class="absolute top-4 bottom-16 md:bottom-4 inset-x-4 md:right-16 overflow-auto">
       <slot />
     </article>
-    <button class="absolute right-4 bottom-2 rounded-2xl flex justify-center items-center bg-theme fill-white duration-500">
-      <BaseSvgIcon
-        name="close"
-        class="w-12 h-12"
-        @click="emits('update:isActive', false)"
-      />
-    </button>
+    <aside class="absolute right-3 bottom-1 w-full md:w-12 flex flex-row md:flex-col items-center justify-center">
+      <button class="rounded-2xl bg-theme fill-white duration-500 m-1">
+        <BaseSvgIcon
+          name="check"
+          class="w-12 h-12"
+        />
+      </button>
+      <button class="rounded-2xl bg-theme fill-white duration-500 m-1">
+        <BaseSvgIcon
+          name="close"
+          class="w-12 h-12"
+          @click="emits('update:isActive', false)"
+        />
+      </button>
+    </aside>
   </div>
 </template>
 <style scoped>
@@ -46,5 +55,11 @@ const sizeMap = {
 .modal-enter-from,
 .modal-leave-to {
   @apply transform translate-x-full;
+}
+
+.main-leave-to {
+  .modal {
+    @apply transform translate-x-full duration-1000;
+  }
 }
 </style>

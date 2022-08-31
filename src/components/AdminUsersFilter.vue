@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="m-2">
     <BaseFormOne
       class="mb-4"
       title="部門"

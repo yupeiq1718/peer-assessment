@@ -4,7 +4,7 @@ const type = ref('')
 </script>
 
 <template>
-  <div>
+  <div class="m-2">
     <BaseFormSelect
       class="mb-4"
       title="問卷類型"
