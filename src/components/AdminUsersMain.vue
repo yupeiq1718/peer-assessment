@@ -1,16 +1,7 @@
 <script setup lang="ts">
-type Field= {
-  key:string,
-  name:string,
-  width?: string
-}
+import { useUsers } from '@/store/users'
 
-type Item = {
-  key:string,
-  [key:string]:unknown
-}
-
-const fields:Field[] = [
+const fields = [
   {
     name: '姓名',
     key: 'name'
@@ -36,22 +27,14 @@ const fields:Field[] = [
   }
 ]
 
-const items = ref<Item[]>([
-  {
-    key: '1',
-    name: '許斾旟',
-    email: 'yupeiq1718@osensetech.com',
-    department: 'O2 meta 組',
-    role: '一般員工'
-  },
-  {
-    key: '2',
-    name: '劉于瑄',
-    email: 'claire.liu@osensetech.com',
-    department: '專案組',
-    role: '一般主管'
-  }
-])
+const items = ref()
+
+const store = useUsers()
+
+onBeforeMount(async () => {
+  await store.readUsers()
+  items.value = store.users
+})
 
 </script>
 
@@ -82,8 +65,13 @@ const items = ref<Item[]>([
         </BaseTag>
       </template>
       <template #role="data">
-        <BaseTag variant="theme">
-          {{ data.data }}
+        <BaseTag
+          v-for="item of data.data"
+          :key="item"
+          variant="theme"
+          class="mx-1"
+        >
+          {{ item }}
         </BaseTag>
       </template>
       <template #function>
