@@ -29,11 +29,9 @@ const fields = [
 
 const items = ref()
 
-const store = useUsers()
-
 onBeforeMount(async () => {
-  await store.readUsers()
-  items.value = store.users
+  await useUsers().readUsers()
+  items.value = useUsers().users
 })
 
 </script>

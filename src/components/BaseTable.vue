@@ -5,7 +5,7 @@ interface Props {
     name:string,
     width?: string
   }[],
-  items: {
+  items?: {
     id:string,
     [key:string]:unknown
   }[]
