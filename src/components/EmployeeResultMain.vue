@@ -45,7 +45,7 @@ const items = ref<Item[]>([
 </script>
 
 <template>
-  <div class="mx-5 my-2">
+  <div class="mx-2 my-2">
     <BaseTable
       :fields="fields"
       :items="items"
