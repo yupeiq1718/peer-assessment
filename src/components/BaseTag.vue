@@ -20,10 +20,10 @@ const tagStyleMap:VariantMap = {
 }
 </script>
 <template>
-  <span
-    class="px-3 py-1 text-white"
+  <div
+    class="inline-block px-3 py-1 text-white"
     :class="tagStyleMap[props.variant]"
   >
     <slot />
-  </span>
+  </div>
 </template>
