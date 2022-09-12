@@ -1,32 +1,24 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosResponse, AxiosError } from 'axios'
 
-const useApi: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_API
+const useApi = axios.create({
+  baseURL: import.meta.env.VITE_APP_API,
+  timeout: 10000
 })
 
-console.log(useApi)
+useApi.interceptors.request.use(request => {
+  console.log(request)
+  return request
+}, error => {
+  return Promise.reject(error)
+})
 
-useApi.interceptors.request.use(
-  request => {
-    console.log(request)
-    request.withCredentials = true
-    return request
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
-
-useApi.interceptors.response.use(
-  response => {
-    console.log(response)
-    return response
-  },
-  async error => {
-    Promise.reject(error)
-    return Promise.reject(error)
-  }
-)
+useApi.interceptors.response.use((response:AxiosResponse) => {
+  console.log(response)
+  return response
+}, (error:AxiosError) => {
+  Promise.reject(error)
+  return Promise.reject(error)
+})
 
 export {
   useApi
