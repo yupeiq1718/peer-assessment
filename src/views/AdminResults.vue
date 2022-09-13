@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const isActive = ref(false)
-const modalType = ref('')
+const router = useRouter()
+
 const items = [
   {
     name: 'download',
@@ -13,10 +13,7 @@ const items = [
   {
     name: 'filter',
     icon: 'filter',
-    function: () => {
-      isActive.value = true
-      modalType.value = 'filter'
-    }
+    function: () => router.push('/admin/results/filter')
   }
 ]
 
@@ -31,17 +28,14 @@ const items = [
     >
       <TheSideBar :items="items" />
     </transition>
-    <transition
-      name="modal"
-      mode="out-in"
-    >
-      <TheModal
-        v-if="isActive"
-        v-model:is-active="isActive"
-        size="side"
+    <router-view v-slot="{ Component }">
+      <transition
+        name="modal"
+        mode="out-in"
+        appear
       >
-        <AdminResultsFilter v-if="modalType==='filter'" />
-      </TheModal>
-    </transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>

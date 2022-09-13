@@ -1,22 +1,11 @@
 <script setup lang="ts">
-const isActive = ref(false)
-const modalType = ref('')
+const router = useRouter()
+
 const items = [
-  {
-    name: 'download',
-    icon: 'download',
-    function: () => {
-      // isActive.value = true
-      // modalType.value = 'download'
-    }
-  },
   {
     name: 'filter',
     icon: 'filter',
-    function: () => {
-      isActive.value = true
-      modalType.value = 'filter'
-    }
+    function: () => router.push('/employee/result/filter')
   }
 ]
 
@@ -31,17 +20,14 @@ const items = [
     >
       <TheSideBar :items="items" />
     </transition>
-    <transition
-      name="modal"
-      mode="out-in"
-    >
-      <TheModal
-        v-if="isActive"
-        v-model:is-active="isActive"
-        size="side"
+    <router-view v-slot="{ Component }">
+      <transition
+        name="modal"
+        mode="out-in"
+        appear
       >
-        <EmployeeResultFilter v-if="modalType==='filter'" />
-      </TheModal>
-    </transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>

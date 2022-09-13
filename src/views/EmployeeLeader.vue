@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const isActive = ref(false)
-const modalType = ref('')
+const router = useRouter()
+
 const items = [
   {
-    name: 'plus',
+    name: 'create',
     icon: 'plus',
-    function: () => {
-      isActive.value = true
-      modalType.value = 'update'
-    }
+    function: () => router.push('/employee/leader/create')
   }
 ]
 
@@ -23,18 +20,14 @@ const items = [
     >
       <TheSideBar :items="items" />
     </transition>
-    <transition
-      name="modal"
-      mode="out-in"
-    >
-      <TheModal
-        v-if="isActive"
-        v-model:is-active="isActive"
-        size="full"
+    <router-view v-slot="{ Component }">
+      <transition
+        name="modal"
+        mode="out-in"
+        appear
       >
-        <EmployeeLeaderUpdate v-if="modalType==='update'" />
-        <EmployeeLeaderCreate v-if="modalType==='create'" />
-      </TheModal>
-    </transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
