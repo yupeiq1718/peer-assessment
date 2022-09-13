@@ -71,7 +71,14 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'results',
         name: 'Results',
-        component: () => import('@/views/AdminResults.vue')
+        component: () => import('@/views/AdminResults.vue'),
+        children: [
+          {
+            path: 'filter',
+            name: 'ResultsFilter',
+            component: () => import('@/views/AdminResultsFilter.vue')
+          }
+        ]
       },
       {
         path: 'question',
