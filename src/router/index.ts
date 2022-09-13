@@ -54,17 +54,17 @@ const routes: RouteRecordRaw[] = [
           {
             path: 'create',
             name: 'UsersCreate',
-            component: () => import('@/components/AdminUsersCreate.vue')
+            component: () => import('@/views/AdminUsersCreate.vue')
           },
           {
             path: 'update',
             name: 'UsersUpdate',
-            component: () => import('@/components/AdminUsersUpdate.vue')
+            component: () => import('@/views/AdminUsersUpdate.vue')
           },
           {
             path: 'filter',
             name: 'UsersFilter',
-            component: () => import('@/components/AdminUsersFilter.vue')
+            component: () => import('@/views/AdminUsersFilter.vue')
           }
         ]
       },
