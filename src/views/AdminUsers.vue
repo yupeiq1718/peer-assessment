@@ -3,7 +3,7 @@ const router = useRouter()
 
 const items = [
   {
-    name: 'plus',
+    name: 'create',
     icon: 'plus',
     function: () => router.push('/admin/users/create')
   },

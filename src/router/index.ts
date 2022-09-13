@@ -83,7 +83,24 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'question',
         name: 'Question',
-        component: () => import('@/views/AdminQuestion.vue')
+        component: () => import('@/views/AdminQuestion.vue'),
+        children: [
+          {
+            path: 'create',
+            name: 'QuestionCreate',
+            component: () => import('@/views/AdminQuestionCreate.vue')
+          },
+          {
+            path: 'update',
+            name: 'QuestionUpdate',
+            component: () => import('@/views/AdminQuestionUpdate.vue')
+          },
+          {
+            path: 'filter',
+            name: 'QuestionFilter',
+            component: () => import('@/views/AdminQuestionFilter.vue')
+          }
+        ]
       }
     ]
   },
