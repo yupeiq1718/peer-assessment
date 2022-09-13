@@ -30,13 +30,15 @@ const useUsers = defineStore('users', () => {
     users.value = response.data.data
   }
 
+  const activeUsers = computed(() => users.value?.filter(user => user.activate))
+
   const departments = computed(() => {
-    const departments = users.value?.map(user => user.department).flat()
+    const departments = activeUsers.value?.map(user => user.department).flat()
     return departments?.filter((role, index, array) => array.indexOf(role) === index)
   })
 
   return {
-    users, createUser, readUsers, departments
+    users, createUser, readUsers, activeUsers, departments
   }
 })
 

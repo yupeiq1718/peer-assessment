@@ -31,7 +31,7 @@ const items = ref()
 
 onBeforeMount(async () => {
   await useUsers().readUsers()
-  items.value = useUsers().users
+  items.value = useUsers().activeUsers
 })
 
 </script>
