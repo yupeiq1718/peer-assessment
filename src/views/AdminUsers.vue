@@ -1,22 +1,16 @@
 <script setup lang="ts">
-const isActive = ref(false)
-const modalType = ref('')
+const router = useRouter()
+
 const items = [
   {
     name: 'plus',
     icon: 'plus',
-    function: () => {
-      isActive.value = true
-      modalType.value = 'create'
-    }
+    function: () => router.push('/admin/users/create')
   },
   {
     name: 'filter',
     icon: 'filter',
-    function: () => {
-      isActive.value = true
-      modalType.value = 'filter'
-    }
+    function: () => router.push('/admin/users/filter')
   }
 ]
 
@@ -31,19 +25,19 @@ const items = [
     >
       <TheSideBar :items="items" />
     </transition>
-    <transition
-      name="modal"
-      mode="out-in"
-    >
-      <TheModal
-        v-if="isActive"
-        v-model:is-active="isActive"
-        :size="modalType==='filter' ? 'side' : 'full'"
+    <router-view v-slot="{ Component }">
+      <transition
+        name="modal"
+        mode="out-in"
       >
-        <AdminUsersUpdate v-if="modalType==='update'" />
-        <AdminUsersCreate v-if="modalType==='create'" />
-        <AdminUsersFilter v-if="modalType==='filter'" />
-      </TheModal>
-    </transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
+<style scoped>
+.modal-enter-active,
+.modal-leave-active {
+  @apply duration-1000;
+}
+</style>
