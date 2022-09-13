@@ -11,7 +11,7 @@ type PageMap = {
 }
 const pages = ref<Page[]>(['list', 'users', 'results', 'timeline', 'question'])
 
-const activePage = computed(() => String(router.currentRoute.value.name).toLowerCase())
+const activePage = computed(() => String(router.currentRoute.value.path.split('/')[2]).toLowerCase())
 
 const pageMap:PageMap = {
   list: {
@@ -70,7 +70,7 @@ setThemeColor('admin')
         appear
       >
         <TheMain
-          :key="route.path"
+          :key="route.path.split('/')[2]"
           :title="pageMap[activePage].title"
         >
           <component :is="Component" />
