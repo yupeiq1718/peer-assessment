@@ -29,6 +29,7 @@ const items = [
       <transition
         name="modal"
         mode="out-in"
+        appear
       >
         <component :is="Component" />
       </transition>
