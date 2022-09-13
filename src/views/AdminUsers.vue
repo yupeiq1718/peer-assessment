@@ -36,9 +36,3 @@ const items = [
     </router-view>
   </div>
 </template>
-<style scoped>
-.modal-enter-active,
-.modal-leave-active {
-  @apply duration-1000;
-}
-</style>
