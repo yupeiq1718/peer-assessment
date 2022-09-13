@@ -18,17 +18,48 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'staff',
         name: 'Staff',
-        component: () => import('@/views/EmployeeStaff.vue')
+        component: () => import('@/views/EmployeeStaff.vue'),
+        children: [
+          {
+            path: 'create',
+            name: 'StaffCreate',
+            component: () => import('@/views/EmployeeStaffCreate.vue')
+          },
+          {
+            path: 'update',
+            name: 'StaffUpdate',
+            component: () => import('@/views/EmployeeStaffUpdate.vue')
+          }
+        ]
       },
       {
         path: 'leader',
         name: 'Leader',
-        component: () => import('@/views/EmployeeLeader.vue')
+        component: () => import('@/views/EmployeeLeader.vue'),
+        children: [
+          {
+            path: 'create',
+            name: 'LeaderCreate',
+            component: () => import('@/views/EmployeeLeaderCreate.vue')
+          },
+          {
+            path: 'update',
+            name: 'LeaderUpdate',
+            component: () => import('@/views/EmployeeLeaderUpdate.vue')
+          }
+        ]
       },
       {
         path: 'result',
         name: 'Result',
-        component: () => import('@/views/EmployeeResult.vue')
+        component: () => import('@/views/EmployeeResult.vue'),
+        children: [
+          {
+            path: 'filter',
+            name: 'ResultFilter',
+            component: () => import('@/views/EmployeeResultFilter.vue')
+          }
+        ]
       }
     ]
   },
