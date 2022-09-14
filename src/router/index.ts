@@ -88,7 +88,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/views/AdminUsersCreate.vue')
           },
           {
-            path: 'update',
+            path: 'update/:id',
             name: 'UsersUpdate',
             component: () => import('@/views/AdminUsersUpdate.vue')
           },

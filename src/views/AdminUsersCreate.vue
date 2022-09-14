@@ -20,8 +20,13 @@ const departments = computed(() => useUsers().departments?.map(department => ({
 })))
 
 const router = useRouter()
-const concern = async () => {
-  await useUsers().createUser(user)
+const createUser = async () => {
+  try {
+    const response = await useUsers().createUser(user)
+    console.log(response)
+  } catch ({ response }) {
+    console.log(response)
+  }
 }
 const cancel = () => router.push('/admin/users')
 
@@ -30,7 +35,7 @@ const cancel = () => router.push('/admin/users')
 <template>
   <TheModal
     size="full"
-    @concern="concern"
+    @concern="createUser"
     @cancel="cancel"
   >
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
