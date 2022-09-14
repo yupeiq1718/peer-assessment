@@ -20,17 +20,53 @@ const useUsers = defineStore('users', () => {
     role:number[]
   }
   const createUser = async (user:UserCreate) => {
-    const response = await useApi.post('/user/', user)
-    console.log(response)
+    try {
+      const response = await useApi.post('/user/', user)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 
   const readUsers = async () => {
-    const response = await useApi.get('/user/all')
-    console.log(response)
-    users.value = response.data.data
+    try {
+      const response = await useApi.get('/user/all')
+      users.value = response.data.data
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
+  type UserUpdate = {
+    name: string,
+    department: string
+  }
+
+  const updateUser = async ({ id, user }:{
+    id:number,
+    user:UserUpdate
+  }) => {
+    try {
+      const response = await useApi.put(`/user/${id}`, user)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
+  const deleteUsers = async (id:number) => {
+    try {
+      const response = await useApi.delete(`/user/${id}`)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 
   const activeUsers = computed(() => users.value?.filter(user => user.activate))
+
+  const user = computed(() => (id:number) => activeUsers.value?.find(user => user.id === id))
 
   const departments = computed(() => {
     const departments = activeUsers.value?.map(user => user.department).flat()
@@ -38,7 +74,7 @@ const useUsers = defineStore('users', () => {
   })
 
   return {
-    users, createUser, readUsers, activeUsers, departments
+    users, createUser, readUsers, updateUser, deleteUsers, user, activeUsers, departments
   }
 })
 

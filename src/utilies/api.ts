@@ -7,16 +7,15 @@ const useApi = axios.create({
 
 useApi.interceptors.request.use(request => {
   console.log(request)
-  return request
+  return Promise.resolve(request)
 }, error => {
   return Promise.reject(error)
 })
 
 useApi.interceptors.response.use((response:AxiosResponse) => {
   console.log(response)
-  return response
+  return Promise.resolve(response)
 }, (error:AxiosError) => {
-  Promise.reject(error)
   return Promise.reject(error)
 })
 
