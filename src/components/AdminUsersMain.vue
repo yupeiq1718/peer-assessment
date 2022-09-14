@@ -35,7 +35,7 @@ const tableItems = computed(() => useUsers().activeUsers?.map(user => ({
   function: user.id
 })))
 
-const readUsers = async () => {
+const getUsers = async () => {
   try {
     const response = await useUsers().readUsers()
     console.log(response)
@@ -44,11 +44,11 @@ const readUsers = async () => {
   }
 }
 
-const deleteUsers = async (id:number) => {
+const removeUser = async (id:number) => {
   try {
-    const response = await useUsers().deleteUsers(id)
+    const response = await useUsers().deleteUser(id)
     console.log(response)
-    await readUsers()
+    await getUsers()
   } catch (error) {
     console.log(error)
   }
@@ -56,11 +56,6 @@ const deleteUsers = async (id:number) => {
 
 const router = useRouter()
 const edit = (id:number) => router.push(`/admin/users/update/${id}`)
-
-onBeforeMount(async () => {
-  await readUsers()
-})
-
 </script>
 
 <template>
@@ -111,7 +106,7 @@ onBeforeMount(async () => {
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
-            @click="deleteUsers(id.data)"
+            @click="removeUser(id.data)"
           />
         </div>
       </template>

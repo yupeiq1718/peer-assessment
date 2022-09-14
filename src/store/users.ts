@@ -55,7 +55,7 @@ const useUsers = defineStore('users', () => {
     }
   }
 
-  const deleteUsers = async (id:number) => {
+  const deleteUser = async (id:number) => {
     try {
       const response = await useApi.delete(`/user/${id}`)
       return Promise.resolve(response)
@@ -74,7 +74,7 @@ const useUsers = defineStore('users', () => {
   })
 
   return {
-    users, createUser, readUsers, updateUser, deleteUsers, user, activeUsers, departments
+    users, createUser, readUsers, updateUser, deleteUser, user, activeUsers, departments
   }
 })
 
