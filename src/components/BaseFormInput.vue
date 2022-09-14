@@ -1,33 +1,29 @@
 <script setup lang="ts">
+import { useField } from 'vee-validate'
+
 interface Props {
-  title: string,
-  value: string
-}
-interface Emits {
-  (event: 'update:value', value: string): void
+  name: string,
+  title: string
 }
 
 const props = defineProps<Props>()
-const emits = defineEmits<Emits>()
 
-const inputValue = ref()
-
-watch(inputValue, () => {
-  emits('update:value', inputValue.value)
-})
-watch(() => props.value, () => {
-  inputValue.value = props.value
-})
+const { value, errorMessage } = useField(props.name)
 </script>
 
 <template>
   <form class="p-8 bg-white rounded-xl flex flex-col">
     <label class="mb-4">{{ props.title }}</label>
     <BaseInput
-      v-model:value="inputValue"
+      v-model:value="value"
       type="text"
       status="info"
       class="max-w-[20rem]"
+    />
+    <BaseMessage
+      v-if="errorMessage"
+      status="error"
+      :message="errorMessage"
     />
   </form>
 </template>

@@ -1,21 +1,20 @@
 <script setup lang="ts">
+import { useField } from 'vee-validate'
+
 interface Props {
+  name:string,
   title: string,
-  tags: string[],
-  value: number[]
-}
-interface Emits {
-  (event: 'update:value', value: number[]): void
+  tags: string[]
 }
 
 const props = defineProps<Props>()
-const emits = defineEmits<Emits>()
+const { value, errorMessage } = useField(props.name)
 
 const switchValue = (index:number) => {
-  if (props.value.includes(index)) {
-    emits('update:value', props.value.filter(value => value !== index))
+  if ((value.value as number[]).includes(index)) {
+    value.value = (value.value as number[]).filter(value => value !== index)
   } else {
-    emits('update:value', [index, ...props.value])
+    value.value = [index, ...(value.value as number[])]
   }
 }
 </script>
@@ -31,11 +30,16 @@ const switchValue = (index:number) => {
         :key="tag"
         role="button"
         class="inline-block mr-4 mb-4"
-        :variant="props.value.includes(index) ? 'theme' : 'muted'"
+        :variant="(value as number[]).includes(index) ? 'theme' : 'muted'"
         @click="switchValue(index)"
       >
         {{ tag }}
       </BaseTag>
     </div>
+    <BaseMessage
+      v-if="errorMessage"
+      status="error"
+      :message="errorMessage"
+    />
   </form>
 </template>
