@@ -5,22 +5,35 @@
   }
 
 interface Props {
-  title: string,
-  options: Option[],
-  selected: string
+  title: string
+  value: string,
+  options: Option[]
 }
-const props = defineProps<Props>()
+interface Emits {
+  (event: 'update:value', value: string): void
+}
 
+const props = defineProps<Props>()
+const emits = defineEmits<Emits>()
+
+const selected = ref()
+
+watch(selected, () => {
+  emits('update:value', selected.value)
+})
+watch(() => props.value, () => {
+  selected.value = props.value
+})
 </script>
 
 <template>
   <form class="p-8 bg-white rounded-xl flex flex-col">
     <label class="mb-4">{{ props.title }}</label>
     <BaseSelect
-      class="max-w-[20rem]"
+      v-model:selected="selected"
+      :options="props.options"
       status="info"
-      :options="options"
-      :selected="selected"
+      class="max-w-[20rem]"
     />
   </form>
 </template>

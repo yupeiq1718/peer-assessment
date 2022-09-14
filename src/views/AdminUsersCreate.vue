@@ -39,23 +39,23 @@ const cancel = () => router.push('/admin/users')
     @cancel="cancel"
   >
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <BaseFormFour
+      <BaseFormInput
         v-model:value="user.name"
         class="col-span-1"
         title="姓名"
       />
-      <BaseFormFour
+      <BaseFormInput
         v-model:value="user.email"
         class="col-span-1"
         title="電子郵件"
       />
-      <BaseFormOne
+      <BaseFormSelect
         v-model:value="user.department"
         :options="departments"
         class="col-start-1 col-span-1"
         title="部門"
       />
-      <BaseFormFive
+      <BaseFormTag
         v-model:value="user.role"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="角色"
