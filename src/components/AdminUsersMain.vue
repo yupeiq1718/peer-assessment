@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 
-const fields = [
+const tableFields = [
   {
     name: '姓名',
     key: 'name'
@@ -27,11 +27,38 @@ const fields = [
   }
 ]
 
-const items = ref()
+const tableItems = computed(() => useUsers().activeUsers?.map(user => ({
+  name: user.name,
+  email: user.email,
+  department: user.department,
+  role: user.role,
+  function: user.id
+})))
+
+const readUsers = async () => {
+  try {
+    const response = await useUsers().readUsers()
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteUsers = async (id:number) => {
+  try {
+    const response = await useUsers().deleteUsers(id)
+    console.log(response)
+    await readUsers()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const router = useRouter()
+const edit = (id:number) => router.push(`/admin/users/update/${id}`)
 
 onBeforeMount(async () => {
-  await useUsers().readUsers()
-  items.value = useUsers().activeUsers
+  await readUsers()
 })
 
 </script>
@@ -39,10 +66,10 @@ onBeforeMount(async () => {
 <template>
   <div class="mx-5 my-2">
     <BaseTable
-      :fields="fields"
-      :items="items"
+      :fields="tableFields"
+      :items="tableItems"
     >
-      <template #name="data">
+      <template #name="name">
         <div>
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
@@ -50,21 +77,21 @@ onBeforeMount(async () => {
             alt="user"
           >
           <span>
-            {{ data.data }}
+            {{ name.data }}
           </span>
         </div>
       </template>
-      <template #email="data">
-        {{ data.data }}
+      <template #email="email">
+        {{ email.data }}
       </template>
-      <template #department="data">
+      <template #department="department">
         <BaseTag variant="theme">
-          {{ data.data }}
+          {{ department.data }}
         </BaseTag>
       </template>
-      <template #role="data">
+      <template #role="role">
         <BaseTag
-          v-for="item of data.data"
+          v-for="item of role.data"
           :key="item"
           variant="theme"
           class="mx-1"
@@ -72,17 +99,19 @@ onBeforeMount(async () => {
           {{ item }}
         </BaseTag>
       </template>
-      <template #function>
+      <template #function="id">
         <div>
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="edit"
+            @click="edit(id.data)"
           />
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
+            @click="deleteUsers(id.data)"
           />
         </div>
       </template>
