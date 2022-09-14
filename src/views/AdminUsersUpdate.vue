@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-
-type User = {
-  name:string,
-  department: string
-}
-const user = reactive<User>({
-  name: '',
-  department: ''
-})
+import { useForm } from 'vee-validate'
 
 const departments = computed(() => useUsers().departments?.map(department => ({
   value: department,
@@ -18,14 +10,41 @@ const departments = computed(() => useUsers().departments?.map(department => ({
 const route = useRoute()
 const id = computed(() => route.params.id)
 
-const updateUser = async () => {
+const user = computed(() => useUsers().user(Number(id.value)))
+
+const { handleSubmit } = useForm({
+  initialValues: {
+    department: user.value?.department || '',
+    email: user.value?.email || '',
+    name: user.value?.name || '',
+    role: user.value?.role || []
+  }
+})
+
+const getUsers = async () => {
   try {
-    const response = await useUsers().updateUser({ id: Number(id.value), user })
+    const response = await useUsers().readUsers()
     console.log(response)
   } catch (error) {
     console.log(error)
   }
 }
+
+const submit = handleSubmit(async values => {
+  try {
+    const response = await useUsers().updateUser({
+      id: Number(id.value),
+      user: {
+        name: values.name,
+        department: values.department
+      }
+    })
+    console.log(response)
+    await getUsers()
+  } catch ({ response }) {
+    console.log(response)
+  }
+})
 
 const router = useRouter()
 const cancel = () => router.push('/admin/users')
@@ -35,32 +54,34 @@ const cancel = () => router.push('/admin/users')
 <template>
   <TheModal
     size="full"
-    @concern="updateUser"
+    @concern="submit"
     @cancel="cancel"
   >
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       <BaseFormInput
-        v-model:value="user.name"
+        name="name"
         class="col-span-1"
         title="姓名"
       />
-      <!-- <BaseFormInput
-        v-model:value="user.email"
+      <BaseFormInput
+        name="email"
         class="col-span-1"
         title="電子郵件"
-      /> -->
+        disabled
+      />
       <BaseFormSelect
-        v-model:value="user.department"
+        name="department"
         :options="departments"
         class="col-start-1 col-span-1"
         title="部門"
       />
-      <!-- <BaseFormTag
-        v-model:value="user.role"
+      <BaseFormTag
+        name="role"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="角色"
         :tags="['一般員工', '一般主管', '高級主管', '管理員']"
-      /> -->
+        disabled
+      />
     </article>
   </TheModal>
 </template>

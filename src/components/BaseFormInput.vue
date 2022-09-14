@@ -3,12 +3,21 @@ import { useField } from 'vee-validate'
 
 interface Props {
   name: string,
-  title: string
+  title: string,
+  disabled?: boolean
 }
 
 const props = defineProps<Props>()
 
 const { value, errorMessage } = useField(props.name)
+
+const status = computed(() => {
+  if (props.disabled) {
+    return 'muted'
+  } else {
+    return 'info'
+  }
+})
 </script>
 
 <template>
@@ -17,7 +26,7 @@ const { value, errorMessage } = useField(props.name)
     <BaseInput
       v-model:value="value"
       type="text"
-      status="info"
+      :status="status"
       class="max-w-[20rem]"
     />
     <BaseMessage
