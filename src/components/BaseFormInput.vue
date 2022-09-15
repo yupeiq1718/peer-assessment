@@ -4,6 +4,7 @@ import { useField } from 'vee-validate'
 interface Props {
   name: string,
   title: string,
+  type: string,
   disabled?: boolean
 }
 
@@ -25,7 +26,7 @@ const status = computed(() => {
     <label class="mb-4">{{ props.title }}</label>
     <BaseInput
       v-model:value="value"
-      type="text"
+      :type="props.type"
       :status="status"
       class="max-w-[20rem]"
     />

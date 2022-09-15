@@ -49,10 +49,12 @@ const cancel = () => router.push('/admin/users')
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       <BaseFormInput
         name="name"
+        type="text"
         class="col-span-1"
         title="姓名"
       />
       <BaseFormInput
+        type="email"
         name="email"
         class="col-span-1"
         title="電子郵件"
