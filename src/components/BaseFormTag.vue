@@ -29,7 +29,7 @@ const switchValue = (index:number) => {
         v-for="(tag, index) of tags"
         :key="tag"
         role="button"
-        class="inline-block mr-4"
+        class="inline-block mr-4 mb-2"
         :variant="value.includes(index) ? 'theme' : 'muted'"
         @click="switchValue(index)"
       >
@@ -39,7 +39,6 @@ const switchValue = (index:number) => {
     <BaseMessage
       v-if="errorMessage"
       status="error"
-      class="mt-2"
       :message="errorMessage"
     />
   </form>
