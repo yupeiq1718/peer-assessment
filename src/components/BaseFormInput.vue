@@ -15,6 +15,8 @@ const { value, errorMessage } = useField(props.name)
 const status = computed(() => {
   if (props.disabled) {
     return 'muted'
+  } else if (errorMessage.value) {
+    return 'error'
   } else {
     return 'info'
   }
@@ -32,6 +34,7 @@ const status = computed(() => {
     />
     <BaseMessage
       v-if="errorMessage"
+      class="mt-2"
       status="error"
       :message="errorMessage"
     />

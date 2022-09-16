@@ -30,6 +30,7 @@ const { value, errorMessage } = useField(props.name)
     <BaseMessage
       v-if="errorMessage"
       status="error"
+      class="mt-2"
       :message="errorMessage"
     />
   </form>

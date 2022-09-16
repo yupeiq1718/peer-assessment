@@ -37,11 +37,11 @@ const iconStyleMap:StatusMap = {
 <template>
   <span
     :class="messageStyleMap[props.status]"
-    class="my-1"
+    class="my-1 flex justify-start items-center"
   >
     <BaseSvgIcon
       v-if="iconNameMap[props.status]"
-      class="w-[24px] h-[24px]"
+      class="w-[24px] h-[24px] mr-1"
       :name="iconNameMap[props.status]"
       :class="iconStyleMap[props.status]"
     />
