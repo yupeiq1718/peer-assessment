@@ -15,7 +15,7 @@ type StatusMap= {
 const messageStyleMap:StatusMap = {
   success: 'text-success',
   alert: 'text-alert',
-  error: 'text-alert',
+  error: 'text-error',
   info: 'text-info'
 }
 
