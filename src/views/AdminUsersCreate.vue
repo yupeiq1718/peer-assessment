@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
+import * as yup from 'yup'
+
+const schema = yup.object({
+  department: yup.string().required('此欄位必填'),
+  name: yup.string().required('此欄位必填'),
+  email: yup.string().required('此欄位必填').email('不符合電子郵件格式'),
+  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
+})
 
 const { handleSubmit } = useForm({
   initialValues: {
@@ -8,7 +16,8 @@ const { handleSubmit } = useForm({
     email: '',
     name: '',
     role: []
-  }
+  },
+  validationSchema: schema
 })
 
 const departments = computed(() => useUsers().departments?.map(department => ({
