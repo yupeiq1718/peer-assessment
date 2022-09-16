@@ -10,7 +10,7 @@ const schema = yup.object({
   role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
 })
 
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
   initialValues: {
     department: '',
     email: '',
@@ -24,6 +24,13 @@ const departments = computed(() => useUsers().departments?.map(department => ({
   value: department,
   text: department
 })))
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const router = useRouter()
 
@@ -40,9 +47,20 @@ const submit = handleSubmit(async values => {
   try {
     const response = await useUsers().createUser(values)
     console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '新增成功'
+    })
+    resetForm()
     await getUsers()
   } catch ({ response }) {
     console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '新增失敗'
+    })
   }
 })
 const cancel = () => router.push('/admin/users')
