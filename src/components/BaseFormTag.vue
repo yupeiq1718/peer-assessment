@@ -8,13 +8,13 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const { value, errorMessage } = useField(props.name)
+const { value, errorMessage } = useField<number[]>(props.name)
 
 const switchValue = (index:number) => {
-  if ((value.value as number[]).includes(index)) {
-    value.value = (value.value as number[]).filter(value => value !== index)
+  if (value.value.includes(index)) {
+    value.value = value.value.filter(value => value !== index)
   } else {
-    value.value = [index, ...(value.value as number[])]
+    value.value = [index, ...value.value]
   }
 }
 </script>
@@ -30,7 +30,7 @@ const switchValue = (index:number) => {
         :key="tag"
         role="button"
         class="inline-block mr-4 mb-4"
-        :variant="(value as number[]).includes(index) ? 'theme' : 'muted'"
+        :variant="value.includes(index) ? 'theme' : 'muted'"
         @click="switchValue(index)"
       >
         {{ tag }}
