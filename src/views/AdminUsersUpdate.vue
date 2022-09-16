@@ -7,6 +7,13 @@ const departments = computed(() => useUsers().departments?.map(department => ({
   text: department
 })))
 
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
 const route = useRoute()
 const id = computed(() => route.params.id)
 
@@ -40,9 +47,20 @@ const submit = handleSubmit(async values => {
       }
     })
     console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '更新成功'
+    })
+    router.push('/admin/users')
     await getUsers()
   } catch ({ response }) {
     console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '更新失敗'
+    })
   }
 })
 
@@ -60,19 +78,21 @@ const cancel = () => router.push('/admin/users')
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       <BaseFormInput
         name="name"
+        type="text"
         class="col-span-1"
         title="姓名"
       />
       <BaseFormInput
         name="email"
         class="col-span-1"
+        type="email"
         title="電子郵件"
         disabled
       />
       <BaseFormSelect
         name="department"
         :options="departments"
-        class="col-start-1 col-span-1"
+        class="col-span-1"
         title="部門"
       />
       <BaseFormTag
