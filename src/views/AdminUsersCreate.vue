@@ -89,7 +89,7 @@ const cancel = () => router.push('/admin/users')
       <BaseFormSelect
         name="department"
         :options="departments"
-        class="col-start-1 col-span-1"
+        class="col-span-1"
         title="部門"
       />
       <BaseFormTag
