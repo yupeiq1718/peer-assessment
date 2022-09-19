@@ -3,7 +3,6 @@ import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 
 const router = useRouter()
-const cancel = () => router.push('/admin/users')
 
 const departments = computed(() => useUsers().departments?.map(department => ({
   value: department,
@@ -47,8 +46,10 @@ const submit = handleSubmit(({ department, role }) => {
     department,
     role: Number(role)
   })
+  router.push('/admin/users')
 })
 
+const cancel = () => router.push('/admin/users')
 </script>
 
 <template>
