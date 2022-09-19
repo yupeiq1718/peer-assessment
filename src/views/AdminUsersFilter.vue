@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
+import { useForm } from 'vee-validate'
 
 const router = useRouter()
 const cancel = () => router.push('/admin/users')
@@ -9,7 +10,12 @@ const departments = computed(() => useUsers().departments?.map(department => ({
   text: department
 })))
 
-const roles = [
+const departmentOptions = computed(() => departments.value?.concat([{
+  value: '',
+  text: '全部'
+}]))
+
+const roleOptions = [
   {
     value: 1,
     text: '一般員工'
@@ -25,26 +31,44 @@ const roles = [
   {
     value: 4,
     text: '管理員'
+  },
+  {
+    value: 0,
+    text: '全部'
   }
 ]
+
+const { handleSubmit } = useForm({
+  initialValues: useUsers().filterData
+})
+
+const submit = handleSubmit(({ department, role }) => {
+  useUsers().setFilterData({
+    department,
+    role: Number(role)
+  })
+})
 
 </script>
 
 <template>
   <TheModal
     size="side"
+    @concern="submit"
     @cancel="cancel"
   >
     <div class="m-2">
       <BaseFormSelect
         class="mb-4"
         title="部門"
-        :options="departments"
+        name="department"
+        :options="departmentOptions"
       />
       <BaseFormSelect
         class="mb-4"
         title="角色"
-        :options="roles"
+        name="role"
+        :options="roleOptions"
       />
     </div>
   </TheModal>

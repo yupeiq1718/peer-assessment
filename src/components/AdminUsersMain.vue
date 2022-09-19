@@ -27,7 +27,7 @@ const tableFields = [
   }
 ]
 
-const tableItems = computed(() => useUsers().activeUsers?.map(user => ({
+const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   name: user.name,
   email: user.email,
   department: user.department,
