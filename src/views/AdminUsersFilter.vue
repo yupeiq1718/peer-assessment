@@ -44,7 +44,7 @@ const { handleSubmit } = useForm({
 const submit = handleSubmit(({ department, role }) => {
   useUsers().setFilterData({
     department,
-    role: Number(role)
+    role: Number(role) as 0|1|2|3|4
   })
   router.push('/admin/users')
 })

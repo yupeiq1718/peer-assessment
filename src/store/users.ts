@@ -8,7 +8,7 @@ const useUsers = defineStore('users', () => {
     email: string,
     id: number,
     name: string,
-    role:number[]
+    role:(1|2|3|4)[]
   }
 
   const users = ref<User[]>()
@@ -17,7 +17,7 @@ const useUsers = defineStore('users', () => {
     department: string,
     email: string,
     name: string,
-    role:number[]
+    role:(1|2|3|4)[]
   }
   const createUser = async (user:UserCreate) => {
     try {
@@ -75,7 +75,7 @@ const useUsers = defineStore('users', () => {
 
   type FilterData = {
     department: string,
-    role: number
+    role: 0|1|2|3|4
   }
   const filterData = ref<FilterData>({
     department: '',

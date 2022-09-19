@@ -2,7 +2,7 @@
 import { useField } from 'vee-validate'
 
 type Option = {
-  value: string,
+  value: string|number,
   text: string
 }
 

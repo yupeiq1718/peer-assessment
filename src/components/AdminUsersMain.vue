@@ -27,6 +27,15 @@ const tableFields = [
   }
 ]
 
+const variantList = ['success', 'alert', 'error', 'info', 'muted']
+
+const roleMap = {
+  1: '一般員工',
+  2: '一般主管',
+  3: '高級主管',
+  4: '管理員'
+}
+
 const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   name: user.name,
   email: user.email,
@@ -65,9 +74,9 @@ const edit = (id:number) => router.push(`/admin/users/update/${id}`)
       :items="tableItems"
     >
       <template #name="name">
-        <div>
+        <div class="flex justify-start items-center">
           <img
-            class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
+            class="inline-block rounded-full w-16 max-w-none h-16 mx-4"
             src="@/assets/images/user.jpg"
             alt="user"
           >
@@ -86,12 +95,12 @@ const edit = (id:number) => router.push(`/admin/users/update/${id}`)
       </template>
       <template #role="role">
         <BaseTag
-          v-for="item of role.data"
+          v-for="item of (role.data as (1|2|3|4)[])"
           :key="item"
-          variant="theme"
+          :variant="variantList[item - 1]"
           class="mx-1"
         >
-          {{ item }}
+          {{ roleMap[item] }}
         </BaseTag>
       </template>
       <template #function="id">
