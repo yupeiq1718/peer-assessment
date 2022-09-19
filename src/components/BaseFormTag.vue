@@ -10,6 +10,8 @@ interface Props {
 const props = defineProps<Props>()
 const { value, errorMessage } = useField<number[]>(props.name)
 
+const variantList = ['success', 'alert', 'error', 'info', 'muted']
+
 const switchValue = (index:number) => {
   if (value.value.includes(index)) {
     value.value = value.value.filter(value => value !== index)
@@ -30,8 +32,8 @@ const switchValue = (index:number) => {
         :key="tag"
         role="button"
         class="inline-block mr-4 mb-2"
-        :variant="value.includes(index) ? 'theme' : 'muted'"
-        @click="switchValue(index)"
+        :variant="value.includes(index + 1) ? variantList[index] : 'muted'"
+        @click="switchValue(index + 1)"
       >
         {{ tag }}
       </BaseTag>
