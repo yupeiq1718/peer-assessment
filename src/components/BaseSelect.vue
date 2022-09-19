@@ -1,18 +1,18 @@
 <script setup lang="ts">
 type Status = 'success'|'alert'|'error'|'info'|'muted'
 type Option = {
-  value: string,
+  value: string|number,
   text: string
 }
 
 interface Props {
   status: Status,
-  selected: string,
+  selected: string|number,
   options: Option[]
 }
 
 interface Emits {
-  (event: 'update:selected', selected: string): void
+  (event: 'update:selected', selected: string|number): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
