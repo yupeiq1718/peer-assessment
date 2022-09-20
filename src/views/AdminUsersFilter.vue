@@ -55,7 +55,7 @@ const cancel = () => router.push('/admin/users')
 <template>
   <TheModal
     size="side"
-    @concern="submit"
+    @confirm="submit"
     @cancel="cancel"
   >
     <div class="m-2">

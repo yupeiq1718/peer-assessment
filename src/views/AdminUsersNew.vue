@@ -78,7 +78,7 @@ const cancel = () => router.push('/admin/users')
 <template>
   <TheModal
     size="full"
-    @concern="submit"
+    @confirm="submit"
     @cancel="cancel"
   >
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
