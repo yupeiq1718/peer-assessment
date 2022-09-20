@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
+import { getDepartments } from '@/utilies/departments'
 
 const router = useRouter()
 
-const departments = computed(() => useUsers().departments?.map(department => ({
+const departments = computed(() => getDepartments().map(department => ({
   value: department,
   text: department
 })))

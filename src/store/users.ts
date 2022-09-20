@@ -68,10 +68,10 @@ const useUsers = defineStore('users', () => {
 
   const user = computed(() => (id:number) => activeUsers.value?.find(user => user.id === id))
 
-  const departments = computed(() => {
-    const departments = activeUsers.value?.map(user => user.department).flat()
-    return departments?.filter((role, index, array) => array.indexOf(role) === index)
-  })
+  // const departments = computed(() => {
+  //   const departments = activeUsers.value?.map(user => user.department).flat()
+  //   return departments?.filter((role, index, array) => array.indexOf(role) === index)
+  // })
 
   type FilterData = {
     department: string,
@@ -89,7 +89,7 @@ const useUsers = defineStore('users', () => {
   const filteredUsers = computed(() => activeUsers.value?.filter(user => (!filterData.value.department || user.department === filterData.value.department) && (!filterData.value.role || user.role.includes(filterData.value.role))))
 
   return {
-    users, createUser, readUsers, updateUser, deleteUser, user, activeUsers, departments, filterData, setFilterData, filteredUsers
+    users, createUser, readUsers, updateUser, deleteUser, user, activeUsers, filterData, setFilterData, filteredUsers
   }
 })
 
