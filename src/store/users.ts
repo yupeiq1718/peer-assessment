@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useApi } from '@/utilies/api'
+import { useApi } from '@/utilities/api'
 
 const useUsers = defineStore('users', () => {
   type User = {

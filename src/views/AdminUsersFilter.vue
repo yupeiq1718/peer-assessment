@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import { getDepartments } from '@/utilies/departments'
+import { getDepartments } from '@/utilities/data'
 
 const router = useRouter()
 

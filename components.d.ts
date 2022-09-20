@@ -12,7 +12,6 @@ declare module '@vue/runtime-core' {
     AdminQuestionMain: typeof import('./src/components/AdminQuestionMain.vue')['default']
     AdminResultsMain: typeof import('./src/components/AdminResultsMain.vue')['default']
     AdminUsersMain: typeof import('./src/components/AdminUsersMain.vue')['default']
-    BaseAlert: typeof import('./src/components/BaseAlert.vue')['default']
     BaseAnswerAll: typeof import('./src/components/BaseAnswerAll.vue')['default']
     BaseAnswerScore: typeof import('./src/components/BaseAnswerScore.vue')['default']
     BaseAnswerText: typeof import('./src/components/BaseAnswerText.vue')['default']

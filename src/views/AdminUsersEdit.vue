@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { getDepartments } from '@/utilies/data'
+import { getDepartments } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 
 const departments = computed(() => getDepartments().map(department => ({
