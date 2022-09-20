@@ -86,7 +86,7 @@ const removeUser = async (id:number) => {
 }
 
 const router = useRouter()
-const edit = (id:number) => router.push(`/admin/users/update/${id}`)
+const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
 </script>
 
 <template>
