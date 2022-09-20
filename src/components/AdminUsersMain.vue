@@ -72,7 +72,7 @@ const removeUser = async (id:number) => {
       variant: 'success',
       message: '刪除成功'
     })
-    await getUsers()
+    getUsers()
   } catch (error) {
     console.log(error)
     setToastData({

@@ -59,7 +59,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     resetForm()
-    await getUsers()
+    getUsers()
   } catch ({ response }) {
     console.log(response)
     setToastData({

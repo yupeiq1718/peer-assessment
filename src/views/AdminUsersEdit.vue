@@ -59,7 +59,7 @@ const submit = handleSubmit(async values => {
       message: '更新成功'
     })
     router.push('/admin/users')
-    await getUsers()
+    getUsers()
   } catch ({ response }) {
     console.log(response)
     setToastData({
