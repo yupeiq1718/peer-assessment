@@ -42,8 +42,14 @@ const toastData = ref<ToastData>({
 const setToastData = (data:ToastData) => {
   toastData.value = data
 }
-
 provide('setToastData', setToastData)
+
+const isLoading = ref(false)
+
+const setIsLoading = (value:boolean) => {
+  isLoading.value = value
+}
+provide('setIsLoading', setIsLoading)
 </script>
 
 <template>
@@ -64,4 +70,5 @@ provide('setToastData', setToastData)
   >
     {{ toastData.message }}
   </BaseToast>
+  <TheLoading v-if="isLoading" />
 </template>

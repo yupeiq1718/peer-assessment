@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     EmployeeStaffMain: typeof import('./src/components/EmployeeStaffMain.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TheLoading: typeof import('./src/components/TheLoading.vue')['default']
     TheMain: typeof import('./src/components/TheMain.vue')['default']
     TheModal: typeof import('./src/components/TheModal.vue')['default']
     TheNavbar: typeof import('./src/components/TheNavbar.vue')['default']
