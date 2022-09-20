@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
+import { getRoles } from '@/utilities/data'
 
 const tableFields = [
   {
@@ -28,13 +29,6 @@ const tableFields = [
 ]
 
 const variantList = ['success', 'alert', 'error', 'info', 'muted']
-
-const roleMap = {
-  1: '一般員工',
-  2: '一般主管',
-  3: '高級主管',
-  4: '管理員'
-}
 
 const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   name: user.name,
@@ -135,7 +129,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
           :variant="variantList[item - 1]"
           class="mx-1"
         >
-          {{ roleMap[item] }}
+          {{ getRoles()[item - 1].text }}
         </BaseTag>
       </template>
       <template #function="id">

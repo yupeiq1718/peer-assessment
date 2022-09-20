@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { getDepartments } from '@/utilities/data'
+import { getDepartments, getRoles } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 
 const departments = computed(() => getDepartments().map(department => ({
@@ -108,7 +108,7 @@ const cancel = () => router.push('/admin/users')
         name="role"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="角色"
-        :tags="['一般員工', '一般主管', '高級主管', '管理員']"
+        :tags="getRoles().map(role => role.text)"
         disabled
       />
     </article>

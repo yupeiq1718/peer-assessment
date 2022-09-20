@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import { getDepartments } from '@/utilities/data'
+import { getDepartments, getRoles } from '@/utilities/data'
 import * as yup from 'yup'
 
 const schema = yup.object({
@@ -105,7 +105,7 @@ const cancel = () => router.push('/admin/users')
         name="role"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="角色"
-        :tags="['一般員工', '一般主管', '高級主管', '管理員']"
+        :tags="getRoles().map(role => role.text)"
       />
     </article>
   </TheModal>
