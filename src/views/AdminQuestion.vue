@@ -5,7 +5,7 @@ const items = [
   {
     name: 'create',
     icon: 'plus',
-    function: () => router.push('/admin/question/create')
+    function: () => router.push('/admin/question/new')
   },
   {
     name: 'filter',

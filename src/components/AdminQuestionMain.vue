@@ -1,21 +1,23 @@
+<script setup lang="ts">
+import { getDepartments } from '@/utilities/data'
+
+const departments = computed(() => getDepartments().map(department => ({
+  value: department,
+  text: department
+})))
+</script>
+
 <template>
   <article class="mx-5 my-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
     <BaseFormSelect
       class="col-span-1"
       title="合作部門"
-      :options="[
-        {
-          value: 'o2',
-          text: 'O2 meta 組'
-        },
-        {
-          value: 'project',
-          text: '專案組'
-        }
-      ]"
+      name="department"
+      :options="departments"
     />
     <BaseFormSelect
       class="col-span-1"
+      name="name"
       title="合作對象"
       :options="[
         {
