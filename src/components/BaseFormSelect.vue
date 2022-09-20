@@ -1,20 +1,32 @@
 <script setup lang="ts">
+import { StringChain } from 'lodash'
 import { useField } from 'vee-validate'
 
 type Option = {
   value: string|number,
-  text: string
+  text: StringChain
 }
 
 interface Props {
   name: string,
   title: string,
-  options: Option[]
+  options: Option[],
+  disabled?: boolean
 }
 
 const props = defineProps<Props>()
 
 const { value, errorMessage } = useField(props.name)
+
+const status = computed(() => {
+  if (props.disabled) {
+    return 'muted'
+  } else if (errorMessage.value) {
+    return 'error'
+  } else {
+    return 'info'
+  }
+})
 
 </script>
 
@@ -24,7 +36,7 @@ const { value, errorMessage } = useField(props.name)
     <BaseSelect
       v-model:selected="value"
       :options="props.options"
-      status="info"
+      :status="status"
       class="max-w-[20rem]"
     />
     <BaseMessage

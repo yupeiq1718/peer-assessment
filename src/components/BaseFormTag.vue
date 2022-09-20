@@ -4,7 +4,8 @@ import { useField } from 'vee-validate'
 interface Props {
   name:string,
   title: string,
-  tags: string[]
+  tags: string[],
+  disabled?: boolean
 }
 
 const props = defineProps<Props>()
@@ -13,6 +14,9 @@ const { value, errorMessage } = useField<number[]>(props.name)
 const variantList = ['success', 'alert', 'error', 'info', 'muted']
 
 const switchValue = (index:number) => {
+  if (props.disabled) {
+    return
+  }
   if (value.value.includes(index)) {
     value.value = value.value.filter(value => value !== index)
   } else {
@@ -30,7 +34,7 @@ const switchValue = (index:number) => {
       <BaseTag
         v-for="(tag, index) of tags"
         :key="tag"
-        role="button"
+        :role="props.disabled ? '' : 'button'"
         class="inline-block mr-4 mb-2"
         :variant="value.includes(index + 1) ? variantList[index] : 'muted'"
         @click="switchValue(index + 1)"
