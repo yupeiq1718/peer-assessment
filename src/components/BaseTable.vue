@@ -5,8 +5,8 @@ interface Props {
     name:string,
     width?: string
   }[],
-  items: {
-    key:string,
+  items?: {
+    id:string,
     [key:string]:unknown
   }[]
 }
@@ -31,7 +31,7 @@ const props = defineProps<Props>()
     <tbody>
       <tr
         v-for="item of props.items"
-        :key="item.key"
+        :key="item.id"
         class="whitespace-nowrap"
       >
         <td

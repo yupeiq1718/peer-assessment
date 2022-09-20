@@ -10,11 +10,11 @@ const cancel = () => router.push('/employee/staff')
     @cancel="cancel"
   >
     <article class="m-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <BaseFormOne
+      <BaseFormSelect
         class="col-span-1"
         title="合作部門"
       />
-      <BaseFormOne
+      <BaseFormSelect
         class="col-span-1"
         title="合作部門"
       />

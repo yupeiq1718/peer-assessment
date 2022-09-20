@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
-    "build:gh-pages":"vite build --mode gh-pages",
+    "build:gh-pages": "vite build --mode gh-pages",
     "dev": "vite",
-    "dev:gh-pages":"vite --mode gh-pages",
+    "dev:gh-pages": "vite --mode gh-pages",
     "eslint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prepare": "husky install",
     "preview": "vite preview",
@@ -16,8 +16,10 @@
   "dependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@types/yup": "^0.32.0",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.11.0",
+    "pinia": "^2.0.22",
     "postcss": "^8.4.14",
     "postcss-html": "^1.4.1",
     "postcss-import": "^14.1.0",
@@ -32,12 +34,14 @@
     "tailwindcss": "^3.1.4",
     "unplugin-auto-import": "^0.9.3",
     "unplugin-vue-components": "^0.21.1",
+    "vee-validate": "^4.6.7",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-remove-console": "^1.1.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.25",
     "vue-axios": "^3.4.1",
-    "vue-router": "^4.0.16"
+    "vue-router": "^4.0.16",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.16.0",

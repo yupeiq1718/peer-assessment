@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useUsers } from '@/store/users'
+
 const router = useRouter()
 
 const items = [
   {
     name: 'create',
     icon: 'plus',
-    function: () => router.push('/admin/users/create')
+    function: () => router.push('/admin/users/new')
   },
   {
     name: 'filter',
@@ -14,9 +16,27 @@ const items = [
   }
 ]
 
+const getUsers = async () => {
+  try {
+    const response = await useUsers().readUsers()
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const users = computed(() => useUsers().users)
+
+onBeforeMount(async () => {
+  await getUsers()
+})
+
 </script>
 <template>
-  <div class="absolute w-full h-full">
+  <div
+    v-if="users"
+    class="absolute w-full h-full"
+  >
     <AdminUsersMain />
     <transition
       name="sidebar"

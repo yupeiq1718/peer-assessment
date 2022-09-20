@@ -1,16 +1,8 @@
 <script setup lang="ts">
-type Field= {
-  key:string,
-  name:string,
-  width?: string
-}
+import { useUsers } from '@/store/users'
+import { getRoles } from '@/utilities/data'
 
-type Item = {
-  key:string,
-  [key:string]:unknown
-}
-
-const fields:Field[] = [
+const tableFields = [
   {
     name: '姓名',
     key: 'name'
@@ -36,67 +28,123 @@ const fields:Field[] = [
   }
 ]
 
-const items = ref<Item[]>([
-  {
-    key: '1',
-    name: '許斾旟',
-    email: 'yupeiq1718@osensetech.com',
-    department: 'O2 meta 組',
-    role: '一般員工'
-  },
-  {
-    key: '2',
-    name: '劉于瑄',
-    email: 'claire.liu@osensetech.com',
-    department: '專案組',
-    role: '一般主管'
-  }
-])
+const variantList = ['success', 'alert', 'error', 'info', 'muted']
 
+const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
+  name: user.name,
+  email: user.email,
+  department: user.department,
+  role: user.role,
+  function: user.id
+})))
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const getUsers = async () => {
+  try {
+    const response = await useUsers().readUsers()
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const removeUser = async (id:number) => {
+  try {
+    setIsLoading(true)
+    const response = await useUsers().deleteUser(id)
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
+    getUsers()
+  } catch (error) {
+    console.log(error)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+type ConfirmData = {
+  isActive: boolean,
+  confirm: unknown
+}
+const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
+
+const handleUserRemove = (id:number) => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => removeUser(id)
+  })
+}
+
+const router = useRouter()
+const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
 </script>
 
 <template>
   <div class="mx-5 my-2">
     <BaseTable
-      :fields="fields"
-      :items="items"
+      :fields="tableFields"
+      :items="tableItems"
     >
-      <template #name="data">
-        <div>
+      <template #name="name">
+        <div class="flex justify-start items-center">
           <img
-            class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
+            class="inline-block rounded-full w-16 max-w-none h-16 mx-4"
             src="@/assets/images/user.jpg"
             alt="user"
           >
           <span>
-            {{ data.data }}
+            {{ name.data }}
           </span>
         </div>
       </template>
-      <template #email="data">
-        {{ data.data }}
+      <template #email="email">
+        {{ email.data }}
       </template>
-      <template #department="data">
+      <template #department="department">
         <BaseTag variant="theme">
-          {{ data.data }}
+          {{ department.data }}
         </BaseTag>
       </template>
-      <template #role="data">
-        <BaseTag variant="theme">
-          {{ data.data }}
+      <template #role="role">
+        <BaseTag
+          v-for="item of (role.data as (1|2|3|4)[])"
+          :key="item"
+          :variant="variantList[item - 1]"
+          class="mx-1"
+        >
+          {{ getRoles()[item - 1].text }}
         </BaseTag>
       </template>
-      <template #function>
+      <template #function="id">
         <div>
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="edit"
+            @click="edit(id.data)"
           />
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
+            @click="handleUserRemove(id.data)"
           />
         </div>
       </template>

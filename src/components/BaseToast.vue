@@ -36,7 +36,7 @@ const closeToast = () => emits('update:isActive', false)
 
 <template>
   <span
-    class="px-4 py-4"
+    class="fixed top-4 right-4 px-4 py-4 shadow-md"
     :class="toastStyleMap[props.variant]"
   >
     <BaseSvgIcon

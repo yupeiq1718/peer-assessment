@@ -19,18 +19,18 @@ type StatusMap= {
 }
 
 const inputStyleMap:StatusMap = {
-  success: 'border-success',
-  alert: 'border-alert',
-  error: 'border-error',
-  info: 'border-black focus:border-info',
-  muted: 'border-muted bg-muted-light'
+  success: 'focus:border-success',
+  alert: 'focus:border-alert',
+  error: 'focus:border-error',
+  info: 'focus:border-info',
+  muted: 'bg-muted-light'
 }
 </script>
 
 <template>
   <input
     :class="inputStyleMap[props.status]"
-    class="px-2 py-1 text-black outline-0 border-2 rounded-lg duration-500"
+    class="px-2 py-1 text-black outline-0 border-2 border-black rounded-lg duration-500"
     :value="props.value"
     :disabled="props.status==='muted'"
     @input="emits('update:value', ($event.target as HTMLInputElement).value)"

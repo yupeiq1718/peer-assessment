@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 interface Emits {
-  (event: 'concern'): void,
+  (event: 'confirm'): void,
   (event: 'cancel'): void
 }
 const emits = defineEmits<Emits>()
@@ -32,7 +32,7 @@ const sizeMap = {
     <aside class="absolute right-3 bottom-1 w-full md:w-12 flex flex-row md:flex-col items-center justify-center">
       <button
         class="rounded-2xl bg-theme fill-white duration-500 m-1"
-        @click="emits('concern')"
+        @click="emits('confirm')"
       >
         <BaseSvgIcon
           name="check"

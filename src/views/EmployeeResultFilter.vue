@@ -10,15 +10,15 @@ const cancel = () => router.push('/employee/result')
     @cancel="cancel"
   >
     <div class="m-2">
-      <BaseFormOne
+      <BaseFormSelect
         class="mb-4"
         title="年度"
       />
-      <BaseFormOne
+      <BaseFormSelect
         class="mb-4"
         title="次別"
       />
-      <BaseFormOne
+      <BaseFormSelect
         class="mb-4"
         title="類型"
       />
