@@ -14,6 +14,8 @@ type ToastData = {
 }
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
 const route = useRoute()
 const id = computed(() => route.params.id)
 
@@ -30,15 +32,19 @@ const { handleSubmit } = useForm({
 
 const getUsers = async () => {
   try {
+    setIsLoading(true)
     const response = await useUsers().readUsers()
     console.log(response)
   } catch (error) {
     console.log(error)
+  } finally {
+    setIsLoading(false)
   }
 }
 
 const submit = handleSubmit(async values => {
   try {
+    setIsLoading(true)
     const response = await useUsers().updateUser({
       id: Number(id.value),
       user: {
@@ -61,6 +67,8 @@ const submit = handleSubmit(async values => {
       variant: 'error',
       message: '更新失敗'
     })
+  } finally {
+    setIsLoading(false)
   }
 })
 

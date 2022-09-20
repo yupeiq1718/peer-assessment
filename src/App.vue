@@ -66,7 +66,7 @@ provide('setIsLoading', setIsLoading)
     v-if="toastData.isActive"
     v-model:isActive="toastData.isActive"
     :variant="toastData.variant"
-    class="fixed top-4 "
+    class="fixed top-4 right-4"
   >
     {{ toastData.message }}
   </BaseToast>

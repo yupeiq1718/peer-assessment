@@ -16,12 +16,17 @@ const items = [
   }
 ]
 
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
 const getUsers = async () => {
   try {
+    setIsLoading(true)
     const response = await useUsers().readUsers()
     console.log(response)
   } catch (error) {
     console.log(error)
+  } finally {
+    setIsLoading(false)
   }
 }
 

@@ -32,19 +32,25 @@ type ToastData = {
 }
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
 const router = useRouter()
 
 const getUsers = async () => {
   try {
+    setIsLoading(true)
     const response = await useUsers().readUsers()
     console.log(response)
   } catch (error) {
     console.log(error)
+  } finally {
+    setIsLoading(false)
   }
 }
 
 const submit = handleSubmit(async values => {
   try {
+    setIsLoading(true)
     const response = await useUsers().createUser(values)
     console.log(response)
     setToastData({
@@ -61,6 +67,8 @@ const submit = handleSubmit(async values => {
       variant: 'error',
       message: '新增失敗'
     })
+  } finally {
+    setIsLoading(false)
   }
 })
 const cancel = () => router.push('/admin/users')

@@ -44,6 +44,15 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   function: user.id
 })))
 
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
 const getUsers = async () => {
   try {
     const response = await useUsers().readUsers()
@@ -55,11 +64,24 @@ const getUsers = async () => {
 
 const removeUser = async (id:number) => {
   try {
+    setIsLoading(true)
     const response = await useUsers().deleteUser(id)
     console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
     await getUsers()
   } catch (error) {
     console.log(error)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
+    })
+  } finally {
+    setIsLoading(false)
   }
 }
 
