@@ -32,24 +32,34 @@ type ToastData = {
   variant: string,
   message: string
 }
-
 const toastData = ref<ToastData>({
   isActive: false,
   variant: '',
   message: ''
 })
-
 const setToastData = (data:ToastData) => {
   toastData.value = data
 }
 provide('setToastData', setToastData)
 
 const isLoading = ref(false)
-
 const setIsLoading = (value:boolean) => {
   isLoading.value = value
 }
 provide('setIsLoading', setIsLoading)
+
+type ConfirmData = {
+  isActive: boolean,
+  confirm: unknown
+}
+const confirmData = ref<ConfirmData>({
+  isActive: false,
+  confirm: () => null
+})
+const setConfirmData = (data:ConfirmData) => {
+  confirmData.value = data
+}
+provide('setConfirmData', setConfirmData)
 </script>
 
 <template>
@@ -71,4 +81,9 @@ provide('setIsLoading', setIsLoading)
     {{ toastData.message }}
   </BaseToast>
   <TheLoading v-if="isLoading" />
+  <BaseConfirm
+    v-if="confirmData.isActive"
+    v-model:isActive="confirmData.isActive"
+    @confirm="confirmData.confirm"
+  />
 </template>

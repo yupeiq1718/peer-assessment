@@ -85,6 +85,19 @@ const removeUser = async (id:number) => {
   }
 }
 
+type ConfirmData = {
+  isActive: boolean,
+  confirm: unknown
+}
+const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
+
+const handleUserRemove = (id:number) => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => removeUser(id)
+  })
+}
+
 const router = useRouter()
 const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
 </script>
@@ -137,7 +150,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
-            @click="removeUser(id.data)"
+            @click="handleUserRemove(id.data)"
           />
         </div>
       </template>
