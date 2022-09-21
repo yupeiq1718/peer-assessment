@@ -7,7 +7,6 @@ const useQuestions = defineStore('questions', () => {
     id: number,
     isRequired: boolean,
     tag: string,
-    textDescription: string,
     textHint: string,
     typeId: number,
   }

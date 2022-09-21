@@ -1,18 +1,18 @@
 <script setup lang="ts">
 type Status = 'success'|'alert'|'error'|'info'|'muted'
 type Option = {
-  value: string|number,
+  value: string|number|boolean,
   text: string
 }
 
 interface Props {
   status: Status,
-  selected: string|number,
+  selected: string|number|boolean,
   options: Option[]
 }
 
 interface Emits {
-  (event: 'update:selected', selected: string|number): void
+  (event: 'update:selected', selected: string|number|boolean): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,7 +25,6 @@ type StatusMap= {
 }
 
 const selectStyleMap:StatusMap = {
-  success: 'border-success',
   alert: 'border-alert',
   error: 'border-error',
   info: 'border-black focus:border-info',
@@ -43,7 +42,7 @@ const selectStyleMap:StatusMap = {
   >
     <option
       v-for="option of options"
-      :key="option.value"
+      :key="String(option.value)"
       :value="option.value"
     >
       {{ option.text }}

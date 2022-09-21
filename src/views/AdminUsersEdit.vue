@@ -2,6 +2,7 @@
 import { useUsers } from '@/store/users'
 import { getDepartments, getRoles } from '@/utilities/data'
 import { useForm } from 'vee-validate'
+import * as yup from 'yup'
 
 const departments = computed(() => getDepartments().map(department => ({
   value: department,
@@ -22,13 +23,21 @@ const id = computed(() => route.params.id)
 
 const user = computed(() => useUsers().user(Number(id.value)))
 
+const schema = yup.object({
+  department: yup.string().required('此欄位必填'),
+  name: yup.string().required('此欄位必填'),
+  email: yup.string().required('此欄位必填').email('不符合電子郵件格式'),
+  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
+})
+
 const { handleSubmit } = useForm({
   initialValues: {
     department: user.value?.department || '',
     email: user.value?.email || '',
     name: user.value?.name || '',
     role: user.value?.role || []
-  }
+  },
+  validationSchema: schema
 })
 
 const getUsers = async () => {

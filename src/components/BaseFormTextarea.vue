@@ -3,6 +3,7 @@ import { useField } from 'vee-validate'
 
 interface Props {
   name: string,
+  title?: string,
   placeholder?: string,
   disabled?: boolean
 }
@@ -24,6 +25,10 @@ const status = computed(() => {
 
 <template>
   <form class="bg-white rounded-xl flex flex-col">
+    <label
+      v-if="props.title"
+      class="mb-4"
+    >{{ props.title }}</label>
     <BaseTextarea
       v-model:value="value"
       :status="status"

@@ -1,34 +1,30 @@
 <script setup lang="ts">
-import type { Component } from 'vue'
-import BaseQuestionFormScore from '@/components/BaseQuestionFormScore.vue'
-import BaseQuestionFormText from '@/components/BaseQuestionFormText.vue'
-import BaseQuestionFormAll from '@/components/BaseQuestionFormAll.vue'
+import { useForm } from 'vee-validate'
+import { questionTypes } from '@/utilities/data'
+import { useQuestions } from '@/store/questions'
+import * as yup from 'yup'
 
-const selected = ref('')
-const options = [
-  {
-    value: 'score',
-    text: '評分'
+const route = useRoute()
+const question = computed(() => useQuestions().question(Number(route.params.id)))
+
+const schema = yup.object({
+  content: yup.string().required('此欄位必填'),
+  tag: yup.string().required('此欄位必填'),
+  textHint: yup.string(),
+  typeId: yup.number(),
+  isRequired: yup.boolean()
+})
+
+const { values, handleSubmit } = useForm({
+  initialValues: {
+    typeId: question.value?.typeId || 1,
+    content: question.value?.content || '',
+    tag: question.value?.tag || '',
+    textHint: question.value?.textHint || '',
+    isRequired: question.value?.isRequired || false
   },
-  {
-    value: 'text',
-    text: '文字'
-  },
-  {
-    value: 'all',
-    text: '評分 + 文字'
-  }
-]
-
-  type SelectedMap = {
-    [key:string]: Component
-  }
-
-const selectedMap:SelectedMap = {
-  score: BaseQuestionFormScore,
-  text: BaseQuestionFormText,
-  all: BaseQuestionFormAll
-}
+  validationSchema: schema
+})
 
 const router = useRouter()
 const cancel = () => router.push('/admin/question')
@@ -40,17 +36,46 @@ const cancel = () => router.push('/admin/question')
     @cancel="cancel"
   >
     <article class="m-2 p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">
-      <section class="col-span-1 flex flex-col">
-        <label class="mb-4">{{ '請選擇問答類型' }}</label>
-        <BaseSelect
-          v-model:selected="selected"
-          class="col-span-1"
-          title="合作部門"
-          status="info"
-          :options="options"
-        />
-      </section>
-      <component :is="selectedMap[selected]" />
+      <BaseFormSelect
+        class="col-span-1 p-0"
+        name="typeId"
+        :options="questionTypes"
+        title="請選擇問答類型"
+      />
+
+      <BaseFormTextarea
+        name="content"
+        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        title="請輸入問題敘述"
+      />
+      <BaseFormInput
+        name="tag"
+        type="text"
+        class="col-span-1 p-0"
+        title="請輸入標籤"
+      />
+      <BaseFormTextarea
+        v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
+        name="textHint"
+        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        title="請輸入文字問題敘述"
+      />
+      <BaseFormSelect
+        v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
+        class="col-span-1 p-0"
+        name="isRequired"
+        :options="[
+          {
+            text: '選填',
+            value: false
+          },
+          {
+            text: '必填',
+            value: true
+          }
+        ]"
+        title="是否必填"
+      />
     </article>
   </TheModal>
 </template>
