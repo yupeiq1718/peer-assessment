@@ -17,6 +17,9 @@ const items = [
   }
 ]
 
+const roleId = ref(2)
+provide('roleId', roleId)
+
 const getUsers = async () => {
   try {
     const response = await useUsers().readUsers()
@@ -40,7 +43,7 @@ const questionnaire = computed(() => useQuestions().questionnaire)
 
 onBeforeMount(() => {
   getUsers()
-  getQuestionnaire(2)
+  getQuestionnaire(roleId.value)
 })
 
 </script>

@@ -19,6 +19,25 @@ const getRoles = () => [
   }
 ]
 
+type QuestionTypes = {
+  value: number,
+  text: string
+}
+const questionTypes:QuestionTypes[] = [
+  {
+    value: 1,
+    text: '評分'
+  },
+  {
+    value: 2,
+    text: '評分+文字'
+  },
+  {
+    value: 3,
+    text: '文字'
+  }
+]
+
 export {
-  getDepartments, getRoles
+  getDepartments, getRoles, questionTypes
 }

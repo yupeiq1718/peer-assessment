@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
-
-type Question = {
-  content: string,
-  id: number,
-  isRequired: boolean,
-  tag: string,
-  textHint: string,
-  typeId: number,
-}
+import { Ref } from 'vue'
 
 interface Props {
-  question: Question
+  id: number
 }
 
 const props = defineProps<Props>()
+
+const roleId:Ref<number> = inject('roleId', ref(2))
+
+const question = computed(() => useQuestions().question(props.id))
 
 type ToastData = {
   isActive: boolean,
@@ -27,7 +23,7 @@ const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
 const getQuestionnaire = async () => {
   try {
-    const response = await useQuestions().readQuestionnaire(2)
+    const response = await useQuestions().readQuestionnaire(roleId.value)
     console.log(response)
   } catch (error) {
     console.log(error)
@@ -62,7 +58,7 @@ const removeQuestion = async ({ roleId, id }:{
 const router = useRouter()
 
 const handleQuestionEdit = () => {
-  router.push(`/question/edit/${props.question.id}`)
+  router.push(`/admin/question/edit/${question.value?.id}`)
 }
 
 type ConfirmData = {
@@ -74,7 +70,7 @@ const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () =>
 const handleQuestionRemove = () => {
   setConfirmData({
     isActive: true,
-    confirm: () => removeQuestion({ roleId: 2, id: props.question.id })
+    confirm: () => removeQuestion({ roleId: 2, id: props.id })
   })
 }
 </script>
@@ -83,20 +79,20 @@ const handleQuestionRemove = () => {
   <form class="p-8 bg-white rounded-xl">
     <section class="flex flex-col mb-4">
       <label class="mb-4">
-        {{ props.question.content }}
+        {{ question?.content }}
         <BaseTag variant="theme">
-          {{ props.question.tag }}
+          {{ question?.tag }}
         </BaseTag>
       </label>
       <BaseFormScore
-        v-if="props.question.typeId===1 || props.question.typeId===2"
+        v-if="question?.typeId===1 || question?.typeId===2"
         class="mb-4"
         name="score"
       />
       <BaseFormTextarea
-        v-if="props.question.typeId===2 || props.question.typeId===3"
+        v-if="question?.typeId===2 || question?.typeId===3"
         name="text"
-        :placeholder="props.question.textHint"
+        :placeholder="question.textHint"
         class="w-full"
       />
     </section>

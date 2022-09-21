@@ -4,7 +4,7 @@ import { useApi } from '@/utilities/api'
 const useQuestions = defineStore('questions', () => {
   type Question = {
     content: string,
-    id: string,
+    id: number,
     isRequired: boolean,
     tag: string,
     textDescription: string,
@@ -44,8 +44,10 @@ const useQuestions = defineStore('questions', () => {
 
   const questions = computed(() => questionnaire.value?.questions)
 
+  const question = computed(() => (id:number) => questions.value?.find(question => question.id === id))
+
   return {
-    questionnaire, readQuestionnaire, deleteQuestion, questions
+    questionnaire, readQuestionnaire, deleteQuestion, questions, question
   }
 })
 
