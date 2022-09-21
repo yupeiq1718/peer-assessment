@@ -3,7 +3,6 @@ import { useField } from 'vee-validate'
 
 interface Props {
   name:string,
-  title: string,
   disabled?: boolean
 }
 
@@ -17,9 +16,6 @@ const setScore = (score:number) => {
 
 <template>
   <form class="bg-white rounded-xl flex flex-col items-start">
-    <label class="mb-4">
-      {{ props.title }}
-    </label>
     <div>
       <div
         v-for="number of 5"

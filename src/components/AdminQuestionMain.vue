@@ -6,7 +6,7 @@ const questions = computed(() => useQuestions().questions)
 
 <template>
   <article class="mx-5 my-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-    <BaseAnswer
+    <AdminQuestionAnswer
       v-for="question of questions"
       :key="question.id"
       class="col-span-1 lg:col-span-2 2xl:col-span-3"

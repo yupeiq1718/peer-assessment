@@ -31,10 +31,21 @@ const useQuestions = defineStore('questions', () => {
     }
   }
 
+  const deleteQuestion = async ({ roleId, id }:{
+    roleId: number, id: number
+  }) => {
+    try {
+      const response = await useApi.delete(`/questionnaire/${roleId}/question/${id}`)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const questions = computed(() => questionnaire.value?.questions)
 
   return {
-    questionnaire, readQuestionnaire, questions
+    questionnaire, readQuestionnaire, deleteQuestion, questions
   }
 })
 

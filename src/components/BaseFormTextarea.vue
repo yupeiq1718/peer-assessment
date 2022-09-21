@@ -3,7 +3,7 @@ import { useField } from 'vee-validate'
 
 interface Props {
   name: string,
-  placeholder: string,
+  placeholder?: string,
   disabled?: boolean
 }
 
