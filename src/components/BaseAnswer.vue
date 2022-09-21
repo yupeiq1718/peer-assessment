@@ -13,6 +13,10 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const router = useRouter()
+
+const handleQuestionEdit = (id:number) => router.push(`/question/edit/${id}`)
 </script>
 
 <template>
@@ -36,7 +40,10 @@ const props = defineProps<Props>()
       />
     </section>
     <section class="flex flex-row">
-      <button class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-12 h-12 mr-2 duration-500">
+      <button
+        class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-12 h-12 mr-2 duration-500"
+        @click="handleQuestionEdit(props.question.id)"
+      >
         <BaseSvgIcon
           name="edit"
           class="w-8 h-8"
