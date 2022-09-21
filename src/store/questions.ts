@@ -5,9 +5,9 @@ const useQuestions = defineStore('questions', () => {
   type Question = {
     content: string,
     id: number,
-    isRequired: boolean,
+    isRequired?: boolean,
     tag: string,
-    textHint: string,
+    textHint?: string,
     typeId: number,
   }
 
@@ -19,6 +19,25 @@ const useQuestions = defineStore('questions', () => {
   }
 
   const questionnaire = ref<Questionnaire>()
+
+  type QuestionCreate = {
+    content: string,
+    isRequired?: boolean,
+    tag: string,
+    textHint?: string,
+    typeId: number,
+  }
+
+  const createQuestion = async ({ roleId, question }:{
+    roleId: number, question: QuestionCreate
+  }) => {
+    try {
+      const response = await useApi.post(`/questionnaire/${roleId}`, question)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
 
   const readQuestionnaire = async (id:number) => {
     try {
@@ -32,9 +51,9 @@ const useQuestions = defineStore('questions', () => {
 
   type QuestionUpdate = {
     content: string,
-    isRequired: boolean,
+    isRequired?: boolean,
     tag: string,
-    textHint: string,
+    textHint?: string,
     typeId: number,
   }
 
@@ -65,7 +84,7 @@ const useQuestions = defineStore('questions', () => {
   const question = computed(() => (id:number) => questions.value?.find(question => question.id === id))
 
   return {
-    questionnaire, readQuestionnaire, updateQuestion, deleteQuestion, questions, question
+    questionnaire, createQuestion, readQuestionnaire, updateQuestion, deleteQuestion, questions, question
   }
 })
 
