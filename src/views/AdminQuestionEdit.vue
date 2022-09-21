@@ -3,9 +3,12 @@ import { useForm } from 'vee-validate'
 import { questionTypes } from '@/utilities/data'
 import { useQuestions } from '@/store/questions'
 import * as yup from 'yup'
+import { Ref } from 'vue'
 
 const route = useRoute()
 const question = computed(() => useQuestions().question(Number(route.params.id)))
+
+const roleId:Ref<number> = inject('roleId', ref(2))
 
 const schema = yup.object({
   content: yup.string().required('此欄位必填'),
@@ -26,6 +29,44 @@ const { values, handleSubmit } = useForm({
   validationSchema: schema
 })
 
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const submit = handleSubmit(async values => {
+  try {
+    setIsLoading(true)
+    const response = await useQuestions().updateQuestion({
+      roleId: roleId.value,
+      id: Number(route.params.id),
+      question: values
+    })
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '更新成功'
+    })
+    useQuestions().readQuestionnaire(roleId.value)
+    router.push('/admin/question')
+  } catch ({ response }) {
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '更新失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+})
+
 const router = useRouter()
 const cancel = () => router.push('/admin/question')
 </script>
@@ -33,6 +74,7 @@ const cancel = () => router.push('/admin/question')
 <template>
   <TheModal
     size="full"
+    @confirm="submit"
     @cancel="cancel"
   >
     <article class="m-2 p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">

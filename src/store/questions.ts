@@ -30,6 +30,25 @@ const useQuestions = defineStore('questions', () => {
     }
   }
 
+  type QuestionUpdate = {
+    content: string,
+    isRequired: boolean,
+    tag: string,
+    textHint: string,
+    typeId: number,
+  }
+
+  const updateQuestion = async ({ roleId, id, question }:{
+    roleId: number, id: number, question: QuestionUpdate
+  }) => {
+    try {
+      const response = await useApi.put(`/questionnaire/${roleId}/question/${id}`, question)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const deleteQuestion = async ({ roleId, id }:{
     roleId: number, id: number
   }) => {
@@ -46,7 +65,7 @@ const useQuestions = defineStore('questions', () => {
   const question = computed(() => (id:number) => questions.value?.find(question => question.id === id))
 
   return {
-    questionnaire, readQuestionnaire, deleteQuestion, questions, question
+    questionnaire, readQuestionnaire, updateQuestion, deleteQuestion, questions, question
   }
 })
 
