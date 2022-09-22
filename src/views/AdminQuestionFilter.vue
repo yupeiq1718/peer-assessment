@@ -1,30 +1,37 @@
 <script setup lang="ts">
-const type = ref('')
+import { useUsers } from '@/store/users'
+import { useForm } from 'vee-validate'
+import { roles } from '@/utilities/data'
 
 const router = useRouter()
-const cancel = () => router.push('/admin/question')
+
+const { handleSubmit } = useForm({
+  initialValues: useUsers().filterData
+})
+
+const submit = handleSubmit(({ department, role }) => {
+  useUsers().setFilterData({
+    department,
+    role: Number(role) as 0|1|2|3|4
+  })
+  router.push('/admin/users')
+})
+
+const cancel = () => router.push('/admin/users')
 </script>
 
 <template>
   <TheModal
     size="side"
+    @confirm="submit"
     @cancel="cancel"
   >
     <div class="m-2">
       <BaseFormSelect
         class="mb-4"
         title="問卷類型"
-        :selected="type"
-        :options="[
-          {
-            value: 'staff',
-            text: '員工互評'
-          },
-          {
-            value: 'leader',
-            text: '主管互評'
-          }
-        ]"
+        name="roleId"
+        :options="roles"
       />
     </div>
   </TheModal>

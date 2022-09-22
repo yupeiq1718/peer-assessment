@@ -1,20 +1,16 @@
 const getDepartments = () => ['研發部', '管理部']
 
-const getRoles = () => [
+const roles = [
   {
     value: 1,
-    text: '一般員工'
+    text: '員工'
   },
   {
     value: 2,
-    text: '一般主管'
+    text: '主管'
   },
   {
     value: 3,
-    text: '高級主管'
-  },
-  {
-    value: 4,
     text: '管理員'
   }
 ]
@@ -39,5 +35,5 @@ const questionTypes:QuestionTypes[] = [
 ]
 
 export {
-  getDepartments, getRoles, questionTypes
+  getDepartments, roles, questionTypes
 }

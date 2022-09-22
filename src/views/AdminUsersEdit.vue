@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { getDepartments, getRoles } from '@/utilities/data'
+import { getDepartments, roles } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 
@@ -117,7 +117,7 @@ const cancel = () => router.push('/admin/users')
         name="role"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="角色"
-        :tags="getRoles().map(role => role.text)"
+        :tags="roles.map(role => role.text)"
         disabled
       />
     </article>
