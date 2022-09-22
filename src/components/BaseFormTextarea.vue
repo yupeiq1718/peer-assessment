@@ -24,7 +24,7 @@ const status = computed(() => {
 </script>
 
 <template>
-  <form class="bg-white rounded-xl flex flex-col">
+  <form class="bg-white rounded-2xl flex flex-col">
     <label
       v-if="props.title"
       class="mb-4"

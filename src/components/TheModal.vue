@@ -23,7 +23,7 @@ const sizeMap = {
 
 <template>
   <div
-    class="modal fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-xl shadow-md overflow-hidden z-30 duration-1000"
+    class="modal fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-2xl shadow-md overflow-hidden z-30 duration-1000"
     :class="sizeMap[props.size]"
   >
     <article class="absolute top-4 bottom-16 md:bottom-4 inset-x-4 md:right-16 overflow-auto">

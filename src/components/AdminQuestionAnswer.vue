@@ -76,7 +76,7 @@ const handleQuestionRemove = () => {
 </script>
 
 <template>
-  <form class="p-8 bg-white rounded-xl">
+  <form class="p-8 bg-white rounded-2xl">
     <section class="flex flex-col mb-4">
       <label class="mb-4">
         {{ question?.content }}

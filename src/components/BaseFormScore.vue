@@ -15,7 +15,7 @@ const setScore = (score:number) => {
 </script>
 
 <template>
-  <form class="bg-white rounded-xl flex flex-col items-start">
+  <form class="bg-white rounded-2xl flex flex-col items-start">
     <div>
       <div
         v-for="number of 5"
