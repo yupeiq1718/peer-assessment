@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
+import { getVariants } from '@/utilities/data'
 
 interface Props {
   id: number
@@ -82,7 +83,7 @@ const handleQuestionRemove = () => {
     <section class="flex flex-col mb-4">
       <label class="mb-4">
         {{ question?.content }}
-        <BaseTag variant="theme">
+        <BaseTag :variant="getVariants(props.id)">
           {{ question?.tag }}
         </BaseTag>
       </label>
@@ -90,6 +91,7 @@ const handleQuestionRemove = () => {
         v-if="question?.typeId===1 || question?.typeId===2"
         class="mb-4"
         name="score"
+        :variant="getVariants(props.id)"
       />
       <BaseFormTextarea
         v-if="question?.typeId===2 || question?.typeId===3"

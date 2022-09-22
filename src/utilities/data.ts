@@ -34,6 +34,12 @@ const questionTypes:QuestionTypes[] = [
   }
 ]
 
+const getVariants = (index:number) => {
+  const variants = ['success', 'alert', 'error', 'info']
+  const variantIndex = index % variants.length
+  return variants[variantIndex]
+}
+
 export {
-  getDepartments, roles, questionTypes
+  getDepartments, roles, questionTypes, getVariants
 }

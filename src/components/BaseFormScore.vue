@@ -3,7 +3,8 @@ import { useField } from 'vee-validate'
 
 interface Props {
   name:string,
-  disabled?: boolean
+  disabled?: boolean,
+  variant: string
 }
 
 const props = defineProps<Props>()
@@ -23,7 +24,7 @@ const setScore = (score:number) => {
         class="inline-block"
       >
         <BaseScore
-          :variant="value === number ? 'theme' : 'muted'"
+          :variant="value === number ? props.variant : 'muted'"
           :score="number"
           @click="setScore(number)"
         />
