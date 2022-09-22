@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import { roles } from '@/utilities/data'
 
 const router = useRouter()
+const route = useRoute()
 
 const { handleSubmit } = useForm({
-  initialValues: useUsers().filterData
+  initialValues: {
+    roleId: route.params.id
+  }
 })
 
-const submit = handleSubmit(({ department, role }) => {
-  useUsers().setFilterData({
-    department,
-    role: Number(role) as 0|1|2|3|4
-  })
-  router.push('/admin/users')
+const submit = handleSubmit(values => {
+  router.push(`/admin/question/${values.roleId}`)
 })
 
-const cancel = () => router.push('/admin/users')
+const cancel = () => router.push('/admin/questions')
 </script>
 
 <template>

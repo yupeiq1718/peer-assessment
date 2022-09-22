@@ -112,7 +112,7 @@ const routes: RouteRecordRaw[] = [
         ]
       },
       {
-        path: 'question',
+        path: 'question/:roleId',
         name: 'Question',
         component: () => import('@/views/AdminQuestion.vue'),
         children: [

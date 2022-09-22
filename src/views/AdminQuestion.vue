@@ -3,22 +3,22 @@ import { useUsers } from '@/store/users'
 import { useQuestions } from '@/store/questions'
 
 const router = useRouter()
+const route = useRoute()
+
+const roleId = computed(() => Number(route.params.roleId))
 
 const items = [
   {
     name: 'create',
     icon: 'plus',
-    function: () => router.push('/admin/question/new')
+    function: () => router.push(`/admin/question/${roleId.value}/new`)
   },
   {
     name: 'filter',
     icon: 'filter',
-    function: () => router.push('/admin/question/filter')
+    function: () => router.push(`/admin/question/${roleId.value}/filter`)
   }
 ]
-
-const roleId = ref(2)
-provide('roleId', roleId)
 
 const getUsers = async () => {
   try {

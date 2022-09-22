@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
-import { Ref } from 'vue'
 
 interface Props {
   id: number
@@ -8,7 +7,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const roleId:Ref<number> = inject('roleId', ref(2))
+const route = useRoute()
+const roleId = computed(() => Number(route.params.roleId))
 
 const question = computed(() => useQuestions().question(props.id))
 
@@ -58,7 +58,7 @@ const removeQuestion = async ({ roleId, id }:{
 const router = useRouter()
 
 const handleQuestionEdit = () => {
-  router.push(`/admin/question/edit/${question.value?.id}`)
+  router.push(`/admin/question/${roleId.value}/edit/${question.value?.id}`)
 }
 
 type ConfirmData = {

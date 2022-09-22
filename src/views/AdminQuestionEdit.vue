@@ -3,12 +3,11 @@ import { useForm } from 'vee-validate'
 import { questionTypes } from '@/utilities/data'
 import { useQuestions } from '@/store/questions'
 import * as yup from 'yup'
-import { Ref } from 'vue'
 
 const route = useRoute()
 const question = computed(() => useQuestions().question(Number(route.params.id)))
 
-const roleId:Ref<number> = inject('roleId', ref(2))
+const roleId = computed(() => Number(route.params.roleId))
 
 const schema = yup.object({
   content: yup.string().required('此欄位必填'),
@@ -68,7 +67,7 @@ const submit = handleSubmit(async values => {
 })
 
 const router = useRouter()
-const cancel = () => router.push('/admin/question')
+const cancel = () => router.push(`/admin/question/${roleId.value}`)
 </script>
 
 <template>
