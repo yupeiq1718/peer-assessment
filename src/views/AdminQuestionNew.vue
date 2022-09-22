@@ -50,7 +50,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     useQuestions().readQuestionnaire(roleId.value)
-    router.push('/admin/question')
+    router.push(`/admin/question/${roleId.value}`)
   } catch ({ response }) {
     console.log(response)
     setToastData({

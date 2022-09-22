@@ -5,17 +5,15 @@ import { roles } from '@/utilities/data'
 const router = useRouter()
 const route = useRoute()
 
-const { handleSubmit } = useForm({
+const { values, handleSubmit } = useForm({
   initialValues: {
-    roleId: route.params.id
+    roleId: route.params.roleId
   }
 })
 
-const submit = handleSubmit(values => {
-  router.push(`/admin/question/${values.roleId}`)
-})
+const submit = handleSubmit(values => router.push(`/admin/question/${values.roleId}`))
 
-const cancel = () => router.push('/admin/questions')
+const cancel = () => router.push(`/admin/question/${values.roleId}`)
 </script>
 
 <template>

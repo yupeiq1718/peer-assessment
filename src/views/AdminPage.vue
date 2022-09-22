@@ -36,7 +36,7 @@ const pageMap:PageMap = {
   },
   question: {
     title: '問卷設定',
-    url: '/admin/question',
+    url: '/admin/question/1',
     icon: 'question'
   }
 }

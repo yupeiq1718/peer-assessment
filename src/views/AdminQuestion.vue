@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useQuestions } from '@/store/questions'
+import { roles } from '@/utilities/data'
 
 const router = useRouter()
 const route = useRoute()
 
 const roleId = computed(() => Number(route.params.roleId))
+
+const roleTitle = computed(() => {
+  const role = roles.find(role => role.value === Number(roleId.value))
+  return `${role?.text}互評問卷`
+})
 
 const items = [
   {
@@ -41,6 +47,8 @@ const getQuestionnaire = async (id:number) => {
 const users = computed(() => useUsers().users)
 const questionnaire = computed(() => useQuestions().questionnaire)
 
+watch(roleId, () => getQuestionnaire(roleId.value))
+
 onBeforeMount(() => {
   getUsers()
   getQuestionnaire(roleId.value)
@@ -52,6 +60,9 @@ onBeforeMount(() => {
     v-if="users && questionnaire"
     class="absolute w-full h-full"
   >
+    <h2 class="font-bold ml-4 text-gray text-sm">
+      {{ roleTitle }}
+    </h2>
     <AdminQuestionMain />
     <transition
       name="sidebar"
