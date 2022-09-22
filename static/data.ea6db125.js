@@ -1,0 +1,1 @@
+const a=()=>["\u7814\u767C\u90E8","\u7BA1\u7406\u90E8"],s=[{value:1,text:"\u54E1\u5DE5"},{value:2,text:"\u4E3B\u7BA1"},{value:3,text:"\u7BA1\u7406\u54E1"}],n=[{value:1,text:"\u8A55\u5206"},{value:2,text:"\u8A55\u5206+\u6587\u5B57"},{value:3,text:"\u6587\u5B57"}],r=u=>{const t=["success","alert","error","info"],e=u%t.length;return t[e]};export{r as a,a as g,n as q,s as r};
