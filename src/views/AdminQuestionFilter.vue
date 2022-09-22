@@ -11,6 +11,8 @@ const { values, handleSubmit } = useForm({
   }
 })
 
+const roleOptions = roles.slice(0, 2)
+
 const submit = handleSubmit(values => router.push(`/admin/question/${values.roleId}`))
 
 const cancel = () => router.push(`/admin/question/${values.roleId}`)
@@ -27,7 +29,7 @@ const cancel = () => router.push(`/admin/question/${values.roleId}`)
         class="mb-4"
         title="問卷類型"
         name="roleId"
-        :options="roles"
+        :options="roleOptions"
       />
     </div>
   </TheModal>
