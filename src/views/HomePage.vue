@@ -162,7 +162,7 @@ switchPosition('employee')
 
   .article {
     @apply left-0 md:left-12 xl:left-40 right-0 xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 rounded-none
-      md:rounded-l-xl xl:rounded-xl;
+      md:rounded-l-2xl xl:rounded-2xl;
   }
 
   .header-content,

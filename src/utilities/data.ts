@@ -1,24 +1,45 @@
 const getDepartments = () => ['研發部', '管理部']
 
-const getRoles = () => [
+const roles = [
   {
     value: 1,
-    text: '一般員工'
+    text: '員工'
   },
   {
     value: 2,
-    text: '一般主管'
+    text: '主管'
   },
   {
     value: 3,
-    text: '高級主管'
-  },
-  {
-    value: 4,
     text: '管理員'
   }
 ]
 
+type QuestionTypes = {
+  value: number,
+  text: string
+}
+const questionTypes:QuestionTypes[] = [
+  {
+    value: 1,
+    text: '評分'
+  },
+  {
+    value: 2,
+    text: '評分+文字'
+  },
+  {
+    value: 3,
+    text: '文字'
+  }
+]
+
+const getVariants = (index:number) => {
+  const variants = ['success', 'alert', 'error', 'info']
+  const variantIndex = index % variants.length
+  return variants[variantIndex]
+}
+
 export {
-  getDepartments, getRoles
+  getDepartments, roles, questionTypes, getVariants
 }

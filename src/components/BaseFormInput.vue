@@ -24,7 +24,7 @@ const status = computed(() => {
 </script>
 
 <template>
-  <form class="p-8 bg-white rounded-xl flex flex-col">
+  <form class="p-8 bg-white rounded-2xl flex flex-col">
     <label class="mb-4">{{ props.title }}</label>
     <BaseInput
       v-model:value="value"

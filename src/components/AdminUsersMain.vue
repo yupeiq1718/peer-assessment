@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { getRoles } from '@/utilities/data'
+import { roles } from '@/utilities/data'
 
 const tableFields = [
   {
@@ -129,7 +129,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
           :variant="variantList[item - 1]"
           class="mx-1"
         >
-          {{ getRoles()[item - 1].text }}
+          {{ roles[item - 1].text }}
         </BaseTag>
       </template>
       <template #function="id">

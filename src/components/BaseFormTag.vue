@@ -26,7 +26,7 @@ const switchValue = (index:number) => {
 </script>
 
 <template>
-  <form class="p-8 bg-white rounded-xl flex flex-col items-start">
+  <form class="p-8 bg-white rounded-2xl flex flex-col items-start">
     <label class="mb-4">
       {{ props.title }}
     </label>

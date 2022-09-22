@@ -30,7 +30,7 @@ const inputStyleMap:StatusMap = {
 <template>
   <input
     :class="inputStyleMap[props.status]"
-    class="px-2 py-1 text-black outline-0 border-2 border-black rounded-lg duration-500"
+    class="px-2 py-1 text-dark outline-0 border-2 border-dark rounded-lg duration-500"
     :value="props.value"
     :disabled="props.status==='muted'"
     @input="emits('update:value', ($event.target as HTMLInputElement).value)"

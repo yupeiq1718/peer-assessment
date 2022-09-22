@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import { getDepartments, getRoles } from '@/utilities/data'
+import { getDepartments, roles } from '@/utilities/data'
 
 const router = useRouter()
 
@@ -15,7 +15,7 @@ const departmentOptions = computed(() => departments.value?.concat([{
   text: '全部'
 }]))
 
-const roleOptions = getRoles().concat([{
+const roleOptions = roles.concat([{
   value: 0,
   text: '全部'
 }])
