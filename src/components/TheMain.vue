@@ -11,7 +11,7 @@ const props = defineProps<Props>()
     <div
       class="main-content absolute left-4 right-4 md:left-20 xl:left-12 md:right-24 xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-2xl shadow-md"
     >
-      <article class="absolute inset-x-4 top-7 bottom-4 overflow-auto">
+      <article class="absolute inset-4 overflow-auto">
         <slot />
       </article>
       <h1 class="absolute left-1/2 -top-8 transform -translate-x-1/2 px-8 py-2 bg-muted text-white rounded-2xl text-xl md:text-2xl font-bold whitespace-nowrap shadow-md">
