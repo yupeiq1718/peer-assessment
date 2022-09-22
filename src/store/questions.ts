@@ -18,7 +18,12 @@ const useQuestions = defineStore('questions', () => {
     roleId: number
   }
 
-  const questionnaire = ref<Questionnaire>()
+  type QuestionnaireMap = {
+    [key in number]?: Questionnaire
+  }
+
+  const questionnaireMap = ref<QuestionnaireMap>({})
+  const questionnaire = computed(() => (roleId:number) => questionnaireMap.value?.[roleId])
 
   type QuestionCreate = {
     content: string,
@@ -39,10 +44,11 @@ const useQuestions = defineStore('questions', () => {
     }
   }
 
-  const readQuestionnaire = async (id:number) => {
+  const readQuestionnaire = async (roleId:number) => {
     try {
-      const response = await useApi.get(`/questionnaire?roleId=${id}`)
-      questionnaire.value = response.data.questionnaire
+      const response = await useApi.get(`/questionnaire?roleId=${roleId}`)
+
+      questionnaireMap.value[roleId] = response.data.questionnaire
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)
@@ -79,9 +85,11 @@ const useQuestions = defineStore('questions', () => {
     }
   }
 
-  const questions = computed(() => questionnaire.value?.questions)
+  const questions = computed(() => (roleId:number) => questionnaire.value(roleId)?.questions)
 
-  const question = computed(() => (id:number) => questions.value?.find(question => question.id === id))
+  const question = computed(() => ({ roleId, id }:{
+    roleId: number, id: number
+  }) => questions.value(roleId)?.find(question => question.id === id))
 
   return {
     questionnaire, createQuestion, readQuestionnaire, updateQuestion, deleteQuestion, questions, question

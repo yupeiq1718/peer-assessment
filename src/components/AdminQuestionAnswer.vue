@@ -10,7 +10,9 @@ const props = defineProps<Props>()
 const route = useRoute()
 const roleId = computed(() => Number(route.params.roleId))
 
-const question = computed(() => useQuestions().question(props.id))
+const question = computed(() => useQuestions().question({
+  roleId: roleId.value, id: props.id
+}))
 
 type ToastData = {
   isActive: boolean,

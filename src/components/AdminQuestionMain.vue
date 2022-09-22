@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 
-const questions = computed(() => useQuestions().questions)
+const route = useRoute()
+
+const roleId = computed(() => Number(route.params.roleId))
+
+const questions = computed(() => useQuestions().questions(roleId.value))
 </script>
 
 <template>

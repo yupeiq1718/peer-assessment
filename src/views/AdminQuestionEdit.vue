@@ -5,9 +5,11 @@ import { useQuestions } from '@/store/questions'
 import * as yup from 'yup'
 
 const route = useRoute()
-const question = computed(() => useQuestions().question(Number(route.params.id)))
-
 const roleId = computed(() => Number(route.params.roleId))
+
+const question = computed(() => useQuestions().question({
+  roleId: roleId.value, id: Number(route.params.id)
+}))
 
 const schema = yup.object({
   content: yup.string().required('此欄位必填'),
@@ -44,7 +46,10 @@ const submit = handleSubmit(async values => {
     const response = await useQuestions().updateQuestion({
       roleId: roleId.value,
       id: Number(route.params.id),
-      question: values
+      question: {
+        ...values,
+        typeId: Number(values.typeId)
+      }
     })
     console.log(response)
     setToastData({

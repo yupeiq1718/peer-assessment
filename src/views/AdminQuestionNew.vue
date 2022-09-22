@@ -41,7 +41,14 @@ const submit = handleSubmit(async values => {
     setIsLoading(true)
     const response = await useQuestions().createQuestion({
       roleId: roleId.value,
-      question: values
+      question: {
+        ...values,
+        typeId: Number(values.typeId)
+      }
+    })
+    console.log({
+      ...values,
+      typeId: Number(values.typeId)
     })
     console.log(response)
     setToastData({
