@@ -79,48 +79,47 @@ const handleQuestionRemove = () => {
 </script>
 
 <template>
-  <form class="p-8 bg-white rounded-2xl">
-    <section class="flex flex-col mb-4">
-      <label class="mb-4">
-        {{ question?.content }}
+  <div>
+    <article class="p-8 bg-white rounded-2xl flex flex-col mb-4">
+      <label>
         <BaseTag :variant="getVariants(props.id)">
           {{ question?.tag }}
         </BaseTag>
+        {{ question?.content }}
       </label>
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"
-        class="mb-4"
         name="score"
         :variant="getVariants(props.id)"
+        class="mt-4"
       />
       <BaseFormTextarea
         v-if="question?.typeId===2 || question?.typeId===3"
         name="text"
         :placeholder="question.textHint"
-        class="w-full"
+        class="w-full mt-4"
       />
-    </section>
-    <section class="flex flex-row">
-      <span
-        class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-12 h-12 mr-2 duration-500"
-        role="button"
+    </article>
+    <footer class="flex flex-row justify-end items-center duration-500 overflow-hidden">
+      <hr class="border-2 border-light grow-[1] mx-3">
+      <button
+        class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-10 h-10 mr-2 duration-500"
         @click="handleQuestionEdit()"
       >
         <BaseSvgIcon
           name="edit"
-          class="w-8 h-8"
+          class="w-6 h-6"
         />
-      </span>
-      <span
-        class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-12 h-12 mr-2 duration-500"
-        role="button"
+      </button>
+      <button
+        class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-10 h-10 mr-2 duration-500"
         @click="handleQuestionRemove()"
       >
         <BaseSvgIcon
           name="delete"
-          class="w-8 h-8"
+          class="w-6 h-6"
         />
-      </span>
-    </section>
-  </form>
+      </button>
+    </footer>
+  </div>
 </template>
