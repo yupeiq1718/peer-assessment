@@ -22,7 +22,7 @@ const inputStyleMap:StatusMap = {
   success: 'border-success',
   alert: 'border-alert',
   error: 'border-error',
-  info: 'border-black focus:border-info',
+  info: 'border-dark focus:border-info',
   muted: 'border-muted bg-muted-light'
 }
 </script>
@@ -30,7 +30,7 @@ const inputStyleMap:StatusMap = {
 <template>
   <textarea
     :class="inputStyleMap[props.status]"
-    class="px-2 py-1 text-black outline-0 border-2 rounded-lg duration-500"
+    class="px-2 py-1 text-dark outline-0 border-2 rounded-lg duration-500"
     :value="props.value"
     :disabled="props.status==='muted'"
     @input="emits('update:value', ($event.target as HTMLInputElement).value)"
