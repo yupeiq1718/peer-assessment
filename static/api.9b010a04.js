@@ -1,1 +1,0 @@
-import{Q as s}from"./index.bfd7bb5a.js";const r=s.create({baseURL:"//peerreview.oexpo.io/backend_dev",timeout:1e4});r.interceptors.request.use(e=>Promise.resolve(e),e=>Promise.reject(e));r.interceptors.response.use(e=>Promise.resolve(e),e=>Promise.reject(e));export{r as u};
