@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
+import { useAnswers } from '@/store/answers'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
-
-const router = useRouter()
-const cancel = () => router.push('/employee/staff')
 
 const questions = computed(() => useQuestions().questions(1))
 
@@ -30,14 +28,69 @@ const handleForm = () => {
 
 const { scheme } = handleForm()
 
-const form = useForm({
+const { handleSubmit } = useForm({
   validationSchema: scheme
 })
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const submit = handleSubmit(async values => {
+  try {
+    setIsLoading(true)
+    console.log(values)
+    const answers = Object.entries(values).map(([key, value]) => {
+      console.log(key, value)
+      return ({
+        qId: Number(key),
+        ...value
+      })
+    })
+    console.log(answers)
+    const response = await useAnswers().createAnswers({
+      reviewer: 1,
+      reviewee: 2,
+      qId: 1,
+      answers
+    })
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '新增成功'
+    })
+    useAnswers().readAnswersInformation({
+      userId: 1,
+      qId: 1
+    })
+    router.push('/employee/staff')
+  } catch ({ response }) {
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '新增失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+})
+
+const router = useRouter()
+const cancel = () => router.push('/employee/staff')
 </script>
 
 <template>
   <TheModal
     size="full"
+    @confirm="submit"
     @cancel="cancel"
   >
     <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
