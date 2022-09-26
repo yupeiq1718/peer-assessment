@@ -3,6 +3,7 @@ import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
+import { departments } from '@/utilities/data'
 
 const questions = computed(() => useQuestions().questions(1))
 
@@ -91,6 +92,18 @@ const cancel = () => router.push('/employee/staff')
     @cancel="cancel"
   >
     <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+      <BaseFormSelect
+        name="department"
+        :options="departments"
+        class="col-span-1"
+        title="部門"
+      />
+      <BaseFormSelect
+        name="department"
+        :options="departments"
+        class="col-span-1"
+        title="部門"
+      />
       <EmployeeAnswer
         v-for="question of questions"
         :id="question.id"

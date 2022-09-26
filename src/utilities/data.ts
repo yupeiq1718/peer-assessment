@@ -1,4 +1,13 @@
-const getDepartments = () => ['研發部', '管理部']
+const departments = [
+  {
+    text: '研發部',
+    value: '研發部'
+  },
+  {
+    text: '管理部',
+    value: '管理部'
+  }
+]
 
 const roles = [
   {
@@ -41,5 +50,5 @@ const getVariants = (index:number) => {
 }
 
 export {
-  getDepartments, roles, questionTypes, getVariants
+  departments, roles, questionTypes, getVariants
 }

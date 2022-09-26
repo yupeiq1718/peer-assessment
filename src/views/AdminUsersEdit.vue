@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { getDepartments, roles } from '@/utilities/data'
+import { departments, roles } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
-
-const departments = computed(() => getDepartments().map(department => ({
-  value: department,
-  text: department
-})))
 
 type ToastData = {
   isActive: boolean,
