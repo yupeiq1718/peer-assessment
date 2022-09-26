@@ -30,7 +30,7 @@ const useUsers = defineStore('users', () => {
 
   const readUsers = async () => {
     try {
-      const response = await useApi.get('/user/all')
+      const response = await useApi.get('/user')
       users.value = response.data.data
       return Promise.resolve(response)
     } catch (error) {
