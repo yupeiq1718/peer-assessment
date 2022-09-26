@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
+// import { useForm } from 'vee-validate'
+// import * as yup from 'yup'
 
 interface Props {
   id: number
@@ -25,13 +27,13 @@ const question = computed(() => useQuestions().question({
       </label>
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"
-        name="score"
+        :name="`${props.id}.score`"
         :variant="getVariants(props.id)"
         class="mt-4"
       />
       <BaseFormTextarea
         v-if="question?.typeId===2 || question?.typeId===3"
-        name="text"
+        :name="`${props.id}.comment`"
         :placeholder="question.textHint"
         class="w-full mt-4"
       />

@@ -1,11 +1,38 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
+import { useForm } from 'vee-validate'
+import * as yup from 'yup'
 
 const router = useRouter()
 const cancel = () => router.push('/employee/staff')
 
 const questions = computed(() => useQuestions().questions(1))
 
+const handleForm = () => {
+  type QuestionsSchema = {
+    [key in number]: unknown
+  }
+
+  const questionsSchema:QuestionsSchema = {}
+  questions.value?.forEach(question => {
+    const questionSchema = yup.object({
+      score: (question?.typeId === 1 || question?.typeId === 2) ? yup.number().required('此欄位必填') : yup.number(),
+      comment: question?.isRequired ? yup.string().required('此欄位必填') : yup.string()
+    })
+
+    questionsSchema[question.id] = questionSchema
+  })
+
+  const scheme = yup.object(questionsSchema as any)
+
+  return { scheme }
+}
+
+const { scheme } = handleForm()
+
+const form = useForm({
+  validationSchema: scheme
+})
 </script>
 
 <template>
