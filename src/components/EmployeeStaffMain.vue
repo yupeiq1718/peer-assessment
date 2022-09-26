@@ -1,16 +1,7 @@
 <script setup lang="ts">
-type Field= {
-  key:string,
-  name:string,
-  width?: string
-}
+import { useAnswers } from '@/store/answers'
 
-type Item = {
-  key:string,
-  [key:string]:unknown
-}
-
-const fields:Field[] = [
+const tableFields = [
   {
     name: '姓名',
     key: 'name'
@@ -31,28 +22,20 @@ const fields:Field[] = [
   }
 ]
 
-const items = ref<Item[]>([
-  {
-    key: '1',
-    name: '許斾旟',
-    department: 'O2 meta 組',
-    scores: [1, 4, 3, 3, 5]
-  },
-  {
-    key: '2',
-    name: '劉于瑄',
-    department: '專案組',
-    scores: [3, 2, 5, 4, 2]
-  }
-])
+const tableItems = computed(() => useAnswers().answersInformation?.map(answerInformation => ({
+  name: answerInformation.reviewee.name,
+  department: answerInformation.reviewee.department,
+  scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
+  function: answerInformation.id
+})))
 
 </script>
 
 <template>
   <div class="mx-5 my-2">
     <BaseTable
-      :fields="fields"
-      :items="items"
+      :fields="tableFields"
+      :items="tableItems"
     >
       <template #name="data">
         <div>

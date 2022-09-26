@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
+import { useAnswers } from '@/store/answers'
 
 const router = useRouter()
 
@@ -22,14 +23,30 @@ const getQuestionnaire = async (id:number) => {
   }
 }
 
+const answersInformation = computed(() => useAnswers().answersInformation)
+
+const getAnswersInformation = async ({ userId, qId }:{
+  userId:number, qId:number
+}) => {
+  try {
+    const response = await useAnswers().readAnswersInformation({ userId, qId })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 onBeforeMount(() => {
   getQuestionnaire(1)
+  getAnswersInformation({
+    userId: 1, qId: 1
+  })
 })
 
 </script>
 <template>
   <div
-    v-if="questionnaire"
+    v-if="questionnaire && answersInformation"
     class="absolute w-full h-full"
   >
     <EmployeeStaffMain />

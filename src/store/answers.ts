@@ -50,7 +50,7 @@ const useAnswers = defineStore('answers', () => {
   }
 
   return {
-    createAnswers, readAnswersInformation
+    answersInformation, createAnswers, readAnswersInformation
   }
 })
 
