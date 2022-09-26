@@ -22,7 +22,7 @@ const tableFields = [
   }
 ]
 
-const tableItems = computed(() => useAnswers().answersInformation?.map(answerInformation => ({
+const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answerInformation => ({
   name: answerInformation.reviewee.name,
   department: answerInformation.reviewee.department,
   scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),

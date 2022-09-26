@@ -21,7 +21,12 @@ const useAnswers = defineStore('answers', () => {
     answers: Answer[]
   }
 
-  const answersInformation = ref<AnswerInformation[]>()
+  type AnswerInformationMap = {
+    [key in number]?: AnswerInformation[]
+  }
+
+  const answersInformationMap = ref<AnswerInformationMap>({})
+  const answersInformation = computed(() => (qId:number) => answersInformationMap.value?.[qId])
 
   const createAnswers = async ({ reviewee, reviewer, qId, answers }: {
     reviewee: number,
@@ -42,15 +47,17 @@ const useAnswers = defineStore('answers', () => {
   }) => {
     try {
       const response = await useApi.get(`/answer/all?userId=${userId}&qId=${qId}`)
-      answersInformation.value = response.data.data
+      answersInformationMap.value[qId] = response.data.data
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)
     }
   }
 
+  const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
+
   return {
-    answersInformation, createAnswers, readAnswersInformation
+    answersInformation, createAnswers, readAnswersInformation, answerUsers
   }
 })
 
