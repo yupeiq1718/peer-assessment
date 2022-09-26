@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
-// import { useForm } from 'vee-validate'
-// import * as yup from 'yup'
 
 interface Props {
-  id: number
+  id: number,
+  roleId: number
 }
 
 const props = defineProps<Props>()
 
 const question = computed(() => useQuestions().question({
-  roleId: 1, id: props.id
+  roleId: props.roleId, id: props.id
 }))
 
 </script>
