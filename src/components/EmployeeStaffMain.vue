@@ -29,8 +29,56 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
   function: answerInformation.id
 })))
 
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const removeAnswersInformation = async (id: number) => {
+  try {
+    setIsLoading(true)
+    const response = await useAnswers().deleteAnswersInformation(id)
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
+    useAnswers().readAnswersInformation({
+      userId: 1, qId: 1
+    })
+  } catch (error) {
+    console.log(error)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+}
+
 const router = useRouter()
+
 const handleAnswersEdit = (id:number) => router.push(`/employee/staff/edit/${id}`)
+
+type ConfirmData = {
+  isActive: boolean,
+  confirm: unknown
+}
+const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
+
+const handleAnswersInformationRemove = (id:number) => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => removeAnswersInformation(id)
+  })
+}
 
 </script>
 
@@ -77,6 +125,7 @@ const handleAnswersEdit = (id:number) => router.push(`/employee/staff/edit/${id}
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
+            @click="handleAnswersInformationRemove(id.data)"
           />
         </div>
       </template>

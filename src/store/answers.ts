@@ -69,6 +69,15 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
+  const deleteAnswersInformation = async (id:number) => {
+    try {
+      const response = await useApi.delete(`/answer/${id}`)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
 
   const answerInformation = computed(() => ({ qId, id }:{
@@ -76,7 +85,7 @@ const useAnswers = defineStore('answers', () => {
   }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, createAnswers, readAnswersInformation, updateAnswers, answerUsers, answerInformation
+    answersInformation, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, answerUsers, answerInformation
   }
 })
 
