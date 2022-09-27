@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import router from '@/router'
 import { Ref } from 'vue'
 
 type Type = 'employee'|'admin'
 const type:Ref<Type> = inject('type', ref('employee'))
 
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
-
-const login = () => {
-  router.push(`/${type.value}`)
-}
 
 type TypeMap = {
   [key in Type]?: string
@@ -76,12 +71,20 @@ switchPosition('employee')
             </p>
           </article>
           <footer class="article-content text-center">
-            <img
-              src="@/assets/images/google.png"
-              alt="google"
-              class="mb-4"
-              @click="login"
-            >
+            <GoogleLogin
+              v-if="type==='employee'"
+              :id-configuration="{
+                login_uri:'https://peerreview.oexpo.io/backend_dev/user/employee/callback',
+                ux_mode:'redirect'
+              }"
+            />
+            <GoogleLogin
+              v-if="type==='admin'"
+              :id-configuration="{
+                login_uri:'https://peerreview.oexpo.io/backend_dev/user/admin/callback',
+                ux_mode:'redirect'
+              }"
+            />
             <BaseButton
               v-if="type==='admin'"
               variant="theme"
