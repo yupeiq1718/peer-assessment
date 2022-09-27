@@ -38,6 +38,7 @@ const status = computed(() => {
       :options="props.options"
       :status="status"
       class="max-w-[20rem]"
+      :disabled=" disabled"
     />
     <BaseMessage
       v-if="errorMessage"

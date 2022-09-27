@@ -54,14 +54,29 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
+  const updateAnswers = async ({ id, reviewee, reviewer, qId, answers }: {
+    id: number,
+    reviewee: number,
+    reviewer: number,
+    qId: number,
+    answers: Answer[]
+  }) => {
+    try {
+      const response = await useApi.put(`/answer/${id}`, { reviewee, reviewer, qId, answers })
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
 
   const answerInformation = computed(() => ({ qId, id }:{
     qId:number, id:number
-  }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.reviewee.id === id))
+  }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, createAnswers, readAnswersInformation, answerUsers, answerInformation
+    answersInformation, createAnswers, readAnswersInformation, updateAnswers, answerUsers, answerInformation
   }
 })
 

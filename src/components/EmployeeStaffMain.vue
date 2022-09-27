@@ -29,6 +29,9 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
   function: answerInformation.id
 })))
 
+const router = useRouter()
+const handleAnswersEdit = (id:number) => router.push(`/employee/staff/edit/${id}`)
+
 </script>
 
 <template>
@@ -37,7 +40,7 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
       :fields="tableFields"
       :items="tableItems"
     >
-      <template #name="data">
+      <template #name="name">
         <div>
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
@@ -45,29 +48,30 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
             alt="user"
           >
           <span>
-            {{ data.data }}
+            {{ name.data }}
           </span>
         </div>
       </template>
-      <template #department="data">
+      <template #department="department">
         <BaseTag variant="theme">
-          {{ data.data }}
+          {{ department.data }}
         </BaseTag>
       </template>
-      <template #scores="data">
+      <template #scores="scores">
         <BaseScore
-          v-for="(score, key) of data.data"
+          v-for="(score, key) of scores.data"
           :key="key"
           variant="theme"
           :score="score"
         />
       </template>
-      <template #function>
+      <template #function="id">
         <div>
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="edit"
+            @click="handleAnswersEdit(id.data)"
           />
           <BaseSvgIcon
             role="button"

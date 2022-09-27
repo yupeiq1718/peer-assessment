@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/views/EmployeeStaffNew.vue')
           },
           {
-            path: 'edit',
+            path: 'edit/:id',
             name: 'StaffEdit',
             component: () => import('@/views/EmployeeStaffEdit.vue')
           }
