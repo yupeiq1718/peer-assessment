@@ -34,9 +34,9 @@ const { values, handleSubmit } = useForm({
   validationSchema
 })
 
-const departmentUsers = computed(() => useUsers().users?.filter(user => user.department === values.department))
+const filteredUsers = computed(() => useUsers().users?.filter(user => user.department === values.department && user.role.includes(1)))
 const answerUsers = computed(() => useAnswers().answerUsers(1))
-const revieweeOptions = computed(() => departmentUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
+const revieweeOptions = computed(() => filteredUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
   text: departmentUser.name,
   value: departmentUser.id
 })))
