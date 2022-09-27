@@ -1,16 +1,7 @@
 <script setup lang="ts">
-type Field= {
-  key:string,
-  name:string,
-  width?: string
-}
+import { useAnswers } from '@/store/answers'
 
-type Item = {
-  key:string,
-  [key:string]:unknown
-}
-
-const fields:Field[] = [
+const tableFields = [
   {
     name: '姓名',
     key: 'name'
@@ -31,30 +22,73 @@ const fields:Field[] = [
   }
 ]
 
-const items = ref<Item[]>([
-  {
-    key: '1',
-    name: '許斾旟',
-    department: 'O2 meta 組',
-    scores: [1, 4, 3, 3, 5]
-  },
-  {
-    key: '2',
-    name: '劉于瑄',
-    department: '專案組',
-    scores: [3, 2, 5, 4, 2]
+const tableItems = computed(() => useAnswers().answersInformation(2)?.map(answerInformation => ({
+  name: answerInformation.reviewee.name,
+  department: answerInformation.reviewee.department,
+  scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
+  function: answerInformation.id
+})))
+
+  type ToastData = {
+    isActive: boolean,
+    variant: string,
+    message: string
   }
-])
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const removeAnswersInformation = async (id: number) => {
+  try {
+    setIsLoading(true)
+    const response = await useAnswers().deleteAnswersInformation(id)
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
+    useAnswers().readAnswersInformation({
+      userId: 1, qId: 2
+    })
+  } catch (error) {
+    console.log(error)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+const router = useRouter()
+
+const handleAnswersEdit = (id:number) => router.push(`/employee/leader/edit/${id}`)
+
+  type ConfirmData = {
+    isActive: boolean,
+    confirm: unknown
+  }
+const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
+
+const handleAnswersInformationRemove = (id:number) => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => removeAnswersInformation(id)
+  })
+}
 
 </script>
 
 <template>
   <div class="mx-5 my-2">
     <BaseTable
-      :fields="fields"
-      :items="items"
+      :fields="tableFields"
+      :items="tableItems"
     >
-      <template #name="data">
+      <template #name="name">
         <div>
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
@@ -62,34 +96,36 @@ const items = ref<Item[]>([
             alt="user"
           >
           <span>
-            {{ data.data }}
+            {{ name.data }}
           </span>
         </div>
       </template>
-      <template #department="data">
+      <template #department="department">
         <BaseTag variant="theme">
-          {{ data.data }}
+          {{ department.data }}
         </BaseTag>
       </template>
-      <template #scores="data">
+      <template #scores="scores">
         <BaseScore
-          v-for="(score, key) of data.data"
+          v-for="(score, key) of scores.data"
           :key="key"
           variant="theme"
           :score="score"
         />
       </template>
-      <template #function>
+      <template #function="id">
         <div>
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="edit"
+            @click="handleAnswersEdit(id.data)"
           />
           <BaseSvgIcon
             role="button"
             class="w-6 h-6 m-2 fill-muted hover:fill-theme"
             name="delete"
+            @click="handleAnswersInformationRemove(id.data)"
           />
         </div>
       </template>

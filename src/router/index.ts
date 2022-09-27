@@ -38,14 +38,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/EmployeeLeader.vue'),
         children: [
           {
-            path: 'create',
-            name: 'LeaderCreate',
-            component: () => import('@/views/EmployeeLeaderCreate.vue')
+            path: 'new',
+            name: 'LeaderNew',
+            component: () => import('@/views/EmployeeLeaderNew.vue')
           },
           {
-            path: 'update',
-            name: 'LeaderUpdate',
-            component: () => import('@/views/EmployeeLeaderUpdate.vue')
+            path: 'edit/:id',
+            name: 'LeaderEdit',
+            component: () => import('@/views/EmployeeLeaderEdit.vue')
           }
         ]
       },
