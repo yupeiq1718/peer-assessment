@@ -1,37 +1,44 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
+import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
 
 const questions = computed(() => useQuestions().questions(1))
 
-const handleForm = () => {
-  type QuestionsSchema = {
-    [key in number]: unknown
-  }
+const validationSchema = yup.object({
+  department: yup.string().required('此欄位必填'),
+  reviewee: yup.number().required('此欄位必填'),
+  answers: yup.array().of(yup.object({
+    qId: yup.number().required('此欄位必填'),
+    score: yup.number().required('此欄位必填'),
+    comment: yup.string().required('此欄位必填')
+  }))
+})
 
-  const questionsSchema:QuestionsSchema = {}
-  questions.value?.forEach(question => {
-    const questionSchema = yup.object({
-      score: (question?.typeId === 1 || question?.typeId === 2) ? yup.number().required('此欄位必填') : yup.number(),
-      comment: question?.isRequired ? yup.string().required('此欄位必填') : yup.string()
-    })
-
-    questionsSchema[question.id] = questionSchema
-  })
-
-  const scheme = yup.object(questionsSchema as any)
-
-  return { scheme }
+const initialValues = {
+  department: '研發部',
+  reviewee: 0,
+  answers: questions.value?.map(question => ({
+    qId: question.id,
+    score: 0,
+    comment: ''
+  })) || []
 }
 
-const { scheme } = handleForm()
-
-const { handleSubmit } = useForm({
-  validationSchema: scheme
+const { values, handleSubmit } = useForm({
+  initialValues,
+  validationSchema
 })
+
+const departmentUsers = computed(() => useUsers().users?.filter(user => user.department === values.department))
+const answerUsers = computed(() => useAnswers().answerUsers(1))
+const revieweeOptions = computed(() => departmentUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
+  text: departmentUser.name,
+  value: departmentUser.id
+})))
 
 type ToastData = {
   isActive: boolean,
@@ -45,18 +52,13 @@ const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
 const submit = handleSubmit(async values => {
   try {
+    console.log(values)
     setIsLoading(true)
-    const answers = Object.entries(values).map(([key, value]) => {
-      return ({
-        qId: Number(key),
-        ...value
-      })
-    })
     const response = await useAnswers().createAnswers({
       reviewer: 1,
-      reviewee: 2,
       qId: 1,
-      answers
+      reviewee: Number(values.reviewee),
+      answers: values.answers
     })
     console.log(response)
     setToastData({
@@ -96,18 +98,19 @@ const cancel = () => router.push('/employee/staff')
         name="department"
         :options="departments"
         class="col-span-1"
-        title="部門"
+        title="合作部門"
       />
       <BaseFormSelect
-        name="department"
-        :options="departments"
+        name="reviewee"
+        :options="revieweeOptions"
         class="col-span-1"
-        title="部門"
+        title="合作對象"
       />
       <EmployeeAnswer
-        v-for="question of questions"
+        v-for="(question, index) of questions"
         :id="question.id"
         :key="question.id"
+        :index="index"
         :role-id="1"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
       />

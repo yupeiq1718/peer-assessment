@@ -56,8 +56,12 @@ const useAnswers = defineStore('answers', () => {
 
   const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
 
+  const answerInformation = computed(() => ({ qId, id }:{
+    qId:number, id:number
+  }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.reviewee.id === id))
+
   return {
-    answersInformation, createAnswers, readAnswersInformation, answerUsers
+    answersInformation, createAnswers, readAnswersInformation, answerUsers, answerInformation
   }
 })
 

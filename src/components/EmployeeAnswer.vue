@@ -4,7 +4,8 @@ import { getVariants } from '@/utilities/data'
 
 interface Props {
   id: number,
-  roleId: number
+  roleId: number,
+  index: number
 }
 
 const props = defineProps<Props>()
@@ -26,13 +27,13 @@ const question = computed(() => useQuestions().question({
       </label>
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"
-        :name="`${props.id}.score`"
+        :name="`answers[${props.index}].score`"
         :variant="getVariants(props.id)"
         class="mt-4"
       />
       <BaseFormTextarea
         v-if="question?.typeId===2 || question?.typeId===3"
-        :name="`${props.id}.comment`"
+        :name="`answers[${props.index}].comment`"
         :placeholder="question.textHint"
         class="w-full mt-4"
       />
