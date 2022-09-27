@@ -19,7 +19,7 @@ const validationSchema = yup.object({
   department: yup.string().required('此欄位必填'),
   reviewee: yup.number().required('此欄位必填'),
   answers: yup.array().of(yup.object({
-    qId: yup.number().required('此欄位必填'),
+    qId: yup.number(),
     score: yup.number(),
     comment: yup.string()
   }))

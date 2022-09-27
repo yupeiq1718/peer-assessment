@@ -8,7 +8,7 @@ import { departments } from '@/utilities/data'
 
 const questions = computed(() => useQuestions().questions(1))
 
-const validationSchema = yup.object({
+const validationSchema = yup.object().shape({
   department: yup.string().required('此欄位必填'),
   reviewee: yup.number().required('此欄位必填'),
   answers: yup.array().of(yup.object({
@@ -19,10 +19,13 @@ const validationSchema = yup.object({
 })
 
 const initialValues = {
+
   department: '研發部',
   reviewee: 0,
   answers: questions.value?.map(question => ({
-    qId: question.id
+    qId: question.id,
+    score: 0,
+    comment: ''
   })) || []
 }
 
