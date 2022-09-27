@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import { getDepartments, roles } from '@/utilities/data'
+import { departments, roles } from '@/utilities/data'
 
 const router = useRouter()
 
-const departments = computed(() => getDepartments().map(department => ({
-  value: department,
-  text: department
-})))
-
-const departmentOptions = computed(() => departments.value?.concat([{
+const departmentOptions = computed(() => departments.concat([{
   value: '',
   text: '全部'
 }]))

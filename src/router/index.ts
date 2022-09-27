@@ -21,14 +21,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/EmployeeStaff.vue'),
         children: [
           {
-            path: 'create',
-            name: 'StaffCreate',
-            component: () => import('@/views/EmployeeStaffCreate.vue')
+            path: 'new',
+            name: 'StaffNew',
+            component: () => import('@/views/EmployeeStaffNew.vue')
           },
           {
-            path: 'update',
-            name: 'StaffUpdate',
-            component: () => import('@/views/EmployeeStaffUpdate.vue')
+            path: 'edit/:id',
+            name: 'StaffEdit',
+            component: () => import('@/views/EmployeeStaffEdit.vue')
           }
         ]
       },
