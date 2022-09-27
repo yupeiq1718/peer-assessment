@@ -1,0 +1,1 @@
+import{C as s}from"./index.afca9dea.js";const r=s.create({baseURL:"https://peerreview.oexpo.io/backend_dev",timeout:1e4});r.interceptors.request.use(e=>Promise.resolve(e),e=>Promise.reject(e));r.interceptors.response.use(e=>Promise.resolve(e),e=>Promise.reject(e));export{r as u};
