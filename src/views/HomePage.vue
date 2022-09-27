@@ -2,7 +2,7 @@
 import { Ref } from 'vue'
 
 type Type = 'employee'|'admin'
-const type:Ref<Type> = inject('type', ref('employee'))
+const type:Ref<Type> = inject('type', ref('admin'))
 
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 
@@ -15,7 +15,11 @@ const positionMap:TypeMap = {
   admin: 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
 }
 
-switchPosition('employee')
+const router = useRouter()
+watch(type, () => router.push(`/?type=${type.value}`))
+
+const route = useRoute()
+switchPosition(route.query.type as Type || 'employee')
 </script>
 
 <template>

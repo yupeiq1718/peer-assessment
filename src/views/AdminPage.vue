@@ -49,6 +49,9 @@ type Type = 'employee'|'admin'
 const setThemeColor:(value:Type)=>void = inject('setThemeColor', () => null)
 setThemeColor('admin')
 
+const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
+switchPosition('admin')
+
 </script>
 
 <template>

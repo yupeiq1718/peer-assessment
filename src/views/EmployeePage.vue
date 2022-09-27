@@ -43,6 +43,9 @@ const pageList = computed(() => pages.value.map(page => ({
 type Type = 'employee'|'admin'
 const setThemeColor:(value:Type)=>void = inject('setThemeColor', () => null)
 setThemeColor('employee')
+
+const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
+switchPosition('employee')
 </script>
 
 <template>

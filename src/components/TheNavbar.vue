@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from '@/router'
+import { Ref } from 'vue'
 
 interface Props {
   activePage: string,
@@ -27,6 +28,9 @@ const status = ref<Status>('folded')
 const toggleStatus = (value:Status) => {
   status.value = value
 }
+
+type Type = 'employee'|'admin'
+const type:Ref<Type> = inject('type', ref('admin'))
 
 type StyleMap = {
   [key: string]: {
@@ -68,7 +72,7 @@ const styleMap:StyleMap = {
   }
 }
 
-const logout = () => router.push('/')
+const logout = () => router.push(`/?type=${type.value}`)
 </script>
 
 <template>
