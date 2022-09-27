@@ -13,8 +13,8 @@ const validationSchema = yup.object({
   reviewee: yup.number().required('此欄位必填'),
   answers: yup.array().of(yup.object({
     qId: yup.number().required('此欄位必填'),
-    score: yup.number().required('此欄位必填'),
-    comment: yup.string().required('此欄位必填')
+    score: yup.number(),
+    comment: yup.string()
   }))
 })
 
@@ -22,9 +22,7 @@ const initialValues = {
   department: '研發部',
   reviewee: 0,
   answers: questions.value?.map(question => ({
-    qId: question.id,
-    score: 0,
-    comment: ''
+    qId: question.id
   })) || []
 }
 
