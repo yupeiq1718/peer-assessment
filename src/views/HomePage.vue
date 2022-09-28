@@ -42,7 +42,7 @@ const handleLogin = async () => {
   }
   try {
     setIsLoading(true)
-    await useAccount().readAccountId()
+    await useAccount().readAccountId(type.value)
 
     router.push(`/${type.value}`)
   } catch (error) {

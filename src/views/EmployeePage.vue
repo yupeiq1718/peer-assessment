@@ -54,7 +54,7 @@ switchPosition('employee')
 
 const handleLogin = async () => {
   try {
-    await useAccount().readAccountId()
+    await useAccount().readAccountId('employee')
     await useUsers().readUsers()
   } catch ({ response }) {
     router.push('/?type=employee')

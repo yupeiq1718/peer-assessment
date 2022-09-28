@@ -59,7 +59,7 @@ switchPosition('admin')
 
 const handleLogin = async () => {
   try {
-    await useAccount().readAccountId()
+    await useAccount().readAccountId('admin')
     await useUsers().readUsers()
   } catch ({ response }) {
     router.push('/?type=admin')
