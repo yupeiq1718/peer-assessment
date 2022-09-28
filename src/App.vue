@@ -83,14 +83,20 @@ provide('setConfirmData', setConfirmData)
       <component :is="Component" />
     </transition>
   </router-view>
-  <BaseToast
-    v-if="toastData.isActive"
-    v-model:isActive="toastData.isActive"
-    :variant="toastData.variant"
-    class="fixed top-4 right-4"
+  <transition
+    name="toast"
+    mode="out-in"
+    appear
   >
-    {{ toastData.message }}
-  </BaseToast>
+    <BaseToast
+      v-if="toastData.isActive"
+      v-model:isActive="toastData.isActive"
+      :variant="toastData.variant"
+      class="fixed top-4 right-4"
+    >
+      {{ toastData.message }}
+    </BaseToast>
+  </transition>
   <TheLoading v-if="isLoading" />
   <BaseConfirm
     v-if="confirmData.isActive"
