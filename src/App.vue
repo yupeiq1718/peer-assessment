@@ -37,8 +37,17 @@ const toastData = ref<ToastData>({
   variant: '',
   message: ''
 })
+
+let toastTimer = setTimeout(() => {
+  toastData.value.isActive = false
+}, 5000)
+
 const setToastData = (data:ToastData) => {
+  clearTimeout(toastTimer)
   toastData.value = data
+  toastTimer = setTimeout(() => {
+    toastData.value.isActive = false
+  }, 5000)
 }
 provide('setToastData', setToastData)
 
