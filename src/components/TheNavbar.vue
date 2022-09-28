@@ -72,7 +72,10 @@ const styleMap:StyleMap = {
   }
 }
 
-const logout = () => router.push(`/?type=${type.value}`)
+const logout = () => {
+  window.sessionStorage.setItem('access-token', '')
+  router.push(`/?type=${type.value}`)
+}
 </script>
 
 <template>

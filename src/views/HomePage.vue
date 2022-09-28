@@ -41,43 +41,35 @@ const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const handleLogin = async () => {
   if (route.query.token) {
-    try {
-      setIsLoading(true)
-      window.sessionStorage.setItem('access-token', String(route.query.token))
-      await useAccount().readAccountId()
-      await useUsers().readUsers()
+    window.sessionStorage.setItem('access-token', String(route.query.token))
+  }
+  try {
+    setIsLoading(true)
+    await useAccount().readAccountId()
+    await useUsers().readUsers()
 
-      useAccount().setAccount(user.value)
+    useAccount().setAccount(user.value)
 
-      setToastData({
-        isActive: true,
-        variant: 'success',
-        message: '登入成功'
-      })
-      router.push(`/${type.value}`)
-    } catch (error) {
-      window.sessionStorage.setItem('access-token', '')
-      setToastData({
-        isActive: true,
-        variant: 'error',
-        message: '登入失敗'
-      })
-      router.push(`?type=${type.value}`)
-    } finally {
-      setIsLoading(false)
-    }
-  } else {
+    router.push(`/${type.value}`)
+  } catch (error) {
+    window.sessionStorage.setItem('access-token', '')
     setToastData({
       isActive: true,
       variant: 'error',
       message: '登入失敗'
     })
+    router.push(`?type=${type.value}`)
+  } finally {
+    setIsLoading(false)
   }
 }
 
-if (route.query.token !== undefined) {
-  handleLogin()
-}
+onMounted(() => {
+  if (route.query.token !== undefined) {
+    handleLogin()
+  }
+})
+
 </script>
 
 <template>
