@@ -37,8 +37,17 @@ const toastData = ref<ToastData>({
   variant: '',
   message: ''
 })
+
+let toastTimer = setTimeout(() => {
+  toastData.value.isActive = false
+}, 5000)
+
 const setToastData = (data:ToastData) => {
+  clearTimeout(toastTimer)
   toastData.value = data
+  toastTimer = setTimeout(() => {
+    toastData.value.isActive = false
+  }, 5000)
 }
 provide('setToastData', setToastData)
 
@@ -50,11 +59,13 @@ provide('setIsLoading', setIsLoading)
 
 type ConfirmData = {
   isActive: boolean,
-  confirm: unknown
+  confirm: unknown,
+  text: string
 }
 const confirmData = ref<ConfirmData>({
   isActive: false,
-  confirm: () => null
+  confirm: () => null,
+  text: ''
 })
 const setConfirmData = (data:ConfirmData) => {
   confirmData.value = data
@@ -72,18 +83,25 @@ provide('setConfirmData', setConfirmData)
       <component :is="Component" />
     </transition>
   </router-view>
-  <BaseToast
-    v-if="toastData.isActive"
-    v-model:isActive="toastData.isActive"
-    :variant="toastData.variant"
-    class="fixed top-4 right-4"
+  <transition
+    name="toast"
+    mode="out-in"
+    appear
   >
-    {{ toastData.message }}
-  </BaseToast>
+    <BaseToast
+      v-if="toastData.isActive"
+      v-model:isActive="toastData.isActive"
+      :variant="toastData.variant"
+      class="fixed top-4 right-4"
+    >
+      {{ toastData.message }}
+    </BaseToast>
+  </transition>
   <TheLoading v-if="isLoading" />
   <BaseConfirm
     v-if="confirmData.isActive"
     v-model:isActive="confirmData.isActive"
+    :text="confirmData.text"
     @confirm="confirmData.confirm"
   />
 </template>

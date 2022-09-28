@@ -69,14 +69,16 @@ const handleAnswersEdit = (id:number) => router.push(`/employee/staff/edit/${id}
 
 type ConfirmData = {
   isActive: boolean,
-  confirm: unknown
+  confirm: unknown,
+  text: string
 }
 const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
 
 const handleAnswersInformationRemove = (id:number) => {
   setConfirmData({
     isActive: true,
-    confirm: () => removeAnswersInformation(id)
+    confirm: () => removeAnswersInformation(id),
+    text: '請確認是否刪除該筆資料？'
   })
 }
 
