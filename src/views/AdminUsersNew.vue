@@ -8,8 +8,7 @@ const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
   email: yup.string().required('此欄位必填').email('不符合電子郵件格式'),
-  role: yup.array().required('此欄位必填').min(1, '最少選擇一項'),
-  managerId: yup.number()
+  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
 })
 
 const { handleSubmit, resetForm } = useForm({
@@ -17,8 +16,7 @@ const { handleSubmit, resetForm } = useForm({
     department: '',
     email: '',
     name: '',
-    role: [],
-    managerId: 0
+    role: []
   },
   validationSchema: schema
 })

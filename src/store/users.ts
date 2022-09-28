@@ -9,7 +9,7 @@ const useUsers = defineStore('users', () => {
     id: number,
     name: string,
     role:(1|2|3|4)[],
-    managerId: number
+    managerId?: number
   }
 
   const users = ref<User[]>()
@@ -19,7 +19,7 @@ const useUsers = defineStore('users', () => {
     email: string,
     name: string,
     role:(1|2|3|4)[],
-    managerId: number
+    managerId?: number
   }
   const createUser = async (user:UserCreate) => {
     try {
@@ -44,7 +44,7 @@ const useUsers = defineStore('users', () => {
     name: string,
     department: string,
     role:(1|2|3|4)[],
-    managerId: number
+    managerId?: number
   }
 
   const updateUser = async ({ id, user }:{
