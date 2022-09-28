@@ -8,7 +8,8 @@ const useAccount = defineStore('account', () => {
     email: string,
     id: number,
     name: string,
-    role:(1|2|3|4)[]
+    role:(1|2|3|4)[],
+    picture:string
   }
 
   const accountId = ref()

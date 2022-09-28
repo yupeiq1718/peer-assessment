@@ -8,7 +8,8 @@ const useUsers = defineStore('users', () => {
     email: string,
     id: number,
     name: string,
-    role:(1|2|3|4)[]
+    role:(1|2|3|4)[],
+    picture:string
   }
 
   const users = ref<User[]>()

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import router from '@/router'
+import { useAccount } from '@/store/account'
 import { Ref } from 'vue'
+import { roles } from '@/utilities/data'
 
 interface Props {
   activePage: string,
@@ -17,11 +19,7 @@ const listStyle = computed(() => (name:string) => name === props.activePage ? 'b
 
 const pushRouter = (url:string) => router.push(url)
 
-const profile = {
-  name: '許斾旟',
-  position: '一般員工',
-  email: 'yupeiq1718@osensetech.com'
-}
+const account = computed(() => useAccount().account)
 
 type Status = 'folded'|'expanded'
 const status = ref<Status>('folded')
@@ -96,7 +94,7 @@ const logout = () => {
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
           class="rounded-full w-16 h-16"
-          src="@/assets/images/user.jpg"
+          :src="account?.picture"
           alt="user"
         >
         <div
@@ -104,13 +102,19 @@ const logout = () => {
           class="h-16 overflow-hidden duration-500 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
-            {{ profile.name }}
+            {{ account?.name }}
           </h2>
           <h3 class="text-sm text-dark">
-            {{ profile.position }}
+            <span
+              v-for="role of account?.role"
+              :key="role"
+              class="mr-1"
+            >
+              {{ roles[role - 1].text }}
+            </span>
           </h3>
           <p class="text-xs text-muted">
-            {{ profile.email }}
+            {{ account?.email }}
           </p>
         </div>
       </header>
