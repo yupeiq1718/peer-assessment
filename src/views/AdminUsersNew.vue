@@ -8,7 +8,8 @@ const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
   email: yup.string().required('此欄位必填').email('不符合電子郵件格式'),
-  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
+  role: yup.array().required('此欄位必填').min(1, '最少選擇一項'),
+  managerId: yup.number()
 })
 
 const { handleSubmit, resetForm } = useForm({
@@ -16,10 +17,16 @@ const { handleSubmit, resetForm } = useForm({
     department: '',
     email: '',
     name: '',
-    role: []
+    role: [],
+    managerId: 0
   },
   validationSchema: schema
 })
+
+const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+  text: user.name,
+  value: user.id
+})))
 
 type ToastData = {
   isActive: boolean,
@@ -96,9 +103,15 @@ const cancel = () => router.push('/admin/users')
         class="col-span-1"
         title="部門"
       />
+      <BaseFormSelect
+        name="managerId"
+        :options="managerOptions"
+        class="col-span-1"
+        title="主管"
+      />
       <BaseFormTag
         name="role"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        class="col-span-1"
         title="角色"
         :tags="roles.map(role => role.text)"
       />
