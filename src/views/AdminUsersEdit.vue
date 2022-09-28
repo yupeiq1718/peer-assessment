@@ -35,18 +35,6 @@ const { handleSubmit } = useForm({
   validationSchema: schema
 })
 
-const getUsers = async () => {
-  try {
-    setIsLoading(true)
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  } finally {
-    setIsLoading(false)
-  }
-}
-
 const submit = handleSubmit(async values => {
   try {
     setIsLoading(true)
@@ -63,8 +51,8 @@ const submit = handleSubmit(async values => {
       variant: 'success',
       message: '更新成功'
     })
+    await useUsers().readUsers()
     router.push('/admin/users')
-    getUsers()
   } catch ({ response }) {
     console.log(response)
     setToastData({

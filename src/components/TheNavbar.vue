@@ -92,7 +92,10 @@ const logout = () => {
       class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
-      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
+      <header
+        v-if="user"
+        class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500"
+      >
         <img
           class="rounded-full w-16 h-16"
           :src="user?.picture"

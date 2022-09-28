@@ -47,15 +47,6 @@ const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
-const getUsers = async () => {
-  try {
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const removeUser = async (id:number) => {
   try {
     setIsLoading(true)
@@ -66,7 +57,7 @@ const removeUser = async (id:number) => {
       variant: 'success',
       message: '刪除成功'
     })
-    getUsers()
+    await useUsers().readUsers()
   } catch (error) {
     console.log(error)
     setToastData({
