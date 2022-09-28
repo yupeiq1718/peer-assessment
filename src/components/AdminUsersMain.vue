@@ -39,7 +39,7 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   email: user.email,
   department: user.department,
   role: user.role,
-  manager: user.managerId,
+  manager: user.manager,
   function: user.id
 })))
 
@@ -137,11 +137,11 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         >
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
-            :src="useUsers().user(manager.data)?.picture"
+            :src="manager.data.picture"
             alt="user"
           >
           <span>
-            {{ useUsers().user(manager.data)?.name }}
+            {{ manager.data.name }}
           </span>
         </div>
       </template>

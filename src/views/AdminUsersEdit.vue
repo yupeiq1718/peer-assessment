@@ -22,12 +22,12 @@ const { handleSubmit } = useForm({
     email: user.value?.email || '',
     name: user.value?.name || '',
     role: user.value?.role || [],
-    managerId: user.value?.managerId
+    managerId: user.value?.manager.id
   },
   validationSchema: schema
 })
 
-const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2) && user.id !== Number(id.value)).map(user => ({
   text: user.name,
   value: user.id
 })))
