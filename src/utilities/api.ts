@@ -6,7 +6,7 @@ const useApi = axios.create({
 })
 
 useApi.interceptors.request.use(request => {
-  request.headers['access-token'] = window.sessionStorage.getItem('access-token')
+  request.headers.Authorization = window.sessionStorage.getItem('access-token')
   console.log(request)
   return Promise.resolve(request)
 }, error => {
