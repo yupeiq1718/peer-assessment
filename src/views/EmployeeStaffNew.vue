@@ -2,11 +2,12 @@
 import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
-import { useAccount } from '@/store/account'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
+import { useAccount } from '@/store/account'
 
+const accountId = computed(() => useAccount().accountId)
 const questions = computed(() => useQuestions().questions(1))
 
 const validationSchema = yup.object().shape({
@@ -56,7 +57,7 @@ const submit = handleSubmit(async values => {
     console.log(values)
     setIsLoading(true)
     const response = await useAnswers().createAnswers({
-      reviewer: 1,
+      reviewer: accountId.value,
       qId: 1,
       reviewee: Number(values.reviewee),
       answers: values.answers
@@ -68,7 +69,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     useAnswers().readAnswersInformation({
-      userId: 1,
+      userId: accountId.value,
       qId: 1
     })
     router.push('/employee/staff')

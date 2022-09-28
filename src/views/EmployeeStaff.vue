@@ -2,6 +2,9 @@
 import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
+import { useAccount } from '@/store/account'
+
+const accountId = computed(() => useAccount().accountId)
 
 const router = useRouter()
 
@@ -42,7 +45,7 @@ const users = computed(() => useUsers().users)
 onBeforeMount(() => {
   getQuestionnaire(1)
   getAnswersInformation({
-    userId: 1, qId: 1
+    userId: accountId.value, qId: 1
   })
 })
 

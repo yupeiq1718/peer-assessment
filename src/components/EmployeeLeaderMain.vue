@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useAnswers } from '@/store/answers'
+import { useAccount } from '@/store/account'
+
+const accountId = computed(() => useAccount().accountId)
 
 const tableFields = [
   {
@@ -49,7 +52,7 @@ const removeAnswersInformation = async (id: number) => {
       message: '刪除成功'
     })
     useAnswers().readAnswersInformation({
-      userId: 1, qId: 2
+      userId: accountId.value, qId: 2
     })
   } catch (error) {
     console.log(error)
