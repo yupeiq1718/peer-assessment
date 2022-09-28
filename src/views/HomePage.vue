@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Ref } from 'vue'
+import { useAccount } from '@/store/account'
 
 type Type = 'employee'|'admin'
 const type:Ref<Type> = inject('type', ref('admin'))
@@ -16,10 +17,61 @@ const positionMap:TypeMap = {
 }
 
 const router = useRouter()
-watch(type, () => router.push(`/?type=${type.value}`))
-
 const route = useRoute()
+
+watch(type, () => {
+  if (route.query.token === undefined) {
+    router.push(`/?type=${type.value}`)
+  }
+})
+
 switchPosition(route.query.type as Type || 'employee')
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setAccountId = async () => {
+  try {
+    const response = await useAccount().readAccountId()
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '登入成功'
+    })
+    router.push(`/${type.value}`)
+  } catch ({ response }) {
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '登入失敗'
+    })
+    router.push(`?type=${type.value}`)
+  }
+}
+
+const handleToken = async () => {
+  if (route.query.token !== undefined) {
+    if (route.query.token) {
+      window.sessionStorage.setItem('access-token', String(route.query.token))
+    }
+    await setAccountId()
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '登入失敗'
+    })
+  }
+}
+
+handleToken()
+
 </script>
 
 <template>
