@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import router from '@/router'
 import { useAccount } from '@/store/account'
+import { useUsers } from '@/store/users'
 import { Ref } from 'vue'
 import { roles } from '@/utilities/data'
 
@@ -19,7 +20,7 @@ const listStyle = computed(() => (name:string) => name === props.activePage ? 'b
 
 const pushRouter = (url:string) => router.push(url)
 
-const account = computed(() => useAccount().account)
+const user = computed(() => useUsers().user(Number(useAccount().accountId)))
 
 type Status = 'folded'|'expanded'
 const status = ref<Status>('folded')
@@ -94,7 +95,7 @@ const logout = () => {
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
           class="rounded-full w-16 h-16"
-          :src="account?.picture"
+          :src="user?.picture"
           alt="user"
         >
         <div
@@ -102,11 +103,11 @@ const logout = () => {
           class="h-16 overflow-hidden duration-500 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
-            {{ account?.name }}
+            {{ user?.name }}
           </h2>
           <h3 class="text-sm text-dark">
             <span
-              v-for="role of account?.role"
+              v-for="role of user?.role"
               :key="role"
               class="mr-1"
             >
@@ -114,7 +115,7 @@ const logout = () => {
             </span>
           </h3>
           <p class="text-xs text-muted">
-            {{ account?.email }}
+            {{ user?.email }}
           </p>
         </div>
       </header>

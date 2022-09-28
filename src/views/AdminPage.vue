@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import router from '@/router'
+import { useAccount } from '@/store/account'
+import { useUsers } from '@/store/users'
 
 type Page = 'list'|'users'|'results'|'timeline'|'question'
 type PageMap = {
@@ -10,6 +11,8 @@ type PageMap = {
   }
 }
 const pages = ref<Page[]>(['list', 'users', 'results', 'timeline', 'question'])
+
+const router = useRouter()
 
 const activePage = computed(() => String(router.currentRoute.value.path.split('/')[2]).toLowerCase())
 
@@ -51,6 +54,11 @@ setThemeColor('admin')
 
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 switchPosition('admin')
+
+onBeforeMount(async () => {
+  await useAccount().readAccountId()
+  await useUsers().readUsers()
+})
 
 </script>
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Ref } from 'vue'
 import { useAccount } from '@/store/account'
-import { useUsers } from '@/store/users'
 
 type Type = 'employee'|'admin'
 const type:Ref<Type> = inject('type', ref('admin'))
@@ -28,8 +27,6 @@ watch(type, () => {
 
 switchPosition(route.query.type as Type || 'employee')
 
-const user = computed(() => useUsers().user(Number(useAccount().accountId)))
-
 type ToastData = {
   isActive: boolean,
   variant: string,
@@ -46,9 +43,6 @@ const handleLogin = async () => {
   try {
     setIsLoading(true)
     await useAccount().readAccountId()
-    await useUsers().readUsers()
-
-    useAccount().setAccount(user.value)
 
     router.push(`/${type.value}`)
   } catch (error) {

@@ -2,18 +2,7 @@ import { defineStore } from 'pinia'
 import { useApi } from '@/utilities/api'
 
 const useAccount = defineStore('account', () => {
-  type Account = {
-    activate: boolean,
-    department: string,
-    email: string,
-    id: number,
-    name: string,
-    role:(1|2|3|4)[],
-    picture:string
-  }
-
   const accountId = ref()
-  const account = ref<Account>()
 
   const readAccountId = async () => {
     try {
@@ -25,12 +14,8 @@ const useAccount = defineStore('account', () => {
     }
   }
 
-  const setAccount = (value?:Account) => {
-    account.value = value
-  }
-
   return {
-    accountId, account, readAccountId, setAccount
+    accountId, readAccountId
   }
 })
 
