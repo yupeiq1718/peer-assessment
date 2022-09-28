@@ -10,17 +10,21 @@ const tableFields = [
   {
     name: '電子信箱',
     key: 'email',
-    width: '40%'
+    width: '25%'
   },
   {
     name: '部門',
     key: 'department',
-    width: '20%'
+    width: '10%'
   },
   {
     name: '角色',
     key: 'role',
-    width: '20%'
+    width: '25%'
+  },
+  {
+    name: '主管',
+    key: 'manager'
   },
   {
     name: '功能',
@@ -35,6 +39,7 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   email: user.email,
   department: user.department,
   role: user.role,
+  manager: user.managerId,
   function: user.id
 })))
 
@@ -124,6 +129,21 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         >
           {{ roles[item - 1].text }}
         </BaseTag>
+      </template>
+      <template #manager="manager">
+        <div
+          v-if="manager.data"
+          class="flex justify-start items-center"
+        >
+          <img
+            class="inline-block rounded-full w-16 max-w-none h-16 mx-4"
+            src="@/assets/images/user.jpg"
+            alt="user"
+          >
+          <span>
+            {{ useUsers().user(manager.data)?.name }}
+          </span>
+        </div>
       </template>
       <template #function="id">
         <div>

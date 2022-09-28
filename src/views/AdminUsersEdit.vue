@@ -4,15 +4,6 @@ import { departments, roles } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 
-type ToastData = {
-  isActive: boolean,
-  variant: string,
-  message: string
-}
-const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
-
-const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
-
 const route = useRoute()
 const id = computed(() => route.params.id)
 
@@ -30,10 +21,25 @@ const { handleSubmit } = useForm({
     department: user.value?.department || '',
     email: user.value?.email || '',
     name: user.value?.name || '',
-    role: user.value?.role || []
+    role: user.value?.role || [],
+    managerId: user.value?.managerId
   },
   validationSchema: schema
 })
+
+const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+  text: user.name,
+  value: user.id
+})))
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
 const submit = handleSubmit(async values => {
   try {
@@ -42,7 +48,9 @@ const submit = handleSubmit(async values => {
       id: Number(id.value),
       user: {
         name: values.name,
-        department: values.department
+        department: values.department,
+        role: values.role,
+        managerId: values.managerId
       }
     })
     console.log(response)
@@ -96,12 +104,17 @@ const cancel = () => router.push('/admin/users')
         class="col-span-1"
         title="部門"
       />
+      <BaseFormSelect
+        name="managerId"
+        :options="managerOptions"
+        class="col-span-1"
+        title="主管"
+      />
       <BaseFormTag
         name="role"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        class="col-span-1"
         title="角色"
         :tags="roles.map(role => role.text)"
-        disabled
       />
     </article>
   </TheModal>

@@ -21,6 +21,11 @@ const { handleSubmit, resetForm } = useForm({
   validationSchema: schema
 })
 
+const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+  text: user.name,
+  value: user.id
+})))
+
 type ToastData = {
   isActive: boolean,
   variant: string,
@@ -84,9 +89,15 @@ const cancel = () => router.push('/admin/users')
         class="col-span-1"
         title="部門"
       />
+      <BaseFormSelect
+        name="managerId"
+        :options="managerOptions"
+        class="col-span-1"
+        title="主管"
+      />
       <BaseFormTag
         name="role"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        class="col-span-1"
         title="角色"
         :tags="roles.map(role => role.text)"
       />
