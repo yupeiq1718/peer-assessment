@@ -2,6 +2,8 @@
 import { useAccount } from '@/store/account'
 import { useUsers } from '@/store/users'
 
+const accountId = computed(() => useAccount().accountId)
+
 type Page = 'list'|'users'|'results'|'timeline'|'question'
 type PageMap = {
   [key: string]: {
@@ -89,6 +91,7 @@ onBeforeMount(async () => {
         appear
       >
         <TheMain
+          v-if="accountId"
           :key="route.path.split('/')[2]"
           :title="pageMap[activePage].title"
         >
