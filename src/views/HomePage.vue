@@ -39,7 +39,6 @@ const setAccountId = async () => {
   try {
     const response = await useAccount().readAccountId()
     console.log(response)
-    window.sessionStorage.setItem('access-token', String(route.query.token))
     setToastData({
       isActive: true,
       variant: 'success',
@@ -61,6 +60,7 @@ const setAccountId = async () => {
 const handleToken = async () => {
   if (route.query.token !== undefined) {
     if (route.query.token) {
+      window.sessionStorage.setItem('access-token', String(route.query.token))
       await setAccountId()
     } else {
       setToastData({
@@ -135,6 +135,12 @@ handleToken()
                 login_uri:'https://peerreview.oexpo.io/backend_dev/user/employee/callback',
                 ux_mode:'redirect'
               }"
+              :button-config="{
+                size:'large',
+                shape:'circle',
+                locale: 'zh_Hant',
+                width: 192
+              }"
             />
             <GoogleLogin
               v-if="type==='admin'"
@@ -142,11 +148,18 @@ handleToken()
                 login_uri:'https://peerreview.oexpo.io/backend_dev/user/admin/callback',
                 ux_mode:'redirect'
               }"
+              :button-config="{
+                size:'large',
+                shape:'circle',
+                locale: 'zh_Hant',
+                width: 192
+              }"
             />
+            <br>
             <BaseButton
               v-if="type==='admin'"
               variant="theme"
-              class="bg-transparent text-md md:hidden"
+              class="bg-transparent text-md w-48 md:hidden mt-2"
               @click="switchPosition('employee')"
             >
               {{ '切換員工登入' }}
@@ -154,7 +167,7 @@ handleToken()
             <BaseButton
               v-if="type==='employee'"
               variant="theme"
-              class="bg-transparent text-md md:hidden"
+              class="bg-transparent text-md w-48 md:hidden mt-2"
               @click="switchPosition('admin')"
             >
               {{ '切換管理員登入' }}
