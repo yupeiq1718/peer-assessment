@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 bg-black/50 flex flex-col justify-center items-center">
+  <div class="fixed inset-0 bg-black/75 flex flex-col justify-center items-center">
     <BaseSvgIcon
       name="logo"
       class="fill-theme max-w-[75%] animate-pulse"

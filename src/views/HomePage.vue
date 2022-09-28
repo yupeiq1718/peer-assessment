@@ -36,11 +36,13 @@ type ToastData = {
   message: string
 }
 
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const handleLogin = async () => {
   if (route.query.token) {
     try {
+      setIsLoading(true)
       window.sessionStorage.setItem('access-token', String(route.query.token))
       await useAccount().readAccountId()
       await useUsers().readUsers()
@@ -61,6 +63,8 @@ const handleLogin = async () => {
         message: '登入失敗'
       })
       router.push(`?type=${type.value}`)
+    } finally {
+      setIsLoading(false)
     }
   } else {
     setToastData({
