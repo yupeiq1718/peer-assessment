@@ -39,7 +39,7 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   email: user.email,
   department: user.department,
   role: user.role,
-  manager: user.managerId,
+  manager: user.manager,
   function: user.id
 })))
 
@@ -52,15 +52,6 @@ const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
-const getUsers = async () => {
-  try {
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const removeUser = async (id:number) => {
   try {
     setIsLoading(true)
@@ -71,7 +62,7 @@ const removeUser = async (id:number) => {
       variant: 'success',
       message: '刪除成功'
     })
-    getUsers()
+    await useUsers().readUsers()
   } catch (error) {
     console.log(error)
     setToastData({
@@ -112,7 +103,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
       <template #name="name">
         <div class="flex justify-start items-center">
           <img
-            class="inline-block rounded-full w-16 max-w-none h-16 mx-4"
+            class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
             src="@/assets/images/user.jpg"
             alt="user"
           >
@@ -145,12 +136,12 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
           class="flex justify-start items-center"
         >
           <img
-            class="inline-block rounded-full w-16 max-w-none h-16 mx-4"
-            src="@/assets/images/user.jpg"
+            class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
+            :src="manager.data.picture"
             alt="user"
           >
           <span>
-            {{ useUsers().user(manager.data)?.name }}
+            {{ manager.data.name }}
           </span>
         </div>
       </template>

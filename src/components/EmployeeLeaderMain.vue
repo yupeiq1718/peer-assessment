@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useAnswers } from '@/store/answers'
+import { useAccount } from '@/store/account'
+
+const accountId = computed(() => useAccount().accountId)
 
 const tableFields = [
   {
     name: '姓名',
-    key: 'name'
+    key: 'profile'
   },
   {
     name: '部門',
@@ -23,7 +26,10 @@ const tableFields = [
 ]
 
 const tableItems = computed(() => useAnswers().answersInformation(2)?.map(answerInformation => ({
-  name: answerInformation.reviewee.name,
+  profile: {
+    name: answerInformation.reviewee.name,
+    picture: answerInformation.reviewee.picture
+  },
   department: answerInformation.reviewee.department,
   scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
   function: answerInformation.id
@@ -49,7 +55,7 @@ const removeAnswersInformation = async (id: number) => {
       message: '刪除成功'
     })
     useAnswers().readAnswersInformation({
-      userId: 1, qId: 2
+      userId: accountId.value, qId: 2
     })
   } catch (error) {
     console.log(error)
@@ -90,15 +96,15 @@ const handleAnswersInformationRemove = (id:number) => {
       :fields="tableFields"
       :items="tableItems"
     >
-      <template #name="name">
-        <div>
+      <template #profile="profile">
+        <div class="flex justify-start items-center">
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-            src="@/assets/images/user.jpg"
+            :src="profile.data.picture"
             alt="user"
           >
           <span>
-            {{ name.data }}
+            {{ profile.data.name }}
           </span>
         </div>
       </template>

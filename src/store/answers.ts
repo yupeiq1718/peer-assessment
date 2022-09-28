@@ -11,7 +11,8 @@ const useAnswers = defineStore('answers', () => {
   type Reviewee = {
     id: number,
     department: string,
-    name: string
+    name: string,
+    picture: string
   }
 
   type AnswerInformation = {

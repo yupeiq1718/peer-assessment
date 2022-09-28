@@ -5,6 +5,9 @@ import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
+import { useAccount } from '@/store/account'
+
+const accountId = computed(() => useAccount().accountId)
 
 const route = useRoute()
 
@@ -38,7 +41,7 @@ const { values, handleSubmit } = useForm({
   validationSchema
 })
 
-const filteredUsers = computed(() => useUsers().users?.filter(user => user.department === values.department && user.role.includes(1)))
+const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.role.includes(1)))
 const revieweeOptions = computed(() => filteredUsers.value?.map(departmentUser => ({
   text: departmentUser.name,
   value: departmentUser.id
@@ -59,7 +62,7 @@ const submit = handleSubmit(async values => {
     setIsLoading(true)
     const response = await useAnswers().updateAnswers({
       id: Number(route.params.id),
-      reviewer: 1,
+      reviewer: accountId.value,
       qId: 1,
       reviewee: Number(values.reviewee),
       answers: values.answers
@@ -71,7 +74,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     useAnswers().readAnswersInformation({
-      userId: 1,
+      userId: accountId.value,
       qId: 1
     })
     router.push('/employee/staff')

@@ -26,15 +26,6 @@ const items = [
   }
 ]
 
-const getUsers = async () => {
-  try {
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const getQuestionnaire = async (id:number) => {
   try {
     const response = await useQuestions().readQuestionnaire(id)
@@ -50,7 +41,6 @@ const questionnaire = computed(() => useQuestions().questionnaire(roleId.value))
 watch(roleId, () => getQuestionnaire(roleId.value))
 
 onBeforeMount(() => {
-  getUsers()
   getQuestionnaire(roleId.value)
 })
 

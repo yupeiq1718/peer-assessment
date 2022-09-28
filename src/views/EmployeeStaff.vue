@@ -2,6 +2,9 @@
 import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
+import { useAccount } from '@/store/account'
+
+const accountId = computed(() => useAccount().accountId)
 
 const router = useRouter()
 
@@ -37,23 +40,13 @@ const getAnswersInformation = async ({ userId, qId }:{
   }
 }
 
-const getUsers = async () => {
-  try {
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const users = computed(() => useUsers().users)
 
 onBeforeMount(() => {
   getQuestionnaire(1)
   getAnswersInformation({
-    userId: 1, qId: 1
+    userId: accountId.value, qId: 1
   })
-  getUsers()
 })
 
 </script>

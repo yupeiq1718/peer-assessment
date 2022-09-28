@@ -21,7 +21,7 @@ const { handleSubmit, resetForm } = useForm({
   validationSchema: schema
 })
 
-const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2)).map(user => ({
   text: user.name,
   value: user.id
 })))
@@ -37,18 +37,6 @@ const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
 const router = useRouter()
 
-const getUsers = async () => {
-  try {
-    setIsLoading(true)
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  } finally {
-    setIsLoading(false)
-  }
-}
-
 const submit = handleSubmit(async values => {
   try {
     setIsLoading(true)
@@ -60,7 +48,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     resetForm()
-    getUsers()
+    await useUsers().readUsers()
   } catch ({ response }) {
     console.log(response)
     setToastData({

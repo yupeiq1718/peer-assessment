@@ -5,7 +5,9 @@ import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
+import { useAccount } from '@/store/account'
 
+const accountId = computed(() => useAccount().accountId)
 const questions = computed(() => useQuestions().questions(1))
 
 const validationSchema = yup.object().shape({
@@ -19,8 +21,7 @@ const validationSchema = yup.object().shape({
 })
 
 const initialValues = {
-
-  department: '研發部',
+  department: '',
   reviewee: 0,
   answers: questions.value?.map(question => ({
     qId: question.id,
@@ -34,7 +35,7 @@ const { values, handleSubmit } = useForm({
   validationSchema
 })
 
-const filteredUsers = computed(() => useUsers().users?.filter(user => user.department === values.department && user.role.includes(1)))
+const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.role.includes(1) && useAccount().accountId !== user.id))
 const answerUsers = computed(() => useAnswers().answerUsers(1))
 const revieweeOptions = computed(() => filteredUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
   text: departmentUser.name,
@@ -56,7 +57,7 @@ const submit = handleSubmit(async values => {
     console.log(values)
     setIsLoading(true)
     const response = await useAnswers().createAnswers({
-      reviewer: 1,
+      reviewer: accountId.value,
       qId: 1,
       reviewee: Number(values.reviewee),
       answers: values.answers
@@ -68,7 +69,7 @@ const submit = handleSubmit(async values => {
       message: '新增成功'
     })
     useAnswers().readAnswersInformation({
-      userId: 1,
+      userId: accountId.value,
       qId: 1
     })
     router.push('/employee/staff')

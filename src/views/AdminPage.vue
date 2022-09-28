@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import router from '@/router'
+import { useAccount } from '@/store/account'
+import { useUsers } from '@/store/users'
+
+const accountId = computed(() => useAccount().accountId)
 
 type Page = 'list'|'users'|'results'|'timeline'|'question'
 type PageMap = {
@@ -10,6 +13,8 @@ type PageMap = {
   }
 }
 const pages = ref<Page[]>(['list', 'users', 'results', 'timeline', 'question'])
+
+const router = useRouter()
 
 const activePage = computed(() => String(router.currentRoute.value.path.split('/')[2]).toLowerCase())
 
@@ -49,6 +54,22 @@ type Type = 'employee'|'admin'
 const setThemeColor:(value:Type)=>void = inject('setThemeColor', () => null)
 setThemeColor('admin')
 
+const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
+switchPosition('admin')
+
+const handleLogin = async () => {
+  try {
+    await useAccount().readAccountId()
+    await useUsers().readUsers()
+  } catch ({ response }) {
+    router.push('/?type=admin')
+  }
+}
+
+onBeforeMount(async () => {
+  await handleLogin()
+})
+
 </script>
 
 <template>
@@ -70,6 +91,7 @@ setThemeColor('admin')
         appear
       >
         <TheMain
+          v-if="accountId"
           :key="route.path.split('/')[2]"
           :title="pageMap[activePage].title"
         >

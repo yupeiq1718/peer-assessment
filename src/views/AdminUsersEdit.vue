@@ -22,12 +22,12 @@ const { handleSubmit } = useForm({
     email: user.value?.email || '',
     name: user.value?.name || '',
     role: user.value?.role || [],
-    managerId: user.value?.managerId
+    managerId: user.value?.manager.id
   },
   validationSchema: schema
 })
 
-const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2) && user.id !== Number(id.value)).map(user => ({
   text: user.name,
   value: user.id
 })))
@@ -40,18 +40,6 @@ type ToastData = {
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
-
-const getUsers = async () => {
-  try {
-    setIsLoading(true)
-    const response = await useUsers().readUsers()
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  } finally {
-    setIsLoading(false)
-  }
-}
 
 const submit = handleSubmit(async values => {
   try {
@@ -71,8 +59,8 @@ const submit = handleSubmit(async values => {
       variant: 'success',
       message: '更新成功'
     })
+    await useUsers().readUsers()
     router.push('/admin/users')
-    getUsers()
   } catch ({ response }) {
     console.log(response)
     setToastData({

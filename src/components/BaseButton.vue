@@ -29,7 +29,7 @@ const iconNameMap:VariantMap = {
 <template>
   <button
     type="button"
-    class="px-3 py-1 rounded-lg border-2 bg-white duration-500 hover:text-white hover:fill-white"
+    class="px-3 py-1 rounded-full border-2 bg-white duration-500 hover:text-white hover:fill-white"
     :class="buttonStyleMap[props.variant]"
   >
     <BaseSvgIcon

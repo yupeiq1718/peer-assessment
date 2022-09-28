@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import router from '@/router'
+import { useAccount } from '@/store/account'
+import { useUsers } from '@/store/users'
+import { Ref } from 'vue'
+import { roles } from '@/utilities/data'
 
 interface Props {
   activePage: string,
@@ -16,17 +20,16 @@ const listStyle = computed(() => (name:string) => name === props.activePage ? 'b
 
 const pushRouter = (url:string) => router.push(url)
 
-const profile = {
-  name: '許斾旟',
-  position: '一般員工',
-  email: 'yupeiq1718@osensetech.com'
-}
+const user = computed(() => useUsers().user(Number(useAccount().accountId)))
 
 type Status = 'folded'|'expanded'
 const status = ref<Status>('folded')
 const toggleStatus = (value:Status) => {
   status.value = value
 }
+
+type Type = 'employee'|'admin'
+const type:Ref<Type> = inject('type', ref('admin'))
 
 type StyleMap = {
   [key: string]: {
@@ -68,7 +71,10 @@ const styleMap:StyleMap = {
   }
 }
 
-const logout = () => router.push('/')
+const logout = () => {
+  window.sessionStorage.setItem('access-token', '')
+  router.push(`/?type=${type.value}`)
+}
 </script>
 
 <template>
@@ -86,10 +92,13 @@ const logout = () => router.push('/')
       class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
-      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
+      <header
+        v-if="user"
+        class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500"
+      >
         <img
           class="rounded-full w-16 h-16"
-          src="@/assets/images/user.jpg"
+          :src="user?.picture"
           alt="user"
         >
         <div
@@ -97,13 +106,19 @@ const logout = () => router.push('/')
           class="h-16 overflow-hidden duration-500 whitespace-nowrap"
         >
           <h2 class="text-lg font-bold text-dark">
-            {{ profile.name }}
+            {{ user?.name }}
           </h2>
           <h3 class="text-sm text-dark">
-            {{ profile.position }}
+            <span
+              v-for="role of user?.role"
+              :key="role"
+              class="mr-1"
+            >
+              {{ roles[role - 1].text }}
+            </span>
           </h3>
           <p class="text-xs text-muted">
-            {{ profile.email }}
+            {{ user?.email }}
           </p>
         </div>
       </header>

@@ -9,7 +9,12 @@ const useUsers = defineStore('users', () => {
     id: number,
     name: string,
     role:(1|2|3|4)[],
-    managerId?: number
+    picture:string,
+    manager: {
+      id: number,
+      picture: string,
+      name: string
+    }
   }
 
   const users = ref<User[]>()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 type Type = 'employee'|'admin'
-const type = ref<Type>('employee')
+const type = ref<Type>('admin')
 const setType = (value:Type) => {
   type.value = value
 }

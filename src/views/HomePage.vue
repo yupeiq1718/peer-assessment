@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import router from '@/router'
 import { Ref } from 'vue'
+import { useAccount } from '@/store/account'
 
 type Type = 'employee'|'admin'
-const type:Ref<Type> = inject('type', ref('employee'))
+const type:Ref<Type> = inject('type', ref('admin'))
 
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
-
-const login = () => {
-  router.push(`/${type.value}`)
-}
 
 type TypeMap = {
   [key in Type]?: string
@@ -20,7 +16,54 @@ const positionMap:TypeMap = {
   admin: 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
 }
 
-switchPosition('employee')
+const router = useRouter()
+const route = useRoute()
+
+watch(type, () => {
+  if (route.query.token === undefined) {
+    router.push(`/?type=${type.value}`)
+  }
+})
+
+switchPosition(route.query.type as Type || 'employee')
+
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const handleLogin = async () => {
+  if (route.query.token) {
+    window.sessionStorage.setItem('access-token', String(route.query.token))
+  }
+  try {
+    setIsLoading(true)
+    await useAccount().readAccountId()
+
+    router.push(`/${type.value}`)
+  } catch (error) {
+    window.sessionStorage.setItem('access-token', '')
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '登入失敗'
+    })
+    router.push(`?type=${type.value}`)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+onMounted(() => {
+  if (route.query.token !== undefined) {
+    handleLogin()
+  }
+})
+
 </script>
 
 <template>
@@ -76,16 +119,37 @@ switchPosition('employee')
             </p>
           </article>
           <footer class="article-content text-center">
-            <img
-              src="@/assets/images/google.png"
-              alt="google"
-              class="mb-4"
-              @click="login"
-            >
+            <GoogleLogin
+              v-if="type==='employee'"
+              :id-configuration="{
+                login_uri:'https://peerreview.oexpo.io/backend_dev/user/employee/callback',
+                ux_mode:'redirect'
+              }"
+              :button-config="{
+                size:'large',
+                shape:'circle',
+                locale: 'zh_Hant',
+                width: 192
+              }"
+            />
+            <GoogleLogin
+              v-if="type==='admin'"
+              :id-configuration="{
+                login_uri:'https://peerreview.oexpo.io/backend_dev/user/admin/callback',
+                ux_mode:'redirect'
+              }"
+              :button-config="{
+                size:'large',
+                shape:'circle',
+                locale: 'zh_Hant',
+                width: 192
+              }"
+            />
+            <br>
             <BaseButton
               v-if="type==='admin'"
               variant="theme"
-              class="bg-transparent text-md md:hidden"
+              class="bg-transparent text-md w-48 md:hidden mt-2"
               @click="switchPosition('employee')"
             >
               {{ '切換員工登入' }}
@@ -93,7 +157,7 @@ switchPosition('employee')
             <BaseButton
               v-if="type==='employee'"
               variant="theme"
-              class="bg-transparent text-md md:hidden"
+              class="bg-transparent text-md w-48 md:hidden mt-2"
               @click="switchPosition('admin')"
             >
               {{ '切換管理員登入' }}
