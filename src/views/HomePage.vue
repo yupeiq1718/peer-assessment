@@ -62,11 +62,6 @@ const handleToken = async () => {
       window.sessionStorage.setItem('access-token', String(route.query.token))
     }
     await setAccountId()
-    setToastData({
-      isActive: true,
-      variant: 'error',
-      message: '登入失敗'
-    })
   }
 }
 
