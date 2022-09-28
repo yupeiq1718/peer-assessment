@@ -21,7 +21,7 @@ const { handleSubmit, resetForm } = useForm({
   validationSchema: schema
 })
 
-const managerOptions = computed(() => useUsers().users?.filter(user => user.role.includes(2)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2)).map(user => ({
   text: user.name,
   value: user.id
 })))
