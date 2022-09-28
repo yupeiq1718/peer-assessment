@@ -50,11 +50,13 @@ provide('setIsLoading', setIsLoading)
 
 type ConfirmData = {
   isActive: boolean,
-  confirm: unknown
+  confirm: unknown,
+  text: string
 }
 const confirmData = ref<ConfirmData>({
   isActive: false,
-  confirm: () => null
+  confirm: () => null,
+  text: ''
 })
 const setConfirmData = (data:ConfirmData) => {
   confirmData.value = data
@@ -84,6 +86,7 @@ provide('setConfirmData', setConfirmData)
   <BaseConfirm
     v-if="confirmData.isActive"
     v-model:isActive="confirmData.isActive"
+    :text="confirmData.text"
     @confirm="confirmData.confirm"
   />
 </template>

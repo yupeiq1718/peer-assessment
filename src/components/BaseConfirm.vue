@@ -1,10 +1,15 @@
 <script setup lang="ts">
+interface Props {
+  text: string
+}
 interface Emits {
   (event: 'update:isActive', value: boolean):void,
   (event: 'confirm'): void
 }
 
+const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
+
 const confirm = () => {
   emits('update:isActive', false)
   emits('confirm')
@@ -16,7 +21,7 @@ const confirm = () => {
     <div class="relative bg-theme-light rounded-2xl shadow-md p-8">
       <article class="mb-8">
         <h2 class="text-lg text-theme font-bold">
-          {{ '請確認是否刪除該筆資料？' }}
+          {{ props.text }}
         </h2>
       </article>
       <footer class="flex justify-center items-center">

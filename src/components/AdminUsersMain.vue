@@ -81,14 +81,16 @@ const removeUser = async (id:number) => {
 
 type ConfirmData = {
   isActive: boolean,
-  confirm: unknown
+  confirm: unknown,
+  text: string
 }
 const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
 
 const handleUserRemove = (id:number) => {
   setConfirmData({
     isActive: true,
-    confirm: () => removeUser(id)
+    confirm: () => removeUser(id),
+    text: '請確認是否刪除該筆資料？'
   })
 }
 
