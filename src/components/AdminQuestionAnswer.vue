@@ -66,14 +66,16 @@ const handleQuestionEdit = () => {
 
 type ConfirmData = {
   isActive: boolean,
-  confirm: unknown
+  confirm: unknown,
+  text: string
 }
 const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
 
 const handleQuestionRemove = () => {
   setConfirmData({
     isActive: true,
-    confirm: () => removeQuestion({ roleId: 2, id: props.id })
+    confirm: () => removeQuestion({ roleId: 2, id: props.id }),
+    text: '請確認是否刪除該筆資料？'
   })
 }
 </script>

@@ -36,7 +36,7 @@ const closeToast = () => emits('update:isActive', false)
 
 <template>
   <span
-    class="fixed top-4 right-4 px-4 py-4 shadow-md"
+    class="fixed top-0 right-0 p-4 shadow-md"
     :class="toastStyleMap[props.variant]"
   >
     <BaseSvgIcon
@@ -53,3 +53,15 @@ const closeToast = () => emits('update:isActive', false)
     />
   </span>
 </template>
+
+<style scope>
+.toast-enter-active,
+.toast-leave-active {
+  @apply duration-500;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  @apply transform translate-x-full;
+}
+</style>
