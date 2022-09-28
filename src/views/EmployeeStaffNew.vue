@@ -2,6 +2,7 @@
 import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
+import { useAccount } from '@/store/account'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
@@ -19,8 +20,7 @@ const validationSchema = yup.object().shape({
 })
 
 const initialValues = {
-
-  department: '研發部',
+  department: '',
   reviewee: 0,
   answers: questions.value?.map(question => ({
     qId: question.id,
@@ -34,7 +34,7 @@ const { values, handleSubmit } = useForm({
   validationSchema
 })
 
-const filteredUsers = computed(() => useUsers().users?.filter(user => user.department === values.department && user.role.includes(1)))
+const filteredUsers = computed(() => useUsers().users?.filter(user => user.department === values.department && user.role.includes(1) && useAccount().accountId !== user.id))
 const answerUsers = computed(() => useAnswers().answerUsers(1))
 const revieweeOptions = computed(() => filteredUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
   text: departmentUser.name,

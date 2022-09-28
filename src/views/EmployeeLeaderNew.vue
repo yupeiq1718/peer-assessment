@@ -20,7 +20,7 @@ const validationSchema = yup.object().shape({
 
 const initialValues = {
 
-  department: '研發部',
+  department: '',
   reviewee: 0,
   answers: questions.value?.map(question => ({
     qId: question.id,
