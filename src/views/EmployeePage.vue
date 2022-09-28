@@ -50,9 +50,17 @@ setThemeColor('employee')
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 switchPosition('employee')
 
+const handleLogin = async () => {
+  try {
+    await useAccount().readAccountId()
+    await useUsers().readUsers()
+  } catch ({ response }) {
+    router.push('/?type=employee')
+  }
+}
+
 onBeforeMount(async () => {
-  await useAccount().readAccountId()
-  await useUsers().readUsers()
+  await handleLogin()
 })
 </script>
 

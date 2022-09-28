@@ -55,9 +55,17 @@ setThemeColor('admin')
 const switchPosition:(value:Type)=>void = inject('switchPosition', () => null)
 switchPosition('admin')
 
+const handleLogin = async () => {
+  try {
+    await useAccount().readAccountId()
+    await useUsers().readUsers()
+  } catch ({ response }) {
+    router.push('/?type=admin')
+  }
+}
+
 onBeforeMount(async () => {
-  await useAccount().readAccountId()
-  await useUsers().readUsers()
+  await handleLogin()
 })
 
 </script>
