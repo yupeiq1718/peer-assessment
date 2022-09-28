@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Ref } from 'vue'
 import { useAccount } from '@/store/account'
+import { useUsers } from '@/store/users'
 
 type Type = 'employee'|'admin'
 const type:Ref<Type> = inject('type', ref('admin'))
@@ -27,6 +28,8 @@ watch(type, () => {
 
 switchPosition(route.query.type as Type || 'employee')
 
+const user = computed(() => useUsers().user(Number(useAccount().accountId)))
+
 type ToastData = {
   isActive: boolean,
   variant: string,
@@ -35,45 +38,42 @@ type ToastData = {
 
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
-const setAccountId = async () => {
-  try {
-    const response = await useAccount().readAccountId()
-    console.log(response)
-    setToastData({
-      isActive: true,
-      variant: 'success',
-      message: '登入成功'
-    })
-    router.push(`/${type.value}`)
-  } catch ({ response }) {
-    console.log(response)
-    window.sessionStorage.setItem('access-token', '')
-    setToastData({
-      isActive: true,
-      variant: 'error',
-      message: '登入失敗'
-    })
-    router.push(`?type=${type.value}`)
-  }
-}
-
-const handleToken = async () => {
-  if (route.query.token !== undefined) {
-    if (route.query.token) {
+const handleLogin = async () => {
+  if (route.query.token) {
+    try {
       window.sessionStorage.setItem('access-token', String(route.query.token))
-      await setAccountId()
-    } else {
+      await useAccount().readAccountId()
+      await useUsers().readUsers()
+
+      useAccount().setAccount(user.value)
+
+      setToastData({
+        isActive: true,
+        variant: 'success',
+        message: '登入成功'
+      })
+      router.push(`/${type.value}`)
+    } catch (error) {
+      window.sessionStorage.setItem('access-token', '')
       setToastData({
         isActive: true,
         variant: 'error',
         message: '登入失敗'
       })
+      router.push(`?type=${type.value}`)
     }
+  } else {
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '登入失敗'
+    })
   }
 }
 
-handleToken()
-
+if (route.query.token !== undefined) {
+  handleLogin()
+}
 </script>
 
 <template>
