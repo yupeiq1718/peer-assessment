@@ -39,6 +39,7 @@ const setAccountId = async () => {
   try {
     const response = await useAccount().readAccountId()
     console.log(response)
+    window.sessionStorage.setItem('access-token', String(route.query.token))
     setToastData({
       isActive: true,
       variant: 'success',
@@ -47,6 +48,7 @@ const setAccountId = async () => {
     router.push(`/${type.value}`)
   } catch ({ response }) {
     console.log(response)
+    window.sessionStorage.setItem('access-token', '')
     setToastData({
       isActive: true,
       variant: 'error',
@@ -59,9 +61,14 @@ const setAccountId = async () => {
 const handleToken = async () => {
   if (route.query.token !== undefined) {
     if (route.query.token) {
-      window.sessionStorage.setItem('access-token', String(route.query.token))
+      await setAccountId()
+    } else {
+      setToastData({
+        isActive: true,
+        variant: 'error',
+        message: '登入失敗'
+      })
     }
-    await setAccountId()
   }
 }
 
