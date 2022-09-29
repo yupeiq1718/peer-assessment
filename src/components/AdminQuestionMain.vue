@@ -11,9 +11,10 @@ const questions = computed(() => useQuestions().questions(roleId.value))
 <template>
   <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
     <AdminQuestionAnswer
-      v-for="question of questions"
+      v-for="(question, index) of questions"
       :id="question.id"
       :key="question.id"
+      :index="index"
       class="col-span-1 lg:col-span-2 2xl:col-span-3"
     />
   </article>
