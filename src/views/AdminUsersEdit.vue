@@ -17,13 +17,6 @@ const schema = yup.object({
 })
 
 const { setFieldValue, handleSubmit } = useForm({
-  // initialValues: {
-  //   department: user.value?.department,
-  //   email: user.value?.email,
-  //   name: user.value?.name,
-  //   role: user.value?.role,
-  //   managerId: user.value?.manager.id
-  // },
   validationSchema: schema
 })
 setFieldValue('department', user.value?.department)
@@ -32,7 +25,7 @@ setFieldValue('name', user.value?.name)
 setFieldValue('roles', user.value?.roles)
 setFieldValue('managerId', user.value?.manager?.id)
 
-const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.roles.includes(2) && user.id !== Number(id.value)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.roles.includes(2)).map(user => ({
   text: user.name,
   value: user.id
 })))
