@@ -87,7 +87,7 @@ const systemStatus = [
 ]
 
 const getVariants = (index:number) => {
-  const variants = ['success', 'alert', 'error', 'info', 'mixed', 'primary', 'secondary']
+  const variants = ['success', 'alert', 'error', 'info', 'variant1', 'variant2', 'variant3', 'variant4', 'primary', 'secondary']
   const variantIndex = index % variants.length
   return variants[variantIndex]
 }

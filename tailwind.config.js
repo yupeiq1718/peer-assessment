@@ -43,9 +43,21 @@ module.exports = {
         DEFAULT: '#7DC1DC',
         light: '#DEEFF6'
       },
-      mixed: {
+      variant1: {
         DEFAULT: '#CCABD8',
         light: '#F2EAF5'
+      },
+      variant2: {
+        DEFAULT: '#FFC8A6',
+        light: '#FFF1E9'
+      },
+      variant3: {
+        DEFAULT: '#C6D2BE',
+        light: '#F1F4EF'
+      },
+      variant4: {
+        DEFAULT: '#838BB2',
+        light: '#E0E2EC'
       },
       muted: {
         DEFAULT: '#888888',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'|'mixed'|'primary'|'secondary'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'|'variant1'|'variant2'|'variant3'|'variant4'|'primary'|'secondary'
 
 interface Props {
   variant: Variant,
@@ -32,7 +32,10 @@ const fillStyleMap:VariantMap = {
   error: '#FADCDB',
   info: '#DEEFF6',
   muted: '#E1E1E1',
-  mixed: '#F2EAF5',
+  variant1: '#F2EAF5',
+  variant2: '#FFF1E9',
+  variant3: '#F1F4EF',
+  variant4: '#E0E2EC',
   primary: '#E8F3F4',
   secondary: '#F4ECEB'
 }
@@ -44,7 +47,10 @@ const strokeStyleMap:VariantMap = {
   error: '#ED7470',
   info: '#7DC1DC',
   muted: '#888888',
-  mixed: '#CCABD8',
+  variant1: '#CCABD8',
+  variant2: '#FFC8A6',
+  variant3: '#C6D2BE',
+  variant4: '#838BB2',
   primary: '#A2CED3',
   secondary: '#D4B3AE'
 }

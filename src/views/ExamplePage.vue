@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const variants = ['theme', 'success', 'alert', 'error', 'info', 'muted', 'mixed', 'primary', 'secondary']
+const variants = ['success', 'alert', 'error', 'info', 'muted', 'variant1', 'variant2', 'variant3', 'variant4', 'primary', 'secondary']
 const statues = ['success', 'alert', 'error', 'info', 'muted']
 const isToastActive = ref(true)
 const score = ref()
