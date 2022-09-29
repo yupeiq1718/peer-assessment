@@ -120,6 +120,7 @@ const handleAnswersInformationRemove = (id:number) => {
         <BaseScore
           v-for="(score, index) of scores.data"
           :key="index"
+          class=" w-[4.5rem] h-[4.5rem]"
           :variant="getVariants(index)"
           :score="score"
         />

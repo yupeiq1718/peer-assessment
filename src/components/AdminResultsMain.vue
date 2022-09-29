@@ -71,6 +71,7 @@ const items = ref<Item[]>([
         <BaseScore
           v-for="(score, key) of data.data"
           :key="key"
+          class=" w-[4.5rem] h-[4.5rem]"
           variant="theme"
           :score="score"
         />
