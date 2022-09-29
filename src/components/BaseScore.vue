@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'|'mixed'|'primary'|'secondary'
 
 interface Props {
   variant: Variant,
@@ -31,7 +31,10 @@ const fillStyleMap:VariantMap = {
   alert: '#FCE9CE',
   error: '#FADCDB',
   info: '#DEEFF6',
-  muted: '#E1E1E1'
+  muted: '#E1E1E1',
+  mixed: '#F2EAF5',
+  primary: '#E8F3F4',
+  secondary: '#F4ECEB'
 }
 const strokeStyleMap:VariantMap = {
   theme: getComputedStyle(document.documentElement)
@@ -40,7 +43,10 @@ const strokeStyleMap:VariantMap = {
   alert: '#F2A63B',
   error: '#ED7470',
   info: '#7DC1DC',
-  muted: '#888888'
+  muted: '#888888',
+  mixed: '#CCABD8',
+  primary: '#A2CED3',
+  secondary: '#D4B3AE'
 }
 
 const rate = ref()

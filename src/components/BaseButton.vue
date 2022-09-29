@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'|'mixed'|'primary'|'secondary'
 
 interface Props {
   variant: Variant
@@ -16,7 +16,10 @@ const buttonStyleMap:VariantMap = {
   alert: 'border-alert text-alert fill-alert hover:bg-alert',
   error: 'border-error text-error fill-error hover:bg-error',
   info: 'border-info text-info fill-info  hover:bg-info',
-  muted: 'border-muted text-muted fill-muted  hover:bg-muted'
+  muted: 'border-muted text-muted fill-muted  hover:bg-muted',
+  mixed: 'border-mixed text-mixed fill-mixed  hover:bg-mixed',
+  primary: 'border-primary text-primary fill-primary  hover:bg-primary',
+  secondary: 'border-secondary text-secondary fill-secondary  hover:bg-secondary'
 }
 
 const iconNameMap:VariantMap = {
