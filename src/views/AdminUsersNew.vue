@@ -7,7 +7,7 @@ import * as yup from 'yup'
 const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
-  email: yup.string().required('此欄位必填').email('不符合電子郵件格式'),
+  email: yup.string().required('此欄位必填').test('email', '不符合公司電子郵件格式', (value) => (value?.includes('@osensetech.com') && value?.split('@osensetech.com')[1] === '') || false),
   role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
 })
 
