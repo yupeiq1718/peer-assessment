@@ -77,11 +77,6 @@ const useUsers = defineStore('users', () => {
 
   const user = computed(() => (id:number) => activeUsers.value?.find(user => user.id === id))
 
-  // const departments = computed(() => {
-  //   const departments = activeUsers.value?.map(user => user.department).flat()
-  //   return departments?.filter((role, index, array) => array.indexOf(role) === index)
-  // })
-
   type FilterData = {
     department: string,
     role: 0|1|2|3|4
