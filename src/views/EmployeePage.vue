@@ -3,6 +3,7 @@ import { useAccount } from '@/store/account'
 import { useUsers } from '@/store/users'
 
 const accountId = computed(() => useAccount().accountId)
+const roles = computed(() => useUsers().user(Number(accountId.value))?.role)
 
 type Page = 'staff'|'leader'|'result'|'calendar'
 type PageMap = {
@@ -12,7 +13,17 @@ type PageMap = {
     icon: string
   }
 }
-const pages = ref<Page[]>(['staff', 'leader', 'result', 'calendar'])
+
+const pages = computed(() => {
+  let pageList:Page[] = []
+  if (roles.value?.includes(1)) {
+    pageList = [...pageList, 'staff']
+  }
+  if (roles.value?.includes(2)) {
+    pageList = [...pageList, 'leader', 'result']
+  }
+  return pageList
+})
 
 const router = useRouter()
 
