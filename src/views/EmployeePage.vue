@@ -3,7 +3,7 @@ import { useAccount } from '@/store/account'
 import { useUsers } from '@/store/users'
 
 const accountId = computed(() => useAccount().accountId)
-const roles = computed(() => useUsers().user(Number(accountId.value))?.role)
+const roles = computed(() => useUsers().user(Number(accountId.value))?.roles)
 
 type Page = 'staff'|'leader'|'result'|'calendar'
 type PageMap = {
