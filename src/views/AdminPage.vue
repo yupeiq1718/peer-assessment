@@ -12,37 +12,32 @@ type PageMap = {
     icon: string
   }
 }
-const pages = ref<Page[]>(['list', 'users', 'results', 'timeline', 'question'])
+const pages = computed<Page[]>(() => ['users', 'question', 'list', 'results'])
 
 const router = useRouter()
 
 const activePage = computed(() => String(router.currentRoute.value.path.split('/')[2]).toLowerCase())
 
 const pageMap:PageMap = {
-  list: {
-    title: '未填名單',
-    url: '/admin/list',
-    icon: 'list'
-  },
   users: {
     title: '使用者設定',
     url: '/admin/users',
     icon: 'users'
   },
-  results: {
-    title: '互評結果',
-    url: '/admin/results',
-    icon: 'result'
-  },
-  timeline: {
-    title: '開放時間設定',
-    url: '/admin/timeline',
-    icon: 'calendar'
-  },
   question: {
     title: '問卷設定',
     url: '/admin/question/1',
     icon: 'question'
+  },
+  list: {
+    title: '未填名單',
+    url: '/admin/list',
+    icon: 'list'
+  },
+  results: {
+    title: '互評結果',
+    url: '/admin/results',
+    icon: 'result'
   }
 }
 const pageList = computed(() => pages.value.map(page => ({
