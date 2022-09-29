@@ -26,6 +26,7 @@ const setScore = (score:number) => {
         <BaseScore
           :variant="value === number ? props.variant : 'muted'"
           :score="number"
+          class=" w-[4.5rem] h-[4.5rem]"
           @click="setScore(number)"
         />
       </div>

@@ -93,7 +93,7 @@ const handleQuestionRemove = () => {
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"
         name="score"
-        :variant="getVariants(props.id)"
+        :variant="getVariants(props.index)"
         class="mt-4"
       />
       <BaseFormTextarea

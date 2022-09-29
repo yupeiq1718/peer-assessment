@@ -121,6 +121,7 @@ const handleAnswersInformationRemove = (id:number) => {
           v-for="(score, index) of scores.data"
           :key="index"
           :variant="getVariants(index)"
+          class=" w-[4.5rem] h-[4.5rem]"
           :score="score"
         />
       </template>
