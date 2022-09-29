@@ -95,7 +95,7 @@ const logout = () => {
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
           class="image relative rounded-full w-16 h-16"
-          :src="user?.picture ||'/favicon.svg'"
+          :src="user?.picture ||'/user.png'"
           alt="user"
         >
         <div
