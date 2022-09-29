@@ -19,13 +19,21 @@ module.exports = {
         DEFAULT: 'var(--color-theme)',
         light: 'var(--color-theme-light)'
       },
+      primary: {
+        DEFAULT: '#A2CED3',
+        light: '#E8F3F4'
+      },
+      secondary: {
+        DEFAULT: '#D4B3AE',
+        light: '#F4ECEB'
+      },
       success: {
-        DEFAULT: '#66B4AF',
-        light: '#D9ECEB'
+        DEFAULT: '#9CCD9B',
+        light: '#E6F2E6'
       },
       alert: {
-        DEFAULT: '#F2A63B',
-        light: '#FCE9CE'
+        DEFAULT: '#FFCC72',
+        light: '#FFF2DC'
       },
       error: {
         DEFAULT: '#ED7470',
@@ -34,6 +42,22 @@ module.exports = {
       info: {
         DEFAULT: '#7DC1DC',
         light: '#DEEFF6'
+      },
+      variant1: {
+        DEFAULT: '#CCABD8',
+        light: '#F2EAF5'
+      },
+      variant2: {
+        DEFAULT: '#FFC8A6',
+        light: '#FFF1E9'
+      },
+      variant3: {
+        DEFAULT: '#C6D2BE',
+        light: '#F1F4EF'
+      },
+      variant4: {
+        DEFAULT: '#838BB2',
+        light: '#E0E2EC'
       },
       muted: {
         DEFAULT: '#888888',

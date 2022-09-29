@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { roles } from '@/utilities/data'
+import { departments, roles, getVariants } from '@/utilities/data'
 
 const tableFields = [
   {
@@ -32,8 +32,6 @@ const tableFields = [
   }
 ]
 
-const variantList = ['success', 'alert', 'error', 'info', 'muted']
-
 const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   profile: {
     name: user.name,
@@ -45,6 +43,8 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   manager: user.manager,
   function: user.id
 })))
+
+const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
 type ToastData = {
   isActive: boolean,
@@ -119,7 +119,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         {{ email.data }}
       </template>
       <template #department="department">
-        <BaseTag variant="theme">
+        <BaseTag :variant="getVariants(departmentIndex(department.data))">
           {{ department.data }}
         </BaseTag>
       </template>
@@ -127,7 +127,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         <BaseTag
           v-for="item of (role.data as (1|2|3|4)[])"
           :key="item"
-          :variant="variantList[item - 1]"
+          :variant="getVariants(item - 1)"
           class="mx-1"
         >
           {{ roles[item - 1].text }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'
+type Variant = 'theme'|'success'|'alert'|'error'|'info'|'muted'|'variant1'|'variant2'|'variant3'|'variant4'|'primary'|'secondary'
 
 interface Props {
   variant: Variant,
@@ -27,20 +27,32 @@ type VariantMap= {
 const fillStyleMap:VariantMap = {
   theme: getComputedStyle(document.documentElement)
     .getPropertyValue('--color-theme-light'),
-  success: '#D9ECEB',
-  alert: '#FCE9CE',
+  success: '#E6F2E6',
+  alert: '#FFF2DC',
   error: '#FADCDB',
   info: '#DEEFF6',
-  muted: '#E1E1E1'
+  muted: '#E1E1E1',
+  variant1: '#F2EAF5',
+  variant2: '#FFF1E9',
+  variant3: '#F1F4EF',
+  variant4: '#E0E2EC',
+  primary: '#E8F3F4',
+  secondary: '#F4ECEB'
 }
 const strokeStyleMap:VariantMap = {
   theme: getComputedStyle(document.documentElement)
     .getPropertyValue('--color-theme'),
-  success: '#66B4AF',
-  alert: '#F2A63B',
+  success: '#9CCD9B',
+  alert: '#FFCC72',
   error: '#ED7470',
   info: '#7DC1DC',
-  muted: '#888888'
+  muted: '#888888',
+  variant1: '#CCABD8',
+  variant2: '#FFC8A6',
+  variant3: '#C6D2BE',
+  variant4: '#838BB2',
+  primary: '#A2CED3',
+  secondary: '#D4B3AE'
 }
 
 const rate = ref()

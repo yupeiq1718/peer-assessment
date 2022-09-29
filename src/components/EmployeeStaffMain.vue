@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
+import { departments, getVariants } from '@/utilities/data'
 
 const accountId = computed(() => useAccount().accountId)
 
@@ -34,6 +35,8 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
   scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
   function: answerInformation.id
 })))
+
+const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
 type ToastData = {
   isActive: boolean,
@@ -109,15 +112,15 @@ const handleAnswersInformationRemove = (id:number) => {
         </div>
       </template>
       <template #department="department">
-        <BaseTag variant="theme">
+        <BaseTag :variant="getVariants(departmentIndex(department.data))">
           {{ department.data }}
         </BaseTag>
       </template>
       <template #scores="scores">
         <BaseScore
-          v-for="(score, key) of scores.data"
-          :key="key"
-          variant="theme"
+          v-for="(score, index) of scores.data"
+          :key="index"
+          :variant="getVariants(index)"
           :score="score"
         />
       </template>

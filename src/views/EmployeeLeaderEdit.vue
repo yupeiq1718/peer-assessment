@@ -71,7 +71,7 @@ const submit = handleSubmit(async values => {
     setToastData({
       isActive: true,
       variant: 'success',
-      message: '新增成功'
+      message: '更新成功'
     })
     useAnswers().readAnswersInformation({
       userId: accountId.value,
@@ -83,7 +83,7 @@ const submit = handleSubmit(async values => {
     setToastData({
       isActive: true,
       variant: 'error',
-      message: '新增失敗'
+      message: '更新失敗'
     })
   } finally {
     setIsLoading(false)

@@ -3,7 +3,8 @@ import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
 
 interface Props {
-  id: number
+  id: number,
+  index: number
 }
 
 const props = defineProps<Props>()
@@ -84,7 +85,7 @@ const handleQuestionRemove = () => {
   <div>
     <article class="p-8 bg-white rounded-2xl flex flex-col mb-4">
       <label>
-        <BaseTag :variant="getVariants(props.id)">
+        <BaseTag :variant="getVariants(props.index)">
           {{ question?.tag }}
         </BaseTag>
         {{ question?.content }}
