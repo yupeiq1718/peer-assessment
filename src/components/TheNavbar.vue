@@ -3,7 +3,7 @@ import router from '@/router'
 import { useAccount } from '@/store/account'
 import { useUsers } from '@/store/users'
 import { Ref } from 'vue'
-import { roles } from '@/utilities/data'
+import { roleData } from '@/utilities/data'
 
 interface Props {
   activePage: string,
@@ -107,11 +107,11 @@ const logout = () => {
           </h2>
           <h3 class="text-sm text-dark">
             <span
-              v-for="role of user?.role"
+              v-for="role of user?.roles"
               :key="role"
               class="mr-1"
             >
-              {{ roles[role - 1].text }}
+              {{ roleData[role - 1].text }}
             </span>
           </h3>
           <p class="text-xs text-muted">

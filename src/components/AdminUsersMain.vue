@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { departments, roles, getVariants } from '@/utilities/data'
+import { departments, roleData, getVariants } from '@/utilities/data'
 
 const tableFields = [
   {
@@ -19,7 +19,7 @@ const tableFields = [
   },
   {
     name: '角色',
-    key: 'role',
+    key: 'roles',
     width: '25%'
   },
   {
@@ -39,7 +39,7 @@ const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   },
   email: user.email,
   department: user.department,
-  role: user.role,
+  roles: user.roles,
   manager: user.manager,
   function: user.id
 })))
@@ -123,14 +123,14 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
           {{ department.data }}
         </BaseTag>
       </template>
-      <template #role="role">
+      <template #roles="roles">
         <BaseTag
-          v-for="item of (role.data as (1|2|3|4)[])"
+          v-for="item of (roles.data as (1|2|3|4)[])"
           :key="item"
           :variant="getVariants(item - 1)"
           class="mx-1"
         >
-          {{ roles[item - 1].text }}
+          {{ roleData[item - 1].text }}
         </BaseTag>
       </template>
       <template #manager="manager">

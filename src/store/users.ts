@@ -8,7 +8,7 @@ const useUsers = defineStore('users', () => {
     email: string,
     id: number,
     name: string,
-    role:(1|2|3|4)[],
+    roles:(1|2|3|4)[],
     picture:string,
     manager: {
       id: number,
@@ -23,12 +23,12 @@ const useUsers = defineStore('users', () => {
     department: string,
     email: string,
     name: string,
-    role:(1|2|3|4)[],
-    managerId?: number
+    roles:(1|2|3|4)[],
+    managerId: number
   }
   const createUser = async (user:UserCreate) => {
     try {
-      const response = await useApi.post('/user/', user)
+      const response = await useApi.post('/user', user)
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)
@@ -48,8 +48,8 @@ const useUsers = defineStore('users', () => {
   type UserUpdate = {
     name: string,
     department: string,
-    role:(1|2|3|4)[],
-    managerId?: number
+    roles:(1|2|3|4)[],
+    managerId: number
   }
 
   const updateUser = async ({ id, user }:{
@@ -79,18 +79,18 @@ const useUsers = defineStore('users', () => {
 
   type FilterData = {
     department: string,
-    role: 0|1|2|3|4
+    roles: 0|1|2|3|4
   }
   const filterData = ref<FilterData>({
     department: '',
-    role: 0
+    roles: 0
   })
 
   const setFilterData = (values: FilterData) => {
     filterData.value = values
   }
 
-  const filteredUsers = computed(() => activeUsers.value?.filter(user => (!filterData.value.department || user.department === filterData.value.department) && (!filterData.value.role || user.role.includes(filterData.value.role))))
+  const filteredUsers = computed(() => activeUsers.value?.filter(user => (!filterData.value.department || user.department === filterData.value.department) && (!filterData.value.roles || user.roles.includes(filterData.value.roles))))
 
   return {
     users, createUser, readUsers, updateUser, deleteUser, user, activeUsers, filterData, setFilterData, filteredUsers
