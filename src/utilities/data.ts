@@ -43,6 +43,17 @@ const questionTypes:QuestionTypes[] = [
   }
 ]
 
+const systemStatus = [
+  {
+    value: 1,
+    text: '準備中'
+  },
+  {
+    value: 2,
+    text: '進行中'
+  }
+]
+
 const getVariants = (index:number) => {
   const variants = ['success', 'alert', 'error', 'info']
   const variantIndex = index % variants.length
@@ -50,5 +61,5 @@ const getVariants = (index:number) => {
 }
 
 export {
-  departments, roles, questionTypes, getVariants
+  departments, roles, questionTypes, systemStatus, getVariants
 }
