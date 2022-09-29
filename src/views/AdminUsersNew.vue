@@ -1,27 +1,23 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import { departments, roles } from '@/utilities/data'
+import { departments, roleData } from '@/utilities/data'
 import * as yup from 'yup'
 
 const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
   email: yup.string().required('此欄位必填').test('email', '不符合公司電子郵件格式', (value) => (value?.includes('@osensetech.com') && value?.split('@osensetech.com')[1] === '') || false),
-  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
+  roles: yup.array().required('此欄位必填').min(1, '最少選擇一項'),
+  managerId: yup.number().required('此欄位必填')
 })
 
-const { handleSubmit, resetForm } = useForm({
-  initialValues: {
-    department: '',
-    email: '',
-    name: '',
-    role: []
-  },
+const { setFieldValue, handleSubmit, resetForm } = useForm({
   validationSchema: schema
 })
+setFieldValue('roles', [])
 
-const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.roles.includes(2)).map(user => ({
   text: user.name,
   value: user.id
 })))
@@ -40,7 +36,14 @@ const router = useRouter()
 const submit = handleSubmit(async values => {
   try {
     setIsLoading(true)
-    const response = await useUsers().createUser(values)
+    console.log(values)
+    const response = await useUsers().createUser({
+      name: values.name,
+      email: values.email,
+      department: values.department,
+      roles: values.roles,
+      managerId: Number(values.managerId)
+    })
     console.log(response)
     setToastData({
       isActive: true,
@@ -96,10 +99,10 @@ const cancel = () => router.push('/admin/users')
         title="主管"
       />
       <BaseFormTag
-        name="role"
+        name="roles"
         class="col-span-1"
         title="角色"
-        :tags="roles.map(role => role.text)"
+        :tags="roleData.map(role => role.text)"
       />
     </article>
   </TheModal>

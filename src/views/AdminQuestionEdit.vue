@@ -19,16 +19,15 @@ const schema = yup.object({
   isRequired: yup.boolean()
 })
 
-const { values, handleSubmit } = useForm({
-  initialValues: {
-    typeId: question.value?.typeId || 1,
-    content: question.value?.content || '',
-    tag: question.value?.tag || '',
-    textHint: question.value?.textHint || '',
-    isRequired: question.value?.isRequired || false
-  },
+const { setFieldValue, values, handleSubmit } = useForm({
   validationSchema: schema
 })
+
+setFieldValue('content', question.value?.content || '')
+setFieldValue('tag', question.value?.tag || '')
+setFieldValue('textHint', question.value?.textHint || '')
+setFieldValue('typeId', question.value?.typeId || 1)
+setFieldValue('isRequired', question.value?.isRequired || false)
 
 type ToastData = {
   isActive: boolean,
@@ -47,8 +46,11 @@ const submit = handleSubmit(async values => {
       roleId: roleId.value,
       id: Number(route.params.id),
       question: {
-        ...values,
-        typeId: Number(values.typeId)
+        content: values.content,
+        tag: values.tag,
+        textHint: values.textHint,
+        typeId: Number(values.typeId),
+        isRequired: (String(values.isRequired) === 'true')
       }
     })
     console.log(response)

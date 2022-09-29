@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import { roles } from '@/utilities/data'
+import { roleData } from '@/utilities/data'
 
 const router = useRouter()
 const route = useRoute()
@@ -11,7 +11,7 @@ const { values, handleSubmit } = useForm({
   }
 })
 
-const roleOptions = roles.slice(0, 2)
+const roleOptions = roleData.slice(0, 2)
 
 const submit = handleSubmit(values => router.push(`/admin/question/${values.roleId}`))
 

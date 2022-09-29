@@ -41,7 +41,7 @@ const departments = [
   }
 ]
 
-const roles = [
+const roleData = [
   {
     value: 1,
     text: '員工'
@@ -93,5 +93,5 @@ const getVariants = (index:number) => {
 }
 
 export {
-  departments, roles, questionTypes, systemStatus, getVariants
+  departments, roleData, questionTypes, systemStatus, getVariants
 }

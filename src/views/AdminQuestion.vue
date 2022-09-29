@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { useQuestions } from '@/store/questions'
-import { roles } from '@/utilities/data'
+import { roleData } from '@/utilities/data'
 
 const router = useRouter()
 const route = useRoute()
@@ -9,7 +9,7 @@ const route = useRoute()
 const roleId = computed(() => Number(route.params.roleId))
 
 const roleTitle = computed(() => {
-  const role = roles.find(role => role.value === Number(roleId.value))
+  const role = roleData.find(role => role.value === Number(roleId.value))
   return `${role?.text}互評問卷`
 })
 

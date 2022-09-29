@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
-import { departments, roles } from '@/utilities/data'
+import { departments, roleData } from '@/utilities/data'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 
@@ -12,21 +12,20 @@ const user = computed(() => useUsers().user(Number(id.value)))
 const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
-  role: yup.array().required('此欄位必填').min(1, '最少選擇一項')
+  roles: yup.array().required('此欄位必填').min(1, '最少選擇一項'),
+  managerId: yup.number().required('此欄位必填')
 })
 
-const { handleSubmit } = useForm({
-  initialValues: {
-    department: user.value?.department || '',
-    email: user.value?.email || '',
-    name: user.value?.name || '',
-    role: user.value?.role || [],
-    managerId: user.value?.manager.id
-  },
+const { setFieldValue, handleSubmit } = useForm({
   validationSchema: schema
 })
+setFieldValue('department', user.value?.department)
+setFieldValue('email', user.value?.email)
+setFieldValue('name', user.value?.name)
+setFieldValue('roles', user.value?.roles)
+setFieldValue('managerId', user.value?.manager?.id)
 
-const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.role.includes(2) && user.id !== Number(id.value)).map(user => ({
+const managerOptions = computed(() => useUsers().activeUsers?.filter(user => user.roles.includes(2)).map(user => ({
   text: user.name,
   value: user.id
 })))
@@ -48,8 +47,8 @@ const submit = handleSubmit(async values => {
       user: {
         name: values.name,
         department: values.department,
-        role: values.role,
-        managerId: values.managerId
+        roles: values.roles,
+        managerId: Number(values.managerId)
       }
     })
     console.log(response)
@@ -110,10 +109,10 @@ const cancel = () => router.push('/admin/users')
         title="主管"
       />
       <BaseFormTag
-        name="role"
+        name="roles"
         class="col-span-1"
         title="角色"
-        :tags="roles.map(role => role.text)"
+        :tags="roleData.map(role => role.text)"
       />
     </article>
   </TheModal>

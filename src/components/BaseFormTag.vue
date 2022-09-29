@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
+import { getVariants } from '@/utilities/data'
 
 interface Props {
   name:string,
@@ -10,8 +11,6 @@ interface Props {
 
 const props = defineProps<Props>()
 const { value, errorMessage } = useField<number[]>(props.name)
-
-const variantList = ['success', 'alert', 'error', 'info', 'muted']
 
 const switchValue = (index:number) => {
   if (props.disabled) {
@@ -36,7 +35,7 @@ const switchValue = (index:number) => {
         :key="tag"
         :role="props.disabled ? '' : 'button'"
         class="inline-block mr-4 mb-2"
-        :variant="value.includes(index + 1) ? variantList[index] : 'muted'"
+        :variant="value?.includes(index + 1) ? getVariants(index) : 'muted'"
         @click="switchValue(index + 1)"
       >
         {{ tag }}
