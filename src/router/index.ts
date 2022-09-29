@@ -73,9 +73,9 @@ const routes: RouteRecordRaw[] = [
         redirect: '/admin/users'
       },
       {
-        path: 'setting',
-        name: 'Setting',
-        component: () => import('@/views/AdminSetting.vue')
+        path: 'system',
+        name: 'System',
+        component: () => import('@/views/AdminSystem.vue')
       },
       {
         path: 'warning',
