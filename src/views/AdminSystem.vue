@@ -90,7 +90,7 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
-  <div class="absolute w-full h-full">
+  <div class="absolute w-full h-full pt-6 px-4">
     <AdminSystemMain v-if="systemStatus" />
   </div>
   <transition

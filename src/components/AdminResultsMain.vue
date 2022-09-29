@@ -45,37 +45,35 @@ const items = ref<Item[]>([
 </script>
 
 <template>
-  <div class="mx-5 my-2">
-    <BaseTable
-      :fields="fields"
-      :items="items"
-    >
-      <template #name="data">
-        <div>
-          <img
-            class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-            src="/user.png"
-            alt="user"
-          >
-          <span>
-            {{ data.data }}
-          </span>
-        </div>
-      </template>
-      <template #department="data">
-        <BaseTag variant="theme">
+  <BaseTable
+    :fields="fields"
+    :items="items"
+  >
+    <template #name="data">
+      <div>
+        <img
+          class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
+          src="/user.png"
+          alt="user"
+        >
+        <span>
           {{ data.data }}
-        </BaseTag>
-      </template>
-      <template #scores="data">
-        <BaseScore
-          v-for="(score, key) of data.data"
-          :key="key"
-          class=" w-[4.5rem] h-[4.5rem]"
-          variant="theme"
-          :score="score"
-        />
-      </template>
-    </BaseTable>
-  </div>
+        </span>
+      </div>
+    </template>
+    <template #department="data">
+      <BaseTag variant="theme">
+        {{ data.data }}
+      </BaseTag>
+    </template>
+    <template #scores="data">
+      <BaseScore
+        v-for="(score, key) of data.data"
+        :key="key"
+        class=" w-[4.5rem] h-[4.5rem]"
+        variant="theme"
+        :score="score"
+      />
+    </template>
+  </BaseTable>
 </template>

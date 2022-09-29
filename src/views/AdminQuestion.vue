@@ -46,16 +46,16 @@ onBeforeMount(() => {
 
 </script>
 <template>
+  <span class="font-bold text-dark text-sm">
+    <BaseSvgIcon
+      name="question"
+      class="w-4 h-4 mr-2"
+    />{{ roleTitle }}
+  </span>
   <div
     v-if="users && questionnaire"
-    class="absolute w-full h-full"
+    class="absolute w-full h-full pt-4 px-4"
   >
-    <span class="font-bold text-dark text-sm">
-      <BaseSvgIcon
-        name="question"
-        class="w-4 h-4 mr-2"
-      />{{ roleTitle }}
-    </span>
     <AdminQuestionMain />
     <transition
       name="sidebar"

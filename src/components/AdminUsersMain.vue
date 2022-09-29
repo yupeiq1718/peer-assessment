@@ -98,72 +98,70 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
 </script>
 
 <template>
-  <div class="mx-5 my-2">
-    <BaseTable
-      :fields="tableFields"
-      :items="tableItems"
-    >
-      <template #profile="profile">
-        <div class="flex justify-start items-center">
-          <img
-            class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
-            :src="profile.data.picture ||'/user.png'"
-            alt="user"
-          >
-          <span>
-            {{ profile.data.name }}
-          </span>
-        </div>
-      </template>
-      <template #email="email">
-        {{ email.data }}
-      </template>
-      <template #department="department">
-        <BaseTag :variant="getVariants(departmentIndex(department.data))">
-          {{ department.data }}
-        </BaseTag>
-      </template>
-      <template #roles="roles">
-        <BaseTag
-          v-for="item of (roles.data as (1|2|3|4)[])"
-          :key="item"
-          :variant="getVariants(item - 1)"
-          class="mx-1"
+  <BaseTable
+    :fields="tableFields"
+    :items="tableItems"
+  >
+    <template #profile="profile">
+      <div class="flex justify-start items-center">
+        <img
+          class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
+          :src="profile.data.picture ||'/user.png'"
+          alt="user"
         >
-          {{ roleData[item - 1].text }}
-        </BaseTag>
-      </template>
-      <template #manager="manager">
-        <div
-          v-if="manager.data"
-          class="flex justify-start items-center"
+        <span>
+          {{ profile.data.name }}
+        </span>
+      </div>
+    </template>
+    <template #email="email">
+      {{ email.data }}
+    </template>
+    <template #department="department">
+      <BaseTag :variant="getVariants(departmentIndex(department.data))">
+        {{ department.data }}
+      </BaseTag>
+    </template>
+    <template #roles="roles">
+      <BaseTag
+        v-for="item of (roles.data as (1|2|3|4)[])"
+        :key="item"
+        :variant="getVariants(item - 1)"
+        class="mx-1"
+      >
+        {{ roleData[item - 1].text }}
+      </BaseTag>
+    </template>
+    <template #manager="manager">
+      <div
+        v-if="manager.data"
+        class="flex justify-start items-center"
+      >
+        <img
+          class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
+          :src="manager.data.picture ||'/user.png'"
+          alt="user"
         >
-          <img
-            class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
-            :src="manager.data.picture ||'/user.png'"
-            alt="user"
-          >
-          <span>
-            {{ manager.data.name }}
-          </span>
-        </div>
-      </template>
-      <template #function="id">
-        <div>
-          <BaseSvgIcon
-            role="button"
-            class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-            name="edit"
-            @click="edit(id.data)"
-          />
-          <BaseSvgIcon
-            role="button"
-            class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-            name="delete"
-            @click="handleUserRemove(id.data)"
-          />
-        </div>
-      </template>
-    </BaseTable>
-  </div>
+        <span>
+          {{ manager.data.name }}
+        </span>
+      </div>
+    </template>
+    <template #function="id">
+      <div>
+        <BaseSvgIcon
+          role="button"
+          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+          name="edit"
+          @click="edit(id.data)"
+        />
+        <BaseSvgIcon
+          role="button"
+          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+          name="delete"
+          @click="handleUserRemove(id.data)"
+        />
+      </div>
+    </template>
+  </BaseTable>
 </template>

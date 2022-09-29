@@ -53,7 +53,7 @@ onBeforeMount(() => {
 <template>
   <div
     v-if="questionnaire && answersInformation && users"
-    class="absolute w-full h-full"
+    class="absolute w-full h-full pt-6 px-4"
   >
     <EmployeeStaffMain />
     <transition
