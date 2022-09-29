@@ -27,7 +27,7 @@ const status = computed(() => {
   <form class="p-8 bg-white rounded-2xl flex flex-col">
     <label class="mb-4">{{ props.title }}</label>
     <BaseInput
-      v-model:value="value"
+      v-model:value.trim="value"
       :type="props.type"
       :status="status"
       class="max-w-[20rem]"
