@@ -89,6 +89,7 @@ onBeforeMount(async () => {
         :page-list="pageList"
       />
     </transition>
+
     <router-view v-slot="{ Component, route }">
       <transition
         name="main"

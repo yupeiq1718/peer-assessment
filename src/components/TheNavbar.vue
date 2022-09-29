@@ -92,13 +92,10 @@ const logout = () => {
       class="navbar fixed left-0 xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
-      <header
-        v-if="user"
-        class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500"
-      >
+      <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
         <img
-          class="rounded-full w-16 h-16"
-          :src="user?.picture"
+          class="image relative rounded-full w-16 h-16"
+          :src="user?.picture ||'/favicon.svg'"
           alt="user"
         >
         <div
@@ -122,48 +119,57 @@ const logout = () => {
           </p>
         </div>
       </header>
-      <article class="navbar-content absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center">
-        <ul>
-          <li
-            v-for="page of props.pageList"
-            :key="page.name"
-            role="button"
-            class="p-4 rounded-2xl flex justify-start items-start duration-500"
-            :class="[listStyle(page.name), styleMap.list[status]]"
-            @click="pushRouter(page.url)"
-          >
-            <BaseSvgIcon
-              :name="page.icon"
-              :class="styleMap.icon[status]"
-              class="duration-500"
-            />
-            <span
-              class="text-lg h-7 font-bold overflow-hidden duration-500"
-              :class="styleMap.title[status]"
+      <transition
+        name="navbar-content"
+        mode="out-in"
+        appear
+      >
+        <article
+          v-if="pageList.length"
+          class="absolute inset-y-28 overflow-hidden flex flex-col justify-between items-center duration-1000"
+        >
+          <ul>
+            <li
+              v-for="page of props.pageList"
+              :key="page.name"
+              role="button"
+              class="p-4 rounded-2xl flex justify-start items-start duration-500"
+              :class="[listStyle(page.name), styleMap.list[status]]"
+              @click="pushRouter(page.url)"
             >
-              <h2>{{ page.title }}</h2>
-            </span>
-          </li>
-        </ul>
-        <BaseSvgIcon
-          class="fill-theme h-12 duration-500"
-          :class="styleMap.logo[status]"
-          name="logo"
-        />
-      </article>
+              <BaseSvgIcon
+                :name="page.icon"
+                :class="styleMap.icon[status]"
+                class="duration-500"
+              />
+              <span
+                class="text-lg h-7 font-bold overflow-hidden duration-500"
+                :class="styleMap.title[status]"
+              >
+                <h2>{{ page.title }}</h2>
+              </span>
+            </li>
+          </ul>
+          <BaseSvgIcon
+            class="fill-theme h-12 duration-500"
+            :class="styleMap.logo[status]"
+            name="logo"
+          />
+        </article>
+      </transition>
+
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
         <button
-          class="rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
+          class="image rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
           :class="styleMap.logoutButton[status]"
           @click="logout"
         >
           <BaseSvgIcon
             name="logout"
             :class="styleMap.icon[status]"
-            class="duration-500"
           />
           <span
-            class="text-lg h-7 font-bold overflow-hidden duration-500"
+            class="text-lg h-7 font-bold overflow-hidden"
             :class="styleMap.logoutTitle[status]"
           >
             <h2>{{ '登出' }}</h2>
@@ -177,15 +183,19 @@ const logout = () => {
 .navbar-enter-active {
   @apply duration-1000;
 
-  .navbar-content {
+  .image {
     @apply duration-1000;
   }
 }
 
 .navbar-enter-from {
-  .navbar-content, {
-    @apply top-full;
+  .image {
+    @apply opacity-0;
   }
+}
+
+.navbar-content-enter-from {
+  @apply top-full;
 }
 
 .page-leave-to {
@@ -193,4 +203,5 @@ const logout = () => {
     @apply -left-72 duration-1000;
   }
 }
+
 </style>
