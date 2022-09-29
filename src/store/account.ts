@@ -4,9 +4,9 @@ import { useApi } from '@/utilities/api'
 const useAccount = defineStore('account', () => {
   const accountId = ref()
 
-  const readAccountId = async () => {
+  const readAccountId = async (type:string) => {
     try {
-      const response = await useApi.get('/user')
+      const response = await useApi.get(`/user/${type}`)
       accountId.value = response.data.data.userId
       return Promise.resolve(response)
     } catch (error) {

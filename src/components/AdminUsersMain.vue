@@ -5,7 +5,7 @@ import { roles } from '@/utilities/data'
 const tableFields = [
   {
     name: '姓名',
-    key: 'name'
+    key: 'profile'
   },
   {
     name: '電子信箱',
@@ -35,7 +35,10 @@ const tableFields = [
 const variantList = ['success', 'alert', 'error', 'info', 'muted']
 
 const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
-  name: user.name,
+  profile: {
+    name: user.name,
+    picture: user.picture
+  },
   email: user.email,
   department: user.department,
   role: user.role,
@@ -100,15 +103,15 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
       :fields="tableFields"
       :items="tableItems"
     >
-      <template #name="name">
+      <template #profile="profile">
         <div class="flex justify-start items-center">
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
-            src="@/assets/images/user.jpg"
+            :src="profile.data.picture ||'/user.png'"
             alt="user"
           >
           <span>
-            {{ name.data }}
+            {{ profile.data.name }}
           </span>
         </div>
       </template>
@@ -137,7 +140,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         >
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
-            :src="manager.data.picture"
+            :src="manager.data.picture ||'/user.png'"
             alt="user"
           >
           <span>

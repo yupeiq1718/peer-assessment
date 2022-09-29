@@ -100,7 +100,7 @@ const handleAnswersInformationRemove = (id:number) => {
         <div class="flex justify-start items-center">
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-            :src="profile.data.picture"
+            :src="profile.data.picture ||'/user.png'"
             alt="user"
           >
           <span>
