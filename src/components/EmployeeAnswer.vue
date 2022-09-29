@@ -20,7 +20,7 @@ const question = computed(() => useQuestions().question({
   <div>
     <article class="p-8 bg-white rounded-2xl flex flex-col mb-4">
       <label>
-        <BaseTag :variant="getVariants(props.id)">
+        <BaseTag :variant="getVariants(props.index)">
           {{ question?.tag }}
         </BaseTag>
         {{ question?.content }}
@@ -28,7 +28,7 @@ const question = computed(() => useQuestions().question({
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"
         :name="`answers[${props.index}].score`"
-        :variant="getVariants(props.id)"
+        :variant="getVariants(props.index)"
         class="mt-4"
       />
       <BaseFormTextarea

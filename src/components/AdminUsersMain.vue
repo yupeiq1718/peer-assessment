@@ -32,8 +32,6 @@ const tableFields = [
   }
 ]
 
-const variantList = ['success', 'alert', 'error', 'info', 'muted']
-
 const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
   profile: {
     name: user.name,
@@ -129,7 +127,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         <BaseTag
           v-for="item of (role.data as (1|2|3|4)[])"
           :key="item"
-          :variant="variantList[item - 1]"
+          :variant="getVariants(item - 1)"
           class="mx-1"
         >
           {{ roles[item - 1].text }}

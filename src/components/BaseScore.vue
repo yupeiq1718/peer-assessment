@@ -27,8 +27,8 @@ type VariantMap= {
 const fillStyleMap:VariantMap = {
   theme: getComputedStyle(document.documentElement)
     .getPropertyValue('--color-theme-light'),
-  success: '#D9ECEB',
-  alert: '#FCE9CE',
+  success: '#E6F2E6',
+  alert: '#FFF2DC',
   error: '#FADCDB',
   info: '#DEEFF6',
   muted: '#E1E1E1',
@@ -39,8 +39,8 @@ const fillStyleMap:VariantMap = {
 const strokeStyleMap:VariantMap = {
   theme: getComputedStyle(document.documentElement)
     .getPropertyValue('--color-theme'),
-  success: '#66B4AF',
-  alert: '#F2A63B',
+  success: '#9CCD9B',
+  alert: '#FFCC72',
   error: '#ED7470',
   info: '#7DC1DC',
   muted: '#888888',
