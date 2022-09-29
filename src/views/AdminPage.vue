@@ -35,7 +35,7 @@ const pageMap:PageMap = {
     icon: 'warning'
   },
   results: {
-    title: '互評結果',
+    title: '互評結果瀏覽',
     url: '/admin/results',
     icon: 'result'
   },
