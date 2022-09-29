@@ -28,18 +28,18 @@ const fields:Field[] = [
 ]
 
 const items = ref<Item[]>([
-  {
-    key: '1',
-    name: '許斾旟',
-    department: 'O2 meta 組',
-    scores: [1, 4, 3, 3, 5]
-  },
-  {
-    key: '2',
-    name: '劉于瑄',
-    department: '專案組',
-    scores: [3, 2, 5, 4, 2]
-  }
+  // {
+  //   key: '1',
+  //   name: '許斾旟',
+  //   department: 'O2 meta 組',
+  //   scores: [1, 4, 3, 3, 5]
+  // },
+  // {
+  //   key: '2',
+  //   name: '劉于瑄',
+  //   department: '專案組',
+  //   scores: [3, 2, 5, 4, 2]
+  // }
 ])
 
 </script>
@@ -54,7 +54,7 @@ const items = ref<Item[]>([
         <div>
           <img
             class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-            src="@/assets/images/user.jpg"
+            src="/user.png"
             alt="user"
           >
           <span>
