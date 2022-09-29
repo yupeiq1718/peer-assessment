@@ -4,7 +4,7 @@ import { useUsers } from '@/store/users'
 
 const accountId = computed(() => useAccount().accountId)
 
-type Page = 'list'|'users'|'results'|'timeline'|'question'
+type Page = 'setting'|'users'|'results'|'timeline'|'question'
 type PageMap = {
   [key: string]: {
     title: string,
@@ -12,7 +12,7 @@ type PageMap = {
     icon: string
   }
 }
-const pages = computed<Page[]>(() => ['users', 'question', 'list', 'results'])
+const pages = computed<Page[]>(() => ['users', 'question', 'setting', 'results'])
 
 const router = useRouter()
 
@@ -29,10 +29,10 @@ const pageMap:PageMap = {
     url: '/admin/question/1',
     icon: 'question'
   },
-  list: {
-    title: '未填名單',
-    url: '/admin/list',
-    icon: 'list'
+  setting: {
+    title: '系統狀態設定',
+    url: '/admin/setting',
+    icon: 'setting'
   },
   results: {
     title: '互評結果',
