@@ -14,7 +14,7 @@ const items = [
 </script>
 <template>
   <div class="absolute w-full h-full">
-    <AdminListMain />
+    <AdminWarningMain />
     <transition
       name="sidebar"
       mode="out-in"

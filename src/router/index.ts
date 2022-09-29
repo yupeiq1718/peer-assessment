@@ -70,12 +70,17 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        redirect: '/admin/list'
+        redirect: '/admin/users'
       },
       {
-        path: 'list',
-        name: 'List',
-        component: () => import('@/views/AdminList.vue')
+        path: 'system',
+        name: 'System',
+        component: () => import('@/views/AdminSystem.vue')
+      },
+      {
+        path: 'warning',
+        name: 'Warning',
+        component: () => import('@/views/AdminWarning.vue')
       },
       {
         path: 'users',
