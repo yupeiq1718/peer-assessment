@@ -1,1 +1,0 @@
-import{x as t,r as o}from"./index.fe3aa23c.js";import{u as c}from"./api.a4fc115a.js";const u=t("account",()=>{const e=o();return{accountId:e,readAccountId:async()=>{try{const r=await c.get("/user");return e.value=r.data.data.userId,Promise.resolve(r)}catch(r){return Promise.reject(r)}}}});export{u};
