@@ -133,7 +133,7 @@ const logout = () => {
               v-for="page of props.pageList"
               :key="page.name"
               role="button"
-              class="p-4 rounded-2xl flex justify-start items-start duration-500"
+              class="p-4 rounded-2xl flex justify-start items-center duration-500"
               :class="[listStyle(page.name), styleMap.list[status]]"
               @click="pushRouter(page.url)"
             >
