@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AdminListCard: typeof import('./src/components/AdminListCard.vue')['default']
-    AdminListMain: typeof import('./src/components/AdminListMain.vue')['default']
     AdminQuestionAnswer: typeof import('./src/components/AdminQuestionAnswer.vue')['default']
     AdminQuestionMain: typeof import('./src/components/AdminQuestionMain.vue')['default']
     AdminResultsMain: typeof import('./src/components/AdminResultsMain.vue')['default']
@@ -23,13 +21,8 @@ declare module '@vue/runtime-core' {
     BaseFormSelect: typeof import('./src/components/BaseFormSelect.vue')['default']
     BaseFormTag: typeof import('./src/components/BaseFormTag.vue')['default']
     BaseFormTextarea: typeof import('./src/components/BaseFormTextarea.vue')['default']
-    BaseFormThree: typeof import('./src/components/BaseFormThree.vue')['default']
-    BaseFormTwo: typeof import('./src/components/BaseFormTwo.vue')['default']
     BaseInput: typeof import('./src/components/BaseInput.vue')['default']
     BaseMessage: typeof import('./src/components/BaseMessage.vue')['default']
-    BaseQuestionFormAll: typeof import('./src/components/BaseQuestionFormAll.vue')['default']
-    BaseQuestionFormScore: typeof import('./src/components/BaseQuestionFormScore.vue')['default']
-    BaseQuestionFormText: typeof import('./src/components/BaseQuestionFormText.vue')['default']
     BaseScore: typeof import('./src/components/BaseScore.vue')['default']
     BaseSelect: typeof import('./src/components/BaseSelect.vue')['default']
     BaseSvgIcon: typeof import('./src/components/BaseSvgIcon.vue')['default']

@@ -58,6 +58,23 @@ const handleLogin = async () => {
   }
 }
 
+const employeeIdConfiguration = {
+  login_uri: `${import.meta.env.VITE_APP_API}/user/employee/callback`,
+  ux_mode: 'redirect'
+}
+
+const adminIdConfiguration = {
+  login_uri: `${import.meta.env.VITE_APP_API}/user/admin/callback`,
+  ux_mode: 'redirect'
+}
+
+const buttonConfig = {
+  size: 'large',
+  shape: 'circle',
+  locale: 'zh_Hant',
+  width: 192
+}
+
 onMounted(() => {
   if (route.query.token !== undefined) {
     handleLogin()
@@ -121,29 +138,13 @@ onMounted(() => {
           <footer class="article-content text-center">
             <GoogleLogin
               v-if="type==='employee'"
-              :id-configuration="{
-                login_uri:'https://peerreview.oexpo.io/backend_dev/user/employee/callback',
-                ux_mode:'redirect'
-              }"
-              :button-config="{
-                size:'large',
-                shape:'circle',
-                locale: 'zh_Hant',
-                width: 192
-              }"
+              :id-configuration="employeeIdConfiguration"
+              :button-config="buttonConfig"
             />
             <GoogleLogin
               v-if="type==='admin'"
-              :id-configuration="{
-                login_uri:'https://peerreview.oexpo.io/backend_dev/user/admin/callback',
-                ux_mode:'redirect'
-              }"
-              :button-config="{
-                size:'large',
-                shape:'circle',
-                locale: 'zh_Hant',
-                width: 192
-              }"
+              :id-configuration="adminIdConfiguration"
+              :button-config="buttonConfig"
             />
             <br>
             <BaseButton

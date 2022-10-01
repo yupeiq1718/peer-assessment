@@ -5,12 +5,15 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "build:gh-pages": "vite build --mode gh-pages",
+    "build:stage": "vite build --mode stage",
     "dev": "vite",
     "dev:gh-pages": "vite --mode gh-pages",
+    "dev:stage": "vite --mode stage",
     "eslint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prepare": "husky install",
     "preview": "vite preview",
     "preview:gh-pages": "vite preview --mode gh-pages",
+    "preview:stage": "vite preview --mode stage",
     "stylelint": "stylelint  src/**/*.{vue,scss,css,sass,less} --fix"
   },
   "dependencies": {
