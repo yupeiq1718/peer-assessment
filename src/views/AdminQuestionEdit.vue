@@ -90,7 +90,7 @@ const cancel = () => router.push(`/admin/question/${roleId.value}`)
         :options="questionTypes"
         title="請選擇問答類型"
       />
-
+      <hr class="border-1 border-theme my-4 col-span-1 lg:col-span-2 2xl:col-span-3">
       <BaseFormTextarea
         name="content"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
