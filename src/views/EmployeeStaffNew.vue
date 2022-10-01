@@ -114,7 +114,7 @@ onBeforeMount(async () => {
           name="department"
           :options="departmentOptions"
           class="col-span-1"
-          title="合作部門"
+          title="篩選"
           :rule="yup.string().required('此欄位必填')"
         />
         <BaseFormSelect
