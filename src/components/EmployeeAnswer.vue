@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
+import * as yup from 'yup'
 
 interface Props {
   id: number,
@@ -29,6 +30,7 @@ const question = computed(() => useQuestions().question({
         v-if="question?.typeId===1 || question?.typeId===2"
         :name="`answers[${props.index}].score`"
         :variant="getVariants(props.index)"
+        :rule="yup.number().required('此欄位必填')"
         class="mt-4"
       />
       <BaseFormTextarea
@@ -36,6 +38,7 @@ const question = computed(() => useQuestions().question({
         :name="`answers[${props.index}].comment`"
         :placeholder="question.textHint"
         class="w-full mt-4"
+        :rule="yup.string().required('此欄位必填')"
       />
     </article>
   </div>

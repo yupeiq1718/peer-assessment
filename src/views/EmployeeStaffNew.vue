@@ -10,29 +10,12 @@ import { useAccount } from '@/store/account'
 const accountId = computed(() => useAccount().accountId)
 const questions = computed(() => useQuestions().questions(1))
 
-const validationSchema = yup.object().shape({
-  department: yup.string().required('此欄位必填'),
-  reviewee: yup.number().required('此欄位必填'),
-  answers: yup.array().of(yup.object({
-    qId: yup.number().required('此欄位必填'),
-    score: yup.number(),
-    comment: yup.string()
-  }))
-})
+const { values, handleSubmit, setFieldValue } = useForm()
 
-const initialValues = {
-  department: '',
-  reviewee: 0,
-  answers: questions.value?.map(question => ({
-    qId: question.id,
-    score: 0,
-    comment: ''
-  })) || []
-}
+setFieldValue('department', '未填名單')
 
-const { values, handleSubmit, setFieldValue } = useForm({
-  initialValues,
-  validationSchema
+questions.value?.forEach((question, index) => {
+  setFieldValue(`answers[${index}].qId`, question.id)
 })
 
 const departmentOptions = [{
@@ -132,6 +115,7 @@ onBeforeMount(async () => {
           :options="departmentOptions"
           class="col-span-1"
           title="合作部門"
+          :rule="yup.string().required('此欄位必填')"
         />
         <BaseFormSelect
           name="reviewee"
@@ -139,6 +123,7 @@ onBeforeMount(async () => {
           class="col-span-1"
           title="合作對象"
           :disabled="!revieweeOptions?.length"
+          :rule="yup.number().required('此欄位必填')"
         />
       </header>
       <hr class="border-1 border-theme my-4 w-full">
