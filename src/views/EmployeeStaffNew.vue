@@ -30,17 +30,32 @@ const initialValues = {
   })) || []
 }
 
-const { values, handleSubmit } = useForm({
+const { values, handleSubmit, setFieldValue } = useForm({
   initialValues,
   validationSchema
 })
 
+const departmentOptions = [{
+  text: '未填名單',
+  value: '未填名單'
+}].concat(departments)
+
 const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.roles.includes(1) && useAccount().accountId !== user.id))
+const unfilledUsers = computed(() => useAnswers().unfilledList[1])
 const answerUsers = computed(() => useAnswers().answerUsers(1))
-const revieweeOptions = computed(() => filteredUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
-  text: departmentUser.name,
-  value: departmentUser.id
-})))
+const revieweeOptions = computed(() => {
+  setFieldValue('reviewee', 0)
+  const reviewee = values.department === '未填名單' ? unfilledUsers.value : filteredUsers.value
+  const options = reviewee?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
+    text: departmentUser.name,
+    value: departmentUser.id
+  }))
+  if (options?.length) {
+    console.log(options[0].value)
+    setFieldValue('reviewee', options[0].value)
+  }
+  return options
+})
 
 type ToastData = {
   isActive: boolean,
@@ -87,6 +102,22 @@ const submit = handleSubmit(async values => {
 
 const router = useRouter()
 const cancel = () => router.push('/employee/staff')
+
+const getUnfilledList = async () => {
+  try {
+    const response = await useAnswers().readUnfilledList({
+      accountId: accountId.value,
+      qId: 1
+    })
+    console.log(response)
+  } catch ({ response }) {
+    console.log(response)
+  }
+}
+
+onBeforeMount(async () => {
+  await getUnfilledList()
+})
 </script>
 
 <template>
@@ -98,7 +129,7 @@ const cancel = () => router.push('/employee/staff')
     <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       <BaseFormSelect
         name="department"
-        :options="departments"
+        :options="departmentOptions"
         class="col-span-1"
         title="合作部門"
       />
@@ -107,9 +138,11 @@ const cancel = () => router.push('/employee/staff')
         :options="revieweeOptions"
         class="col-span-1"
         title="合作對象"
+        :disabled="!revieweeOptions?.length"
       />
       <EmployeeAnswer
         v-for="(question, index) of questions"
+        v-show="values.reviewee"
         :id="question.id"
         :key="question.id"
         :index="index"
