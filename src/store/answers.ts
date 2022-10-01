@@ -42,6 +42,15 @@ const useAnswers = defineStore('answers', () => {
     2: []
   })
 
+  type WarningUser = {
+    id:number,
+    name:string,
+    picture:string,
+    q1_unfilled_count:number,
+    q2_unfilled_count:number
+  }
+  const warningUserList = ref<WarningUser[]>()
+
   const createAnswers = async ({ reviewee, reviewer, qId, answers }: {
     reviewee: number,
     reviewer: number,
@@ -105,6 +114,16 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
+  const readWarningUserList = async () => {
+    try {
+      const response = await useApi.get('/answer/unfilled')
+      warningUserList.value = response.data.data
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
 
   const answerInformation = computed(() => ({ qId, id }:{
@@ -112,7 +131,7 @@ const useAnswers = defineStore('answers', () => {
   }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, unfilledList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, answerUsers, answerInformation
+    answersInformation, unfilledList, warningUserList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, readWarningUserList, answerUsers, answerInformation
   }
 })
 
