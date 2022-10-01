@@ -29,6 +29,19 @@ const useAnswers = defineStore('answers', () => {
   const answersInformationMap = ref<AnswerInformationMap>({})
   const answersInformation = computed(() => (qId:number) => answersInformationMap.value?.[qId])
 
+  type Unfilled = {
+    id:number,
+    name:string,
+    picture:string
+  }
+  type UnfilledList = {
+    [key in number]: Unfilled[]
+  }
+  const unfilledList = ref<UnfilledList>({
+    1: [],
+    2: []
+  })
+
   const createAnswers = async ({ reviewee, reviewer, qId, answers }: {
     reviewee: number,
     reviewer: number,
@@ -47,7 +60,7 @@ const useAnswers = defineStore('answers', () => {
     userId:number, qId:number
   }) => {
     try {
-      const response = await useApi.get(`/answer/all?userId=${userId}&qId=${qId}`)
+      const response = await useApi.get(`/answer?userId=${userId}&qId=${qId}`)
       answersInformationMap.value[qId] = response.data.data
       return Promise.resolve(response)
     } catch (error) {
@@ -79,6 +92,19 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
+  const readUnfilledList = async ({ qId, accountId }:{
+    qId: number,
+    accountId: number
+  }) => {
+    try {
+      const response = await useApi.get(`/answer/unfilled?qId=${qId}&userId=${accountId}`)
+      unfilledList.value[qId] = response.data.data
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
 
   const answerInformation = computed(() => ({ qId, id }:{
@@ -86,7 +112,7 @@ const useAnswers = defineStore('answers', () => {
   }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, answerUsers, answerInformation
+    answersInformation, unfilledList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, answerUsers, answerInformation
   }
 })
 

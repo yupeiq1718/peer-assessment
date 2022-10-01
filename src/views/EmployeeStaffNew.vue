@@ -10,37 +10,34 @@ import { useAccount } from '@/store/account'
 const accountId = computed(() => useAccount().accountId)
 const questions = computed(() => useQuestions().questions(1))
 
-const validationSchema = yup.object().shape({
-  department: yup.string().required('此欄位必填'),
-  reviewee: yup.number().required('此欄位必填'),
-  answers: yup.array().of(yup.object({
-    qId: yup.number().required('此欄位必填'),
-    score: yup.number(),
-    comment: yup.string()
-  }))
+const { values, handleSubmit, setFieldValue } = useForm()
+
+setFieldValue('department', '未填名單')
+
+questions.value?.forEach((question, index) => {
+  setFieldValue(`answers[${index}].qId`, question.id)
 })
 
-const initialValues = {
-  department: '',
-  reviewee: 0,
-  answers: questions.value?.map(question => ({
-    qId: question.id,
-    score: 0,
-    comment: ''
-  })) || []
-}
-
-const { values, handleSubmit } = useForm({
-  initialValues,
-  validationSchema
-})
+const departmentOptions = [{
+  text: '未填名單',
+  value: '未填名單'
+}].concat(departments)
 
 const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.roles.includes(1) && useAccount().accountId !== user.id))
+const unfilledUsers = computed(() => useAnswers().unfilledList[1])
 const answerUsers = computed(() => useAnswers().answerUsers(1))
-const revieweeOptions = computed(() => filteredUsers.value?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
-  text: departmentUser.name,
-  value: departmentUser.id
-})))
+const revieweeOptions = computed(() => {
+  setFieldValue('reviewee', 0)
+  const reviewee = values.department === '未填名單' ? unfilledUsers.value : filteredUsers.value
+  const options = reviewee?.filter(departmentUser => !answerUsers.value?.includes(departmentUser.id)).map(departmentUser => ({
+    text: departmentUser.name,
+    value: departmentUser.id
+  }))
+  if (options?.length) {
+    setFieldValue('reviewee', options[0].value)
+  }
+  return options
+})
 
 type ToastData = {
   isActive: boolean,
@@ -87,6 +84,22 @@ const submit = handleSubmit(async values => {
 
 const router = useRouter()
 const cancel = () => router.push('/employee/staff')
+
+const getUnfilledList = async () => {
+  try {
+    const response = await useAnswers().readUnfilledList({
+      accountId: accountId.value,
+      qId: 1
+    })
+    console.log(response)
+  } catch ({ response }) {
+    console.log(response)
+  }
+}
+
+onBeforeMount(async () => {
+  await getUnfilledList()
+})
 </script>
 
 <template>
@@ -95,27 +108,36 @@ const cancel = () => router.push('/employee/staff')
     @confirm="submit"
     @cancel="cancel"
   >
-    <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <BaseFormSelect
-        name="department"
-        :options="departments"
-        class="col-span-1"
-        title="合作部門"
-      />
-      <BaseFormSelect
-        name="reviewee"
-        :options="revieweeOptions"
-        class="col-span-1"
-        title="合作對象"
-      />
-      <EmployeeAnswer
-        v-for="(question, index) of questions"
-        :id="question.id"
-        :key="question.id"
-        :index="index"
-        :role-id="1"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
-      />
+    <article class="p-4">
+      <header class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <BaseFormSelect
+          name="department"
+          :options="departmentOptions"
+          class="col-span-1"
+          title="篩選"
+          :rule="yup.string().required('此欄位必填')"
+        />
+        <BaseFormSelect
+          name="reviewee"
+          :options="revieweeOptions"
+          class="col-span-1"
+          title="合作對象"
+          :disabled="!revieweeOptions?.length"
+          :rule="yup.number().required('此欄位必填')"
+        />
+      </header>
+      <hr class="border-1 border-theme my-4 w-full">
+      <article class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <EmployeeAnswer
+          v-for="(question, index) of questions"
+          v-show="values.reviewee"
+          :id="question.id"
+          :key="question.id"
+          :index="index"
+          :role-id="1"
+          class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        />
+      </article>
     </article>
   </TheModal>
 </template>
