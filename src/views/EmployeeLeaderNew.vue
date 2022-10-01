@@ -52,7 +52,6 @@ const revieweeOptions = computed(() => {
     value: departmentUser.id
   }))
   if (options?.length) {
-    console.log(options[0].value)
     setFieldValue('reviewee', options[0].value)
   }
   return options
@@ -108,7 +107,7 @@ const getUnfilledList = async () => {
   try {
     const response = await useAnswers().readUnfilledList({
       accountId: accountId.value,
-      qId: 1
+      qId: 2
     })
     console.log(response)
   } catch ({ response }) {
@@ -127,29 +126,34 @@ onBeforeMount(async () => {
     @confirm="submit"
     @cancel="cancel"
   >
-    <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <BaseFormSelect
-        name="department"
-        :options="departmentOptions"
-        class="col-span-1"
-        title="合作部門"
-      />
-      <BaseFormSelect
-        name="reviewee"
-        :options="revieweeOptions"
-        class="col-span-1"
-        title="合作對象"
-        :disabled="!revieweeOptions?.length"
-      />
-      <EmployeeAnswer
-        v-for="(question, index) of questions"
-        v-show="values.reviewee"
-        :id="question.id"
-        :key="question.id"
-        :index="index"
-        :role-id="2"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
-      />
+    <article class="p-4">
+      <header class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <BaseFormSelect
+          name="department"
+          :options="departmentOptions"
+          class="col-span-1"
+          title="合作部門"
+        />
+        <BaseFormSelect
+          name="reviewee"
+          :options="revieweeOptions"
+          class="col-span-1"
+          title="合作對象"
+          :disabled="!revieweeOptions?.length"
+        />
+      </header>
+      <hr class="border-1 border-theme my-4 w-full">
+      <article class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <EmployeeAnswer
+          v-for="(question, index) of questions"
+          v-show="values.reviewee"
+          :id="question.id"
+          :key="question.id"
+          :index="index"
+          :role-id="2"
+          class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        />
+      </article>
     </article>
   </TheModal>
 </template>
