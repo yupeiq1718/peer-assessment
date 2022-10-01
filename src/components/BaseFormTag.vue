@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
 import { getVariants } from '@/utilities/data'
+import { BaseSchema } from 'yup'
 
 interface Props {
   name:string,
   title: string,
   tags: string[],
-  disabled?: boolean
+  disabled?: boolean,
+  rule?: BaseSchema
 }
 
 const props = defineProps<Props>()
-const { value, errorMessage } = useField<number[]>(props.name)
+const { value, errorMessage } = useField<number[]>(props.name, props.rule)
 
 const switchValue = (index:number) => {
   if (props.disabled) {

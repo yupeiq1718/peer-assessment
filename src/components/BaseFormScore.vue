@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
+import { BaseSchema } from 'yup'
 
 interface Props {
   name:string,
   disabled?: boolean,
-  variant: string
+  variant: string,
+  rule?: BaseSchema
 }
 
 const props = defineProps<Props>()
-const { value, errorMessage } = useField<number>(props.name)
+const { value, errorMessage } = useField<number>(props.name, props.rule)
 
 const setScore = (score:number) => {
   value.value = score

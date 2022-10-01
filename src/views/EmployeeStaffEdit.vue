@@ -3,7 +3,6 @@ import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
-import * as yup from 'yup'
 import { departments } from '@/utilities/data'
 import { useAccount } from '@/store/account'
 
@@ -18,28 +17,11 @@ const answerInformation = computed(() => useAnswers().answerInformation({
   id: Number(route.params.id)
 }))
 
-const validationSchema = yup.object({
-  department: yup.string().required('此欄位必填'),
-  reviewee: yup.number().required('此欄位必填'),
-  answers: yup.array().of(yup.object({
-    qId: yup.number(),
-    score: yup.number(),
-    comment: yup.string()
-  }))
-})
+const { values, handleSubmit, setFieldValue } = useForm()
 
-const initialValues = {
-  department: answerInformation.value?.reviewee.department,
-  reviewee: answerInformation.value?.reviewee.id,
-  answers: answerInformation.value?.answers || []
-}
-
-console.log(initialValues)
-
-const { values, handleSubmit } = useForm({
-  initialValues,
-  validationSchema
-})
+setFieldValue('department', answerInformation.value?.reviewee.department)
+setFieldValue('reviewee', answerInformation.value?.reviewee.id)
+setFieldValue('answers', answerInformation.value?.answers || [])
 
 const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.roles.includes(1)))
 const revieweeOptions = computed(() => filteredUsers.value?.map(departmentUser => ({
@@ -100,29 +82,34 @@ const cancel = () => router.push('/employee/staff')
     @confirm="submit"
     @cancel="cancel"
   >
-    <article class="mx-5 mt-5 mb-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-      <BaseFormSelect
-        name="department"
-        :options="departments"
-        class="col-span-1"
-        title="合作部門"
-        disabled
-      />
-      <BaseFormSelect
-        name="reviewee"
-        :options="revieweeOptions"
-        class="col-span-1"
-        title="合作對象"
-        disabled
-      />
-      <EmployeeAnswer
-        v-for="(question, index) of questions"
-        :id="question.id"
-        :key="question.id"
-        :index="index"
-        :role-id="1"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
-      />
+    <article class="mx-5 mt-5 mb-2">
+      <header class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <BaseFormSelect
+          name="department"
+          :options="departments"
+          class="col-span-1"
+          title="合作部門"
+          disabled
+        />
+        <BaseFormSelect
+          name="reviewee"
+          :options="revieweeOptions"
+          class="col-span-1"
+          title="合作對象"
+          disabled
+        />
+      </header>
+      <hr class="border-1 border-theme my-4 w-full">
+      <article class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <EmployeeAnswer
+          v-for="(question, index) of questions"
+          :id="question.id"
+          :key="question.id"
+          :index="index"
+          :role-id="1"
+          class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        />
+      </article>
     </article>
   </TheModal>
 </template>
