@@ -53,10 +53,10 @@ onBeforeMount(() => {
     />{{ roleTitle }}
   </span>
   <div
-    v-if="users && questionnaire"
+    v-if="users"
     class="absolute w-full h-full pt-4 px-4"
   >
-    <AdminQuestionMain />
+    <AdminQuestionMain v-if="questionnaire" />
     <transition
       name="sidebar"
       mode="out-in"
