@@ -12,8 +12,8 @@ type TypeMap = {
 }
 
 const positionMap:TypeMap = {
-  employee: 'left-1/12 right-1/12 md:right-5/12 xl:right-7/12',
-  admin: 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
+  employee: 'left-1/12 right-1/12 md:right-5/12 2xl:right-7/12',
+  admin: 'left-1/12 md:left-5/12 2xl:left-7/12 right-1/12'
 }
 
 const router = useRouter()
@@ -86,7 +86,7 @@ onMounted(() => {
 <template>
   <div class="fixed w-full inset-y-0 bg-theme duration-1000 flex justify-center items-center">
     <div class="outer absolute container max-h-full h-[40rem]">
-      <div class="inner absolute inset-0 md:inset-4 xl:inset-8">
+      <div class="inner absolute inset-0 md:inset-4 2xl:inset-8">
         <header class="header absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000">
           <section class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center">
             <p class="text-muted mb-4 text-lg">
@@ -188,7 +188,7 @@ onMounted(() => {
   }
 
   .article {
-    @apply left-full -right-5/6 md:-right-1/2 xl:-right-1/3;
+    @apply left-full -right-5/6 md:-right-1/2 2xl:-right-1/3;
   }
 
   .header-content {
@@ -222,12 +222,12 @@ onMounted(() => {
   }
 
   .header {
-    @apply left-0 xl:left-8 inset-y-0 md:inset-y-12 translate-x-0 translate-y-0 w-24 h-auto z-10;
+    @apply left-0 2xl:left-8 inset-y-0 md:inset-y-12 translate-x-0 translate-y-0 w-24 h-auto z-10;
   }
 
   .article {
-    @apply left-0 md:left-12 xl:left-40 right-0 xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 rounded-none
-      md:rounded-l-2xl xl:rounded-2xl;
+    @apply left-0 md:left-12 2xl:left-40 right-0 2xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 rounded-none
+      md:rounded-l-2xl 2xl:rounded-2xl;
   }
 
   .header-content,
