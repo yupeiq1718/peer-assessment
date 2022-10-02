@@ -128,13 +128,13 @@ const handleAnswersInformationRemove = (id:number) => {
       <div>
         <BaseSvgIcon
           role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+          class="w-6 h-6 m-2 fill-muted hover:fill-theme hover:animate-bounce"
           name="edit"
           @click="handleAnswersEdit(id.data)"
         />
         <BaseSvgIcon
           role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
+          class="w-6 h-6 m-2 fill-muted hover:fill-theme hover:animate-bounce"
           name="delete"
           @click="handleAnswersInformationRemove(id.data)"
         />
