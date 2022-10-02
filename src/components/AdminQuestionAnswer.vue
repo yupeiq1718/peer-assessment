@@ -108,7 +108,7 @@ const handleQuestionRemove = () => {
     </article>
     <footer
       v-if="systemStatus===0"
-      class="flex flex-row justify-end items-center duration-500 overflow-hidden"
+      class="flex flex-row justify-end items-center duration-500 overflow-hidden mb-4"
     >
       <hr class="border-2 border-light grow-[1] mx-3">
       <button
