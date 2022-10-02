@@ -51,6 +51,7 @@ const props = defineProps<Props>()
 }
 
 .article-enter-from {
-  @apply opacity-0 translate-y-16;
+  @apply opacity-0 top-20;
 }
+
 </style>
