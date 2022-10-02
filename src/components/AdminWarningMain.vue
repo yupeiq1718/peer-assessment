@@ -18,12 +18,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <transition-group
-    name="warning-card"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-    tag="div"
-    appear
-  >
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
     <AdminWarningCard
       v-for="warningUser of warningUserList"
       :id="warningUser.id"
@@ -34,18 +29,5 @@ onBeforeMount(async () => {
       :count2="warningUser.q2_unfilled_count"
       class="m-4"
     />
-  </transition-group>
+  </div>
 </template>
-<style scoped>
-.warning-card-enter-active {
-  @apply duration-500 delay-200;
-}
-
-.warning-card-enter-from {
-  @apply opacity-0  translate-y-16;
-}
-
-.warning-card-move {
-  @apply opacity-0  translate-y-16 duration-500 delay-500;
-}
-</style>
