@@ -42,7 +42,7 @@ const pageMap:PageMap = {
     icon: 'leader'
   },
   result: {
-    title: '互評結果瀏覽',
+    title: '歷史結果查詢',
     url: '/employee/result',
     icon: 'result'
   },
