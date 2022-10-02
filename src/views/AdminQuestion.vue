@@ -36,7 +36,6 @@ const getQuestionnaire = async (id:number) => {
 }
 
 const users = computed(() => useUsers().users)
-const questionnaire = computed(() => useQuestions().questionnaire(roleId.value))
 
 watch(roleId, () => getQuestionnaire(roleId.value))
 
@@ -46,15 +45,15 @@ onBeforeMount(() => {
 
 </script>
 <template>
-  <span class="font-bold text-dark text-sm">
+  <span class="absolute font-bold text-dark text-sm h-4 mb-2">
     <BaseSvgIcon
       name="question"
       class="w-4 h-4 mr-2"
     />{{ roleTitle }}
   </span>
   <div
-    v-if="users && questionnaire"
-    class="absolute w-full h-full pt-4 px-4"
+    v-if="users"
+    class="absolute top-8 left-0 w-full h-[calc(100%-2rem)] pt-4 px-4 overflow-auto"
   >
     <AdminQuestionMain />
     <transition
