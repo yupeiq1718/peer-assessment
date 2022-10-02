@@ -81,59 +81,53 @@ onBeforeMount(() => {
     @confirm="submit"
     @cancel="cancel"
   >
-    <transition
-      name="question-new"
-      mode="out-in"
-      appear
-    >
-      <article class="m-2 p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">
-        <BaseFormSelect
-          class="col-span-1 p-0"
-          name="typeId"
-          :options="questionTypes"
-          title="請選擇問答類型"
-          :rule="yup.number().required('此欄位必填')"
-        />
-        <hr class="border-1 border-theme my-4 col-span-1 lg:col-span-2 2xl:col-span-3">
-        <BaseFormTextarea
-          name="content"
-          class="col-span-1 lg:col-span-2 2xl:col-span-3 p-0"
-          title="請輸入問題敘述"
-          :rule="yup.string().required('此欄位必填')"
-        />
-        <BaseFormInput
-          name="tag"
-          type="text"
-          class="col-span-1 p-0"
-          title="請輸入標籤"
-          :rule="yup.string().required('此欄位必填')"
-        />
-        <BaseFormTextarea
-          v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
-          name="textHint"
-          class="col-span-1 lg:col-span-2 2xl:col-span-3"
-          title="請輸入文字問題敘述"
-          :rule="yup.string().required('此欄位必填')"
-        />
-        <BaseFormSelect
-          v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
-          class="col-span-1 p-0"
-          name="isRequired"
-          :options="[
-            {
-              text: '選填',
-              value: false
-            },
-            {
-              text: '必填',
-              value: true
-            }
-          ]"
-          title="是否必填"
-          :role="yup.boolean().required('此欄位必填')"
-        />
-      </article>
-    </transition>
+    <article class="m-2 p-8 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4 bg-white rounded-2xl duration-500">
+      <BaseFormSelect
+        class="col-span-1 p-0"
+        name="typeId"
+        :options="questionTypes"
+        title="請選擇問答類型"
+        :rule="yup.number().required('此欄位必填')"
+      />
+      <hr class="border-1 border-theme my-4 col-span-1 lg:col-span-2 2xl:col-span-3">
+      <BaseFormTextarea
+        name="content"
+        class="col-span-1 lg:col-span-2 2xl:col-span-3 p-0"
+        title="請輸入問題敘述"
+        :rule="yup.string().required('此欄位必填')"
+      />
+      <BaseFormInput
+        name="tag"
+        type="text"
+        class="col-span-1 p-0"
+        title="請輸入標籤"
+        :rule="yup.string().required('此欄位必填')"
+      />
+      <BaseFormTextarea
+        v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
+        name="textHint"
+        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        title="請輸入文字問題敘述"
+        :rule="yup.string().required('此欄位必填')"
+      />
+      <BaseFormSelect
+        v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
+        class="col-span-1 p-0"
+        name="isRequired"
+        :options="[
+          {
+            text: '選填',
+            value: false
+          },
+          {
+            text: '必填',
+            value: true
+          }
+        ]"
+        title="是否必填"
+        :role="yup.boolean().required('此欄位必填')"
+      />
+    </article>
   </TheModal>
 </template>
 

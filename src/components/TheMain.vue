@@ -11,9 +11,15 @@ const props = defineProps<Props>()
     <div
       class="main-content absolute left-4 right-4 md:left-20 xl:left-12 md:right-24 xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-2xl shadow-md"
     >
-      <article class="absolute inset-4 overflow-auto">
-        <slot />
-      </article>
+      <transition
+        name="article"
+        mode="out-in"
+        appear
+      >
+        <article class="absolute inset-4 overflow-auto">
+          <slot />
+        </article>
+      </transition>
       <h1 class="absolute left-1/2 -top-8 transform -translate-x-1/2 px-8 py-2 bg-muted text-white rounded-2xl text-xl md:text-2xl font-bold whitespace-nowrap shadow-md">
         {{ props.title }}
       </h1>
@@ -38,5 +44,13 @@ const props = defineProps<Props>()
   .main {
     @apply left-full -right-full duration-1000;
   }
+}
+
+.article-enter-active {
+  @apply duration-500 delay-700;
+}
+
+.article-enter-from {
+  @apply opacity-0 translate-y-16;
 }
 </style>
