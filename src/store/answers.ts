@@ -49,7 +49,7 @@ const useAnswers = defineStore('answers', () => {
     q1_unfilled_count:number,
     q2_unfilled_count:number
   }
-  const warningUserList = ref<WarningUser[]>()
+  const warningUserList = ref<WarningUser[]>([])
 
   const createAnswers = async ({ reviewee, reviewer, qId, answers }: {
     reviewee: number,

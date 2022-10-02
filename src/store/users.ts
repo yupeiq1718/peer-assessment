@@ -17,7 +17,7 @@ const useUsers = defineStore('users', () => {
     }
   }
 
-  const users = ref<User[]>()
+  const users = ref<User[]>([])
 
   type UserCreate = {
     department: string,
@@ -73,9 +73,9 @@ const useUsers = defineStore('users', () => {
     }
   }
 
-  const activeUsers = computed(() => users.value?.filter(user => user.activate))
+  const activeUsers = computed(() => users.value.filter(user => user.activate))
 
-  const user = computed(() => (id:number) => activeUsers.value?.find(user => user.id === id))
+  const user = computed(() => (id:number) => activeUsers.value.find(user => user.id === id))
 
   type FilterData = {
     department: string,
