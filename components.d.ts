@@ -27,7 +27,6 @@ declare module '@vue/runtime-core' {
     BaseSelect: typeof import('./src/components/BaseSelect.vue')['default']
     BaseSvgIcon: typeof import('./src/components/BaseSvgIcon.vue')['default']
     BaseTable: typeof import('./src/components/BaseTable.vue')['default']
-    BaseTableItem: typeof import('./src/components/BaseTableItem.vue')['default']
     BaseTag: typeof import('./src/components/BaseTag.vue')['default']
     BaseTextarea: typeof import('./src/components/BaseTextarea.vue')['default']
     BaseToast: typeof import('./src/components/BaseToast.vue')['default']
