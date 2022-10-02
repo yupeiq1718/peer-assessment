@@ -128,9 +128,6 @@ const setSystemStatus = async (status:number) => {
   }
 }
 
-onBeforeMount(async () => {
-  await getSystemStatus()
-})
 </script>
 <template>
   <div class="absolute w-full h-full pt-6 px-4">
