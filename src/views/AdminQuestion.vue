@@ -36,7 +36,6 @@ const getQuestionnaire = async (id:number) => {
 }
 
 const users = computed(() => useUsers().users)
-const questionnaire = computed(() => useQuestions().questionnaire(roleId.value))
 
 watch(roleId, () => getQuestionnaire(roleId.value))
 
@@ -56,7 +55,7 @@ onBeforeMount(() => {
     v-if="users"
     class="absolute w-full h-full pt-4 px-4"
   >
-    <AdminQuestionMain v-if="questionnaire" />
+    <AdminQuestionMain />
     <transition
       name="sidebar"
       mode="out-in"
