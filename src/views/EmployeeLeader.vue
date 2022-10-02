@@ -3,18 +3,21 @@ import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
 import { useAccount } from '@/store/account'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 
 const router = useRouter()
 
-const items = [
+const items = computed(() => systemStatus.value === 1 && [
   {
     name: 'create',
     icon: 'plus',
     function: () => router.push('/employee/leader/new')
   }
-]
+])
 
 const getQuestionnaire = async (id:number) => {
   try {
