@@ -11,13 +11,15 @@ const accountId = computed(() => useAccount().accountId)
 
 const router = useRouter()
 
-const items = computed(() => systemStatus.value === 1 && [
-  {
-    name: 'create',
-    icon: 'plus',
-    function: () => router.push('/employee/leader/new')
-  }
-])
+const items = computed(() => systemStatus.value === 1
+  ? [
+    {
+      name: 'create',
+      icon: 'plus',
+      function: () => router.push('/employee/leader/new')
+    }
+  ]
+  : [])
 
 const getQuestionnaire = async (id:number) => {
   try {
