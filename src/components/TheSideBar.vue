@@ -9,7 +9,7 @@ interface Props {
 const props = defineProps<Props>()
 </script>
 <template>
-  <div class="sidebar fixed -top-2 md:top-auto md:bottom-10 right-0 md:right-4 xl:right-20 flex flex-row md:flex-col z-20">
+  <div class="sidebar fixed -top-2 md:top-auto md:bottom-10 right-0 md:right-4 2xl:right-20 flex flex-row md:flex-col z-20">
     <button
       v-for="item of props.items"
       :key="item.name"

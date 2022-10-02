@@ -7,9 +7,9 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <main class="main fixed left-0 md:left-12 xl:left-40 right-0 xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 bg-white md:rounded-l-2xl xl:rounded-2xl shadow-md">
+  <main class="main fixed left-0 md:left-12 2xl:left-40 right-0 2xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 bg-white md:rounded-l-2xl 2xl:rounded-2xl shadow-md">
     <div
-      class="main-content absolute left-4 right-4 md:left-20 xl:left-12 md:right-24 xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-2xl shadow-md"
+      class="main-content absolute left-4 right-4 md:left-20 2xl:left-12 md:right-24 2xl:right-32 top-10 md:top-12 bottom-4 md:bottom-8 bg-muted-light border-4 border-muted rounded-2xl shadow-md"
     >
       <transition
         name="article"
