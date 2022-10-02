@@ -2,6 +2,9 @@
 import { useUsers } from '@/store/users'
 import { useQuestions } from '@/store/questions'
 import { roleData } from '@/utilities/data'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const router = useRouter()
 const route = useRoute()
@@ -13,18 +16,27 @@ const roleTitle = computed(() => {
   return `${role?.text}互評問卷`
 })
 
-const items = [
-  {
-    name: 'create',
-    icon: 'plus',
-    function: () => router.push(`/admin/question/${roleId.value}/new`)
-  },
-  {
-    name: 'filter',
-    icon: 'filter',
-    function: () => router.push(`/admin/question/${roleId.value}/filter`)
-  }
-]
+const items = computed(() => systemStatus.value === 0
+  ? [
+    {
+      name: 'create',
+      icon: 'plus',
+      function: () => router.push(`/admin/question/${roleId.value}/new`)
+    },
+    {
+      name: 'filter',
+      icon: 'filter',
+      function: () => router.push(`/admin/question/${roleId.value}/filter`)
+    }
+  ]
+  : [
+
+    {
+      name: 'filter',
+      icon: 'filter',
+      function: () => router.push(`/admin/question/${roleId.value}/filter`)
+    }
+  ])
 
 const getQuestionnaire = async (id:number) => {
   try {
@@ -36,7 +48,6 @@ const getQuestionnaire = async (id:number) => {
 }
 
 const users = computed(() => useUsers().users)
-const questionnaire = computed(() => useQuestions().questionnaire(roleId.value))
 
 watch(roleId, () => getQuestionnaire(roleId.value))
 
@@ -46,15 +57,15 @@ onBeforeMount(() => {
 
 </script>
 <template>
-  <span class="font-bold text-dark text-sm">
+  <span class="absolute font-bold text-dark text-sm h-4 mb-2">
     <BaseSvgIcon
       name="question"
       class="w-4 h-4 mr-2"
     />{{ roleTitle }}
   </span>
   <div
-    v-if="users && questionnaire"
-    class="absolute w-full h-full pt-4 px-4"
+    v-if="users"
+    class="absolute top-8 left-0 w-full h-[calc(100%-2rem)] pt-4 px-4 overflow-auto"
   >
     <AdminQuestionMain />
     <transition

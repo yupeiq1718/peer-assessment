@@ -77,12 +77,16 @@ const questionTypes:QuestionTypes[] = [
 
 const systemStatus = [
   {
-    value: 1,
+    value: 0,
     text: '準備中'
   },
   {
-    value: 2,
+    value: 1,
     text: '進行中'
+  },
+  {
+    value: 2,
+    text: '暫停中'
   }
 ]
 

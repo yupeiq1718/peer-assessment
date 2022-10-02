@@ -6,6 +6,9 @@ import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { departments } from '@/utilities/data'
 import { useAccount } from '@/store/account'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 const questions = computed(() => useQuestions().questions(1))
@@ -98,6 +101,9 @@ const getUnfilledList = async () => {
 }
 
 onBeforeMount(async () => {
+  if (systemStatus.value !== 1) {
+    router.push('/employee/staff')
+  }
   await getUnfilledList()
 })
 </script>

@@ -5,18 +5,38 @@ const systemStatus = computed(() => useSystem().systemStatus)
 
 const items = computed(() => {
   switch (systemStatus.value) {
-    case 1 :
+    case 0 :
       return [{
         name: 'begin',
         icon: 'begin',
         function: handleAssessmentBegin
       }]
-    case 2 :
+    case 1 :
       return [{
-        name: 'finish',
-        icon: 'finish',
-        function: handleAssessmentFinish
+        name: 'pause',
+        icon: 'pause',
+        function: handleAssessmentPause
       }]
+    case 2 :
+      return [
+        {
+          name: 'play',
+          icon: 'play',
+          function: handleAssessmentContinue
+        }
+        // {
+        //   name: 'save',
+        //   icon: 'file_save',
+        //   function: handleAssessmentSave
+        // },
+        // {
+        //   name: 'delete',
+        //   icon: 'file_delete',
+        //   function: handleAssessmentDelete
+        // }
+      ]
+    default:
+      return []
   }
 })
 
@@ -46,21 +66,44 @@ type ConfirmData = {
 }
 const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
 
-const handleAssessmentFinish = () => {
-  setConfirmData({
-    isActive: true,
-    confirm: () => setSystemStatus(1),
-    text: '請確認是否要結束互評？'
-  })
-}
-
 const handleAssessmentBegin = () => {
   setConfirmData({
     isActive: true,
-    confirm: () => setSystemStatus(2),
+    confirm: () => setSystemStatus(1),
     text: '請確認是否要開始互評？'
   })
 }
+
+const handleAssessmentPause = () => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => setSystemStatus(2),
+    text: '請確認是否要暫停填寫互評？'
+  })
+}
+const handleAssessmentContinue = () => {
+  setConfirmData({
+    isActive: true,
+    confirm: () => setSystemStatus(1),
+    text: '請確認是否要重新開始填寫互評？'
+  })
+}
+
+// const handleAssessmentSave = () => {
+//   setConfirmData({
+//     isActive: true,
+//     confirm: () => setSystemStatus(0),
+//     text: '請確認是否要儲存互評？'
+//   })
+// }
+
+// const handleAssessmentDelete = () => {
+//   setConfirmData({
+//     isActive: true,
+//     confirm: () => setSystemStatus(0),
+//     text: '請確認是否要刪除互評？'
+//   })
+// }
 
 const setSystemStatus = async (status:number) => {
   try {
@@ -85,13 +128,10 @@ const setSystemStatus = async (status:number) => {
   }
 }
 
-onBeforeMount(async () => {
-  await getSystemStatus()
-})
 </script>
 <template>
   <div class="absolute w-full h-full pt-6 px-4">
-    <AdminSystemMain v-if="systemStatus" />
+    <AdminSystemMain v-if="systemStatus!==undefined" />
   </div>
   <transition
     name="sidebar"

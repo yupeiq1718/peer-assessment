@@ -3,20 +3,23 @@ import { useQuestions } from '@/store/questions'
 import { useAnswers } from '@/store/answers'
 import { useUsers } from '@/store/users'
 import { useAccount } from '@/store/account'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 
 const router = useRouter()
 
-const items = [
-  {
-    name: 'create',
-    icon: 'plus',
-    function: () => router.push('/employee/leader/new')
-  }
-]
-
-const questionnaire = computed(() => useQuestions().questionnaire(2))
+const items = computed(() => systemStatus.value === 1
+  ? [
+    {
+      name: 'create',
+      icon: 'plus',
+      function: () => router.push('/employee/leader/new')
+    }
+  ]
+  : [])
 
 const getQuestionnaire = async (id:number) => {
   try {
@@ -27,7 +30,7 @@ const getQuestionnaire = async (id:number) => {
   }
 }
 
-const answersInformation = computed(() => useAnswers().answersInformation(2))
+const questionnaire = computed(() => useQuestions().questionnaire(2))
 
 const getAnswersInformation = async ({ userId, qId }:{
   userId:number, qId:number
@@ -52,7 +55,7 @@ onBeforeMount(() => {
 </script>
 <template>
   <div
-    v-if="questionnaire && answersInformation && users"
+    v-if="users"
     class="absolute w-full h-full pt-6 px-4"
   >
     <EmployeeLeaderMain />
@@ -61,9 +64,15 @@ onBeforeMount(() => {
       mode="out-in"
       appear
     >
-      <TheSideBar :items="items" />
+      <TheSideBar
+        v-if="questionnaire"
+        :items="items"
+      />
     </transition>
-    <router-view v-slot="{ Component }">
+    <router-view
+      v-if="questionnaire"
+      v-slot="{ Component }"
+    >
       <transition
         name="modal"
         mode="out-in"
