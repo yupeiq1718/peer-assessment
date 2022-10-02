@@ -65,12 +65,12 @@ const systemStatusId = computed(() => useSystem().systemStatus)
       <p class="text-dark">
         {{ '重啟：員工和主管可以繼續填寫互評。' }}
       </p>
-      <p class="text-dark">
+      <!-- <p class="text-dark">
         {{ '儲存：結束這次互評並儲存這次紀錄。' }}
       </p>
       <p class="text-dark">
         {{ '刪除：結束這次互評並刪除這次紀錄。' }}
-      </p>
+      </p> -->
       <section class="my-4 border-2 border-light p-4">
         <h3 class="font-bold text-dark mb-2">
           {{ '主管：' }}

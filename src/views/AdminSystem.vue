@@ -23,17 +23,17 @@ const items = computed(() => {
           name: 'play',
           icon: 'play',
           function: handleAssessmentContinue
-        },
-        {
-          name: 'save',
-          icon: 'file_save',
-          function: handleAssessmentSave
-        },
-        {
-          name: 'delete',
-          icon: 'file_delete',
-          function: handleAssessmentDelete
         }
+        // {
+        //   name: 'save',
+        //   icon: 'file_save',
+        //   function: handleAssessmentSave
+        // },
+        // {
+        //   name: 'delete',
+        //   icon: 'file_delete',
+        //   function: handleAssessmentDelete
+        // }
       ]
     default:
       return []
@@ -89,21 +89,21 @@ const handleAssessmentContinue = () => {
   })
 }
 
-const handleAssessmentSave = () => {
-  setConfirmData({
-    isActive: true,
-    confirm: () => setSystemStatus(0),
-    text: '請確認是否要完成互評？'
-  })
-}
+// const handleAssessmentSave = () => {
+//   setConfirmData({
+//     isActive: true,
+//     confirm: () => setSystemStatus(0),
+//     text: '請確認是否要儲存互評？'
+//   })
+// }
 
-const handleAssessmentDelete = () => {
-  setConfirmData({
-    isActive: true,
-    confirm: () => setSystemStatus(0),
-    text: '請確認是否要完成互評？'
-  })
-}
+// const handleAssessmentDelete = () => {
+//   setConfirmData({
+//     isActive: true,
+//     confirm: () => setSystemStatus(0),
+//     text: '請確認是否要刪除互評？'
+//   })
+// }
 
 const setSystemStatus = async (status:number) => {
   try {
