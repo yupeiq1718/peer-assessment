@@ -25,6 +25,8 @@ const getQuestionnaire = async (id:number) => {
   }
 }
 
+const questionnaire = computed(() => useQuestions().questionnaire(2))
+
 const getAnswersInformation = async ({ userId, qId }:{
   userId:number, qId:number
 }) => {
@@ -57,9 +59,15 @@ onBeforeMount(() => {
       mode="out-in"
       appear
     >
-      <TheSideBar :items="items" />
+      <TheSideBar
+        v-if="questionnaire"
+        :items="items"
+      />
     </transition>
-    <router-view v-slot="{ Component }">
+    <router-view
+      v-if="questionnaire"
+      v-slot="{ Component }"
+    >
       <transition
         name="modal"
         mode="out-in"
