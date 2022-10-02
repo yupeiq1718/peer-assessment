@@ -3,6 +3,9 @@ import { useForm } from 'vee-validate'
 import { questionTypes } from '@/utilities/data'
 import { useQuestions } from '@/store/questions'
 import * as yup from 'yup'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const route = useRoute()
 const roleId = computed(() => Number(route.params.roleId))
@@ -75,6 +78,13 @@ const submit = handleSubmit(async values => {
 
 const router = useRouter()
 const cancel = () => router.push(`/admin/question/${roleId.value}`)
+
+onBeforeMount(() => {
+  if (systemStatus.value !== 0) {
+    router.push(`/admin/question/${roleId.value}`)
+  }
+})
+
 </script>
 
 <template>
