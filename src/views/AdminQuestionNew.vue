@@ -10,17 +10,7 @@ const systemStatus = computed(() => useSystem().systemStatus)
 const route = useRoute()
 const roleId = computed(() => Number(route.params.roleId))
 
-const schema = yup.object({
-  content: yup.string().required('此欄位必填'),
-  tag: yup.string().required('此欄位必填'),
-  textHint: yup.string(),
-  typeId: yup.number(),
-  isRequired: yup.boolean()
-})
-
-const { setFieldValue, values, handleSubmit } = useForm({
-  validationSchema: schema
-})
+const { setFieldValue, values, handleSubmit } = useForm()
 
 setFieldValue('content', '')
 setFieldValue('tag', '')
@@ -97,24 +87,28 @@ onBeforeMount(() => {
         name="typeId"
         :options="questionTypes"
         title="請選擇問答類型"
+        :rule="yup.number().required('此欄位必填')"
       />
 
       <BaseFormTextarea
         name="content"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="請輸入問題敘述"
+        :rule="yup.string().required('此欄位必填')"
       />
       <BaseFormInput
         name="tag"
         type="text"
         class="col-span-1 p-0"
         title="請輸入標籤"
+        :rule="yup.string().required('此欄位必填')"
       />
       <BaseFormTextarea
         v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
         name="textHint"
         class="col-span-1 lg:col-span-2 2xl:col-span-3"
         title="請輸入文字問題敘述"
+        :rule="yup.string().required('此欄位必填')"
       />
       <BaseFormSelect
         v-if="Number(values.typeId) === 2 || Number(values.typeId) === 3"
@@ -131,6 +125,7 @@ onBeforeMount(() => {
           }
         ]"
         title="是否必填"
+        :role="yup.boolean().required('此欄位必填')"
       />
     </article>
   </TheModal>
