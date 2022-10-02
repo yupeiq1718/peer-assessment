@@ -16,8 +16,6 @@ const items = [
   }
 ]
 
-const questionnaire = computed(() => useQuestions().questionnaire(2))
-
 const getQuestionnaire = async (id:number) => {
   try {
     const response = await useQuestions().readQuestionnaire(id)
@@ -26,8 +24,6 @@ const getQuestionnaire = async (id:number) => {
     console.log(error)
   }
 }
-
-const answersInformation = computed(() => useAnswers().answersInformation(2))
 
 const getAnswersInformation = async ({ userId, qId }:{
   userId:number, qId:number
@@ -52,7 +48,7 @@ onBeforeMount(() => {
 </script>
 <template>
   <div
-    v-if="questionnaire && answersInformation && users"
+    v-if="users"
     class="absolute w-full h-full pt-6 px-4"
   >
     <EmployeeLeaderMain />
