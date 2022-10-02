@@ -128,19 +128,29 @@ const handleAnswersInformationRemove = (id:number) => {
       />
     </template>
     <template #function="id">
-      <div v-if="systemStatus === 1">
-        <BaseSvgIcon
-          role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-          name="edit"
+      <div>
+        <button
+          :disabled="systemStatus !== 1"
+          :class="systemStatus== 1 ? ['fill-muted hover:fill-theme'] : 'fill-muted-light pointer-events-none'"
           @click="handleAnswersEdit(id.data)"
-        />
-        <BaseSvgIcon
-          role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme"
-          name="delete"
+        >
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2"
+            name="edit"
+          />
+        </button>
+        <button
+          :disabled="systemStatus !== 1"
+          :class="systemStatus== 1 ? ['fill-muted hover:fill-theme'] : 'fill-muted-light pointer-events-none'"
           @click="handleAnswersInformationRemove(id.data)"
-        />
+        >
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2"
+            name="delete"
+          />
+        </button>
       </div>
     </template>
   </BaseTable>
