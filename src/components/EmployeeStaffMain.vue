@@ -2,6 +2,9 @@
 import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
 import { departments, getVariants } from '@/utilities/data'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 
@@ -126,18 +129,28 @@ const handleAnswersInformationRemove = (id:number) => {
     </template>
     <template #function="id">
       <div>
-        <BaseSvgIcon
-          role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme hover:animate-bounce"
-          name="edit"
+        <button
+          :disabled="systemStatus !== 1"
+          :class="systemStatus== 1 ? ['fill-muted hover:fill-theme hover:animate-bounce'] : 'fill-muted-light pointer-events-none'"
           @click="handleAnswersEdit(id.data)"
-        />
-        <BaseSvgIcon
-          role="button"
-          class="w-6 h-6 m-2 fill-muted hover:fill-theme hover:animate-bounce"
-          name="delete"
+        >
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2"
+            name="edit"
+          />
+        </button>
+        <button
+          :disabled="systemStatus !== 1"
+          :class="systemStatus== 1 ? ['fill-muted hover:fill-theme hover:animate-bounce'] : 'fill-muted-light pointer-events-none'"
           @click="handleAnswersInformationRemove(id.data)"
-        />
+        >
+          <BaseSvgIcon
+            role="button"
+            class="w-6 h-6 m-2"
+            name="delete"
+          />
+        </button>
       </div>
     </template>
   </BaseTable>

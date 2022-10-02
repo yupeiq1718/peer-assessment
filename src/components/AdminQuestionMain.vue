@@ -5,7 +5,7 @@ const route = useRoute()
 
 const roleId = computed(() => Number(route.params.roleId))
 
-const questions = computed(() => useQuestions().questions(roleId.value))
+const questions = computed(() => useQuestions().questions(roleId.value) || [])
 </script>
 
 <template>

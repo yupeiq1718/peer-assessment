@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 interface Props {
   id: number,
@@ -103,7 +106,10 @@ const handleQuestionRemove = () => {
         class="w-full mt-4"
       />
     </article>
-    <footer class="flex flex-row justify-end items-center duration-500 overflow-hidden">
+    <footer
+      v-if="systemStatus===0"
+      class="flex flex-row justify-end items-center duration-500 overflow-hidden"
+    >
       <hr class="border-2 border-light grow-[1] mx-3">
       <button
         class="rounded-2xl flex justify-center items-center bg-light hover:bg-theme fill-white w-10 h-10 mr-2 duration-500"

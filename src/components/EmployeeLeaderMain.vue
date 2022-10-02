@@ -2,6 +2,9 @@
 import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
 import { departments, getVariants } from '@/utilities/data'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 
@@ -125,7 +128,7 @@ const handleAnswersInformationRemove = (id:number) => {
       />
     </template>
     <template #function="id">
-      <div>
+      <div v-if="systemStatus === 1">
         <BaseSvgIcon
           role="button"
           class="w-6 h-6 m-2 fill-muted hover:fill-theme hover:animate-bounce"
