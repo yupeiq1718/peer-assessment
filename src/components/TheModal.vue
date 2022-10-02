@@ -31,7 +31,7 @@ const sizeMap = {
     </article>
     <aside class="absolute right-3 bottom-1 w-full md:w-12 flex flex-row md:flex-col items-center justify-center">
       <button
-        class="rounded-2xl bg-theme fill-white duration-500 m-1"
+        class="rounded-2xl border-2 border-theme bg-theme-light hover:bg-theme fill-theme hover:fill-theme-light duration-500 m-1"
         @click="emits('confirm')"
       >
         <BaseSvgIcon
@@ -40,7 +40,7 @@ const sizeMap = {
         />
       </button>
       <button
-        class="rounded-2xl bg-theme fill-white duration-500 m-1"
+        class="rounded-2xl border-2 border-theme bg-theme-light hover:bg-theme fill-theme hover:fill-theme-light duration-500 m-1"
         @click="emits('cancel')"
       >
         <BaseSvgIcon
