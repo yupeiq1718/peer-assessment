@@ -2,6 +2,9 @@
 import { useUsers } from '@/store/users'
 import { useQuestions } from '@/store/questions'
 import { roleData } from '@/utilities/data'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const router = useRouter()
 const route = useRoute()
@@ -13,18 +16,27 @@ const roleTitle = computed(() => {
   return `${role?.text}互評問卷`
 })
 
-const items = [
-  {
-    name: 'create',
-    icon: 'plus',
-    function: () => router.push(`/admin/question/${roleId.value}/new`)
-  },
-  {
-    name: 'filter',
-    icon: 'filter',
-    function: () => router.push(`/admin/question/${roleId.value}/filter`)
-  }
-]
+const items = computed(() => systemStatus.value === 0
+  ? [
+    {
+      name: 'create',
+      icon: 'plus',
+      function: () => router.push(`/admin/question/${roleId.value}/new`)
+    },
+    {
+      name: 'filter',
+      icon: 'filter',
+      function: () => router.push(`/admin/question/${roleId.value}/filter`)
+    }
+  ]
+  : [
+
+    {
+      name: 'filter',
+      icon: 'filter',
+      function: () => router.push(`/admin/question/${roleId.value}/filter`)
+    }
+  ])
 
 const getQuestionnaire = async (id:number) => {
   try {

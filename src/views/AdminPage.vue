@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAccount } from '@/store/account'
 import { useUsers } from '@/store/users'
+import { useSystem } from '@/store/system'
 
 const accountId = computed(() => useAccount().accountId)
 
@@ -61,6 +62,7 @@ const handleLogin = async () => {
   try {
     await useAccount().readAccountId('admin')
     await useUsers().readUsers()
+    await useSystem().readSystemStatus()
   } catch ({ response }) {
     router.push('/?type=admin')
   }

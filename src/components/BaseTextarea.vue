@@ -19,9 +19,9 @@ type StatusMap= {
 }
 
 const inputStyleMap:StatusMap = {
-  success: 'border-success',
-  alert: 'border-alert',
-  error: 'border-error',
+  success: 'border-dark focus:border-success',
+  alert: 'border-dark focus:border-alert',
+  error: 'border-dark focus:border-error',
   info: 'border-dark focus:border-info',
   muted: 'border-muted bg-muted-light'
 }

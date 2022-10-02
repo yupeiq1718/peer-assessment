@@ -5,6 +5,9 @@ import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import { departments } from '@/utilities/data'
 import { useAccount } from '@/store/account'
+import { useSystem } from '@/store/system'
+
+const systemStatus = computed(() => useSystem().systemStatus)
 
 const accountId = computed(() => useAccount().accountId)
 
@@ -74,6 +77,12 @@ const submit = handleSubmit(async values => {
 
 const router = useRouter()
 const cancel = () => router.push('/employee/staff')
+
+onBeforeMount(async () => {
+  if (systemStatus.value !== 1) {
+    router.push('/employee/staff')
+  }
+})
 </script>
 
 <template>
