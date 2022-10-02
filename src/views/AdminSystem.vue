@@ -5,7 +5,7 @@ const systemStatus = computed(() => useSystem().systemStatus)
 
 const items = computed(() => {
   switch (systemStatus.value) {
-    case 1 :
+    case 0 :
       return [{
         name: 'begin',
         icon: 'begin',
@@ -17,6 +17,8 @@ const items = computed(() => {
         icon: 'finish',
         function: handleAssessmentFinish
       }]
+    default:
+      return []
   }
 })
 
