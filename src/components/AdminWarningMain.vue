@@ -38,7 +38,7 @@ onBeforeMount(async () => {
 </template>
 <style scoped>
 .warning-card-enter-active {
-  @apply duration-500 delay-500;
+  @apply duration-500 delay-200;
 }
 
 .warning-card-enter-from {
