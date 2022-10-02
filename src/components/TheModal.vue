@@ -26,9 +26,15 @@ const sizeMap = {
     class="modal fixed top-0 md:top-8 bottom-0 md:bottom-8 right-0 md:right-0 xl:right-0 bg-theme-light border-2 border-theme rounded-l-2xl shadow-md overflow-hidden z-30 duration-1000"
     :class="sizeMap[props.size]"
   >
-    <article class="absolute top-4 bottom-16 md:bottom-4 inset-x-4 md:right-18 overflow-auto">
-      <slot />
-    </article>
+    <transition
+      name="modal-article"
+      mode="out-in"
+      appear
+    >
+      <article class="absolute top-4 bottom-16 md:bottom-4 inset-x-4 md:right-18 overflow-auto">
+        <slot />
+      </article>
+    </transition>
     <aside class="absolute right-3 bottom-1 w-full md:w-12 flex flex-row md:flex-col items-center justify-center">
       <button
         class="rounded-2xl border-2 border-theme bg-theme-light hover:bg-theme fill-theme hover:fill-theme-light duration-500 m-1"
@@ -61,5 +67,13 @@ const sizeMap = {
   .modal {
     @apply transform translate-x-full;
   }
+}
+
+.modal-article-enter-active {
+  @apply duration-500 delay-700;
+}
+
+.modal-article-enter-from {
+  @apply opacity-0 translate-y-16;
 }
 </style>
