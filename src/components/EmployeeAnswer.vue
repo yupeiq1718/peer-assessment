@@ -38,7 +38,7 @@ const question = computed(() => useQuestions().question({
         :name="`answers[${props.index}].comment`"
         :placeholder="question.textHint"
         class="w-full mt-4"
-        :rule="yup.string().required('此欄位必填')"
+        :rule="question?.isRequired && yup.string().required('此欄位必填')"
       />
     </article>
   </div>
