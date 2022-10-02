@@ -28,10 +28,14 @@ const props = defineProps<Props>()
         </th>
       </tr>
     </thead>
-    <tbody>
+    <transition-group
+      name="tboby"
+      tag="tbody"
+      appear
+    >
       <tr
-        v-for="item of props.items"
-        :key="item.id"
+        v-for="item, index of props.items"
+        :key="index"
         class="whitespace-nowrap"
       >
         <td
@@ -45,6 +49,19 @@ const props = defineProps<Props>()
           />
         </td>
       </tr>
-    </tbody>
+    </transition-group>
   </table>
 </template>
+<style scoped>
+  .tbody-enter-active {
+    @apply duration-500 delay-500;
+  }
+
+  .tbody-enter-from {
+    @apply opacity-0  translate-y-16;
+  }
+
+  .tbody-move {
+    @apply opacity-0  translate-y-16 duration-500 delay-500;
+  }
+  </style>
