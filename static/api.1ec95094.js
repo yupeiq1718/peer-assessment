@@ -1,0 +1,1 @@
+import{y as s}from"./index.4b8d1758.js";const r=s.create({baseURL:"https://peerreview.oexpo.io/backend_staging",timeout:1e4});r.interceptors.request.use(e=>(e.headers.Authorization=window.sessionStorage.getItem("access-token"),Promise.resolve(e)),e=>Promise.reject(e));r.interceptors.response.use(e=>Promise.resolve(e),e=>Promise.reject(e));export{r as u};
