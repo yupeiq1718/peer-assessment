@@ -69,6 +69,12 @@ const sizeMap = {
   }
 }
 
+.page-leave-to {
+  .modal {
+    @apply transform translate-x-full;
+  }
+}
+
 .modal-article-enter-active {
   @apply duration-500 delay-700;
 }
