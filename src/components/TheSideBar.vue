@@ -18,7 +18,7 @@ const props = defineProps<Props>()
     >
       <BaseSvgIcon
         :name="item.icon"
-        class="w-6 h-6 lg:w-8 lg:h-8"
+        class="w-6 h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8"
       />
     </button>
   </div>
