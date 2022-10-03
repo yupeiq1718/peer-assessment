@@ -36,10 +36,10 @@ provide('setFilterData', setFilterData)
 
 </script>
 <template>
-  <span class="absolute font-bold text-dark text-sm h-4 mb-2">
+  <span class="absolute font-bold text-muted text-sm h-4 mb-2">
     <BaseSvgIcon
       name="users"
-      class="w-4 h-4 mr-2"
+      class="w-4 h-4 mr-2 fill-muted"
     />
     <span v-if="!filterDepartment && !filterRoles">{{ '全部使用者' }}</span>
     <span v-if="filterDepartment">{{ filterDepartment }}</span>

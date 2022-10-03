@@ -57,10 +57,10 @@ onBeforeMount(() => {
 
 </script>
 <template>
-  <span class="absolute font-bold text-dark text-sm h-4 mb-2">
+  <span class="absolute font-bold text-muted text-sm h-4 mb-2">
     <BaseSvgIcon
       name="question"
-      class="w-4 h-4 mr-2"
+      class="w-4 h-4 mr-2 fill-muted"
     />{{ roleTitle }}
   </span>
   <div
