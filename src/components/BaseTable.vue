@@ -50,6 +50,14 @@ const props = defineProps<Props>()
         </td>
       </tr>
     </transition-group>
+    <tr v-show="!props.items?.length">
+      <td
+        :colspan="props.fields.length"
+        class="px-3 2xl:px-4 py-8 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
+      >
+        {{ '暫無資料' }}
+      </td>
+    </tr>
   </table>
 </template>
 <style scoped>
