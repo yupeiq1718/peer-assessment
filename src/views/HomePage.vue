@@ -71,7 +71,6 @@ const adminIdConfiguration = {
 const buttonConfig = {
   size: 'large',
   shape: 'circle',
-  locale: 'zh_Hant',
   width: 192
 }
 
@@ -138,11 +137,13 @@ onMounted(() => {
           <footer class="article-content text-center">
             <GoogleLogin
               v-if="type==='employee'"
+              class="h-10"
               :id-configuration="employeeIdConfiguration"
               :button-config="buttonConfig"
             />
             <GoogleLogin
               v-if="type==='admin'"
+              class="h-10"
               :id-configuration="adminIdConfiguration"
               :button-config="buttonConfig"
             />
