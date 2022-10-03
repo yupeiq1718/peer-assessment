@@ -104,7 +104,7 @@ const handleAnswersInformationRemove = (id:number) => {
     <template #profile="profile">
       <div class="flex justify-start items-center">
         <img
-          class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
+          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-4"
           :src="profile.data.picture ||'/user.png'"
           alt="user"
         >
@@ -122,7 +122,7 @@ const handleAnswersInformationRemove = (id:number) => {
       <BaseScore
         v-for="(score, index) of scores.data"
         :key="index"
-        class=" w-[4.5rem] h-[4.5rem]"
+        class="w-14 2xl:w-16 h-14 2xl:h-16"
         :variant="getVariants(index)"
         :score="score"
       />

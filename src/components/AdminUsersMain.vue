@@ -105,7 +105,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
     <template #profile="profile">
       <div class="flex justify-start items-center">
         <img
-          class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
+          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-4"
           :src="profile.data.picture ||'/user.png'"
           alt="user"
         >
@@ -138,7 +138,7 @@ const edit = (id:number) => router.push(`/admin/users/edit/${id}`)
         class="flex justify-start items-center"
       >
         <img
-          class="inline-block rounded-full w-16 max-w-none h-16 bg-light mx-4"
+          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-4"
           :src="manager.data.picture ||'/user.png'"
           alt="user"
         >
