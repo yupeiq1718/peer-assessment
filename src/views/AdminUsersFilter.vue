@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useUsers } from '@/store/users'
 import { useForm } from 'vee-validate'
 import { departments, roleData } from '@/utilities/data'
+import { Ref } from 'vue'
 
 const router = useRouter()
 
@@ -15,12 +15,23 @@ const roleOptions = roleData.concat([{
   text: '全部'
 }])
 
+const filterDepartment:Ref<string> = inject('filterDepartment', ref(''))
+const filterRoles:Ref<0|1|2|3|4> = inject('filterRoles', ref(0))
+
+const setFilterData:({ department, roles }: {
+  department: string,
+  roles: 0|1|2|3|4
+})=>void = inject('setFilterData', () => null)
+
 const { handleSubmit } = useForm({
-  initialValues: useUsers().filterData
+  initialValues: {
+    department: filterDepartment.value,
+    roles: filterRoles.value
+  }
 })
 
 const submit = handleSubmit(({ department, roles }) => {
-  useUsers().setFilterData({
+  setFilterData({
     department,
     roles: Number(roles) as 0|1|2|3|4
   })

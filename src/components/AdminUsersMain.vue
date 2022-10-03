@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUsers } from '@/store/users'
 import { departments, roleData, getVariants } from '@/utilities/data'
+import { Ref } from 'vue'
 
 const tableFields = [
   {
@@ -32,7 +33,14 @@ const tableFields = [
   }
 ]
 
-const tableItems = computed(() => useUsers().filteredUsers?.map(user => ({
+const activeUsers = computed(() => useUsers().activeUsers)
+
+const filterDepartment:Ref<string> = inject('filterDepartment', ref(''))
+const filterRoles:Ref<0|1|2|3|4> = inject('filterRoles', ref(0))
+
+const filteredUsers = computed(() => activeUsers.value?.filter(user => (!filterDepartment.value || user.department === filterDepartment.value) && (!filterRoles.value || user.roles.includes(filterRoles.value))))
+
+const tableItems = computed(() => filteredUsers.value?.map(user => ({
   profile: {
     name: user.name,
     picture: user.picture
