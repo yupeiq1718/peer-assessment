@@ -47,7 +47,7 @@ provide('setFilterData', setFilterData)
   </span>
   <div
     v-if="users"
-    class="absolute top-8 left-0 w-full h-[calc(100%-2rem)] pt-4 px-4 overflow-auto"
+    class="absolute top-8 left-0 w-full h-[calc(100%-2rem)] px-4 overflow-auto"
   >
     <AdminUsersMain />
     <transition
