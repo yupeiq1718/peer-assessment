@@ -104,25 +104,27 @@ const handleAnswersInformationRemove = (id:number) => {
     <template #profile="profile">
       <div class="flex justify-start items-center">
         <img
-          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-4"
+          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-3 2xl:mx-4"
           :src="profile.data.picture ||'/user.png'"
           alt="user"
         >
-        <span>
+        <span class="text-sm 2xl:text-base">
           {{ profile.data.name }}
         </span>
       </div>
     </template>
     <template #department="department">
       <BaseTag :variant="getVariants(departmentIndex(department.data))">
-        {{ department.data }}
+        <span class="text-sm 2xl:text-base">
+          {{ department.data }}
+        </span>
       </BaseTag>
     </template>
     <template #scores="scores">
       <BaseScore
         v-for="(score, index) of scores.data"
         :key="index"
-        class="w-14 2xl:w-16 h-14 2xl:h-16"
+        class="w-16 2xl:w-18 h-16 2xl:h-18"
         :variant="getVariants(index)"
         :score="score"
       />
@@ -135,7 +137,7 @@ const handleAnswersInformationRemove = (id:number) => {
       >
         <BaseSvgIcon
           role="button"
-          class="w-6 h-6 m-2"
+          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2 fill-muted hover:fill-theme hover:animate-bounce"
           name="edit"
         />
       </button>
@@ -146,7 +148,7 @@ const handleAnswersInformationRemove = (id:number) => {
       >
         <BaseSvgIcon
           role="button"
-          class="w-6 h-6 m-2"
+          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2 fill-muted hover:fill-theme hover:animate-bounce"
           name="delete"
         />
       </button>

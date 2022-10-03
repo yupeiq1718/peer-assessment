@@ -22,7 +22,7 @@ const props = defineProps<Props>()
           v-for="field of props.fields"
           :key="field.key"
           :width="field.width"
-          class="px-4 py-2 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white font-bold"
+          class="px-3 2xl:px-4 py-2 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white font-bold"
         >
           {{ field.name }}
         </th>
@@ -41,7 +41,7 @@ const props = defineProps<Props>()
         <td
           v-for="field of props.fields"
           :key="field.key"
-          class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
+          class="px-3 2xl:px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
         >
           <slot
             :name="field.key"
