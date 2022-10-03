@@ -12,8 +12,8 @@ type TypeMap = {
 }
 
 const positionMap:TypeMap = {
-  employee: 'left-1/12 right-1/12 md:right-5/12 2xl:right-7/12',
-  admin: 'left-1/12 md:left-5/12 2xl:left-7/12 right-1/12'
+  employee: 'left-1/12 right-1/12 md:right-5/12 xl:right-1/2 2xl:right-7/12',
+  admin: 'left-1/12  right-1/12 md:left-5/12 xl:left-1/2 2xl:left-7/12'
 }
 
 const router = useRouter()
