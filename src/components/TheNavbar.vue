@@ -38,7 +38,7 @@ type StyleMap = {
 }
 const styleMap:StyleMap = {
   navBar: {
-    folded: 'transform -translate-x-full md:translate-x-0 w-24',
+    folded: 'transform -translate-x-full lg:translate-x-0 w-24',
     expanded: 'w-[18rem]'
   },
   list: {
@@ -82,14 +82,14 @@ const logout = () => {
     @mouseenter="toggleStatus('expanded')"
     @mouseleave="toggleStatus('folded')"
   >
-    <section class="fixed md:hidden left-0 top-0 flex items-center justify-center w-12 h-12">
+    <section class="fixed lg:hidden left-0 top-0 flex items-center justify-center w-12 h-12">
       <BaseSvgIcon
         name="menu"
         class="w-8 h-8 fill-white"
       />
     </section>
     <section
-      class="navbar fixed left-0 2xl:left-8 inset-y-0 md:inset-y-12 z-10 bg-theme-light rounded-r-2xl 2xl:rounded-2xl px-4 duration-500 shadow-md"
+      class="navbar fixed left-0 2xl:left-8 inset-y-0 lg:inset-y-12 z-10 bg-theme-light rounded-r-2xl 2xl:rounded-2xl px-4 duration-500 shadow-md"
       :class="styleMap.navBar[status]"
     >
       <header class="absolute top-4 flex justify-start items-center border-b-2 border-theme pb-4 duration-500">
