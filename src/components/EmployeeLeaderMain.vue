@@ -137,7 +137,7 @@ const handleAnswersInformationRemove = (id:number) => {
       >
         <BaseSvgIcon
           role="button"
-          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2 fill-muted hover:fill-theme hover:animate-bounce"
+          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2"
           name="edit"
         />
       </button>
@@ -148,7 +148,7 @@ const handleAnswersInformationRemove = (id:number) => {
       >
         <BaseSvgIcon
           role="button"
-          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2 fill-muted hover:fill-theme hover:animate-bounce"
+          class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2"
           name="delete"
         />
       </button>
