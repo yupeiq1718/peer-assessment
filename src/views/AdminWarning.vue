@@ -2,7 +2,7 @@
 
 // const items = [
 //   {
-//     name: 'mail',
+//     name: '寄信',
 //     icon: 'mail',
 //     function: () => {
 
@@ -12,7 +12,7 @@
 
 </script>
 <template>
-  <div class="absolute w-full h-full pt-4">
+  <div class="absolute w-full h-full pt-6 px-4">
     <AdminWarningMain />
     <!-- <transition
       name="sidebar"

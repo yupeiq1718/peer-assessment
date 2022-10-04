@@ -7,20 +7,20 @@ const items = computed(() => {
   switch (systemStatus.value) {
     case 0 :
       return [{
-        name: 'begin',
+        name: '開始',
         icon: 'begin',
         function: handleAssessmentBegin
       }]
     case 1 :
       return [{
-        name: 'pause',
+        name: '暫停',
         icon: 'pause',
         function: handleAssessmentPause
       }]
     case 2 :
       return [
         {
-          name: 'play',
+          name: '恢復進行',
           icon: 'play',
           function: handleAssessmentContinue
         }
@@ -70,7 +70,7 @@ const handleAssessmentBegin = () => {
   setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(1),
-    text: '請確認是否要開始互評？'
+    text: '請確認是否開始互評填寫？'
   })
 }
 
@@ -78,14 +78,14 @@ const handleAssessmentPause = () => {
   setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(2),
-    text: '請確認是否要暫停填寫互評？'
+    text: '請確認是否暫停互評填寫？'
   })
 }
 const handleAssessmentContinue = () => {
   setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(1),
-    text: '請確認是否要重新開始填寫互評？'
+    text: '請確認是否恢復進行互評填寫？'
   })
 }
 
@@ -93,7 +93,7 @@ const handleAssessmentContinue = () => {
 //   setConfirmData({
 //     isActive: true,
 //     confirm: () => setSystemStatus(0),
-//     text: '請確認是否要儲存互評？'
+//     text: '請確認是否儲存互評？'
 //   })
 // }
 
@@ -101,7 +101,7 @@ const handleAssessmentContinue = () => {
 //   setConfirmData({
 //     isActive: true,
 //     confirm: () => setSystemStatus(0),
-//     text: '請確認是否要刪除互評？'
+//     text: '請確認是否刪除互評？'
 //   })
 // }
 

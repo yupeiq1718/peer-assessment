@@ -35,7 +35,7 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
     picture: answerInformation.reviewee.picture
   },
   department: answerInformation.reviewee.department,
-  scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
+  scores: answerInformation.answers.filter(answer => answer.score),
   function: answerInformation.id
 })))
 
@@ -121,13 +121,22 @@ const handleAnswersInformationRemove = (id:number) => {
       </BaseTag>
     </template>
     <template #scores="scores">
-      <BaseScore
-        v-for="(score, index) of scores.data"
+      <div
+        v-for="(data, index) of scores.data"
         :key="index"
-        :variant="getVariants(index)"
-        class="w-16 2xl:w-18 h-16 2xl:h-18"
-        :score="score"
-      />
+        class="relative group inline-block"
+      >
+        <BaseScore
+          :variant="getVariants(index)"
+          class="w-16 2xl:w-18 h-16 2xl:h-18"
+          :score="data.score"
+        />
+        <BaseTooltip
+          class="absolute whitespace-nowrap left-1/2 bottom-18 2xl:bottom-20 -translate-x-1/2 opacity-0 group-hover:block lg:group-hover:opacity-100"
+          :variant="getVariants(index)"
+          :text="data.tag"
+        />
+      </div>
     </template>
     <template #function="id">
       <div>

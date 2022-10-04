@@ -20,11 +20,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         {{ systemStatus[1].text }}：
       </h2>
       <p class="text-dark">
-        {{ '新的互評填寫已經開始。員工和主管可以開始填寫互評問券。' }}
-        <br><br>
-      </p>
-      <p class="text-dark">
-        {{ '暫停：暫時停止員工和主管填寫互評問券，此操作並不會結束這次互評。' }}
+        {{ '開放填寫互評問卷。點選「暫停」可切換系統至「暫停中」。' }}
       </p>
       <section class="my-4 border-2 border-light p-4">
         <h3 class="font-bold text-dark mb-2">
@@ -48,6 +44,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '管理員：' }}
         </h3>
         <ul class="text-muted">
+          <li>{{ '使用者設定' }}</li>
           <li>{{ '未填名單提醒' }}</li>
           <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
@@ -59,18 +56,8 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         {{ systemStatus[2].text }}：
       </h2>
       <p class="text-dark">
-        {{ '員工和主管暫時無法填寫互評問券。' }}
+        {{ '暫時無法填寫互評問券。可選擇「恢復進行」切回「進行中」。' }}
       </p>
-      <br>
-      <p class="text-dark">
-        {{ '重啟：員工和主管可以繼續填寫互評。' }}
-      </p>
-      <!-- <p class="text-dark">
-        {{ '儲存：結束這次互評並儲存這次紀錄。' }}
-      </p>
-      <p class="text-dark">
-        {{ '刪除：結束這次互評並刪除這次紀錄。' }}
-      </p> -->
       <section class="my-4 border-2 border-light p-4">
         <h3 class="font-bold text-dark mb-2">
           {{ '主管：' }}
@@ -84,6 +71,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '管理員：' }}
         </h3>
         <ul class="text-muted">
+          <li>{{ '使用者設定' }}</li>
           <li>{{ '未填名單提醒' }}</li>
           <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
@@ -95,11 +83,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         {{ systemStatus[0].text }}：
       </h2>
       <p class="text-dark">
-        {{ '舊互評已結束' }}
-        <br><br>
-      </p>
-      <p class="text-dark">
-        {{ '開始：開始新的填寫互評。' }}
+        {{ '互評尚未開始。點選「開始」可切換系統至 「進行中」。' }}
       </p>
       <section class="my-4 border-2 border-light p-4">
         <h3 class="font-bold text-dark mb-2">

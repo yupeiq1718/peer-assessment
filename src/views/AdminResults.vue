@@ -3,7 +3,7 @@ const router = useRouter()
 
 const items = [
   {
-    name: 'download',
+    name: '下載',
     icon: 'download',
     function: () => {
       // isActive.value = true
@@ -11,7 +11,7 @@ const items = [
     }
   },
   {
-    name: 'filter',
+    name: '篩選',
     icon: 'filter',
     function: () => router.push('/admin/results/filter')
   }
