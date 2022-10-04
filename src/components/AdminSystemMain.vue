@@ -48,6 +48,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '管理員：' }}
         </h3>
         <ul class="text-muted">
+          <li>{{ '使用者設定' }}</li>
           <li>{{ '未填名單提醒' }}</li>
           <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
@@ -84,6 +85,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '管理員：' }}
         </h3>
         <ul class="text-muted">
+          <li>{{ '使用者設定' }}</li>
           <li>{{ '未填名單提醒' }}</li>
           <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
