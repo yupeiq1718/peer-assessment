@@ -12,8 +12,8 @@ type TypeMap = {
 }
 
 const positionMap:TypeMap = {
-  employee: 'left-1/12 right-1/12 md:right-5/12 xl:right-7/12',
-  admin: 'left-1/12 md:left-5/12 xl:left-7/12 right-1/12'
+  employee: 'left-1/12 right-1/12 lg:right-5/12 xl:right-1/2 2xl:right-7/12',
+  admin: 'left-1/12  right-1/12 lg:left-5/12 xl:left-1/2 2xl:left-7/12'
 }
 
 const router = useRouter()
@@ -71,7 +71,6 @@ const adminIdConfiguration = {
 const buttonConfig = {
   size: 'large',
   shape: 'circle',
-  locale: 'zh_Hant',
   width: 192
 }
 
@@ -86,9 +85,9 @@ onMounted(() => {
 <template>
   <div class="fixed w-full inset-y-0 bg-theme duration-1000 flex justify-center items-center">
     <div class="outer absolute container max-h-full h-[40rem]">
-      <div class="inner absolute inset-0 md:inset-4 xl:inset-8">
-        <header class="header absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-3/4 hidden md:block rounded-2xl bg-theme-light shadow-md duration-1000">
-          <section class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center">
+      <div class="inner absolute inset-0 lg:inset-4 2xl:inset-8">
+        <header class="header absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-3/4 hidden lg:block rounded-2xl bg-theme-light shadow-md duration-1000">
+          <section class="header-content absolute top-1/2 left-[8.33%] transform -translate-y-1/2 hidden lg:block w-1/3 text-center">
             <p class="text-muted mb-4 text-lg">
               {{ '我想要填寫互評問卷' }}
             </p>
@@ -100,7 +99,7 @@ onMounted(() => {
               {{ '切換員工登入' }}
             </BaseButton>
           </section>
-          <section class="header-content absolute top-1/2 right-[8.33%] transform -translate-y-1/2 hidden md:block w-1/3 text-center">
+          <section class="header-content absolute top-1/2 right-[8.33%] transform -translate-y-1/2 hidden lg:block w-1/3 text-center">
             <p class="text-muted mb-4 text-lg">
               {{ '我想要設定互評系統' }}
             </p>
@@ -125,7 +124,7 @@ onMounted(() => {
             />
           </header>
           <article class="article-content text-center text-dark">
-            <h1 class="text-xl md:text-2xl font-bold mb-4">
+            <h1 class="text-xl lg:text-2xl font-bold mb-4">
               {{ '光禾感知互評系統' }}
             </h1>
             <p v-if="type==='employee'">
@@ -138,11 +137,13 @@ onMounted(() => {
           <footer class="article-content text-center">
             <GoogleLogin
               v-if="type==='employee'"
+              class="h-10"
               :id-configuration="employeeIdConfiguration"
               :button-config="buttonConfig"
             />
             <GoogleLogin
               v-if="type==='admin'"
+              class="h-10"
               :id-configuration="adminIdConfiguration"
               :button-config="buttonConfig"
             />
@@ -150,7 +151,7 @@ onMounted(() => {
             <BaseButton
               v-if="type==='admin'"
               variant="theme"
-              class="bg-transparent text-md w-48 md:hidden mt-2"
+              class="bg-transparent text-md w-48 lg:hidden mt-2"
               @click="switchPosition('employee')"
             >
               {{ '切換員工登入' }}
@@ -158,7 +159,7 @@ onMounted(() => {
             <BaseButton
               v-if="type==='employee'"
               variant="theme"
-              class="bg-transparent text-md w-48 md:hidden mt-2"
+              class="bg-transparent text-md w-48 lg:hidden mt-2"
               @click="switchPosition('admin')"
             >
               {{ '切換管理員登入' }}
@@ -188,7 +189,7 @@ onMounted(() => {
   }
 
   .article {
-    @apply left-full -right-5/6 md:-right-1/2 xl:-right-1/3;
+    @apply left-full -right-5/6 lg:-right-1/2 2xl:-right-1/3;
   }
 
   .header-content {
@@ -218,16 +219,16 @@ onMounted(() => {
   }
 
   .inner {
-    @apply md:inset-0;
+    @apply lg:inset-0;
   }
 
   .header {
-    @apply left-0 xl:left-8 inset-y-0 md:inset-y-12 translate-x-0 translate-y-0 w-24 h-auto z-10;
+    @apply left-0 2xl:left-8 inset-y-0 lg:inset-y-12 translate-x-0 translate-y-0 w-24 h-auto z-10;
   }
 
   .article {
-    @apply left-0 md:left-12 xl:left-40 right-0 xl:right-8 top-12 md:top-4 bottom-0 md:bottom-4 rounded-none
-      md:rounded-l-2xl xl:rounded-2xl;
+    @apply left-0 lg:left-12 2xl:left-40 right-0 2xl:right-8 top-12 lg:top-4 bottom-0 lg:bottom-4 rounded-none
+      lg:rounded-l-2xl 2xl:rounded-2xl;
   }
 
   .header-content,

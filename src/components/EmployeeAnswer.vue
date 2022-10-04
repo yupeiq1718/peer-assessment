@@ -21,10 +21,15 @@ const question = computed(() => useQuestions().question({
   <div>
     <article class="p-8 bg-white rounded-2xl flex flex-col mb-4">
       <label>
-        <BaseTag :variant="getVariants(props.index)">
+        <BaseTag
+          class="mr-1"
+          :variant="getVariants(props.index)"
+        >
           {{ question?.tag }}
         </BaseTag>
-        {{ question?.content }}
+        <span :class="!question?.isRequired === false && `after:content-['*'] after:ml-0.5 after:text-error`">
+          {{ question?.content }}
+        </span>
       </label>
       <BaseFormScore
         v-if="question?.typeId===1 || question?.typeId===2"

@@ -77,23 +77,8 @@ const useUsers = defineStore('users', () => {
 
   const user = computed(() => (id:number) => activeUsers.value.find(user => user.id === id))
 
-  type FilterData = {
-    department: string,
-    roles: 0|1|2|3|4
-  }
-  const filterData = ref<FilterData>({
-    department: '',
-    roles: 0
-  })
-
-  const setFilterData = (values: FilterData) => {
-    filterData.value = values
-  }
-
-  const filteredUsers = computed(() => activeUsers.value?.filter(user => (!filterData.value.department || user.department === filterData.value.department) && (!filterData.value.roles || user.roles.includes(filterData.value.roles))))
-
   return {
-    users, createUser, readUsers, updateUser, deleteUser, user, activeUsers, filterData, setFilterData, filteredUsers
+    users, createUser, readUsers, updateUser, deleteUser, user, activeUsers
   }
 })
 

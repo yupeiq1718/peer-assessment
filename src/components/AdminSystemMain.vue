@@ -40,7 +40,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         </h3>
         <ul class="text-muted">
           <li>{{ '主管互評填寫' }}</li>
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
         </ul>
       </section>
       <section class="my-4 border-2 border-light p-4">
@@ -49,7 +49,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         </h3>
         <ul class="text-muted">
           <li>{{ '未填名單提醒' }}</li>
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
         </ul>
       </section>
@@ -76,7 +76,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '主管：' }}
         </h3>
         <ul class="text-muted">
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
         </ul>
       </section>
       <section class="my-4 border-2 border-light p-4">
@@ -85,7 +85,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         </h3>
         <ul class="text-muted">
           <li>{{ '未填名單提醒' }}</li>
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
         </ul>
       </section>
@@ -106,7 +106,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
           {{ '主管：' }}
         </h3>
         <ul class="text-muted">
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
         </ul>
       </section>
       <section class="my-4 border-2 border-light p-4">
@@ -116,7 +116,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         <ul class="text-muted">
           <li>{{ '使用者設定' }}</li>
           <li>{{ '問卷設定' }}</li>
-          <li>{{ '互評結果瀏覽' }}</li>
+          <li>{{ '歷史結果查詢' }}</li>
           <li>{{ '系統狀態設定' }}</li>
         </ul>
       </section>

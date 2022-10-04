@@ -22,22 +22,26 @@ const props = defineProps<Props>()
           v-for="field of props.fields"
           :key="field.key"
           :width="field.width"
-          class="px-4 py-2 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white font-bold"
+          class="px-3 2xl:px-4 py-2 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white font-bold text-sm lg:text-base"
         >
           {{ field.name }}
         </th>
       </tr>
     </thead>
-    <tbody>
+    <transition-group
+      name="tboby"
+      tag="tbody"
+      appear
+    >
       <tr
-        v-for="item of props.items"
-        :key="item.id"
+        v-for="item, index of props.items"
+        :key="index"
         class="whitespace-nowrap"
       >
         <td
           v-for="field of props.fields"
           :key="field.key"
-          class="px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
+          class="px-3 2xl:px-4 py-4 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
         >
           <slot
             :name="field.key"
@@ -45,6 +49,27 @@ const props = defineProps<Props>()
           />
         </td>
       </tr>
-    </tbody>
+    </transition-group>
+    <tr v-show="!props.items?.length">
+      <td
+        :colspan="props.fields.length"
+        class="px-3 2xl:px-4 py-8 border-y-2 first:border-l-2 last:border-r-2 border-muted first:rounded-l-2xl last:rounded-r-2xl bg-white align-middle whitespace-nowrap"
+      >
+        {{ '暫無資料' }}
+      </td>
+    </tr>
   </table>
 </template>
+<style scoped>
+  .tbody-enter-active {
+    @apply duration-500 delay-500;
+  }
+
+  .tbody-enter-from {
+    @apply opacity-0  translate-y-16;
+  }
+
+  .tbody-move {
+    @apply opacity-0  translate-y-16 duration-500 delay-500;
+  }
+  </style>

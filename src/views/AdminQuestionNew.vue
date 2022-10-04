@@ -89,10 +89,10 @@ onBeforeMount(() => {
         title="請選擇問答類型"
         :rule="yup.number().required('此欄位必填')"
       />
-
+      <hr class="border-1 border-theme my-4 col-span-1 lg:col-span-2 2xl:col-span-3">
       <BaseFormTextarea
         name="content"
-        class="col-span-1 lg:col-span-2 2xl:col-span-3"
+        class="col-span-1 lg:col-span-2 2xl:col-span-3 p-0"
         title="請輸入問題敘述"
         :rule="yup.string().required('此欄位必填')"
       />
@@ -130,3 +130,17 @@ onBeforeMount(() => {
     </article>
   </TheModal>
 </template>
+
+<style scoped>
+  .question-new-enter-active {
+    @apply duration-500 delay-700;
+  }
+
+  .question-new-enter-from {
+    @apply opacity-0 translate-y-16;
+  }
+
+  .question-new-move {
+    @apply opacity-0 translate-y-16 duration-500;
+  }
+  </style>

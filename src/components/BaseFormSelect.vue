@@ -21,7 +21,7 @@ const props = defineProps<Props>()
 const { value, errorMessage } = useField(props.name, props.rule)
 
 const status = computed(() => {
-  if (props.disabled) {
+  if (props.disabled || !props.options?.length) {
     return 'muted'
   } else if (errorMessage.value) {
     return 'error'
@@ -40,7 +40,7 @@ const status = computed(() => {
       :options="props.options"
       :status="status"
       class="max-w-[20rem]"
-      :disabled="props.disabled"
+      :disabled="props.disabled || !props.options?.length"
     />
     <BaseMessage
       v-if="errorMessage"

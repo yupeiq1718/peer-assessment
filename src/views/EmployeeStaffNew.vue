@@ -128,7 +128,6 @@ onBeforeMount(async () => {
           :options="revieweeOptions"
           class="col-span-1"
           title="合作對象"
-          :disabled="!revieweeOptions?.length"
           :rule="yup.number().required('此欄位必填')"
         />
       </header>

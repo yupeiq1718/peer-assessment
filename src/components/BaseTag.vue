@@ -27,7 +27,7 @@ const tagStyleMap:VariantMap = {
 </script>
 <template>
   <div
-    class="inline-block px-3 py-1 text-white duration-500"
+    class="inline-block rounded-2xl px-3 py-1 text-white duration-500"
     :class="tagStyleMap[props.variant]"
   >
     <slot />

@@ -12,7 +12,7 @@
 
 </script>
 <template>
-  <div class="absolute w-full h-full">
+  <div class="absolute w-full h-full pt-4">
     <AdminWarningMain />
     <!-- <transition
       name="sidebar"

@@ -38,6 +38,10 @@ const departments = [
   {
     text: '設計部',
     value: '設計部'
+  },
+  {
+    text: '總管理處',
+    value: '總管理處'
   }
 ]
 
