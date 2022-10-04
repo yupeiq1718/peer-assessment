@@ -13,7 +13,7 @@ const props = defineProps<Props>()
     <button
       v-for="item of props.items"
       :key="item.name"
-      class="group relative my-2 p-3 rounded-2xl flex justify-center items-center lg:border-2 lg:border-theme lg:bg-white lg:hover:bg-theme fill-white lg:fill-theme lg:hover:fill-white lg:shadow-md peer duration-500"
+      class="group relative my-2 p-3 rounded-2xl flex justify-center items-center lg:border-2 lg:border-theme lg:bg-white lg:hover:bg-theme fill-white lg:fill-theme lg:hover:fill-white lg:shadow-md duration-500"
       @click="item.function"
     >
       <BaseSvgIcon
