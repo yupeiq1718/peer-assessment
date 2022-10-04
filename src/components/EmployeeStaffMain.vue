@@ -3,7 +3,6 @@ import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
 import { departments, getVariants } from '@/utilities/data'
 import { useSystem } from '@/store/system'
-import { useQuestions } from '@/store/questions'
 
 const systemStatus = computed(() => useSystem().systemStatus)
 
@@ -36,11 +35,9 @@ const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answer
     picture: answerInformation.reviewee.picture
   },
   department: answerInformation.reviewee.department,
-  scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
+  scores: answerInformation.answers.filter(answer => answer.score),
   function: answerInformation.id
 })))
-
-const questions = computed(() => useQuestions().questions(1))
 
 const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
@@ -125,19 +122,19 @@ const handleAnswersInformationRemove = (id:number) => {
     </template>
     <template #scores="scores">
       <div
-        v-for="(score, index) of scores.data"
+        v-for="(data, index) of scores.data"
         :key="index"
         class="relative group inline-block"
       >
         <BaseScore
           :variant="getVariants(index)"
           class="w-16 2xl:w-18 h-16 2xl:h-18"
-          :score="score"
+          :score="data.score"
         />
         <BaseTooltip
           class="absolute whitespace-nowrap left-1/2 bottom-18 2xl:bottom-20 -translate-x-1/2 opacity-0 group-hover:block lg:group-hover:opacity-100"
           :variant="getVariants(index)"
-          :text="questions?.[index].tag"
+          :text="data.tag"
         />
       </div>
     </template>
