@@ -28,7 +28,8 @@ const departmentOptions = [{
 
 const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.roles.includes(1) && useAccount().accountId !== user.id))
 const unfilledUsers = computed(() => useAnswers().unfilledList[1])
-const answerUsers = computed(() => useAnswers().answerUsers(1))
+const answerUsers = computed(() => useAnswers().isDoneAnswerUsers(1))
+
 const revieweeOptions = computed(() => {
   setFieldValue('reviewee', 0)
   const reviewee = values.department === '未填名單' ? unfilledUsers.value : filteredUsers.value

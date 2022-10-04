@@ -28,7 +28,10 @@ const departmentOptions = [{
 
 const filteredUsers = computed(() => useUsers().activeUsers?.filter(user => user.department === values.department && user.roles.includes(2) && useAccount().accountId !== user.id))
 const unfilledUsers = computed(() => useAnswers().unfilledList[2])
-const answerUsers = computed(() => useAnswers().answerUsers(2))
+const answerUsers = computed(() => useAnswers().isDoneAnswerUsers(2))
+
+const route = useRoute()
+
 const revieweeOptions = computed(() => {
   setFieldValue('reviewee', 0)
   const reviewee = values.department === '未填名單' ? unfilledUsers.value : filteredUsers.value
@@ -38,6 +41,9 @@ const revieweeOptions = computed(() => {
   }))
   if (options?.length) {
     setFieldValue('reviewee', options[0].value)
+  }
+  if (route.query.reviewee) {
+    setFieldValue('reviewee', route.query.reviewee)
   }
   return options
 })
