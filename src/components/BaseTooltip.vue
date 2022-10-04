@@ -29,7 +29,7 @@ const tooltipStyleMap:VariantMap = {
 
 <template>
   <div
-    class="inline-block px-1 py-1 text-xs text-white duration-500 shadow-md"
+    class="inline-block px-1 py-1 text-xs 2xl:text-sm text-white duration-500 shadow-md"
     :class="tooltipStyleMap[props.variant]"
   >
     {{ props.text }}
