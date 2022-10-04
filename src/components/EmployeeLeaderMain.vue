@@ -3,6 +3,7 @@ import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
 import { departments, getVariants } from '@/utilities/data'
 import { useSystem } from '@/store/system'
+import { useQuestions } from '@/store/questions'
 
 const systemStatus = computed(() => useSystem().systemStatus)
 
@@ -38,6 +39,8 @@ const tableItems = computed(() => useAnswers().answersInformation(2)?.map(answer
   scores: answerInformation.answers.filter(answer => answer.score).map(answer => answer.score),
   function: answerInformation.id
 })))
+
+const questions = computed(() => useQuestions().questions(2))
 
 const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
@@ -121,13 +124,22 @@ const handleAnswersInformationRemove = (id:number) => {
       </BaseTag>
     </template>
     <template #scores="scores">
-      <BaseScore
+      <div
         v-for="(score, index) of scores.data"
         :key="index"
-        class="w-16 2xl:w-18 h-16 2xl:h-18"
-        :variant="getVariants(index)"
-        :score="score"
-      />
+        class="relative group inline-block"
+      >
+        <BaseScore
+          :variant="getVariants(index)"
+          class="w-16 2xl:w-18 h-16 2xl:h-18"
+          :score="score"
+        />
+        <BaseTooltip
+          class="absolute whitespace-nowrap left-1/2 bottom-18 2xl:bottom-20 -translate-x-1/2 opacity-0 group-hover:block lg:group-hover:opacity-100"
+          :variant="getVariants(index)"
+          :text="questions?.[index].tag"
+        />
+      </div>
     </template>
     <template #function="id">
       <button
