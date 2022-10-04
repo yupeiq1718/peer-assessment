@@ -18,7 +18,7 @@ const questions = computed(() => useQuestions().questions(roleId.value) || [])
   />
   <div
     v-if="!questions.length"
-    class="px-3 2xl:px-4 py-8 rounded-2xl bg-white text-center align-middle whitespace-nowrap col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5"
+    class="px-3 2xl:px-4 py-8 rounded-2xl bg-white text-center text-dark align-middle whitespace-nowrap col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5"
   >
     {{ '暫無資料' }}
   </div>
