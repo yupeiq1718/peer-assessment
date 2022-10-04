@@ -27,7 +27,7 @@ const question = computed(() => useQuestions().question({
         >
           {{ question?.tag }}
         </BaseTag>
-        <span :class="!question?.isRequired === false && `after:content-['*'] after:ml-0.5 after:text-error`">
+        <span :class="question?.isRequired && `after:content-['*'] after:ml-1 after:text-error`">
           {{ question?.content }}
         </span>
       </label>
