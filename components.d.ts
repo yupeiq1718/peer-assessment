@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     BaseTag: typeof import('./src/components/BaseTag.vue')['default']
     BaseTextarea: typeof import('./src/components/BaseTextarea.vue')['default']
     BaseToast: typeof import('./src/components/BaseToast.vue')['default']
+    BaseTooltip: typeof import('./src/components/BaseTooltip.vue')['default']
     EmployeeAnswer: typeof import('./src/components/EmployeeAnswer.vue')['default']
     EmployeeLeaderMain: typeof import('./src/components/EmployeeLeaderMain.vue')['default']
     EmployeeResultMain: typeof import('./src/components/EmployeeResultMain.vue')['default']
