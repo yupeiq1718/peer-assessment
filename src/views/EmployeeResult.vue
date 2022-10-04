@@ -3,7 +3,7 @@ const router = useRouter()
 
 const items = [
   {
-    name: 'filter',
+    name: '篩選',
     icon: 'filter',
     function: () => router.push('/employee/result/filter')
   }

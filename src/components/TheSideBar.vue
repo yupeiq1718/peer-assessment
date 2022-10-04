@@ -21,7 +21,7 @@ const props = defineProps<Props>()
         class="w-6 h-6 lg:w-7 lg:h-7 2xl:w-8 2xl:h-8"
       />
       <BaseTooltip
-        class="absolute lg:right-16 2xl:right-17 top-1/2 -translate-y-1/2 opacity-0 lg:group-hover:inline-block lg:group-hover:opacity-100"
+        class="absolute whitespace-nowrap lg:right-16 2xl:right-17 top-1/2 -translate-y-1/2 opacity-0 lg:group-hover:block lg:group-hover:opacity-100"
         variant="theme"
         :text="item.name"
       />

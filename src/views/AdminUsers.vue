@@ -6,12 +6,12 @@ const router = useRouter()
 
 const items = [
   {
-    name: 'create',
+    name: '新增',
     icon: 'plus',
     function: () => router.push('/admin/users/new')
   },
   {
-    name: 'filter',
+    name: '篩選',
     icon: 'filter',
     function: () => router.push('/admin/users/filter')
   }

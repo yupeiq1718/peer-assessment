@@ -2,7 +2,7 @@
 
 // const items = [
 //   {
-//     name: 'mail',
+//     name: '寄信',
 //     icon: 'mail',
 //     function: () => {
 

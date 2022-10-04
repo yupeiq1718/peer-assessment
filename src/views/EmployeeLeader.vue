@@ -14,7 +14,7 @@ const router = useRouter()
 const items = computed(() => systemStatus.value === 1
   ? [
     {
-      name: 'create',
+      name: '新增',
       icon: 'plus',
       function: () => router.push('/employee/leader/new')
     }

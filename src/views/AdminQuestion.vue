@@ -19,12 +19,12 @@ const roleTitle = computed(() => {
 const items = computed(() => systemStatus.value === 0
   ? [
     {
-      name: 'create',
+      name: '新增',
       icon: 'plus',
       function: () => router.push(`/admin/question/${roleId.value}/new`)
     },
     {
-      name: 'filter',
+      name: '篩選',
       icon: 'filter',
       function: () => router.push(`/admin/question/${roleId.value}/filter`)
     }
@@ -32,7 +32,7 @@ const items = computed(() => systemStatus.value === 0
   : [
 
     {
-      name: 'filter',
+      name: '篩選',
       icon: 'filter',
       function: () => router.push(`/admin/question/${roleId.value}/filter`)
     }

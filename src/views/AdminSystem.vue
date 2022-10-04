@@ -7,20 +7,20 @@ const items = computed(() => {
   switch (systemStatus.value) {
     case 0 :
       return [{
-        name: 'begin',
+        name: '開始',
         icon: 'begin',
         function: handleAssessmentBegin
       }]
     case 1 :
       return [{
-        name: 'pause',
+        name: '暫停',
         icon: 'pause',
         function: handleAssessmentPause
       }]
     case 2 :
       return [
         {
-          name: 'play',
+          name: '恢復進行',
           icon: 'play',
           function: handleAssessmentContinue
         }
