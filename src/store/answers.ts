@@ -124,14 +124,14 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
-  const answerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.map(answerInformation => answerInformation.reviewee.id))
+  const isDoneAnswerUsers = computed(() => (qId:number) => answersInformation.value(qId)?.filter(answerInformation => answerInformation.isDone).map(answerInformation => answerInformation.reviewee.id))
 
   const answerInformation = computed(() => ({ qId, id }:{
     qId:number, id:number
   }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, unfilledList, warningUserList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, readWarningUserList, answerUsers, answerInformation
+    answersInformation, unfilledList, warningUserList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, readWarningUserList, isDoneAnswerUsers, answerInformation
   }
 })
 

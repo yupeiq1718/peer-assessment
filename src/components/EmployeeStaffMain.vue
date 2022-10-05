@@ -29,14 +29,19 @@ const tableFields = [
   }
 ]
 
-const tableItems = computed(() => useAnswers().answersInformation(1)?.map(answerInformation => ({
+const answersInformation = computed(() => useAnswers().answersInformation(1))
+const tableItems = computed(() => answersInformation.value?.map(answerInformation => ({
   profile: {
     name: answerInformation.reviewee.name,
     picture: answerInformation.reviewee.picture
   },
   department: answerInformation.reviewee.department,
-  scores: answerInformation.answers.filter(answer => answer.score),
-  function: answerInformation.id
+  scores: answerInformation.answers.filter(answer => answer.score === 0 || answer.score),
+  function: {
+    id: answerInformation.id,
+    isDone: answerInformation.isDone,
+    reviewee: answerInformation.reviewee.id
+  }
 })))
 
 const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
@@ -79,6 +84,8 @@ const router = useRouter()
 
 const handleAnswersEdit = (id:number) => router.push(`/employee/staff/edit/${id}`)
 
+const handleAnswersNew = (reviewee:number) => router.push(`/employee/staff/new?reviewee=${reviewee}`)
+
 type ConfirmData = {
   isActive: boolean,
   confirm: unknown,
@@ -86,7 +93,7 @@ type ConfirmData = {
 }
 const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
 
-const handleAnswersInformationRemove = (id:number) => {
+const handleAnswerRemove = (id:number) => {
   setConfirmData({
     isActive: true,
     confirm: () => removeAnswersInformation(id),
@@ -138,12 +145,13 @@ const handleAnswersInformationRemove = (id:number) => {
         />
       </div>
     </template>
-    <template #function="id">
+    <template #function="data">
       <div>
         <button
+          v-if="(systemStatus== 1 && !data.data.isDone)"
           :disabled="systemStatus !== 1"
           :class="systemStatus== 1 ? ['fill-muted hover:fill-theme hover:animate-bounce'] : 'fill-muted-light pointer-events-none'"
-          @click="handleAnswersEdit(id.data)"
+          @click="handleAnswersNew(data.data.reviewee)"
         >
           <BaseSvgIcon
             role="button"
@@ -152,9 +160,21 @@ const handleAnswersInformationRemove = (id:number) => {
           />
         </button>
         <button
+          v-else
           :disabled="systemStatus !== 1"
           :class="systemStatus== 1 ? ['fill-muted hover:fill-theme hover:animate-bounce'] : 'fill-muted-light pointer-events-none'"
-          @click="handleAnswersInformationRemove(id.data)"
+          @click="handleAnswersEdit(data.data.id)"
+        >
+          <BaseSvgIcon
+            role="button"
+            class="w-5 2xl:w-6 h-5 2xl:h-6 m-1 2xl:m-2"
+            name="edit"
+          />
+        </button>
+        <button
+          :disabled="!(systemStatus== 1 && data.data.isDone)"
+          :class="(systemStatus== 1 && data.data.isDone) ? ['fill-muted hover:fill-theme hover:animate-bounce'] : 'fill-muted-light pointer-events-none'"
+          @click="handleAnswerRemove(data.data.id)"
         >
           <BaseSvgIcon
             role="button"
