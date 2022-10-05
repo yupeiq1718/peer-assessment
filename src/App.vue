@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useConfirm } from '@/store/confirm'
 type Type = 'employee'|'admin'
 const type = ref<Type>('admin')
 const setType = (value:Type) => {
@@ -57,20 +58,7 @@ const setIsLoading = (value:boolean) => {
 }
 provide('setIsLoading', setIsLoading)
 
-type ConfirmData = {
-  isActive: boolean,
-  confirm: unknown,
-  text: string
-}
-const confirmData = ref<ConfirmData>({
-  isActive: false,
-  confirm: () => null,
-  text: ''
-})
-const setConfirmData = (data:ConfirmData) => {
-  confirmData.value = data
-}
-provide('setConfirmData', setConfirmData)
+const confirmData = computed(() => useConfirm().confirmData)
 </script>
 
 <template>

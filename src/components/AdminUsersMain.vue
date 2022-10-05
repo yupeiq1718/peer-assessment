@@ -2,6 +2,7 @@
 import { useUsers } from '@/store/users'
 import { departments, roleData, getVariants } from '@/utilities/data'
 import { Ref } from 'vue'
+import { useConfirm } from '@/store/confirm'
 
 const tableFields = [
   {
@@ -86,15 +87,8 @@ const removeUser = async (id:number) => {
   }
 }
 
-type ConfirmData = {
-  isActive: boolean,
-  confirm: unknown,
-  text: string
-}
-const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
-
 const handleUserRemove = (id:number) => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => removeUser(id),
     text: '請確認是否刪除該筆資料？'

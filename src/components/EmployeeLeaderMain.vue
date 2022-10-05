@@ -3,6 +3,7 @@ import { useAnswers } from '@/store/answers'
 import { useAccount } from '@/store/account'
 import { departments, getVariants } from '@/utilities/data'
 import { useSystem } from '@/store/system'
+import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
 
@@ -86,15 +87,8 @@ const handleAnswersEdit = (id:number) => router.push(`/employee/leader/edit/${id
 
 const handleAnswersNew = (reviewee:number) => router.push(`/employee/leader/new?reviewee=${reviewee}`)
 
-  type ConfirmData = {
-    isActive: boolean,
-    confirm: unknown,
-    text: string
-  }
-const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
-
 const handleAnswersRemove = (id:number) => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => removeAnswersInformation(id),
     text: '請確認是否刪除該筆資料？'
