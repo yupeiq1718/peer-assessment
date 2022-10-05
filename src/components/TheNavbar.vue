@@ -49,6 +49,10 @@ const styleMap:StyleMap = {
     folded: 'w-0',
     expanded: 'w-48'
   },
+  version: {
+    folded: 'hidden',
+    expanded: 'inline-block'
+  },
   icon: {
     folded: 'w-8 h-8',
     expanded: 'w-6 h-6'
@@ -150,15 +154,23 @@ const logout = () => {
               </span>
             </li>
           </ul>
-          <BaseSvgIcon
-            class="fill-theme h-12 duration-500"
-            :class="styleMap.logo[status]"
-            name="logo"
-          />
+          <div>
+            <BaseSvgIcon
+              class="fill-theme h-12 duration-500"
+              :class="styleMap.logo[status]"
+              name="logo"
+            />
+          </div>
         </article>
       </transition>
 
       <footer class="absolute bottom-4 border-t-2 border-theme pt-4">
+        <span
+          class="absolute -top-6 right-0 text-theme text-xs"
+          :class="styleMap.version[status]"
+        >
+          {{ 'v1.1.0' }}
+        </span>
         <button
           class="image rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
           :class="styleMap.logoutButton[status]"
