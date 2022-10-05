@@ -1,4 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
+import router from '@/router'
+import { useConfirm } from '@/store/confirm'
 
 const useApi = axios.create({
   baseURL: import.meta.env.VITE_APP_API,
@@ -14,10 +16,15 @@ useApi.interceptors.request.use(request => {
 })
 
 useApi.interceptors.response.use((response:AxiosResponse) => {
-  console.log(response)
   return Promise.resolve(response)
 }, (error:AxiosError) => {
-  console.log(error.response)
+  if (error.response?.status === 401) {
+    useConfirm().setConfirmData({
+      isActive: true,
+      confirm: () => router.push('/'),
+      text: '登入時效已到期，請重新登入'
+    })
+  }
   return Promise.reject(error)
 })
 

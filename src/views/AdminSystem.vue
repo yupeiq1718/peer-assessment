@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSystem } from '@/store/system'
+import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
 
@@ -59,15 +60,8 @@ const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
 const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 
-type ConfirmData = {
-  isActive: boolean,
-  confirm: unknown,
-  text: string
-}
-const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
-
 const handleAssessmentBegin = () => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(1),
     text: '請確認是否開始互評填寫？'
@@ -75,14 +69,14 @@ const handleAssessmentBegin = () => {
 }
 
 const handleAssessmentPause = () => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(2),
     text: '請確認是否暫停互評填寫？'
   })
 }
 const handleAssessmentContinue = () => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => setSystemStatus(1),
     text: '請確認是否恢復進行互評填寫？'
@@ -90,7 +84,7 @@ const handleAssessmentContinue = () => {
 }
 
 // const handleAssessmentSave = () => {
-//   setConfirmData({
+//   useConfirm().setConfirmData({
 //     isActive: true,
 //     confirm: () => setSystemStatus(0),
 //     text: '請確認是否儲存互評？'
@@ -98,7 +92,7 @@ const handleAssessmentContinue = () => {
 // }
 
 // const handleAssessmentDelete = () => {
-//   setConfirmData({
+//   useConfirm().setConfirmData({
 //     isActive: true,
 //     confirm: () => setSystemStatus(0),
 //     text: '請確認是否刪除互評？'

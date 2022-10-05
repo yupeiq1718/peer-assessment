@@ -2,6 +2,7 @@
 import { useQuestions } from '@/store/questions'
 import { getVariants } from '@/utilities/data'
 import { useSystem } from '@/store/system'
+import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
 
@@ -68,15 +69,8 @@ const handleQuestionEdit = () => {
   router.push(`/admin/question/${roleId.value}/edit/${question.value?.id}`)
 }
 
-type ConfirmData = {
-  isActive: boolean,
-  confirm: unknown,
-  text: string
-}
-const setConfirmData:(data:ConfirmData) => void = inject('setConfirmData', () => null)
-
 const handleQuestionRemove = () => {
-  setConfirmData({
+  useConfirm().setConfirmData({
     isActive: true,
     confirm: () => removeQuestion({ roleId: 2, id: props.id }),
     text: '請確認是否刪除該筆資料？'
