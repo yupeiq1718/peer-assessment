@@ -36,17 +36,23 @@ type ToastData = {
 const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
 const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
 
-const handleLogin = async () => {
-  if (route.query.token) {
-    window.sessionStorage.setItem('access-token', String(route.query.token))
-  }
+const handleCallback = async (data: {
+  clientId: string,
+  credential:string
+}) => {
   try {
+    console.log(data)
     setIsLoading(true)
-    await useAccount().readAccountId(type.value)
-
+    const response1 = await useAccount().readToken({
+      type: type.value,
+      credential: data.credential
+    })
+    console.log(response1)
+    const response2 = await useAccount().readAccountId(type.value)
+    console.log(response2)
     router.push(`/${type.value}`)
   } catch (error) {
-    window.sessionStorage.setItem('access-token', '')
+    console.log(error)
     setToastData({
       isActive: true,
       variant: 'error',
@@ -58,14 +64,9 @@ const handleLogin = async () => {
   }
 }
 
-const employeeIdConfiguration = {
-  login_uri: `${import.meta.env.VITE_APP_API}/user/employee/callback`,
-  ux_mode: 'redirect'
-}
-
-const adminIdConfiguration = {
-  login_uri: `${import.meta.env.VITE_APP_API}/user/admin/callback`,
-  ux_mode: 'redirect'
+const idConfiguration = {
+  callback: handleCallback,
+  ux_mode: 'popup'
 }
 
 const buttonConfig = {
@@ -73,12 +74,6 @@ const buttonConfig = {
   shape: 'circle',
   width: 192
 }
-
-onMounted(() => {
-  if (route.query.token !== undefined) {
-    handleLogin()
-  }
-})
 
 </script>
 
@@ -136,15 +131,8 @@ onMounted(() => {
           </article>
           <footer class="article-content text-center">
             <GoogleLogin
-              v-if="type==='employee'"
               class="h-10"
-              :id-configuration="employeeIdConfiguration"
-              :button-config="buttonConfig"
-            />
-            <GoogleLogin
-              v-if="type==='admin'"
-              class="h-10"
-              :id-configuration="adminIdConfiguration"
+              :id-configuration="idConfiguration"
               :button-config="buttonConfig"
             />
             <br>
