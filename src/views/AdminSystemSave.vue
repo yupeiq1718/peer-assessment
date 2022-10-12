@@ -80,7 +80,7 @@ const cancel = () => router.push('/admin/system')
         title="年度"
         name="year"
         type="number"
-        :rule="yup.number().required('此欄位必填')"
+        :rule="yup.number().typeError('此欄位格式不符').min(1911, '此欄位格式不符').required('此欄位必填')"
       />
     </div>
     <div class="m-2">
