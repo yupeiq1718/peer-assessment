@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSystem } from '@/store/system'
+import { useAnswers } from '@/store/answers'
 import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
@@ -24,17 +25,17 @@ const items = computed(() => {
           name: '恢復進行',
           icon: 'play',
           function: handleAssessmentContinue
+        },
+        {
+          name: '儲存互評結果',
+          icon: 'file_save',
+          function: handleAssessmentSave
+        },
+        {
+          name: '刪除互評結果',
+          icon: 'file_delete',
+          function: handleAssessmentDelete
         }
-        // {
-        //   name: 'save',
-        //   icon: 'file_save',
-        //   function: handleAssessmentSave
-        // },
-        // {
-        //   name: 'delete',
-        //   icon: 'file_delete',
-        //   function: handleAssessmentDelete
-        // }
       ]
     default:
       return []
@@ -83,21 +84,21 @@ const handleAssessmentContinue = () => {
   })
 }
 
-// const handleAssessmentSave = () => {
-//   useConfirm().setConfirmData({
-//     isActive: true,
-//     confirm: () => setSystemStatus(0),
-//     text: '請確認是否儲存互評？'
-//   })
-// }
+const handleAssessmentSave = () => {
+  useConfirm().setConfirmData({
+    isActive: true,
+    confirm: () => setSystemStatus(0),
+    text: '請確認是否儲存互評？'
+  })
+}
 
-// const handleAssessmentDelete = () => {
-//   useConfirm().setConfirmData({
-//     isActive: true,
-//     confirm: () => setSystemStatus(0),
-//     text: '請確認是否刪除互評？'
-//   })
-// }
+const handleAssessmentDelete = () => {
+  useConfirm().setConfirmData({
+    isActive: true,
+    confirm: () => deleteAssessment(),
+    text: '請確認是否刪除所有互評並結束此次互評填寫？'
+  })
+}
 
 const setSystemStatus = async (status:number) => {
   try {
@@ -116,6 +117,29 @@ const setSystemStatus = async (status:number) => {
       isActive: true,
       variant: 'error',
       message: '更新失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+const deleteAssessment = async () => {
+  try {
+    setIsLoading(true)
+    const response = await useAnswers().deleteAllAnswersInformation()
+    console.log(response)
+    await getSystemStatus()
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
+  } catch ({ response }) {
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
     })
   } finally {
     setIsLoading(false)

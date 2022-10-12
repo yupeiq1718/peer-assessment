@@ -101,6 +101,15 @@ const useAnswers = defineStore('answers', () => {
     }
   }
 
+  const deleteAllAnswersInformation = async () => {
+    try {
+      const response = await useApi.delete('/answer')
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   const readUnfilledList = async ({ qId, accountId }:{
     qId: number,
     accountId: number
@@ -131,7 +140,7 @@ const useAnswers = defineStore('answers', () => {
   }) => answersInformation.value(qId)?.find(answerInformation => answerInformation.id === id))
 
   return {
-    answersInformation, unfilledList, warningUserList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, readUnfilledList, readWarningUserList, isDoneAnswerUsers, answerInformation
+    answersInformation, unfilledList, warningUserList, createAnswers, readAnswersInformation, updateAnswers, deleteAnswersInformation, deleteAllAnswersInformation, readUnfilledList, readWarningUserList, isDoneAnswerUsers, answerInformation
   }
 })
 
