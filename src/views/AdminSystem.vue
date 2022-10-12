@@ -4,6 +4,7 @@ import { useAnswers } from '@/store/answers'
 import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
+const router = useRouter()
 
 const items = computed(() => {
   switch (systemStatus.value) {
@@ -29,7 +30,7 @@ const items = computed(() => {
         {
           name: '儲存互評結果',
           icon: 'file_save',
-          function: handleAssessmentSave
+          function: () => router.push('/admin/system/save')
         },
         {
           name: '刪除互評結果',
@@ -81,14 +82,6 @@ const handleAssessmentContinue = () => {
     isActive: true,
     confirm: () => setSystemStatus(1),
     text: '請確認是否恢復進行互評填寫？'
-  })
-}
-
-const handleAssessmentSave = () => {
-  useConfirm().setConfirmData({
-    isActive: true,
-    confirm: () => setSystemStatus(0),
-    text: '請確認是否儲存互評？'
   })
 }
 
@@ -158,4 +151,13 @@ const deleteAssessment = async () => {
   >
     <TheSideBar :items="items" />
   </transition>
+  <router-view v-slot="{ Component }">
+    <transition
+      name="modal"
+      mode="out-in"
+      appear
+    >
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
