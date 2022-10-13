@@ -19,10 +19,8 @@ const useAccount = defineStore('account', () => {
     credential:string
   }) => {
     try {
-      console.log({ credential })
       const formData = new FormData()
       formData.append('credential', credential)
-      console.log(formData)
       const response = await useApi.post(`/user/${type}/callback`, formData)
       window.sessionStorage.setItem('access-token', response.data.token)
       return Promise.resolve(response)
@@ -32,8 +30,19 @@ const useAccount = defineStore('account', () => {
     }
   }
 
+  const deleteToken = async () => {
+    try {
+      const response = await useApi.post('/user/logout')
+      window.sessionStorage.setItem('access-token', '')
+      return Promise.resolve(response)
+    } catch (error) {
+      window.sessionStorage.setItem('access-token', '')
+      return Promise.reject(error)
+    }
+  }
+
   return {
-    accountId, readAccountId, readToken
+    accountId, readAccountId, readToken, deleteToken
   }
 })
 

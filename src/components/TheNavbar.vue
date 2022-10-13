@@ -75,9 +75,15 @@ const styleMap:StyleMap = {
   }
 }
 
-const logout = () => {
-  window.sessionStorage.setItem('access-token', '')
-  router.push(`/?type=${type.value}`)
+const logout = async () => {
+  try {
+    const response = await useAccount().deleteToken()
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    router.push(`/?type=${type.value}`)
+  }
 }
 </script>
 
