@@ -56,7 +56,7 @@ const systemStatusId = computed(() => useSystem().systemStatus)
         {{ systemStatus[2].text }}：
       </h2>
       <p class="text-dark">
-        {{ '暫時無法填寫互評問券。可選擇「恢復進行」切回「進行中」。' }}
+        {{ '暫時無法填寫互評問券。點選「恢復進行」可切換系統回「進行中」。點選「儲存互評結果」可儲存本次互評並切回「準備中」。點選「刪除互評結果」可刪除本次互評並切回並切回「準備中」。' }}
       </p>
       <section class="my-4 border-2 border-light p-4">
         <h3 class="font-bold text-dark mb-2">
