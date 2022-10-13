@@ -3,7 +3,7 @@ type Status = 'success'|'alert'|'error'|'info'|'muted'
 
 interface Props {
   status: Status,
-  value: string,
+  value: string|number,
 }
 interface Emits {
   (event: 'update:value', value: string): void

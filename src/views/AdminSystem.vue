@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useSystem } from '@/store/system'
+import { useAnswers } from '@/store/answers'
 import { useConfirm } from '@/store/confirm'
 
 const systemStatus = computed(() => useSystem().systemStatus)
+const router = useRouter()
 
 const items = computed(() => {
   switch (systemStatus.value) {
@@ -24,17 +26,17 @@ const items = computed(() => {
           name: '恢復進行',
           icon: 'play',
           function: handleAssessmentContinue
+        },
+        {
+          name: '儲存互評結果',
+          icon: 'file_save',
+          function: () => router.push('/admin/system/save')
+        },
+        {
+          name: '刪除互評結果',
+          icon: 'file_delete',
+          function: handleAssessmentDelete
         }
-        // {
-        //   name: 'save',
-        //   icon: 'file_save',
-        //   function: handleAssessmentSave
-        // },
-        // {
-        //   name: 'delete',
-        //   icon: 'file_delete',
-        //   function: handleAssessmentDelete
-        // }
       ]
     default:
       return []
@@ -83,21 +85,13 @@ const handleAssessmentContinue = () => {
   })
 }
 
-// const handleAssessmentSave = () => {
-//   useConfirm().setConfirmData({
-//     isActive: true,
-//     confirm: () => setSystemStatus(0),
-//     text: '請確認是否儲存互評？'
-//   })
-// }
-
-// const handleAssessmentDelete = () => {
-//   useConfirm().setConfirmData({
-//     isActive: true,
-//     confirm: () => setSystemStatus(0),
-//     text: '請確認是否刪除互評？'
-//   })
-// }
+const handleAssessmentDelete = () => {
+  useConfirm().setConfirmData({
+    isActive: true,
+    confirm: () => deleteAssessment(),
+    text: '請確認是否刪除所有互評並結束此次互評填寫？'
+  })
+}
 
 const setSystemStatus = async (status:number) => {
   try {
@@ -122,6 +116,29 @@ const setSystemStatus = async (status:number) => {
   }
 }
 
+const deleteAssessment = async () => {
+  try {
+    setIsLoading(true)
+    const response = await useAnswers().deleteAllAnswersInformation()
+    console.log(response)
+    await getSystemStatus()
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '刪除成功'
+    })
+  } catch ({ response }) {
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '刪除失敗'
+    })
+  } finally {
+    setIsLoading(false)
+  }
+}
+
 </script>
 <template>
   <div class="absolute w-full h-full pt-6 px-4">
@@ -134,4 +151,13 @@ const setSystemStatus = async (status:number) => {
   >
     <TheSideBar :items="items" />
   </transition>
+  <router-view v-slot="{ Component }">
+    <transition
+      name="modal"
+      mode="out-in"
+      appear
+    >
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>

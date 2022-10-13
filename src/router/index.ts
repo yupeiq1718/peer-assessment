@@ -75,7 +75,14 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'system',
         name: 'System',
-        component: () => import('@/views/AdminSystem.vue')
+        component: () => import('@/views/AdminSystem.vue'),
+        children: [
+          {
+            path: 'save',
+            name: 'SystemSave',
+            component: () => import('@/views/AdminSystemSave.vue')
+          }
+        ]
       },
       {
         path: 'warning',
