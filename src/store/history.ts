@@ -4,11 +4,13 @@ import { useApi } from '@/utilities/api'
 const useHistory = defineStore('history', () => {
   const history = ref()
 
-  const createHistory = async ({ year, time }:{
-    year:number, time:number
+  const createHistory = async ({ year, filename }:{
+    year:number, filename:string
   }) => {
     try {
-      const response = await useApi.post(`/history/${year}/${time}`)
+      const response = await useApi.post('/history', {
+        year, filename
+      })
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)

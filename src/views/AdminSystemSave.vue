@@ -42,7 +42,7 @@ const saveAssessment = handleSubmit(async values => {
     setIsLoading(true)
     const response = await useHistory().createHistory({
       year: values.year,
-      time: Number(values.time)
+      filename: values.filename
     })
 
     console.log(response)
@@ -87,9 +87,9 @@ const cancel = () => router.push('/admin/system')
       <BaseFormInput
         class="mb-4"
         title="名稱"
-        name="time"
+        name="filename"
         type="text"
-        :rule="yup.number().required('此欄位必填')"
+        :rule="yup.string().required('此欄位必填')"
       />
     </div>
   </TheModal>
