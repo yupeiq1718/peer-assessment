@@ -75,9 +75,37 @@ const styleMap:StyleMap = {
   }
 }
 
-const logout = () => {
-  window.sessionStorage.setItem('access-token', '')
-  router.push(`/?type=${type.value}`)
+type ToastData = {
+  isActive: boolean,
+  variant: string,
+  message: string
+}
+
+const setToastData:(data:ToastData) => void = inject('setToastData', () => null)
+
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const logout = async () => {
+  try {
+    setIsLoading(true)
+    const response = await useAccount().deleteToken()
+    console.log(response)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '登出成功'
+    })
+  } catch (error) {
+    console.log(error)
+    setToastData({
+      isActive: true,
+      variant: 'error',
+      message: '登出失敗'
+    })
+  } finally {
+    setIsLoading(false)
+    router.push(`/?type=${type.value}`)
+  }
 }
 </script>
 

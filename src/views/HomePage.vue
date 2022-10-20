@@ -50,6 +50,11 @@ const handleCallback = async (data: {
     console.log(response1)
     const response2 = await useAccount().readAccountId(type.value)
     console.log(response2)
+    setToastData({
+      isActive: true,
+      variant: 'success',
+      message: '登入成功'
+    })
     router.push(`/${type.value}`)
   } catch (error) {
     console.log(error)
