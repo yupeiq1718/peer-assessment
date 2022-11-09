@@ -2,7 +2,11 @@ import { defineStore } from 'pinia'
 import { useApi } from '@/utilities/api'
 
 const useHistory = defineStore('history', () => {
-  const history = ref()
+  type History = {
+    year: number,
+    filename: string[]
+  }
+  const histories = ref<History[]>()
 
   const createHistory = async ({ year, filename }:{
     year:number, filename:string
@@ -19,7 +23,7 @@ const useHistory = defineStore('history', () => {
   const readHistory = async () => {
     try {
       const response = await useApi.get('/history/filter')
-      history.value = response.data.data
+      histories.value = response.data.data
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)
@@ -41,7 +45,7 @@ const useHistory = defineStore('history', () => {
   }
 
   return {
-    createHistory, readHistory, historyScore, readAllHistoryScore
+    createHistory, readHistory, histories, historyScore, readAllHistoryScore
   }
 })
 

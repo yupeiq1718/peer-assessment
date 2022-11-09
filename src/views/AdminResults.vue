@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useHistory } from '@/store/history'
+
 const router = useRouter()
 
 const items = [
@@ -17,6 +19,23 @@ const items = [
   }
 ]
 
+const setIsLoading:(value:boolean) => void = inject('setIsLoading', () => null)
+
+const readHistory = async () => {
+  try {
+    setIsLoading(true)
+    const response = await useHistory().readHistory()
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+onBeforeMount(async () => {
+  await readHistory()
+})
 </script>
 <template>
   <div class="absolute w-full h-full pt-6 px-4">

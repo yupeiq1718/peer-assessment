@@ -1,4 +1,21 @@
 <script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { useHistory } from '@/store/history'
+import { roleData } from '@/utilities/data'
+
+const histories = computed(() => useHistory().histories)
+
+const { values, handleSubmit } = useForm()
+
+const yearOptions = computed(() => histories.value?.map((history) => ({
+  text: history.year,
+  value: history.year
+})))
+const filenameOptions = computed(() => histories.value?.find((history) => history.year === Number(values.year))?.filename.map(filename => ({
+  text: filename,
+  value: filename
+})))
+
 const router = useRouter()
 const cancel = () => router.push('/admin/results')
 
@@ -11,16 +28,22 @@ const cancel = () => router.push('/admin/results')
   >
     <div class="m-2">
       <BaseFormSelect
+        name="year"
         class="mb-4"
         title="年度"
+        :options="yearOptions"
       />
       <BaseFormSelect
         class="mb-4"
         title="次別"
+        name="filename"
+        :options="filenameOptions"
       />
       <BaseFormSelect
         class="mb-4"
         title="類型"
+        name="roles"
+        :options="roleData"
       />
     </div>
   </TheModal>
