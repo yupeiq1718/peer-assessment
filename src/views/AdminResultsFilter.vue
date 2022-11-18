@@ -16,7 +16,10 @@ const filenameOptions = computed(() => histories.value?.find((history) => histor
   value: filename
 })))
 
+const roleOptions = roleData.splice(0, 2)
+
 const router = useRouter()
+const submit = handleSubmit(values => router.push(`/admin/result?year=${values.year}&filename=${values.filename}&roleId=${values.roles}`))
 const cancel = () => router.push('/admin/results')
 
 </script>
@@ -25,6 +28,7 @@ const cancel = () => router.push('/admin/results')
   <TheModal
     size="side"
     @cancel="cancel"
+    @confirm="submit"
   >
     <div class="m-2">
       <BaseFormSelect
@@ -43,7 +47,7 @@ const cancel = () => router.push('/admin/results')
         class="mb-4"
         title="類型"
         name="roles"
-        :options="roleData"
+        :options="roleOptions"
       />
     </div>
   </TheModal>
