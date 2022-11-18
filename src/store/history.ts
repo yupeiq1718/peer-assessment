@@ -36,7 +36,7 @@ const useHistory = defineStore('history', () => {
     year: number, filename: string, roleId: number
   }) => {
     try {
-      const response = await useApi.get(`/history/scores/${year}/${filename}?roleId=${roleId}`)
+      const response = await useApi.get(`/history/scores?year=${year}&filename=${filename}&roleId=${roleId}`)
       historyScore.value = response.data.data
       return Promise.resolve(response)
     } catch (error) {

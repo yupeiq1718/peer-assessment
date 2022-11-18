@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useHistory } from '@/store/history'
+
+const route = useRoute()
+
 type Field= {
   key:string,
   name:string,
@@ -27,21 +31,27 @@ const fields:Field[] = [
   }
 ]
 
-const items = ref<Item[]>([
-  // {
-  //   key: '1',
-  //   name: '許斾旟',
-  //   department: 'O2 meta 組',
-  //   scores: [1, 4, 3, 3, 5]
-  // },
-  // {
-  //   key: '2',
-  //   name: '劉于瑄',
-  //   department: '專案組',
-  //   scores: [3, 2, 5, 4, 2]
-  // }
-])
+const items = ref<Item[]>([])
 
+const readAllHistoryScore = async ({ year, filename, roleId }: {
+  year: number, filename: string, roleId: number
+}) => {
+  try {
+    const response = await useHistory().readAllHistoryScore({
+      year: Number(year),
+      filename: filename,
+      roleId: Number(roleId)
+    })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
+}
+watch(() => route.query, () => readAllHistoryScore({
+  year: Number(route.query.year),
+  filename: route.query.filename as string,
+  roleId: Number(route.query.roleId)
+}), { immediate: true })
 </script>
 
 <template>

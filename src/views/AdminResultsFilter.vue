@@ -19,7 +19,7 @@ const filenameOptions = computed(() => histories.value?.find((history) => histor
 const roleOptions = roleData.slice(0, 2)
 
 const router = useRouter()
-const submit = handleSubmit(values => router.push(`/admin/result?year=${values.year}&filename=${values.filename}&roleId=${values.roles}`))
+const submit = handleSubmit(values => router.push(`/admin/results?year=${values.year}&filename=${values.filename}&roleId=${values.roles}`))
 const cancel = () => router.push('/admin/results')
 
 </script>
