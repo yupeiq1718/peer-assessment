@@ -11,7 +11,7 @@ type Option = {
 interface Props {
   name: string,
   title: string,
-  options: Option[],
+  options?: Option[],
   disabled?: boolean,
   rule?: BaseSchema
 }
