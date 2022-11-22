@@ -68,7 +68,7 @@ const departmentIndex = (value:string) => departments.findIndex(department => va
         <BaseScore
           :variant="getVariants(index)"
           class="w-16 2xl:w-18 h-16 2xl:h-18"
-          :score="data.score"
+          :score="data.average"
         />
         <BaseTooltip
           class="absolute whitespace-nowrap left-1/2 bottom-18 2xl:bottom-20 -translate-x-1/2 opacity-0 group-hover:block lg:group-hover:opacity-100"
