@@ -2,10 +2,11 @@
 import { useForm } from 'vee-validate'
 import { useHistory } from '@/store/history'
 import { roleData } from '@/utilities/data'
+import { Ref } from 'vue'
 
 const histories = computed(() => useHistory().histories)
 
-const { values, handleSubmit } = useForm()
+const { values, handleSubmit, setFieldValue } = useForm()
 
 const yearOptions = computed(() => histories.value?.map((history) => ({
   text: history.year,
@@ -21,11 +22,21 @@ const roleOptions = roleData.slice(0, 2)
 const router = useRouter()
 
 interface HistoryFilterData {
-  year: number,
-  filename: string,
-  roleId: number
+  year?: number,
+  filename?: string,
+  roleId?: number
 }
+const historyFilterData:Ref<HistoryFilterData> = inject('historyFilterData', ref({
+  year: NaN,
+  filename: '',
+  roleId: NaN
+}))
 const setHistoryFilterData:(value:HistoryFilterData) => void = inject('setHistoryFilterData', () => null)
+
+console.log(historyFilterData.value)
+setFieldValue('year', historyFilterData.value?.year)
+setFieldValue('filename', historyFilterData.value?.filename)
+setFieldValue('roleId', historyFilterData.value?.roleId)
 
 const submit = handleSubmit(values => {
   setHistoryFilterData({

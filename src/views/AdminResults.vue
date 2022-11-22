@@ -4,9 +4,9 @@ import { useHistory } from '@/store/history'
 const router = useRouter()
 
 interface HistoryFilterData {
-  year: number,
-  filename: string,
-  roleId: number
+  year?: number,
+  filename?: string,
+  roleId?: number
 }
 const historyFilterData = ref<HistoryFilterData>()
 const setHistoryFilterData = (value:HistoryFilterData) => {
@@ -67,7 +67,7 @@ watch(() => historyFilterData.value, () => readAllHistoryScore({
   year: historyFilterData.value?.year || NaN,
   filename: historyFilterData.value?.filename || '',
   roleId: historyFilterData.value?.roleId || NaN
-}), { immediate: true })
+}))
 
 onBeforeMount(async () => {
   await readHistory()
