@@ -19,10 +19,11 @@ const items = [
   {
     name: '下載',
     icon: 'download',
-    function: () => {
-      // isActive.value = true
-      // modalType.value = 'download'
-    }
+    function: () => readAllHistoryReport({
+      year: historyFilterData.value?.year || NaN,
+      filename: historyFilterData.value?.filename || '',
+      roleId: historyFilterData.value?.roleId || NaN
+    })
   },
   {
     name: '篩選',
@@ -51,6 +52,24 @@ const readAllHistoryScore = async ({ year, filename, roleId }: {
   try {
     setIsLoading(true)
     const response = await useHistory().readAllHistoryScore({
+      year: Number(year),
+      filename: filename,
+      roleId: Number(roleId)
+    })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+const readAllHistoryReport = async ({ year, filename, roleId }: {
+  year: number, filename: string, roleId: number
+}) => {
+  try {
+    setIsLoading(true)
+    const response = await useHistory().readAllHistoryReport({
       year: Number(year),
       filename: filename,
       roleId: Number(roleId)
