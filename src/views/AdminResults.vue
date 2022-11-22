@@ -3,26 +3,17 @@ import { useHistory } from '@/store/history'
 
 const router = useRouter()
 
-const year = ref()
-const setYear = (value:number) => {
-  year.value = value
+interface HistoryFilterData {
+  year: number,
+  filename: string,
+  roleId: number
 }
-provide('year', year)
-provide('setYear', setYear)
-
-const filename = ref()
-const setFilename = (value:string) => {
-  filename.value = value
+const historyFilterData = ref<HistoryFilterData>()
+const setHistoryFilterData = (value:HistoryFilterData) => {
+  historyFilterData.value = value
 }
-provide('filename', filename)
-provide('setFilename', setFilename)
-
-const roleId = ref()
-const setRoleId = (value:number) => {
-  roleId.value = value
-}
-provide('roleId', roleId)
-provide('setRoleId', setRoleId)
+provide('historyFilterData', historyFilterData)
+provide('setHistoryFilterData', setHistoryFilterData)
 
 const items = [
   {
@@ -72,10 +63,10 @@ const readAllHistoryScore = async ({ year, filename, roleId }: {
   }
 }
 
-watch(() => [year.value, filename.value, roleId.value], () => readAllHistoryScore({
-  year: year.value,
-  filename: filename.value,
-  roleId: roleId.value
+watch(() => historyFilterData.value, () => readAllHistoryScore({
+  year: historyFilterData.value?.year || NaN,
+  filename: historyFilterData.value?.filename || '',
+  roleId: historyFilterData.value?.roleId || NaN
 }), { immediate: true })
 
 onBeforeMount(async () => {

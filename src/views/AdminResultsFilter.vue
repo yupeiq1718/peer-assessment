@@ -20,14 +20,20 @@ const roleOptions = roleData.slice(0, 2)
 
 const router = useRouter()
 
-const setYear:(value:number) => void = inject('setYear', () => null)
-const setFilename: (value:string) => void = inject('setFilename', () => null)
-const setRoleId:(value:number) => void = inject('setRoleId', () => null)
+interface HistoryFilterData {
+  year: number,
+  filename: string,
+  roleId: number
+}
+const setHistoryFilterData:(value:HistoryFilterData) => void = inject('setHistoryFilterData', () => null)
 
 const submit = handleSubmit(values => {
-  setYear(values.year)
-  setFilename(values.filename)
-  setRoleId(values.roleId)
+  setHistoryFilterData({
+    year: values.year,
+    filename: values.filename,
+    roleId: values.roleId
+
+  })
   router.push('/admin/results')
 })
 
