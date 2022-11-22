@@ -30,14 +30,25 @@ const useHistory = defineStore('history', () => {
     }
   }
 
-  const historyScore = ref()
+  type HistoryScore = {
+    department: string,
+    id: number,
+    name: string,
+    picture?: string,
+    scores: {
+      average: number,
+      tag: string
+    }[]
+  }
+
+  const allHistoryScore = ref<HistoryScore[]>()
 
   const readAllHistoryScore = async ({ year, filename, roleId }: {
     year: number, filename: string, roleId: number
   }) => {
     try {
       const response = await useApi.get(`/history/scores?year=${year}&filename=${filename}&roleId=${roleId}`)
-      historyScore.value = response.data.data
+      allHistoryScore.value = response.data.data
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(error)
@@ -45,7 +56,7 @@ const useHistory = defineStore('history', () => {
   }
 
   return {
-    createHistory, readHistory, histories, historyScore, readAllHistoryScore
+    createHistory, readHistory, histories, allHistoryScore, readAllHistoryScore
   }
 })
 
