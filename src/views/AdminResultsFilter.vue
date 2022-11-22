@@ -19,7 +19,18 @@ const filenameOptions = computed(() => histories.value?.find((history) => histor
 const roleOptions = roleData.slice(0, 2)
 
 const router = useRouter()
-const submit = handleSubmit(values => router.push(`/admin/results?year=${values.year}&filename=${values.filename}&roleId=${values.roles}`))
+
+const setYear:(value:number) => void = inject('setYear', () => null)
+const setFilename: (value:string) => void = inject('setFilename', () => null)
+const setRoleId:(value:number) => void = inject('setRoleId', () => null)
+
+const submit = handleSubmit(values => {
+  setYear(values.year)
+  setFilename(values.filename)
+  setRoleId(values.roleId)
+  router.push('/admin/results')
+})
+
 const cancel = () => router.push('/admin/results')
 
 </script>
@@ -46,7 +57,7 @@ const cancel = () => router.push('/admin/results')
       <BaseFormSelect
         class="mb-4"
         title="類型"
-        name="roles"
+        name="roleId"
         :options="roleOptions"
       />
     </div>

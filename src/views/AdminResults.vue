@@ -3,6 +3,27 @@ import { useHistory } from '@/store/history'
 
 const router = useRouter()
 
+const year = ref()
+const setYear = (value:number) => {
+  year.value = value
+}
+provide('year', year)
+provide('setYear', setYear)
+
+const filename = ref()
+const setFilename = (value:string) => {
+  filename.value = value
+}
+provide('filename', filename)
+provide('setFilename', setFilename)
+
+const roleId = ref()
+const setRoleId = (value:number) => {
+  roleId.value = value
+}
+provide('roleId', roleId)
+provide('setRoleId', setRoleId)
+
 const items = [
   {
     name: '下載',
@@ -32,6 +53,30 @@ const readHistory = async () => {
     setIsLoading(false)
   }
 }
+
+const readAllHistoryScore = async ({ year, filename, roleId }: {
+  year: number, filename: string, roleId: number
+}) => {
+  try {
+    setIsLoading(true)
+    const response = await useHistory().readAllHistoryScore({
+      year: Number(year),
+      filename: filename,
+      roleId: Number(roleId)
+    })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+watch(() => [year.value, filename.value, roleId.value], () => readAllHistoryScore({
+  year: year.value,
+  filename: filename.value,
+  roleId: roleId.value
+}), { immediate: true })
 
 onBeforeMount(async () => {
   await readHistory()

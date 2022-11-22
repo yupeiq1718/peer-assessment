@@ -2,8 +2,6 @@
 import { useHistory } from '@/store/history'
 import { departments, getVariants } from '@/utilities/data'
 
-const route = useRoute()
-
 const tableFields = [
   {
     name: '姓名',
@@ -35,25 +33,6 @@ const tableItems = computed(() => allHistoryScore.value?.map(historyScore => ({
 
 const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
-const readAllHistoryScore = async ({ year, filename, roleId }: {
-  year: number, filename: string, roleId: number
-}) => {
-  try {
-    const response = await useHistory().readAllHistoryScore({
-      year: Number(year),
-      filename: filename,
-      roleId: Number(roleId)
-    })
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
-watch(() => route.query, () => readAllHistoryScore({
-  year: Number(route.query.year),
-  filename: route.query.filename as string,
-  roleId: Number(route.query.roleId)
-}), { immediate: true })
 </script>
 
 <template>
