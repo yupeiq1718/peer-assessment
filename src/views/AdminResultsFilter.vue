@@ -2,6 +2,7 @@
 import { useForm } from 'vee-validate'
 import { useHistory } from '@/store/history'
 import { roleData } from '@/utilities/data'
+import * as yup from 'yup'
 import { Ref } from 'vue'
 
 const histories = computed(() => useHistory().histories)
@@ -64,18 +65,21 @@ const cancel = () => router.push('/admin/results')
         class="mb-4"
         title="年度"
         :options="yearOptions"
+        :rule="yup.number().required('此欄位必填')"
       />
       <BaseFormSelect
         class="mb-4"
         title="次別"
         name="filename"
         :options="filenameOptions"
+        :rule="yup.string().required('此欄位必填')"
       />
       <BaseFormSelect
         class="mb-4"
         title="類型"
         name="roleId"
         :options="roleOptions"
+        :rule="yup.number().required('此欄位必填')"
       />
     </div>
   </TheModal>
