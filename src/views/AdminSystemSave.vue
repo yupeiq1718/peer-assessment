@@ -9,6 +9,7 @@ const router = useRouter()
 
 const { handleSubmit, setFieldValue } = useForm()
 setFieldValue('year', new Date().getFullYear())
+setFieldValue('filename', '')
 
 type ToastData = {
   isActive: boolean,
@@ -41,7 +42,7 @@ const saveAssessment = handleSubmit(async values => {
   try {
     setIsLoading(true)
     const response = await useHistory().createHistory({
-      year: values.year,
+      year: Number(values.year),
       filename: values.filename
     })
 

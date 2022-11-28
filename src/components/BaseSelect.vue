@@ -8,7 +8,7 @@ type Option = {
 interface Props {
   status: Status,
   selected: string|number|boolean,
-  options: Option[]
+  options?: Option[]
 }
 
 interface Emits {
@@ -16,6 +16,7 @@ interface Emits {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  options: undefined,
   selected: ''
 })
 const emits = defineEmits<Emits>()

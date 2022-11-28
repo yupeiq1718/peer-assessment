@@ -1,79 +1,81 @@
 <script setup lang="ts">
-type Field= {
-  key:string,
-  name:string,
-  width?: string
-}
+import { useHistory } from '@/store/history'
+import { departments, getVariants } from '@/utilities/data'
 
-type Item = {
-  key:string,
-  [key:string]:unknown
-}
-
-const fields:Field[] = [
+const tableFields = [
   {
     name: '姓名',
-    key: 'name'
+    key: 'profile'
   },
   {
     name: '部門',
     key: 'department',
-    width: '28%'
+    width: '15%'
   },
   {
     name: '評分',
     key: 'scores',
-    width: '56%'
+    width: '60%'
   }
 ]
 
-const items = ref<Item[]>([
-  // {
-  //   key: '1',
-  //   name: '許斾旟',
-  //   department: 'O2 meta 組',
-  //   scores: [1, 4, 3, 3, 5]
-  // },
-  // {
-  //   key: '2',
-  //   name: '劉于瑄',
-  //   department: '專案組',
-  //   scores: [3, 2, 5, 4, 2]
-  // }
-])
+const historyScore = computed(() => useHistory().historyScore)
+
+const tableItems = computed(() => historyScore.value?.map(historyScore => ({
+  profile: {
+    name: historyScore.name,
+    picture: historyScore.picture
+  },
+  department: historyScore.department,
+  function: historyScore.id,
+  scores: historyScore.scores
+})))
+
+const departmentIndex = (value:string) => departments.findIndex(department => value === department.value)
 
 </script>
 
 <template>
   <BaseTable
-    :fields="fields"
-    :items="items"
+    :fields="tableFields"
+    :items="tableItems"
   >
-    <template #name="data">
-      <div>
+    <template #profile="profile">
+      <div class="flex justify-start items-center">
         <img
-          class="inline-block rounded-full w-16 max-w-none h-16 mr-4"
-          src="/user.png"
+          class="inline-block rounded-full w-14 2xl:w-16 max-w-none h-14 2xl:h-16 bg-light mx-3 2xl:mx-4"
+          :src="profile.data.picture ||'/user.png'"
           alt="user"
         >
-        <span>
-          {{ data.data }}
+        <span class="text-sm 2xl:text-base">
+          {{ profile.data.name }}
         </span>
       </div>
     </template>
-    <template #department="data">
-      <BaseTag variant="theme">
-        {{ data.data }}
+    <template #department="department">
+      <BaseTag :variant="getVariants(departmentIndex(department.data))">
+        <span class="text-sm 2xl:text-base">
+          {{ department.data }}
+        </span>
       </BaseTag>
     </template>
-    <template #scores="data">
-      <BaseScore
-        v-for="(score, key) of data.data"
-        :key="key"
-        class=" w-[4.5rem] h-[4.5rem]"
-        variant="theme"
-        :score="score"
-      />
+    <template #scores="scores">
+      <div
+        v-for="(data, index) of scores.data"
+        :key="index"
+        class="relative group inline-block"
+      >
+        <BaseScore
+          :variant="getVariants(index)"
+          class="w-16 2xl:w-18 h-16 2xl:h-18"
+          :score="data.average"
+        />
+        <BaseTooltip
+          class="absolute whitespace-nowrap left-1/2 bottom-18 2xl:bottom-20 -translate-x-1/2 opacity-0 group-hover:block lg:group-hover:opacity-100"
+          :variant="getVariants(index)"
+          :text="data.tag"
+        />
+      </div>
     </template>
   </BaseTable>
 </template>
