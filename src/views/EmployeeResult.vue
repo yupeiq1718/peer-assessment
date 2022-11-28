@@ -22,12 +22,13 @@ provide('setHistoryFilterData', setHistoryFilterData)
 const items = [
   {
     name: '下載',
-    icon: 'download'
-    // function: () => readAllHistoryReport({
-    //   year: historyFilterData.value?.year || NaN,
-    //   filename: historyFilterData.value?.filename || '',
-    //   roleId: historyFilterData.value?.roleId || NaN
-    // })
+    icon: 'download',
+    function: () => readHistoryReport({
+      year: historyFilterData.value?.year || NaN,
+      filename: historyFilterData.value?.filename || '',
+      roleId: historyFilterData.value?.roleId || NaN,
+      managerId: accountId.value
+    })
   },
   {
     name: '篩選',
@@ -69,23 +70,24 @@ const readHistoryScore = async ({ year, filename, roleId, managerId }: {
   }
 }
 
-// const readHistoryReport = async ({ year, filename, roleId }: {
-//   year: number, filename: string, roleId: number
-// }) => {
-//   try {
-//     setIsLoading(true)
-//     const response = await useHistory().readAllHistoryReport({
-//       year: Number(year),
-//       filename: filename,
-//       roleId: Number(roleId)
-//     })
-//     console.log(response)
-//   } catch (error) {
-//     console.log(error)
-//   } finally {
-//     setIsLoading(false)
-//   }
-// }
+const readHistoryReport = async ({ year, filename, roleId, managerId }: {
+  year: number, filename: string, roleId: number, managerId: number
+}) => {
+  try {
+    setIsLoading(true)
+    const response = await useHistory().readHistoryReport({
+      year: Number(year),
+      filename: filename,
+      roleId: Number(roleId),
+      managerId: Number(managerId)
+    })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsLoading(false)
+  }
+}
 
 watch(() => historyFilterData.value, () => readHistoryScore({
   year: historyFilterData.value?.year || NaN,

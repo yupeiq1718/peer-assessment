@@ -92,8 +92,31 @@ const useHistory = defineStore('history', () => {
     }
   }
 
+  const readHistoryReport = async ({ year, filename, roleId, managerId }: {
+    year: number, filename: string, roleId: number, managerId: number
+  }) => {
+    try {
+      const response = await useApi.get(`/history/download?year=${year}&filename=${filename}&roleId=${roleId}&managerId=${managerId}`, { responseType: 'blob' })
+
+      const blob = response.data
+      console.log(blob)
+      const name = `${year}-${filename}-${roleId}.xlsx`
+      const link = document.createElement('a')
+      link.download = name
+      link.style.display = 'none'
+      link.href = URL.createObjectURL(blob)
+      document.body.appendChild(link)
+      link.click()
+      URL.revokeObjectURL(link.href)
+      document.body.removeChild(link)
+      return Promise.resolve(response)
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   return {
-    createHistory, readHistory, histories, allHistoryScore, historyScore, readAllHistoryScore, readHistoryScore, readAllHistoryReport
+    createHistory, readHistory, histories, allHistoryScore, historyScore, readAllHistoryScore, readHistoryScore, readAllHistoryReport, readHistoryReport
   }
 })
 
