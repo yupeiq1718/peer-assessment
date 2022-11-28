@@ -197,7 +197,7 @@ const logout = async () => {
           class="absolute -top-6 right-0 text-theme text-xs"
           :class="styleMap.version[status]"
         >
-          {{ 'v1.1.0' }}
+          {{ 'v1.2.0' }}
         </span>
         <button
           class="image rounded-2xl p-4 flex justify-center items-center bg-white fill-theme text-theme duration-500"
