@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { useHistory } from '@/store/history'
+import { roleData } from '@/utilities/data'
+
+const histories = computed(() => useHistory().histories)
+
+const roleOptions = roleData.slice(0, 2)
 
 const router = useRouter()
 
@@ -95,6 +100,11 @@ watch(() => historyFilterData.value, () => {
 
 onBeforeMount(async () => {
   await readHistory()
+  setHistoryFilterData({
+    year: histories.value?.[0].year,
+    filename: histories.value?.[0].filename[0],
+    roleId: roleOptions[0].value
+  })
 })
 </script>
 <template>
