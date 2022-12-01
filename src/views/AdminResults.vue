@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { useHistory } from '@/store/history'
+import { roleData } from '@/utilities/data'
+
+const histories = computed(() => useHistory().histories)
+
+const roleOptions = roleData.slice(0, 2)
 
 const router = useRouter()
 
@@ -82,17 +87,33 @@ const readAllHistoryReport = async ({ year, filename, roleId }: {
   }
 }
 
-watch(() => historyFilterData.value, () => readAllHistoryScore({
-  year: historyFilterData.value?.year || NaN,
-  filename: historyFilterData.value?.filename || '',
-  roleId: historyFilterData.value?.roleId || NaN
-}))
+watch(() => historyFilterData.value, () => {
+  if (historyFilterData.value?.year && historyFilterData.value?.filename && historyFilterData.value?.roleId) {
+    readAllHistoryScore({
+      year: historyFilterData.value.year,
+      filename: historyFilterData.value.filename,
+      roleId: historyFilterData.value.roleId
+    })
+  }
+}
+)
 
 onBeforeMount(async () => {
   await readHistory()
+  setHistoryFilterData({
+    year: histories.value?.[0].year,
+    filename: histories.value?.[0].filename[0],
+    roleId: roleOptions[0].value
+  })
 })
 </script>
 <template>
+  <span class="absolute font-bold text-muted text-sm h-4 mb-2">
+    <BaseSvgIcon
+      name="result"
+      class="w-4 h-4 mr-2 fill-muted"
+    />{{ roleOptions[(historyFilterData?.roleId || 1) - 1].text }}互評結果/{{ historyFilterData?.year }}年/{{ historyFilterData?.filename }}
+  </span>
   <div class="absolute w-full h-full pt-6 px-4">
     <AdminResultsMain />
     <transition
