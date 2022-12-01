@@ -115,6 +115,12 @@ onBeforeMount(async () => {
 
 </script>
 <template>
+  <span class="absolute font-bold text-muted text-sm h-4 mb-2">
+    <BaseSvgIcon
+      name="result"
+      class="w-4 h-4 mr-2 fill-muted"
+    />{{ roleOptions[(historyFilterData?.roleId || 1) - 1].text }}互評結果/{{ historyFilterData?.year }}年/{{ historyFilterData?.filename }}
+  </span>
   <div class="absolute w-full h-full pt-6 px-4">
     <EmployeeResultMain />
     <transition
