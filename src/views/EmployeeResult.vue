@@ -89,12 +89,16 @@ const readHistoryReport = async ({ year, filename, roleId, managerId }: {
   }
 }
 
-watch(() => historyFilterData.value, () => readHistoryScore({
-  year: historyFilterData.value?.year || NaN,
-  filename: historyFilterData.value?.filename || '',
-  roleId: historyFilterData.value?.roleId || NaN,
-  managerId: accountId.value || NaN
-}))
+watch(() => historyFilterData.value, () => {
+  if (historyFilterData.value?.year && historyFilterData.value?.filename && historyFilterData.value?.roleId && accountId.value) {
+    readHistoryScore({
+      year: historyFilterData.value.year,
+      filename: historyFilterData.value.filename,
+      roleId: historyFilterData.value.roleId,
+      managerId: accountId.value
+    })
+  }
+})
 
 onBeforeMount(async () => {
   await readHistory()
