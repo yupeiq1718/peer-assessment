@@ -48,6 +48,7 @@ const useUsers = defineStore('users', () => {
   type UserUpdate = {
     name: string,
     department: string,
+    email: string,
     roles:(1|2|3|4)[],
     managerId: number
   }
