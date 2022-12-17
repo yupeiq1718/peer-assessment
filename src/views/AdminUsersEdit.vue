@@ -12,6 +12,7 @@ const user = computed(() => useUsers().user(Number(id.value)))
 const schema = yup.object({
   department: yup.string().required('此欄位必填'),
   name: yup.string().required('此欄位必填'),
+  email: yup.string().required('此欄位必填').test('email', '不符合公司電子郵件格式', (value) => (value?.includes('@osensetech.com') && value?.split('@osensetech.com')[1] === '') || false),
   roles: yup.array().required('此欄位必填').min(1, '最少選擇一項'),
   managerId: yup.number().required('此欄位必填')
 })
@@ -46,6 +47,7 @@ const submit = handleSubmit(async values => {
       id: Number(id.value),
       user: {
         name: values.name,
+        email: values.email,
         department: values.department,
         roles: values.roles,
         managerId: Number(values.managerId)
@@ -94,7 +96,6 @@ const cancel = () => router.push('/admin/users')
         class="col-span-1"
         type="email"
         title="電子郵件"
-        disabled
       />
       <BaseFormSelect
         name="department"
